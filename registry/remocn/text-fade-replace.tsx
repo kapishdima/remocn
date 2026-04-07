@@ -8,6 +8,7 @@ export interface TextFadeReplaceProps {
   fontSize?: number;
   color?: string;
   fontWeight?: number;
+  speed?: number;
   className?: string;
 }
 
@@ -17,9 +18,10 @@ export function TextFadeReplace({
   fontSize = 48,
   color = "#171717",
   fontWeight = 600,
+  speed = 1,
   className,
 }: TextFadeReplaceProps) {
-  const frame = useCurrentFrame();
+  const frame = useCurrentFrame() * speed;
   const { durationInFrames } = useVideoConfig();
 
   const stops = [

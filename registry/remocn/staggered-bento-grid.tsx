@@ -20,6 +20,7 @@ export interface StaggeredBentoGridProps {
   background?: string;
   cardColor?: string;
   textColor?: string;
+  speed?: number;
   className?: string;
 }
 
@@ -38,12 +39,14 @@ function Card({
   item,
   cardColor,
   textColor,
+  speed,
 }: {
   item: BentoItem;
   cardColor: string;
   textColor: string;
+  speed: number;
 }) {
-  const frame = useCurrentFrame();
+  const frame = useCurrentFrame() * speed;
   const { fps } = useVideoConfig();
 
   const progress = spring({
@@ -107,6 +110,7 @@ export function StaggeredBentoGrid({
   background = "#0a0a0a",
   cardColor = "#1a1a1a",
   textColor = "white",
+  speed = 1,
   className,
 }: StaggeredBentoGridProps) {
   return (
@@ -134,10 +138,15 @@ export function StaggeredBentoGrid({
         {items.map((item, index) => (
           <Sequence
             key={index}
-            from={index * staggerDelay}
+            from={Math.round((index * staggerDelay) / speed)}
             layout="none"
           >
-            <Card item={item} cardColor={cardColor} textColor={textColor} />
+            <Card
+              item={item}
+              cardColor={cardColor}
+              textColor={textColor}
+              speed={speed}
+            />
           </Sequence>
         ))}
       </div>

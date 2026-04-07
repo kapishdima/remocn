@@ -8,6 +8,7 @@ export interface ZoomThroughTransitionProps {
   targetScale?: number;
   transformOrigin?: string;
   background?: string;
+  speed?: number;
   className?: string;
 }
 
@@ -43,9 +44,10 @@ export function ZoomThroughTransition({
   targetScale = 20,
   transformOrigin = "center center",
   background = "white",
+  speed = 1,
   className,
 }: ZoomThroughTransitionProps) {
-  const frame = useCurrentFrame();
+  const frame = useCurrentFrame() * speed;
   const { durationInFrames } = useVideoConfig();
 
   const scale = interpolate(

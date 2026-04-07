@@ -1,0 +1,84 @@
+---
+title: Tracking In
+description: Letter-spacing collapses and blur clears with a springy entrance.
+---
+
+A typography primitive that starts text with a wide `letter-spacing` and a heavy blur, then springs both back to normal. The result is a tight, premium-feeling title reveal.
+
+<ComponentPreview name="tracking-in" />
+
+## Installation
+
+<InstallBlock name="tracking-in" />
+
+## Usage
+
+```tsx
+import { TrackingIn } from "@/components/remocn/tracking-in";
+
+<TrackingIn text="REMOCN" startTracking={0.6} startBlur={14} />
+```
+
+## Props
+
+<PropsTable
+  rows={[
+    {
+      name: "text",
+      type: "string",
+      required: true,
+      description: "The text to animate.",
+    },
+    {
+      name: "startTracking",
+      type: "number",
+      default: "0.5",
+      description: "Initial letter-spacing in em. Animates down to -0.03em.",
+    },
+    {
+      name: "startBlur",
+      type: "number",
+      default: "12",
+      description: "Initial blur radius in pixels. Animates down to 0.",
+    },
+    {
+      name: "fontSize",
+      type: "number",
+      default: "96",
+      description: "Font size in pixels.",
+    },
+    {
+      name: "fontWeight",
+      type: "number",
+      default: "700",
+      description: "CSS font-weight.",
+    },
+    {
+      name: "color",
+      type: "string",
+      default: "\"#171717\"",
+      description: "Text color (any valid CSS color).",
+    },
+    {
+      name: "speed",
+      type: "number",
+      default: "1",
+      description: "Playback speed multiplier (1 = normal, 2 = twice as fast).",
+    },
+    {
+      name: "className",
+      type: "string",
+      description: "Optional className passed to the underlying span.",
+    },
+  ]}
+/>
+
+## Notes
+
+<Note title="Load fonts before render">
+  Make sure your font is loaded before the first frame renders. Use [`@remotion/google-fonts`](https://www.remotion.dev/docs/google-fonts) so the blur and tracking effects don't apply to a fallback system font.
+</Note>
+
+<Warning title="Overflow">
+  Wide initial tracking can push text outside the container. Either reduce `startTracking`, lower `fontSize`, or wrap the component in a parent with `overflow: hidden`.
+</Warning>

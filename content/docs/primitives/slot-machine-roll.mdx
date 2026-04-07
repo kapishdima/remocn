@@ -1,0 +1,78 @@
+---
+title: Slot Machine Roll
+description: Vertical reel scrolls each character from an old value to a new value.
+---
+
+A typography primitive that animates changing values (prices, counters, statuses) as a vertical reel. Each character column rolls independently with a staggered spring, giving a slot-machine feel.
+
+<ComponentPreview name="slot-machine-roll" />
+
+## Installation
+
+<InstallBlock name="slot-machine-roll" />
+
+## Usage
+
+```tsx
+import { SlotMachineRoll } from "@/components/remocn/slot-machine-roll";
+
+<SlotMachineRoll from="$99" to="$199" fontSize={120} />
+```
+
+## Props
+
+<PropsTable
+  rows={[
+    {
+      name: "from",
+      type: "string",
+      default: "\"$99\"",
+      description: "Starting value shown before the reel rolls.",
+    },
+    {
+      name: "to",
+      type: "string",
+      default: "\"$199\"",
+      description: "Target value the reel settles on.",
+    },
+    {
+      name: "fontSize",
+      type: "number",
+      default: "120",
+      description: "Font size in pixels. Used to compute reel travel distance.",
+    },
+    {
+      name: "color",
+      type: "string",
+      default: "\"#171717\"",
+      description: "Text color.",
+    },
+    {
+      name: "fontWeight",
+      type: "number",
+      default: "700",
+      description: "CSS font-weight.",
+    },
+    {
+      name: "speed",
+      type: "number",
+      default: "1",
+      description: "Multiplier for animation speed.",
+    },
+    {
+      name: "className",
+      type: "string",
+      description: "Optional className passed to the outer text span.",
+    },
+  ]}
+/>
+
+## Notes
+
+<Note title="Right-aligned by design">
+  `from` and `to` are left-padded with spaces to the same length so digits align on the right. This matches how prices and counters read.
+</Note>
+
+<Warning title="Monospaced digits recommended">
+  Each column is a fixed width (`0.7em`). If you use a proportional font, wide characters like `W` may get clipped. Use a mono font or characters of similar width.
+</Warning>

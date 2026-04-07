@@ -1,0 +1,137 @@
+---
+title: Morphing Modal
+description: A bento card lifts off the grid and blooms into a full-screen modal driven by a single heavy spring.
+---
+
+The most expensive transition in the kit. Five properties — `top`, `left`, `width`, `height`, and `borderRadius` — are all driven by **one** spring with high mass and low stiffness so the modal "blooms" instead of jumping. The source card's content fades out in the first third of the morph, the modal's content fades in (with a 20px translateY) only in the last third — that asymmetric handoff is what stops it from feeling like a cheap slideshow. Backdrop dims in lockstep with the spring.
+
+<ComponentPreview name="morphing-modal" />
+
+## Installation
+
+<InstallBlock name="morphing-modal" />
+
+## Usage
+
+```tsx
+import { MorphingModal } from "@/components/remocn/morphing-modal";
+
+<MorphingModal
+  from={{ left: 460, top: 260, width: 360, height: 200 }}
+  to={{ left: 80, top: 60, width: 1120, height: 600 }}
+  morphAt={30}
+/>
+```
+
+## Props
+
+<PropsTable
+  rows={[
+    {
+      name: "from",
+      type: "{ top, left, width, height }",
+      description: "Source rect of the card before it blooms.",
+    },
+    {
+      name: "to",
+      type: "{ top, left, width, height }",
+      description: "Target rect of the modal. Defaults to a near-fullscreen sheet.",
+    },
+    {
+      name: "borderRadiusFrom",
+      type: "number",
+      default: "24",
+      description: "Border radius of the source card in pixels.",
+    },
+    {
+      name: "borderRadiusTo",
+      type: "number",
+      default: "0",
+      description: "Border radius of the modal in pixels.",
+    },
+    {
+      name: "morphAt",
+      type: "number",
+      default: "30",
+      description: "Frame at which the morph spring fires.",
+    },
+    {
+      name: "background",
+      type: "string",
+      default: "\"#050505\"",
+      description: "Page background color.",
+    },
+    {
+      name: "cardColor",
+      type: "string",
+      default: "\"#0a0a0a\"",
+      description: "Card / modal surface color.",
+    },
+    {
+      name: "textColor",
+      type: "string",
+      default: "\"#fafafa\"",
+      description: "Heading color in source and modal.",
+    },
+    {
+      name: "mutedColor",
+      type: "string",
+      default: "\"#71717a\"",
+      description: "Body copy color.",
+    },
+    {
+      name: "sourceTitle",
+      type: "string",
+      default: "\"Compose video\"",
+      description: "Heading shown on the source card.",
+    },
+    {
+      name: "sourceBody",
+      type: "string",
+      default: "\"Click to start a new project\"",
+      description: "Body copy shown on the source card.",
+    },
+    {
+      name: "modalTitle",
+      type: "string",
+      default: "\"New project\"",
+      description: "Heading shown after the morph completes.",
+    },
+    {
+      name: "modalBody",
+      type: "string",
+      description: "Body copy shown after the morph completes.",
+    },
+    {
+      name: "source",
+      type: "ReactNode",
+      description: "Override the default source card content.",
+    },
+    {
+      name: "modal",
+      type: "ReactNode",
+      description: "Override the default modal content.",
+    },
+    {
+      name: "speed",
+      type: "number",
+      default: "1",
+      description: "Playback speed multiplier.",
+    },
+    {
+      name: "className",
+      type: "string",
+      description: "Optional className passed to the root container.",
+    },
+  ]}
+/>
+
+## Notes
+
+<Note title="One spring, five properties">
+  Animating each rect property from a single spring value is the trick — independent springs would drift out of phase and the morph would feel jelly-like in the worst way.
+</Note>
+
+<Warning title="Asymmetric content fade">
+  Source content fades over `[0, 0.33]`, modal content arrives over `[0.66, 1]`. Don't overlap them — the empty middle third is what makes the bloom feel intentional.
+</Warning>

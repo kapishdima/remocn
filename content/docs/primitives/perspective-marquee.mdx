@@ -1,0 +1,112 @@
+---
+title: Perspective Marquee
+description: A 3D-tilted infinite marquee with depth-of-field blur on items rolling toward the horizon.
+---
+
+A typography primitive that takes the seamless modulo-based loop from `InfiniteMarquee` and tilts it in 3D space using CSS `perspective` and `rotateX/Y`. Items further from the viewport center receive progressively heavier `filter: blur()` and lower opacity, mimicking depth of field. Edge vignettes fade the marquee into the background so the loop is invisible.
+
+<ComponentPreview name="perspective-marquee" />
+
+## Installation
+
+<InstallBlock name="perspective-marquee" />
+
+## Usage
+
+```tsx
+import { PerspectiveMarquee } from "@/components/remocn/perspective-marquee";
+
+<PerspectiveMarquee
+  items={["Vercel", "Linear", "Stripe", "Figma"]}
+  rotateY={-28}
+  pixelsPerFrame={2}
+/>
+```
+
+## Props
+
+<PropsTable
+  rows={[
+    {
+      name: "items",
+      type: "string[]",
+      default: "[\"Vercel\", \"Linear\", \"Stripe\", \"Figma\", \"Notion\", \"Raycast\", \"Arc\", \"Cursor\"]",
+      description: "Items rendered in the marquee. Repeated three times under the hood for a seamless loop.",
+    },
+    {
+      name: "fontSize",
+      type: "number",
+      default: "84",
+      description: "Font size in pixels.",
+    },
+    {
+      name: "color",
+      type: "string",
+      default: "\"#fafafa\"",
+      description: "Text color of each item.",
+    },
+    {
+      name: "fontWeight",
+      type: "number",
+      default: "700",
+      description: "CSS font-weight.",
+    },
+    {
+      name: "pixelsPerFrame",
+      type: "number",
+      default: "2",
+      description: "Horizontal scroll speed in pixels per frame.",
+    },
+    {
+      name: "rotateY",
+      type: "number",
+      default: "-28",
+      description: "Y-axis rotation in degrees applied to the marquee row.",
+    },
+    {
+      name: "rotateX",
+      type: "number",
+      default: "8",
+      description: "X-axis rotation in degrees applied to the marquee row.",
+    },
+    {
+      name: "perspective",
+      type: "number",
+      default: "1200",
+      description: "CSS perspective in pixels on the parent.",
+    },
+    {
+      name: "fadeColor",
+      type: "string",
+      default: "\"#050505\"",
+      description: "Color used in the edge vignette gradients.",
+    },
+    {
+      name: "background",
+      type: "string",
+      default: "\"#050505\"",
+      description: "Root container background color.",
+    },
+    {
+      name: "speed",
+      type: "number",
+      default: "1",
+      description: "Playback speed multiplier.",
+    },
+    {
+      name: "className",
+      type: "string",
+      description: "Optional className passed to the root container.",
+    },
+  ]}
+/>
+
+## Notes
+
+<Note title="Slow is hypnotic">
+  Keep `pixelsPerFrame` between 1 and 3. The 3D tilt amplifies perceived speed — anything faster reads as motion sickness.
+</Note>
+
+<Warning title="Match `fadeColor` to `background`">
+  The vignette assumes `fadeColor === background`. If they differ you will see hard edges where the marquee ends and the background begins.
+</Warning>

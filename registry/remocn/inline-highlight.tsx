@@ -15,6 +15,7 @@ export interface InlineHighlightProps {
   highlightColor?: string;
   fontSize?: number;
   fontWeight?: number;
+  speed?: number;
   className?: string;
 }
 
@@ -26,9 +27,10 @@ export function InlineHighlight({
   highlightColor = "#ff5e3a",
   fontSize = 48,
   fontWeight = 600,
+  speed = 1,
   className,
 }: InlineHighlightProps) {
-  const frame = useCurrentFrame();
+  const frame = useCurrentFrame() * speed;
   const { durationInFrames } = useVideoConfig();
 
   const progress = interpolate(

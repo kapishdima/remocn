@@ -1,0 +1,97 @@
+---
+title: Marker Highlight
+description: A colored marker block draws behind a phrase while the text color shifts.
+---
+
+A typography primitive that mimics a physical highlighter sweeping behind a word. The colored block grows from left to right via a spring, and the target text color interpolates to a contrast color.
+
+<ComponentPreview name="marker-highlight" />
+
+## Installation
+
+<InstallBlock name="marker-highlight" />
+
+## Usage
+
+```tsx
+import { MarkerHighlight } from "@/components/remocn/marker-highlight";
+
+<MarkerHighlight
+  before="Ship it "
+  highlight="fast"
+  after="."
+  markerColor="#facc15"
+/>
+```
+
+## Props
+
+<PropsTable
+  rows={[
+    {
+      name: "before",
+      type: "string",
+      default: "\"\"",
+      description: "Text that appears before the highlighted phrase.",
+    },
+    {
+      name: "highlight",
+      type: "string",
+      required: true,
+      description: "The phrase the marker draws behind.",
+    },
+    {
+      name: "after",
+      type: "string",
+      default: "\"\"",
+      description: "Text that appears after the highlighted phrase.",
+    },
+    {
+      name: "markerColor",
+      type: "string",
+      default: "\"#facc15\"",
+      description: "Color of the marker block.",
+    },
+    {
+      name: "baseColor",
+      type: "string",
+      default: "\"#171717\"",
+      description: "Color of the surrounding text.",
+    },
+    {
+      name: "highlightedTextColor",
+      type: "string",
+      default: "\"#171717\"",
+      description: "Final color of the highlighted phrase once the marker is drawn.",
+    },
+    {
+      name: "fontSize",
+      type: "number",
+      default: "72",
+      description: "Font size in pixels.",
+    },
+    {
+      name: "fontWeight",
+      type: "number",
+      default: "600",
+      description: "CSS font-weight.",
+    },
+    {
+      name: "speed",
+      type: "number",
+      default: "1",
+      description: "Multiplier for animation speed.",
+    },
+    {
+      name: "className",
+      type: "string",
+      description: "Optional className passed to the outer text span.",
+    },
+  ]}
+/>
+
+## Notes
+
+<Note title="Pick a contrast color">
+  For the classic marker effect, keep `markerColor` bright and leave `highlightedTextColor` dark. Or invert both for a neon look on dark backgrounds.
+</Note>

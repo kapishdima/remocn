@@ -74,6 +74,132 @@
       ]
     },
     {
+      "name": "staggered-fade-up",
+      "type": "registry:component",
+      "title": "Staggered Fade Up",
+      "description": "Words fade in and slide up one after another with a configurable delay.",
+      "dependencies": ["remotion"],
+      "files": [
+        {
+          "path": "registry/remocn/staggered-fade-up.tsx",
+          "type": "registry:component",
+          "target": "components/remocn/staggered-fade-up.tsx"
+        }
+      ]
+    },
+    {
+      "name": "masked-slide-reveal",
+      "type": "registry:component",
+      "title": "Masked Slide Reveal",
+      "description": "Words slide up out of an invisible horizontal mask, one after another.",
+      "dependencies": ["remotion"],
+      "files": [
+        {
+          "path": "registry/remocn/masked-slide-reveal.tsx",
+          "type": "registry:component",
+          "target": "components/remocn/masked-slide-reveal.tsx"
+        }
+      ]
+    },
+    {
+      "name": "tracking-in",
+      "type": "registry:component",
+      "title": "Tracking In",
+      "description": "Letter-spacing collapses and blur clears with a springy motion.",
+      "dependencies": ["remotion"],
+      "files": [
+        {
+          "path": "registry/remocn/tracking-in.tsx",
+          "type": "registry:component",
+          "target": "components/remocn/tracking-in.tsx"
+        }
+      ]
+    },
+    {
+      "name": "shimmer-sweep",
+      "type": "registry:component",
+      "title": "Shimmer Sweep",
+      "description": "Light shine sweeps across muted text via background-clip:text.",
+      "dependencies": ["remotion"],
+      "files": [
+        {
+          "path": "registry/remocn/shimmer-sweep.tsx",
+          "type": "registry:component",
+          "target": "components/remocn/shimmer-sweep.tsx"
+        }
+      ]
+    },
+    {
+      "name": "marker-highlight",
+      "type": "registry:component",
+      "title": "Marker Highlight",
+      "description": "Colored marker block draws behind a phrase as the text color shifts.",
+      "dependencies": ["remotion"],
+      "files": [
+        {
+          "path": "registry/remocn/marker-highlight.tsx",
+          "type": "registry:component",
+          "target": "components/remocn/marker-highlight.tsx"
+        }
+      ]
+    },
+    {
+      "name": "slot-machine-roll",
+      "type": "registry:component",
+      "title": "Slot Machine Roll",
+      "description": "Vertical reel scrolls characters from one value to another.",
+      "dependencies": ["remotion"],
+      "files": [
+        {
+          "path": "registry/remocn/slot-machine-roll.tsx",
+          "type": "registry:component",
+          "target": "components/remocn/slot-machine-roll.tsx"
+        }
+      ]
+    },
+    {
+      "name": "matrix-decode",
+      "type": "registry:component",
+      "title": "Matrix Decode",
+      "description": "Random scramble resolves left-to-right into the target text.",
+      "dependencies": ["remotion"],
+      "files": [
+        {
+          "path": "registry/remocn/matrix-decode.tsx",
+          "type": "registry:component",
+          "target": "components/remocn/matrix-decode.tsx"
+        }
+      ]
+    },
+    {
+      "name": "rgb-glitch-text",
+      "type": "registry:component",
+      "title": "RGB Glitch Text",
+      "description": "Three RGB-offset text copies jitter for a brief glitch window.",
+      "dependencies": ["remotion"],
+      "files": [
+        {
+          "path": "registry/remocn/rgb-glitch-text.tsx",
+          "type": "registry:component",
+          "target": "components/remocn/rgb-glitch-text.tsx"
+        }
+      ]
+    },
+    {
+      "name": "infinite-marquee",
+      "type": "registry:component",
+      "title": "Infinite Marquee",
+      "description": "Seamlessly looping horizontal text strip with optional stroke style.",
+      "dependencies": ["remotion"],
+      "files": [
+        {
+          "path": "registry/remocn/infinite-marquee.tsx",
+          "type": "registry:component",
+          "target": "components/remocn/infinite-marquee.tsx"
+        }
+      ]
+    },
+    {
       "name": "mesh-gradient-bg",
       "type": "registry:component",
       "title": "Mesh Gradient Background",
@@ -322,6 +448,104 @@
           "path": "registry/remocn/progress-steps.tsx",
           "type": "registry:component",
           "target": "components/remocn/progress-steps.tsx"
+        }
+      ]
+    },
+    {
+      "name": "morphing-modal",
+      "type": "registry:component",
+      "title": "Morphing Modal",
+      "description": "A bento card lifts off the grid and blooms into a full-screen modal driven by a single heavy spring.",
+      "dependencies": ["remotion"],
+      "files": [
+        {
+          "path": "registry/remocn/morphing-modal.tsx",
+          "type": "registry:component",
+          "target": "components/remocn/morphing-modal.tsx"
+        }
+      ]
+    },
+    {
+      "name": "data-flow-pipes",
+      "type": "registry:component",
+      "title": "Data Flow Pipes",
+      "description": "Glowing data packets travel along SVG bezier pipes between system nodes, leaving fading trails.",
+      "dependencies": ["remotion"],
+      "files": [
+        {
+          "path": "registry/remocn/data-flow-pipes.tsx",
+          "type": "registry:component",
+          "target": "components/remocn/data-flow-pipes.tsx"
+        }
+      ]
+    },
+    {
+      "name": "cursor-flow",
+      "type": "registry:component",
+      "title": "Cursor Flow",
+      "description": "A realistic mouse that arcs along cubic Bezier paths, pauses, and clicks targets that dip in response.",
+      "dependencies": ["remotion"],
+      "files": [
+        {
+          "path": "registry/remocn/cursor-flow.tsx",
+          "type": "registry:component",
+          "target": "components/remocn/cursor-flow.tsx"
+        }
+      ]
+    },
+    {
+      "name": "code-accordion",
+      "type": "registry:component",
+      "title": "Code Accordion",
+      "description": "A code window that springs a range of lines closed and replaces them with a \"N lines collapsed\" placeholder.",
+      "dependencies": ["remotion"],
+      "files": [
+        {
+          "path": "registry/remocn/code-accordion.tsx",
+          "type": "registry:component",
+          "target": "components/remocn/code-accordion.tsx"
+        }
+      ]
+    },
+    {
+      "name": "glass-code-block",
+      "type": "registry:component",
+      "title": "Glass Code Block",
+      "description": "A premium frosted-glass code editor window with a regex tokenizer and line-by-line stagger reveal.",
+      "dependencies": ["remotion"],
+      "files": [
+        {
+          "path": "registry/remocn/glass-code-block.tsx",
+          "type": "registry:component",
+          "target": "components/remocn/glass-code-block.tsx"
+        }
+      ]
+    },
+    {
+      "name": "spotlight-card",
+      "type": "registry:component",
+      "title": "Spotlight Card",
+      "description": "A card with a moonlight-cool radial spotlight that follows a synthetic cursor and lights up its microborder.",
+      "dependencies": ["remotion"],
+      "files": [
+        {
+          "path": "registry/remocn/spotlight-card.tsx",
+          "type": "registry:component",
+          "target": "components/remocn/spotlight-card.tsx"
+        }
+      ]
+    },
+    {
+      "name": "perspective-marquee",
+      "type": "registry:component",
+      "title": "Perspective Marquee",
+      "description": "A 3D-tilted infinite marquee with depth-of-field blur on items rolling toward the horizon.",
+      "dependencies": ["remotion"],
+      "files": [
+        {
+          "path": "registry/remocn/perspective-marquee.tsx",
+          "type": "registry:component",
+          "target": "components/remocn/perspective-marquee.tsx"
         }
       ]
     },

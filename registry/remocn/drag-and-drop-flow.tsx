@@ -13,6 +13,7 @@ export interface DragAndDropFlowProps {
   dropzoneLabel?: string;
   fileName?: string;
   background?: string;
+  speed?: number;
   className?: string;
 }
 
@@ -38,9 +39,10 @@ export function DragAndDropFlow({
   dropzoneLabel = "Drop file to upload",
   fileName = "design.fig",
   background = "#fafafa",
+  speed = 1,
   className,
 }: DragAndDropFlowProps) {
-  const frame = useCurrentFrame();
+  const frame = useCurrentFrame() * speed;
   const { durationInFrames } = useVideoConfig();
 
   // Phase split

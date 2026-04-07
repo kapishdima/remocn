@@ -17,6 +17,7 @@ export interface ToastNotificationProps {
   cardColor?: string;
   textColor?: string;
   mutedColor?: string;
+  speed?: number;
   className?: string;
 }
 
@@ -79,9 +80,10 @@ export function ToastNotification({
   cardColor = "white",
   textColor = "#171717",
   mutedColor = "#71717a",
+  speed = 1,
   className,
 }: ToastNotificationProps) {
-  const frame = useCurrentFrame();
+  const frame = useCurrentFrame() * speed;
   const { fps, durationInFrames } = useVideoConfig();
 
   const enterFrames = 15;

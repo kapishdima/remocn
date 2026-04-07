@@ -9,6 +9,7 @@ export interface StrikethroughReplaceProps {
   fontSize?: number;
   color?: string;
   fontWeight?: number;
+  speed?: number;
   className?: string;
 }
 
@@ -19,9 +20,10 @@ export function StrikethroughReplace({
   fontSize = 48,
   color = "#171717",
   fontWeight = 600,
+  speed = 1,
   className,
 }: StrikethroughReplaceProps) {
-  const frame = useCurrentFrame();
+  const frame = useCurrentFrame() * speed;
   const { durationInFrames } = useVideoConfig();
 
   // Phases:

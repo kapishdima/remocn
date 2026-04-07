@@ -9,6 +9,7 @@ export interface DirectionalWipeProps {
   direction?: "left" | "right" | "up" | "down";
   transitionStart?: number;
   transitionDuration?: number;
+  speed?: number;
   className?: string;
 }
 
@@ -43,9 +44,10 @@ export function DirectionalWipe({
   direction = "left",
   transitionStart,
   transitionDuration = 20,
+  speed = 1,
   className,
 }: DirectionalWipeProps) {
-  const frame = useCurrentFrame();
+  const frame = useCurrentFrame() * speed;
   const { durationInFrames } = useVideoConfig();
 
   const start =

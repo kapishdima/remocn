@@ -11,6 +11,7 @@ export interface AnimatedBarChartProps {
   background?: string;
   gap?: number;
   staggerFrames?: number;
+  speed?: number;
   className?: string;
 }
 
@@ -23,9 +24,10 @@ export function AnimatedBarChart({
   background = "#0a0a0a",
   gap = 16,
   staggerFrames = 6,
+  speed = 1,
   className,
 }: AnimatedBarChartProps) {
-  const frame = useCurrentFrame();
+  const frame = useCurrentFrame() * speed;
   const { fps } = useVideoConfig();
 
   const padding = 60;

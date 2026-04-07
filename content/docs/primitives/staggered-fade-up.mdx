@@ -1,0 +1,80 @@
+---
+title: Staggered Fade Up
+description: Words slide up and fade in sequentially with a wave-like cascade.
+---
+
+A typography primitive that splits text into words and animates each one with a small delay, sliding up from a configurable distance while fading in. Great for hero titles and intro shots.
+
+<ComponentPreview name="staggered-fade-up" />
+
+## Installation
+
+<InstallBlock name="staggered-fade-up" />
+
+## Usage
+
+```tsx
+import { StaggeredFadeUp } from "@/components/remocn/staggered-fade-up";
+
+<StaggeredFadeUp text="Ship videos faster" staggerDelay={4} />
+```
+
+## Props
+
+<PropsTable
+  rows={[
+    {
+      name: "text",
+      type: "string",
+      required: true,
+      description: "The text to animate. Split on spaces into words.",
+    },
+    {
+      name: "staggerDelay",
+      type: "number",
+      default: "4",
+      description: "Frames between the start of each word's animation.",
+    },
+    {
+      name: "distance",
+      type: "number",
+      default: "20",
+      description: "Vertical distance in pixels each word travels upward.",
+    },
+    {
+      name: "fontSize",
+      type: "number",
+      default: "72",
+      description: "Font size in pixels.",
+    },
+    {
+      name: "fontWeight",
+      type: "number",
+      default: "600",
+      description: "CSS font-weight.",
+    },
+    {
+      name: "color",
+      type: "string",
+      default: "\"#171717\"",
+      description: "Text color (any valid CSS color).",
+    },
+    {
+      name: "speed",
+      type: "number",
+      default: "1",
+      description: "Playback speed multiplier (1 = normal, 2 = twice as fast).",
+    },
+    {
+      name: "className",
+      type: "string",
+      description: "Optional className passed to the underlying span.",
+    },
+  ]}
+/>
+
+## Notes
+
+<Note title="Tune the stagger">
+  A smaller `staggerDelay` (2-3 frames) feels punchy, larger values (6-8) feel cinematic. Pair with `speed` to fit your composition's pacing.
+</Note>

@@ -16,6 +16,7 @@ export interface ProgressStepsProps {
   background?: string;
   textColor?: string;
   stepDuration?: number;
+  speed?: number;
   className?: string;
 }
 
@@ -27,9 +28,10 @@ export function ProgressSteps({
   background = "#0a0a0a",
   textColor = "white",
   stepDuration = 30,
+  speed = 1,
   className,
 }: ProgressStepsProps) {
-  const frame = useCurrentFrame();
+  const frame = useCurrentFrame() * speed;
   const { fps } = useVideoConfig();
 
   const isHorizontal = orientation === "horizontal";

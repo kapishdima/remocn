@@ -9,6 +9,7 @@ export interface ChatToPreviewLayoutProps {
   startChatRatio?: number;
   endChatRatio?: number;
   background?: string;
+  speed?: number;
   className?: string;
 }
 
@@ -163,24 +164,63 @@ export function ChatToPreviewLayout({
   startChatRatio = 0.5,
   endChatRatio = 0.25,
   background = "#0a0a0a",
+  speed = 1,
   className,
 }: ChatToPreviewLayoutProps) {
-  const frame = useCurrentFrame();
+  const frame = useCurrentFrame() * speed;
   const { durationInFrames } = useVideoConfig();
+
+  // Apple's signature ease — slow start, dramatic settle. Replaces the older
+  // symmetric bezier so the morph feels deliberate instead of mechanical.
+  const APPLE_EASE = Easing.bezier(0.16, 1, 0.3, 1);
+
+  const morphStart = durationInFrames * 0.1;
+  const morphEnd = durationInFrames * 0.7;
 
   const ratio = interpolate(
     frame,
-    [durationInFrames * 0.1, durationInFrames * 0.7],
+    [morphStart, morphEnd],
     [startChatRatio, endChatRatio],
     {
       extrapolateLeft: "clamp",
       extrapolateRight: "clamp",
-      easing: Easing.bezier(0.65, 0, 0.35, 1),
+      easing: APPLE_EASE,
+    },
+  );
+
+  // Right (preview) panel reveal: fade in + slide left into its growing slot.
+  // Anchored to the same morph window so it feels like the chat is physically
+  // dragging the preview into existence.
+  const previewOpacity = interpolate(
+    frame,
+    [morphStart, morphEnd],
+    [0, 1],
+    {
+      extrapolateLeft: "clamp",
+      extrapolateRight: "clamp",
+      easing: APPLE_EASE,
+    },
+  );
+  const previewTx = interpolate(
+    frame,
+    [morphStart, morphEnd],
+    [40, 0],
+    {
+      extrapolateLeft: "clamp",
+      extrapolateRight: "clamp",
+      easing: APPLE_EASE,
     },
   );
 
   const chatBasis = `${ratio * 100}%`;
   const previewBasis = `${(1 - ratio) * 100}%`;
+
+  // Inner content min-widths. These are the lever that prevents text from
+  // re-flowing inside the columns as the parent flex-basis morphs — content
+  // is rendered at a fixed virtual width, then clipped by `overflow: hidden`
+  // on the outer column. No reflow → no jumping characters.
+  const CHAT_INNER_MIN = 520;
+  const PREVIEW_INNER_MIN = 720;
 
   return (
     <div
@@ -205,7 +245,15 @@ export function ChatToPreviewLayout({
           border: "1px solid rgba(255,255,255,0.08)",
         }}
       >
-        {chat ?? <DefaultChat />}
+        <div
+          style={{
+            position: "absolute",
+            inset: 0,
+            minWidth: CHAT_INNER_MIN,
+          }}
+        >
+          {chat ?? <DefaultChat />}
+        </div>
       </div>
       <div
         style={{
@@ -216,9 +264,19 @@ export function ChatToPreviewLayout({
           overflow: "hidden",
           borderRadius: 16,
           border: "1px solid rgba(255,255,255,0.08)",
+          opacity: previewOpacity,
+          transform: `translateX(${previewTx}px)`,
         }}
       >
-        {preview ?? <DefaultPreview />}
+        <div
+          style={{
+            position: "absolute",
+            inset: 0,
+            minWidth: PREVIEW_INNER_MIN,
+          }}
+        >
+          {preview ?? <DefaultPreview />}
+        </div>
       </div>
     </div>
   );

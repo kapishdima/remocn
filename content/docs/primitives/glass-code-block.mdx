@@ -1,0 +1,104 @@
+---
+title: Glass Code Block
+description: A premium frosted-glass code editor window with a regex tokenizer and line-by-line stagger reveal.
+---
+
+A code window primitive that ditches the flat black rectangle look. The card uses `backdrop-filter: blur()` over a slow animated aura for real refraction; a 1px linear-gradient ring fakes a top-edge highlight; macOS-style traffic lights are dimmed to 60% so they don't shout. Lines fade in one after another with a tiny upward slide via `Sequence`. Syntax highlighting is a small built-in regex tokenizer — no `highlight.js` dependency.
+
+<ComponentPreview name="glass-code-block" />
+
+## Installation
+
+<InstallBlock name="glass-code-block" />
+
+## Usage
+
+```tsx
+import { GlassCodeBlock } from "@/components/remocn/glass-code-block";
+
+<GlassCodeBlock
+  title="hero.tsx"
+  code={`export function Hero() {\n  return <h1>Hello</h1>;\n}`}
+/>
+```
+
+## Props
+
+<PropsTable
+  rows={[
+    {
+      name: "code",
+      type: "string",
+      description: "Source code to render. Newlines split into lines.",
+    },
+    {
+      name: "title",
+      type: "string",
+      default: "\"hero.tsx\"",
+      description: "Filename shown in the chrome bar.",
+    },
+    {
+      name: "width",
+      type: "number",
+      default: "760",
+      description: "Window width in pixels.",
+    },
+    {
+      name: "height",
+      type: "number",
+      default: "460",
+      description: "Window height in pixels.",
+    },
+    {
+      name: "fontSize",
+      type: "number",
+      default: "16",
+      description: "Code font size in pixels.",
+    },
+    {
+      name: "background",
+      type: "string",
+      default: "\"#0a0a0a\"",
+      description: "Background color around the window.",
+    },
+    {
+      name: "glassColor",
+      type: "string",
+      default: "\"rgba(10, 10, 10, 0.6)\"",
+      description: "Card surface color. Keep alpha < 1 for glass refraction.",
+    },
+    {
+      name: "staggerFrames",
+      type: "number",
+      default: "4",
+      description: "Frames between each line's reveal.",
+    },
+    {
+      name: "showTrafficLights",
+      type: "boolean",
+      default: "true",
+      description: "Show the dimmed macOS-style window controls.",
+    },
+    {
+      name: "speed",
+      type: "number",
+      default: "1",
+      description: "Playback speed multiplier.",
+    },
+    {
+      name: "className",
+      type: "string",
+      description: "Optional className passed to the root container.",
+    },
+  ]}
+/>
+
+## Notes
+
+<Note title="Tokenizer scope">
+  The built-in tokenizer covers JS/TS keywords, strings, numbers, and `//` comments. It is intentionally not a full parser — for richer highlighting, replace `tokenizeLine` with your own and keep the same `Token` shape.
+</Note>
+
+<Warning title="Backdrop filter requires content behind">
+  The frosted glass effect only shows refraction if there is something behind it. The component renders a slow built-in aura. If you wrap it inside another scene, make sure that scene has visual content.
+</Warning>

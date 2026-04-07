@@ -19,6 +19,7 @@ export interface SuccessConfettiProps {
   textColor?: string;
   background?: string;
   seed?: string;
+  speed?: number;
   className?: string;
 }
 
@@ -33,9 +34,10 @@ export function SuccessConfetti({
   textColor = "#171717",
   background = "#fafafa",
   seed = "remocn",
+  speed = 1,
   className,
 }: SuccessConfettiProps) {
-  const frame = useCurrentFrame();
+  const frame = useCurrentFrame() * speed;
   const { fps, durationInFrames } = useVideoConfig();
 
   const width = 1280;

@@ -14,6 +14,7 @@ export interface SimulatedCursorProps {
   color?: string;
   size?: number;
   background?: string;
+  speed?: number;
   className?: string;
 }
 
@@ -28,9 +29,10 @@ export function SimulatedCursor({
   color = "#ffffff",
   size = 32,
   background = "#0a0a0a",
+  speed = 1,
   className,
 }: SimulatedCursorProps) {
-  const frame = useCurrentFrame();
+  const frame = useCurrentFrame() * speed;
   const { fps, durationInFrames } = useVideoConfig();
 
   const travelPerLeg = 24;

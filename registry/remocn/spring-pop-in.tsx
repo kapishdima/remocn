@@ -9,6 +9,7 @@ export interface SpringPopInProps {
   mass?: number;
   stiffness?: number;
   delayInFrames?: number;
+  speed?: number;
   className?: string;
 }
 
@@ -45,9 +46,10 @@ export function SpringPopIn({
   mass = 1,
   stiffness = 100,
   delayInFrames = 0,
+  speed = 1,
   className,
 }: SpringPopInProps) {
-  const frame = useCurrentFrame();
+  const frame = useCurrentFrame() * speed;
   const { fps } = useVideoConfig();
 
   const scale = spring({

@@ -10,6 +10,7 @@ export interface BoundingBoxSelectorProps {
   borderWidth?: number;
   appearAt?: number;
   background?: string;
+  speed?: number;
   className?: string;
 }
 
@@ -69,9 +70,10 @@ export function BoundingBoxSelector({
   borderWidth = 2,
   appearAt = 15,
   background = "#fafafa",
+  speed = 1,
   className,
 }: BoundingBoxSelectorProps) {
-  const frame = useCurrentFrame();
+  const frame = useCurrentFrame() * speed;
   const { fps } = useVideoConfig();
 
   const progress = spring({

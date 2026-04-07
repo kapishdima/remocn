@@ -11,6 +11,7 @@ export interface CodeDiffWipeProps {
   transitionStart?: number;
   transitionDuration?: number;
   showHandle?: boolean;
+  speed?: number;
   className?: string;
 }
 
@@ -43,9 +44,10 @@ export function CodeDiffWipe({
   transitionStart = 20,
   transitionDuration = 60,
   showHandle = true,
+  speed = 1,
   className,
 }: CodeDiffWipeProps) {
-  const frame = useCurrentFrame();
+  const frame = useCurrentFrame() * speed;
 
   const progress = interpolate(
     frame,

@@ -11,6 +11,7 @@ export interface AnimatedLineChartProps {
   background?: string;
   gridColor?: string;
   showDot?: boolean;
+  speed?: number;
   className?: string;
 }
 
@@ -23,9 +24,10 @@ export function AnimatedLineChart({
   background = "#0a0a0a",
   gridColor = "#27272a",
   showDot = true,
+  speed = 1,
   className,
 }: AnimatedLineChartProps) {
-  const frame = useCurrentFrame();
+  const frame = useCurrentFrame() * speed;
   const { fps, durationInFrames } = useVideoConfig();
 
   const padding = 60;

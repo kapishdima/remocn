@@ -9,6 +9,7 @@ export interface DeviceMockupZoomProps {
   frameColor?: string;
   screenColor?: string;
   background?: string;
+  speed?: number;
   className?: string;
 }
 
@@ -43,9 +44,10 @@ export function DeviceMockupZoom({
   frameColor = "#1f1f1f",
   screenColor = "#0a0a0a",
   background = "#fafafa",
+  speed = 1,
   className,
 }: DeviceMockupZoomProps) {
-  const frame = useCurrentFrame();
+  const frame = useCurrentFrame() * speed;
   const { durationInFrames } = useVideoConfig();
 
   const scale = interpolate(frame, [0, durationInFrames], [2, 1], {

@@ -9,6 +9,7 @@ export interface BlurRevealProps {
   fontSize?: number;
   color?: string;
   fontWeight?: number;
+  speed?: number;
 }
 
 export function BlurReveal({
@@ -18,8 +19,9 @@ export function BlurReveal({
   fontSize = 48,
   color = "#171717",
   fontWeight = 600,
+  speed = 1,
 }: BlurRevealProps) {
-  const frame = useCurrentFrame();
+  const frame = useCurrentFrame() * speed;
   const { durationInFrames } = useVideoConfig();
 
   const opacity = interpolate(frame, [0, durationInFrames * 0.6], [0, 1], {

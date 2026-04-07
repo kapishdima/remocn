@@ -1,0 +1,96 @@
+---
+title: Infinite Marquee
+description: A continuously scrolling horizontal text strip that loops seamlessly.
+---
+
+A typography primitive that translates a row of duplicated text spans on the X axis at a fixed pixel-per-frame rate. The offset is taken `mod` the approximate width of one repetition so the loop is seamless and fully deterministic.
+
+<ComponentPreview name="infinite-marquee" />
+
+## Installation
+
+<InstallBlock name="infinite-marquee" />
+
+## Usage
+
+```tsx
+import { InfiniteMarquee } from "@/components/remocn/infinite-marquee";
+
+<InfiniteMarquee text="ship · build · animate · " pixelsPerFrame={4} stroke />
+```
+
+## Props
+
+<PropsTable
+  rows={[
+    {
+      name: "text",
+      type: "string",
+      default: "\"ship · build · animate · \"",
+      description: "Text repeated across the marquee. Include trailing whitespace or punctuation for spacing.",
+    },
+    {
+      name: "fontSize",
+      type: "number",
+      default: "120",
+      description: "Font size in pixels.",
+    },
+    {
+      name: "color",
+      type: "string",
+      default: "\"#171717\"",
+      description: "Text color when `stroke` is false.",
+    },
+    {
+      name: "fontWeight",
+      type: "number",
+      default: "900",
+      description: "CSS font-weight.",
+    },
+    {
+      name: "pixelsPerFrame",
+      type: "number",
+      default: "4",
+      description: "Horizontal scroll speed in pixels per frame.",
+    },
+    {
+      name: "stroke",
+      type: "boolean",
+      default: "false",
+      description: "Render outlined text via `-webkit-text-stroke` instead of filled.",
+    },
+    {
+      name: "strokeColor",
+      type: "string",
+      default: "\"#171717\"",
+      description: "Stroke color used when `stroke` is true.",
+    },
+    {
+      name: "background",
+      type: "string",
+      default: "\"#fafafa\"",
+      description: "Background color of the root container.",
+    },
+    {
+      name: "speed",
+      type: "number",
+      default: "1",
+      description: "Playback speed multiplier.",
+    },
+    {
+      name: "className",
+      type: "string",
+      description: "Optional className passed to the translating row.",
+    },
+  ]}
+/>
+
+## Notes
+
+<Note title="Seamless looping">
+  Width is approximated as `text.length * fontSize * 0.55`. For very wide or very narrow fonts you may see a small jump on loop — tweak the multiplier to match your typeface, or pass a longer `text` to make any seam imperceptible.
+</Note>
+
+<Warning title="No layout reads">
+  This component intentionally avoids `useRef` / measurement so it stays render-deterministic. If you need pixel-perfect looping for a specific font, hard-code the repetition width via `text` length and `fontSize`.
+</Warning>

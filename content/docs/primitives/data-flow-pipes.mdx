@@ -1,0 +1,106 @@
+---
+title: Data Flow Pipes
+description: Glowing data packets travel along SVG bezier pipes between system nodes, leaving fading trails.
+---
+
+A diagramming primitive for showing data moving through a system. Nodes are positioned absolutely; edges become SVG cubic-bezier paths with horizontally-pulled handles so the routes look like API/DB diagrams instead of straight wires. Each pulse is rendered as a bright dash that animates along the path via `strokeDashoffset`, with three faded ghost copies offset behind it to fake motion blur. Path arc length is sampled numerically (no DOM `getTotalLength`), so the math is fully render-deterministic.
+
+<ComponentPreview name="data-flow-pipes" />
+
+## Installation
+
+<InstallBlock name="data-flow-pipes" />
+
+## Usage
+
+```tsx
+import { DataFlowPipes } from "@/components/remocn/data-flow-pipes";
+
+<DataFlowPipes
+  nodes={[
+    { id: "client", x: 140, y: 360, label: "Client" },
+    { id: "api", x: 460, y: 200, label: "API" },
+    { id: "db", x: 820, y: 360, label: "Database" },
+  ]}
+  edges={[
+    { from: "client", to: "api", startFrame: 0 },
+    { from: "api", to: "db", startFrame: 18 },
+  ]}
+/>
+```
+
+## Props
+
+<PropsTable
+  rows={[
+    {
+      name: "nodes",
+      type: "DataFlowNode[]",
+      description: "Array of `{ id, x, y, label }`. Coordinates are in the 1280×720 viewBox.",
+    },
+    {
+      name: "edges",
+      type: "DataFlowEdge[]",
+      description: "Array of `{ from, to, startFrame }`. Each edge becomes a static pipe plus an animated pulse.",
+    },
+    {
+      name: "pipeColor",
+      type: "string",
+      default: "\"#1f1f23\"",
+      description: "Color of the static pipe stroke.",
+    },
+    {
+      name: "pulseColor",
+      type: "string",
+      default: "\"#22d3ee\"",
+      description: "Color of the moving pulse and its glow.",
+    },
+    {
+      name: "pulseLength",
+      type: "number",
+      default: "60",
+      description: "Length of the bright dash in pixels.",
+    },
+    {
+      name: "pulseDuration",
+      type: "number",
+      default: "36",
+      description: "Frames a single pulse takes to traverse its edge.",
+    },
+    {
+      name: "background",
+      type: "string",
+      default: "\"#050505\"",
+      description: "Page background color.",
+    },
+    {
+      name: "nodeColor",
+      type: "string",
+      default: "\"#0a0a0a\"",
+      description: "Node card background color.",
+    },
+    {
+      name: "textColor",
+      type: "string",
+      default: "\"#fafafa\"",
+      description: "Node label color.",
+    },
+    {
+      name: "speed",
+      type: "number",
+      default: "1",
+      description: "Playback speed multiplier.",
+    },
+    {
+      name: "className",
+      type: "string",
+      description: "Optional className passed to the root container.",
+    },
+  ]}
+/>
+
+## Notes
+
+<Note title="Stagger by `startFrame`">
+  Each edge has its own `startFrame`. Stagger them in increments of 8–12 frames to create a chain reaction across the diagram.
+</Note>

@@ -1,0 +1,74 @@
+---
+title: Masked Slide Reveal
+description: Words rise out of an invisible horizontal mask with a springy motion.
+---
+
+A strict, architectural typography primitive: each word is wrapped in a fixed-height container with `overflow: hidden`, and the inner span springs upward from `translateY(100%)` to `0`. The result is text that grows out of an invisible baseline.
+
+<ComponentPreview name="masked-slide-reveal" />
+
+## Installation
+
+<InstallBlock name="masked-slide-reveal" />
+
+## Usage
+
+```tsx
+import { MaskedSlideReveal } from "@/components/remocn/masked-slide-reveal";
+
+<MaskedSlideReveal text="Built for Remotion" />
+```
+
+## Props
+
+<PropsTable
+  rows={[
+    {
+      name: "text",
+      type: "string",
+      required: true,
+      description: "The text to animate. Split on spaces into words.",
+    },
+    {
+      name: "staggerDelay",
+      type: "number",
+      default: "3",
+      description: "Frames between the start of each word's spring animation.",
+    },
+    {
+      name: "fontSize",
+      type: "number",
+      default: "72",
+      description: "Font size in pixels.",
+    },
+    {
+      name: "fontWeight",
+      type: "number",
+      default: "700",
+      description: "CSS font-weight.",
+    },
+    {
+      name: "color",
+      type: "string",
+      default: "\"#171717\"",
+      description: "Text color (any valid CSS color).",
+    },
+    {
+      name: "speed",
+      type: "number",
+      default: "1",
+      description: "Playback speed multiplier (1 = normal, 2 = twice as fast).",
+    },
+    {
+      name: "className",
+      type: "string",
+      description: "Optional className passed to the underlying span.",
+    },
+  ]}
+/>
+
+## Notes
+
+<Note title="Mind descenders">
+  The mask uses `lineHeight: 1`, which clips letter descenders (g, y, p) by design. If you need extra room, wrap the component in your own container with padding.
+</Note>

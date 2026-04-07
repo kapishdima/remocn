@@ -1,0 +1,90 @@
+---
+title: Cursor Flow
+description: A realistic mouse that arcs along cubic Bezier paths, pauses, and clicks targets that dip in response.
+---
+
+A more sophisticated cousin of `SimulatedCursor`. Instead of moving on straight lines between waypoints, the cursor follows per-segment cubic Bezier curves whose control points are offset perpendicular to the chord, so the trajectory always has a "belly". An ease-in-out function shapes velocity inside each segment so the cursor accelerates, glides, and decelerates before arrival. At click moments, an independent spring drives a hard 4-frame `1 → 0.85 → 1` press while the click target dips to `0.98` in sync — that's the moment that sells the impact.
+
+<ComponentPreview name="cursor-flow" />
+
+## Installation
+
+<InstallBlock name="cursor-flow" />
+
+## Usage
+
+```tsx
+import { CursorFlow } from "@/components/remocn/cursor-flow";
+
+<CursorFlow
+  waypoints={[
+    { x: 200, y: 180 },
+    { x: 540, y: 240, click: true, label: "Generate" },
+    { x: 880, y: 360, hold: 8 },
+    { x: 1040, y: 520, click: true, label: "Publish" },
+  ]}
+/>
+```
+
+## Props
+
+<PropsTable
+  rows={[
+    {
+      name: "waypoints",
+      type: "CursorWaypoint[]",
+      description: "Ordered list of points the cursor visits. Each waypoint has `x`, `y`, and optional `hold`, `click`, and `label`.",
+    },
+    {
+      name: "cursorColor",
+      type: "string",
+      default: "\"#fafafa\"",
+      description: "Cursor SVG fill color.",
+    },
+    {
+      name: "cursorSize",
+      type: "number",
+      default: "28",
+      description: "Cursor SVG side length in pixels.",
+    },
+    {
+      name: "segmentDuration",
+      type: "number",
+      default: "36",
+      description: "Frames spent traversing one segment between two waypoints.",
+    },
+    {
+      name: "background",
+      type: "string",
+      default: "\"#0a0a0a\"",
+      description: "Page background color.",
+    },
+    {
+      name: "showTargets",
+      type: "boolean",
+      default: "true",
+      description: "Render the click target chips at clickable waypoints.",
+    },
+    {
+      name: "speed",
+      type: "number",
+      default: "1",
+      description: "Playback speed multiplier.",
+    },
+    {
+      name: "className",
+      type: "string",
+      description: "Optional className passed to the root container.",
+    },
+  ]}
+/>
+
+## Notes
+
+<Note title="The arc is the point">
+  Per-segment perpendicular control points alternate sign every other segment so the path snakes naturally. If you flatten the offset to 0 you get robotic straight lines — keep it.
+</Note>
+
+<Warning title="No d3-shape">
+  Curves are computed inline with a small `cubicBezier` evaluator to avoid pulling in `d3-shape` (~30KB) just for path math.
+</Warning>

@@ -5,6 +5,9 @@ import { interpolate, useCurrentFrame, useVideoConfig } from "remotion";
 export interface TypewriterProps {
   text: string;
   cursor?: boolean;
+  /** Typing speed in characters per second. */
+  charsPerSecond?: number;
+  /** Playback speed multiplier (1 = normal, 2 = twice as fast). */
   speed?: number;
   fontSize?: number;
   color?: string;
@@ -16,17 +19,18 @@ export interface TypewriterProps {
 export function Typewriter({
   text,
   cursor = true,
-  speed = 20,
+  charsPerSecond = 20,
+  speed = 1,
   fontSize = 48,
   color = "#171717",
   cursorColor = "#171717",
   fontWeight = 600,
   className,
 }: TypewriterProps) {
-  const frame = useCurrentFrame();
+  const frame = useCurrentFrame() * speed;
   const { fps } = useVideoConfig();
 
-  const charsToRevealOver = (text.length / speed) * fps;
+  const charsToRevealOver = (text.length / charsPerSecond) * fps;
 
   const revealed = Math.floor(
     interpolate(frame, [0, charsToRevealOver], [0, text.length], {
