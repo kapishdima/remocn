@@ -3,9 +3,10 @@ title: Pipeline Journey
 description: A Kanban ticket flies between columns, triggering events along the way.
 ---
 
+<ComponentPreview name="pipeline-journey" />
+
 A workflow primitive that animates a single ticket on a Kanban board. The card lifts out of Todo, arcs through the air with a tilt and growing shadow, lands in In Progress where a brief timer ticks, then takes off again toward Done — where it triggers a deterministic confetti burst on touchdown.
 
-<ComponentPreview name="pipeline-journey" />
 
 ## Installation
 
@@ -14,9 +15,24 @@ A workflow primitive that animates a single ticket on a Kanban board. The card l
 ## Usage
 
 ```tsx
+// src/Root.tsx
+import { Composition } from "remotion";
 import { PipelineJourney } from "@/components/remocn/pipeline-journey";
 
-<PipelineJourney cardLabel="Build pipeline" accentColor="#22c55e" />
+const PipelineJourneyScene = () => (
+  <PipelineJourney cardLabel="Build pipeline" accentColor="#22c55e" />
+);
+
+export const RemotionRoot = () => (
+  <Composition
+    id="PipelineJourney"
+    component={PipelineJourneyScene}
+    durationInFrames={200}
+    fps={30}
+    width={1280}
+    height={720}
+  />
+);
 ```
 
 ## Props

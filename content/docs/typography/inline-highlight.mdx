@@ -3,9 +3,10 @@ title: Inline Highlight
 description: Animate one word inside a sentence from a base color to a brand color.
 ---
 
+<ComponentPreview name="inline-highlight" />
+
 A typography primitive that splits a sentence into `before`, `highlight`, and `after` parts and animates the color of the middle word using `interpolateColors` from Remotion.
 
-<ComponentPreview name="inline-highlight" />
 
 ## Installation
 
@@ -14,14 +15,29 @@ A typography primitive that splits a sentence into `before`, `highlight`, and `a
 ## Usage
 
 ```tsx
+// src/Root.tsx
+import { Composition } from "remotion";
 import { InlineHighlight } from "@/components/remocn/inline-highlight";
 
-<InlineHighlight
-  before="Ship faster with "
-  highlight="remocn"
-  highlightColor="#ff5e3a"
-  fontSize={72}
-/>
+const InlineHighlightScene = () => (
+  <InlineHighlight
+    before="Ship faster with "
+    highlight="remocn"
+    highlightColor="#ff5e3a"
+    fontSize={72}
+  />
+);
+
+export const RemotionRoot = () => (
+  <Composition
+    id="InlineHighlight"
+    component={InlineHighlightScene}
+    durationInFrames={90}
+    fps={30}
+    width={1280}
+    height={720}
+  />
+);
 ```
 
 ## Props

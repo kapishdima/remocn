@@ -26,7 +26,7 @@ export function ComponentPreview({ name }: { name: string }) {
 
   if (!entry) {
     return (
-      <div className="not-prose my-6 rounded-lg border border-fd-border p-4 text-sm text-fd-muted-foreground">
+      <div className="not-prose mb-6 rounded-lg border border-fd-border p-4 text-sm text-fd-muted-foreground">
         Unknown component: <code>{name}</code>
       </div>
     );
@@ -35,7 +35,7 @@ export function ComponentPreview({ name }: { name: string }) {
   return (
     <Suspense
       fallback={
-        <div className="not-prose my-6 aspect-video w-full animate-pulse rounded-xl bg-muted" />
+        <div className="not-prose mb-6 aspect-video w-full animate-pulse rounded-xl bg-muted" />
       }
     >
       <Preview name={name} config={entry.config} Component={entry.Component} />
@@ -111,7 +111,7 @@ function Preview({
   };
 
   return (
-    <div className="not-prose my-6 flex w-full flex-col gap-4">
+    <div className="not-prose mb-6 flex w-full flex-col gap-4">
       <Tabs defaultValue="preview" className="gap-3">
         <TabsList>
           <TabsTrigger value="preview">Preview</TabsTrigger>

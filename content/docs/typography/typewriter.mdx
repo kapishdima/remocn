@@ -3,9 +3,10 @@ title: Typewriter
 description: Character-by-character text reveal with a deterministic blinking cursor.
 ---
 
+<ComponentPreview name="typewriter" />
+
 A typography primitive that reveals text one character at a time using `interpolate` and `substring`. The cursor blinks via integer math on the current frame, so it stays consistent across re-renders.
 
-<ComponentPreview name="typewriter" />
 
 ## Installation
 
@@ -14,9 +15,24 @@ A typography primitive that reveals text one character at a time using `interpol
 ## Usage
 
 ```tsx
+// src/Root.tsx
+import { Composition } from "remotion";
 import { Typewriter } from "@/components/remocn/typewriter";
 
-<Typewriter text="Hello, world" speed={20} fontSize={72} />
+const TypewriterScene = () => (
+  <Typewriter text="Hello, world" speed={20} fontSize={72} />
+);
+
+export const RemotionRoot = () => (
+  <Composition
+    id="Typewriter"
+    component={TypewriterScene}
+    durationInFrames={120}
+    fps={30}
+    width={1280}
+    height={720}
+  />
+);
 ```
 
 ## Props

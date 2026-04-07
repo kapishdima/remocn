@@ -3,9 +3,10 @@ title: Frosted Glass Wipe
 description: Elegant scene transition through a sliding pane of frosted glass.
 ---
 
+<ComponentPreview name="frosted-glass-wipe" />
+
 A transition primitive that slides a pane of frosted glass across the screen between two scenes. The outgoing scene blurs beneath the glass; once the pane crosses the midpoint, the incoming scene is revealed in its place. Uses `backdrop-filter` for the glass and `transform: translateX` for movement so the browser stays on the compositor.
 
-<ComponentPreview name="frosted-glass-wipe" />
 
 ## Installation
 
@@ -14,14 +15,25 @@ A transition primitive that slides a pane of frosted glass across the screen bet
 ## Usage
 
 ```tsx
+// src/Root.tsx
+import { Composition } from "remotion";
 import { FrostedGlassWipe } from "@/components/remocn/frosted-glass-wipe";
 
-<FrostedGlassWipe
-  from={<SceneA />}
-  to={<SceneB />}
-  transitionDuration={30}
-  glassBlur={24}
-/>
+const FrostedGlassWipeScene = () => (
+  <FrostedGlassWipe
+    from={<SceneA />
+);
+
+export const RemotionRoot = () => (
+  <Composition
+    id="FrostedGlassWipe"
+    component={FrostedGlassWipeScene}
+    durationInFrames={90}
+    fps={30}
+    width={1280}
+    height={720}
+  />
+);
 ```
 
 ## Props

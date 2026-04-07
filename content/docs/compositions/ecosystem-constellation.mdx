@@ -3,9 +3,10 @@ title: Ecosystem Constellation
 description: A central product logo orbited by integration satellites with pulsing data lines.
 ---
 
+<ComponentPreview name="ecosystem-constellation" />
+
 A composition for telling an "everything connects" story. A pulsing logo sits in the center while integration satellites fly in from beyond the frame and settle into elliptical orbits at different radii and angular speeds. Connection lines between the hub and each satellite periodically light up — and the firing satellite scales up by a hair to feel like real data is moving.
 
-<ComponentPreview name="ecosystem-constellation" />
 
 ## Installation
 
@@ -14,13 +15,28 @@ A composition for telling an "everything connects" story. A pulsing logo sits in
 ## Usage
 
 ```tsx
+// src/Root.tsx
+import { Composition } from "remotion";
 import { EcosystemConstellation } from "@/components/remocn/ecosystem-constellation";
 
-<EcosystemConstellation
-  satelliteCount={6}
-  centerLabel="V"
-  accentColor="#a855f7"
-/>
+const EcosystemConstellationScene = () => (
+  <EcosystemConstellation
+    satelliteCount={6}
+    centerLabel="V"
+    accentColor="#a855f7"
+  />
+);
+
+export const RemotionRoot = () => (
+  <Composition
+    id="EcosystemConstellation"
+    component={EcosystemConstellationScene}
+    durationInFrames={240}
+    fps={30}
+    width={1280}
+    height={720}
+  />
+);
 ```
 
 ## Props

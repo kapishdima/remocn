@@ -3,9 +3,10 @@ title: Infinite Bento Pan
 description: A hypnotic diagonal camera glide over an oversized grid of bento cards.
 ---
 
+<ComponentPreview name="infinite-bento-pan" />
+
 A composition that builds a super-sized bento grid (well beyond the canvas) and slowly drifts the camera across it on a diagonal trajectory. Each card renders a different miniature — line charts, counters, code fragments, gradients, logo marks — with subtle deterministic micro-animations driven by `Math.sin(frame)`. A radial vignette swallows the edges so cards seem to fade in and out of darkness as the camera moves.
 
-<ComponentPreview name="infinite-bento-pan" />
 
 ## Installation
 
@@ -14,9 +15,24 @@ A composition that builds a super-sized bento grid (well beyond the canvas) and 
 ## Usage
 
 ```tsx
+// src/Root.tsx
+import { Composition } from "remotion";
 import { InfiniteBentoPan } from "@/components/remocn/infinite-bento-pan";
 
-<InfiniteBentoPan panSpeed={1} accentColor="#7c3aed" />
+const InfiniteBentoPanScene = () => (
+  <InfiniteBentoPan panSpeed={1} accentColor="#7c3aed" />
+);
+
+export const RemotionRoot = () => (
+  <Composition
+    id="InfiniteBentoPan"
+    component={InfiniteBentoPanScene}
+    durationInFrames={300}
+    fps={30}
+    width={1280}
+    height={720}
+  />
+);
 ```
 
 ## Props

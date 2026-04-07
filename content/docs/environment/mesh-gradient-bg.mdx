@@ -3,9 +3,10 @@ title: Mesh Gradient Background
 description: Living gradient with amorphous color blobs slowly drifting across the frame.
 ---
 
+<ComponentPreview name="mesh-gradient-bg" />
+
 A background primitive that renders several large radial-gradient blobs and animates them via `transform: translate()` using `Math.sin(frame)` and `Math.cos(frame)` for organic, deterministic drift. Heavy CSS blur plus `mix-blend-mode` creates a soft mesh gradient without shaders.
 
-<ComponentPreview name="mesh-gradient-bg" />
 
 ## Installation
 
@@ -14,13 +15,28 @@ A background primitive that renders several large radial-gradient blobs and anim
 ## Usage
 
 ```tsx
+// src/Root.tsx
+import { Composition } from "remotion";
 import { MeshGradientBg } from "@/components/remocn/mesh-gradient-bg";
 
-<MeshGradientBg
-  colors={["#ff0080", "#7928ca", "#00d4ff", "#ffb800"]}
-  speed={1}
-  background="#0a0a0a"
-/>
+const MeshGradientBgScene = () => (
+  <MeshGradientBg
+    colors={["#ff0080", "#7928ca", "#00d4ff", "#ffb800"]}
+    speed={1}
+    background="#0a0a0a"
+  />
+);
+
+export const RemotionRoot = () => (
+  <Composition
+    id="MeshGradientBg"
+    component={MeshGradientBgScene}
+    durationInFrames={150}
+    fps={30}
+    width={1280}
+    height={720}
+  />
+);
 ```
 
 ## Props

@@ -3,9 +3,10 @@ title: Data Flow Pipes
 description: Glowing data packets travel along SVG bezier pipes between system nodes, leaving fading trails.
 ---
 
+<ComponentPreview name="data-flow-pipes" />
+
 A diagramming primitive for showing data moving through a system. Nodes are positioned absolutely; edges become SVG cubic-bezier paths with horizontally-pulled handles so the routes look like API/DB diagrams instead of straight wires. Each pulse is rendered as a bright dash that animates along the path via `strokeDashoffset`, with three faded ghost copies offset behind it to fake motion blur. Path arc length is sampled numerically (no DOM `getTotalLength`), so the math is fully render-deterministic.
 
-<ComponentPreview name="data-flow-pipes" />
 
 ## Installation
 
@@ -14,19 +15,34 @@ A diagramming primitive for showing data moving through a system. Nodes are posi
 ## Usage
 
 ```tsx
+// src/Root.tsx
+import { Composition } from "remotion";
 import { DataFlowPipes } from "@/components/remocn/data-flow-pipes";
 
-<DataFlowPipes
-  nodes={[
-    { id: "client", x: 140, y: 360, label: "Client" },
-    { id: "api", x: 460, y: 200, label: "API" },
-    { id: "db", x: 820, y: 360, label: "Database" },
-  ]}
-  edges={[
-    { from: "client", to: "api", startFrame: 0 },
-    { from: "api", to: "db", startFrame: 18 },
-  ]}
-/>
+const DataFlowPipesScene = () => (
+  <DataFlowPipes
+    nodes={[
+      { id: "client", x: 140, y: 360, label: "Client" },
+      { id: "api", x: 460, y: 200, label: "API" },
+      { id: "db", x: 820, y: 360, label: "Database" },
+    ]}
+    edges={[
+      { from: "client", to: "api", startFrame: 0 },
+      { from: "api", to: "db", startFrame: 18 },
+    ]}
+  />
+);
+
+export const RemotionRoot = () => (
+  <Composition
+    id="DataFlowPipes"
+    component={DataFlowPipesScene}
+    durationInFrames={180}
+    fps={30}
+    width={1280}
+    height={720}
+  />
+);
 ```
 
 ## Props

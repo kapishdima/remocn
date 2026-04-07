@@ -3,9 +3,10 @@ title: Cursor Flow
 description: A realistic mouse that arcs along cubic Bezier paths, pauses, and clicks targets that dip in response.
 ---
 
+<ComponentPreview name="cursor-flow" />
+
 A more sophisticated cousin of `SimulatedCursor`. Instead of moving on straight lines between waypoints, the cursor follows per-segment cubic Bezier curves whose control points are offset perpendicular to the chord, so the trajectory always has a "belly". An ease-in-out function shapes velocity inside each segment so the cursor accelerates, glides, and decelerates before arrival. At click moments, an independent spring drives a hard 4-frame `1 → 0.85 → 1` press while the click target dips to `0.98` in sync — that's the moment that sells the impact.
 
-<ComponentPreview name="cursor-flow" />
 
 ## Installation
 
@@ -14,16 +15,31 @@ A more sophisticated cousin of `SimulatedCursor`. Instead of moving on straight 
 ## Usage
 
 ```tsx
+// src/Root.tsx
+import { Composition } from "remotion";
 import { CursorFlow } from "@/components/remocn/cursor-flow";
 
-<CursorFlow
-  waypoints={[
-    { x: 200, y: 180 },
-    { x: 540, y: 240, click: true, label: "Generate" },
-    { x: 880, y: 360, hold: 8 },
-    { x: 1040, y: 520, click: true, label: "Publish" },
-  ]}
-/>
+const CursorFlowScene = () => (
+  <CursorFlow
+    waypoints={[
+      { x: 200, y: 180 },
+      { x: 540, y: 240, click: true, label: "Generate" },
+      { x: 880, y: 360, hold: 8 },
+      { x: 1040, y: 520, click: true, label: "Publish" },
+    ]}
+  />
+);
+
+export const RemotionRoot = () => (
+  <Composition
+    id="CursorFlow"
+    component={CursorFlowScene}
+    durationInFrames={180}
+    fps={30}
+    width={1280}
+    height={720}
+  />
+);
 ```
 
 ## Props

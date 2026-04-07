@@ -3,9 +3,10 @@ title: Zoom Through Transition
 description: Aggressively scale into the center of an element to fly through it.
 ---
 
+<ComponentPreview name="zoom-through-transition" />
+
 A scene transition that interpolates `transform: scale()` with an exponential easing curve, creating the impression of flying *through* an element. Pair with the next scene rendered behind it for a continuous reveal.
 
-<ComponentPreview name="zoom-through-transition" />
 
 ## Installation
 
@@ -14,11 +15,24 @@ A scene transition that interpolates `transform: scale()` with an exponential ea
 ## Usage
 
 ```tsx
+// src/Root.tsx
+import { Composition } from "remotion";
 import { ZoomThroughTransition } from "@/components/remocn/zoom-through-transition";
 
-<ZoomThroughTransition targetScale={20}>
+const ZoomThroughTransitionScene = () => (
   <Logo />
-</ZoomThroughTransition>
+);
+
+export const RemotionRoot = () => (
+  <Composition
+    id="ZoomThroughTransition"
+    component={ZoomThroughTransitionScene}
+    durationInFrames={60}
+    fps={30}
+    width={1280}
+    height={720}
+  />
+);
 ```
 
 ## Props

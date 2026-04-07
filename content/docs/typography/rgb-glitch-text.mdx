@@ -3,9 +3,10 @@ title: RGB Glitch Text
 description: Three RGB-offset text copies jitter for a few frames to create a chromatic aberration glitch.
 ---
 
+<ComponentPreview name="rgb-glitch-text" />
+
 A typography primitive that stacks red, green, and blue copies of the same text and offsets them on each frame during a short glitch window. Uses `random(seed)` from Remotion so the jitter is fully deterministic across renders.
 
-<ComponentPreview name="rgb-glitch-text" />
 
 ## Installation
 
@@ -14,9 +15,24 @@ A typography primitive that stacks red, green, and blue copies of the same text 
 ## Usage
 
 ```tsx
+// src/Root.tsx
+import { Composition } from "remotion";
 import { RGBGlitchText } from "@/components/remocn/rgb-glitch-text";
 
-<RGBGlitchText text="SYSTEM" glitchAt={20} glitchDuration={8} intensity={6} />
+const RGBGlitchTextScene = () => (
+  <RGBGlitchText text="SYSTEM" glitchAt={20} glitchDuration={8} intensity={6} />
+);
+
+export const RemotionRoot = () => (
+  <Composition
+    id="RGBGlitchText"
+    component={RGBGlitchTextScene}
+    durationInFrames={90}
+    fps={30}
+    width={1280}
+    height={720}
+  />
+);
 ```
 
 ## Props

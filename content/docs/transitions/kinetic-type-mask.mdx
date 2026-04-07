@@ -3,9 +3,10 @@ title: Kinetic Type Mask
 description: Use giant typography as a window into the next scene.
 ---
 
+<ComponentPreview name="kinetic-type-mask" />
+
 A transition primitive that turns a giant headline into a window into the next scene. The text is rendered as an SVG `<clipPath>` over the incoming scene, so its interior literally shows what's underneath. After a brief hold, the text scales exponentially until the inside of one letter expands past the screen edges and fully reveals the new scene.
 
-<ComponentPreview name="kinetic-type-mask" />
 
 ## Installation
 
@@ -14,16 +15,25 @@ A transition primitive that turns a giant headline into a window into the next s
 ## Usage
 
 ```tsx
+// src/Root.tsx
+import { Composition } from "remotion";
 import { KineticTypeMask } from "@/components/remocn/kinetic-type-mask";
 
-<KineticTypeMask
-  from={<SceneA />}
-  to={<SceneB />}
-  text="NEXT"
-  holdFrames={12}
-  transitionDuration={24}
-  maxScale={120}
-/>
+const KineticTypeMaskScene = () => (
+  <KineticTypeMask
+    from={<SceneA />
+);
+
+export const RemotionRoot = () => (
+  <Composition
+    id="KineticTypeMask"
+    component={KineticTypeMaskScene}
+    durationInFrames={90}
+    fps={30}
+    width={1280}
+    height={720}
+  />
+);
 ```
 
 ## Props

@@ -3,9 +3,10 @@ title: Live Code Compilation
 description: A split-screen where code is typed on the left and the right-side UI snaps to match in a single frame.
 ---
 
+<ComponentPreview name="live-code-compilation" />
+
 A timeline-driven composition that pairs a glass code editor with a live preview pane. As each event fires, a new code fragment is appended to the editor and the preview button instantly applies the matching style — no CSS transitions, no easing — mimicking the feel of a real Vite HMR update.
 
-<ComponentPreview name="live-code-compilation" />
 
 ## Installation
 
@@ -14,9 +15,24 @@ A timeline-driven composition that pairs a glass code editor with a live preview
 ## Usage
 
 ```tsx
+// src/Root.tsx
+import { Composition } from "remotion";
 import { LiveCodeCompilation } from "@/components/remocn/live-code-compilation";
 
-<LiveCodeCompilation accentColor="#3b82f6" />
+const LiveCodeCompilationScene = () => (
+  <LiveCodeCompilation accentColor="#3b82f6" />
+);
+
+export const RemotionRoot = () => (
+  <Composition
+    id="LiveCodeCompilation"
+    component={LiveCodeCompilationScene}
+    durationInFrames={260}
+    fps={30}
+    width={1280}
+    height={720}
+  />
+);
 ```
 
 ## Props

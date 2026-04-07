@@ -3,9 +3,10 @@ title: Staggered Fade Up
 description: Words slide up and fade in sequentially with a wave-like cascade.
 ---
 
+<ComponentPreview name="staggered-fade-up" />
+
 A typography primitive that splits text into words and animates each one with a small delay, sliding up from a configurable distance while fading in. Great for hero titles and intro shots.
 
-<ComponentPreview name="staggered-fade-up" />
 
 ## Installation
 
@@ -14,9 +15,24 @@ A typography primitive that splits text into words and animates each one with a 
 ## Usage
 
 ```tsx
+// src/Root.tsx
+import { Composition } from "remotion";
 import { StaggeredFadeUp } from "@/components/remocn/staggered-fade-up";
 
-<StaggeredFadeUp text="Ship videos faster" staggerDelay={4} />
+const StaggeredFadeUpScene = () => (
+  <StaggeredFadeUp text="Ship videos faster" staggerDelay={4} />
+);
+
+export const RemotionRoot = () => (
+  <Composition
+    id="StaggeredFadeUp"
+    component={StaggeredFadeUpScene}
+    durationInFrames={90}
+    fps={30}
+    width={1280}
+    height={720}
+  />
+);
 ```
 
 ## Props

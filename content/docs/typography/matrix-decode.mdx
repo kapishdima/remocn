@@ -3,9 +3,10 @@ title: Matrix Decode
 description: Random scramble resolves left-to-right into target text.
 ---
 
+<ComponentPreview name="matrix-decode" />
+
 A typography primitive that starts as a stream of random symbols and decodes character by character into the target text. Perfect for DevTools, cybersecurity, and AI reveal moments.
 
-<ComponentPreview name="matrix-decode" />
 
 ## Installation
 
@@ -14,9 +15,24 @@ A typography primitive that starts as a stream of random symbols and decodes cha
 ## Usage
 
 ```tsx
+// src/Root.tsx
+import { Composition } from "remotion";
 import { MatrixDecode } from "@/components/remocn/matrix-decode";
 
-<MatrixDecode text="ACCESS GRANTED" revealDuration={60} />
+const MatrixDecodeScene = () => (
+  <MatrixDecode text="ACCESS GRANTED" revealDuration={60} />
+);
+
+export const RemotionRoot = () => (
+  <Composition
+    id="MatrixDecode"
+    component={MatrixDecodeScene}
+    durationInFrames={90}
+    fps={30}
+    width={1280}
+    height={720}
+  />
+);
 ```
 
 ## Props

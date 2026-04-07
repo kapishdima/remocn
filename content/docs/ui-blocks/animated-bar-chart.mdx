@@ -3,9 +3,10 @@ title: Animated Bar Chart
 description: Bars spring up from the baseline with a staggered cascade.
 ---
 
+<ComponentPreview name="animated-bar-chart" />
+
 A data-viz primitive that renders SVG `<rect>` bars and animates each one with a `spring()` driven `scaleY` transform. Each bar is offset by `staggerFrames`, producing a clean cascade.
 
-<ComponentPreview name="animated-bar-chart" />
 
 ## Installation
 
@@ -14,12 +15,27 @@ A data-viz primitive that renders SVG `<rect>` bars and animates each one with a
 ## Usage
 
 ```tsx
+// src/Root.tsx
+import { Composition } from "remotion";
 import { AnimatedBarChart } from "@/components/remocn/animated-bar-chart";
 
-<AnimatedBarChart
-  data={[35, 60, 45, 80, 55, 70, 90, 65]}
-  barColor="#0ea5e9"
-/>
+const AnimatedBarChartScene = () => (
+  <AnimatedBarChart
+    data={[35, 60, 45, 80, 55, 70, 90, 65]}
+    barColor="#0ea5e9"
+  />
+);
+
+export const RemotionRoot = () => (
+  <Composition
+    id="AnimatedBarChart"
+    component={AnimatedBarChartScene}
+    durationInFrames={90}
+    fps={30}
+    width={1280}
+    height={720}
+  />
+);
 ```
 
 ## Props

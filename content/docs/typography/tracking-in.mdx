@@ -3,9 +3,10 @@ title: Tracking In
 description: Letter-spacing collapses and blur clears with a springy entrance.
 ---
 
+<ComponentPreview name="tracking-in" />
+
 A typography primitive that starts text with a wide `letter-spacing` and a heavy blur, then springs both back to normal. The result is a tight, premium-feeling title reveal.
 
-<ComponentPreview name="tracking-in" />
 
 ## Installation
 
@@ -14,9 +15,24 @@ A typography primitive that starts text with a wide `letter-spacing` and a heavy
 ## Usage
 
 ```tsx
+// src/Root.tsx
+import { Composition } from "remotion";
 import { TrackingIn } from "@/components/remocn/tracking-in";
 
-<TrackingIn text="REMOCN" startTracking={0.6} startBlur={14} />
+const TrackingInScene = () => (
+  <TrackingIn text="REMOCN" startTracking={0.6} startBlur={14} />
+);
+
+export const RemotionRoot = () => (
+  <Composition
+    id="TrackingIn"
+    component={TrackingInScene}
+    durationInFrames={90}
+    fps={30}
+    width={1280}
+    height={720}
+  />
+);
 ```
 
 ## Props

@@ -3,9 +3,10 @@ title: Drag And Drop Flow
 description: Simulates dragging a file into a drop zone, then a progress bar fills.
 ---
 
+<ComponentPreview name="drag-and-drop-flow" />
+
 A micro-interaction composition: a file icon is dragged across the frame into a dashed dropzone. The dropzone border highlights via `interpolateColors`, the file fades, and a progress bar grows from 0 to 100%.
 
-<ComponentPreview name="drag-and-drop-flow" />
 
 ## Installation
 
@@ -14,13 +15,28 @@ A micro-interaction composition: a file icon is dragged across the frame into a 
 ## Usage
 
 ```tsx
+// src/Root.tsx
+import { Composition } from "remotion";
 import { DragAndDropFlow } from "@/components/remocn/drag-and-drop-flow";
 
-<DragAndDropFlow
-  accent="#0ea5e9"
-  dropzoneLabel="Drop file to upload"
-  fileName="design.fig"
-/>
+const DragAndDropFlowScene = () => (
+  <DragAndDropFlow
+    accent="#0ea5e9"
+    dropzoneLabel="Drop file to upload"
+    fileName="design.fig"
+  />
+);
+
+export const RemotionRoot = () => (
+  <Composition
+    id="DragAndDropFlow"
+    component={DragAndDropFlowScene}
+    durationInFrames={150}
+    fps={30}
+    width={1280}
+    height={720}
+  />
+);
 ```
 
 ## Props

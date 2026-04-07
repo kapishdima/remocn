@@ -3,9 +3,10 @@ title: Text Fade Replace
 description: Cross-fade between two strings on the same line without layout shift.
 ---
 
+<ComponentPreview name="text-fade-replace" />
+
 A typography primitive that swaps one string for another in place. Both spans are absolutely positioned in a relative container so they never push each other in the DOM during the fade.
 
-<ComponentPreview name="text-fade-replace" />
 
 ## Installation
 
@@ -14,9 +15,24 @@ A typography primitive that swaps one string for another in place. Both spans ar
 ## Usage
 
 ```tsx
+// src/Root.tsx
+import { Composition } from "remotion";
 import { TextFadeReplace } from "@/components/remocn/text-fade-replace";
 
-<TextFadeReplace from="Before" to="After" fontSize={72} />
+const TextFadeReplaceScene = () => (
+  <TextFadeReplace from="Before" to="After" fontSize={72} />
+);
+
+export const RemotionRoot = () => (
+  <Composition
+    id="TextFadeReplace"
+    component={TextFadeReplaceScene}
+    durationInFrames={90}
+    fps={30}
+    width={1280}
+    height={720}
+  />
+);
 ```
 
 ## Props

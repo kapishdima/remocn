@@ -3,9 +3,10 @@ title: Marker Highlight
 description: A colored marker block draws behind a phrase while the text color shifts.
 ---
 
+<ComponentPreview name="marker-highlight" />
+
 A typography primitive that mimics a physical highlighter sweeping behind a word. The colored block grows from left to right via a spring, and the target text color interpolates to a contrast color.
 
-<ComponentPreview name="marker-highlight" />
 
 ## Installation
 
@@ -14,14 +15,29 @@ A typography primitive that mimics a physical highlighter sweeping behind a word
 ## Usage
 
 ```tsx
+// src/Root.tsx
+import { Composition } from "remotion";
 import { MarkerHighlight } from "@/components/remocn/marker-highlight";
 
-<MarkerHighlight
-  before="Ship it "
-  highlight="fast"
-  after="."
-  markerColor="#facc15"
-/>
+const MarkerHighlightScene = () => (
+  <MarkerHighlight
+    before="Ship it "
+    highlight="fast"
+    after="."
+    markerColor="#facc15"
+  />
+);
+
+export const RemotionRoot = () => (
+  <Composition
+    id="MarkerHighlight"
+    component={MarkerHighlightScene}
+    durationInFrames={90}
+    fps={30}
+    width={1280}
+    height={720}
+  />
+);
 ```
 
 ## Props

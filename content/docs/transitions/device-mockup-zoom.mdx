@@ -3,9 +3,10 @@ title: Device Mockup Zoom
 description: Pull back from a UI to reveal it inside a device frame.
 ---
 
+<ComponentPreview name="device-mockup-zoom" />
+
 A transition that starts zoomed into a UI screen and animates `transform: scale()` from 2 down to 1, revealing an inline SVG laptop or phone frame around it. No external assets — the device chrome is rendered with plain divs.
 
-<ComponentPreview name="device-mockup-zoom" />
 
 ## Installation
 
@@ -14,11 +15,24 @@ A transition that starts zoomed into a UI screen and animates `transform: scale(
 ## Usage
 
 ```tsx
+// src/Root.tsx
+import { Composition } from "remotion";
 import { DeviceMockupZoom } from "@/components/remocn/device-mockup-zoom";
 
-<DeviceMockupZoom device="laptop">
+const DeviceMockupZoomScene = () => (
   <YourAppScreen />
-</DeviceMockupZoom>
+);
+
+export const RemotionRoot = () => (
+  <Composition
+    id="DeviceMockupZoom"
+    component={DeviceMockupZoomScene}
+    durationInFrames={120}
+    fps={30}
+    width={1280}
+    height={720}
+  />
+);
 ```
 
 ## Props

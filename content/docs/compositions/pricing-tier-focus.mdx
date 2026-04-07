@@ -3,9 +3,10 @@ title: Pricing Tier Focus
 description: Highlight the recommended pricing tier by dimming and blurring its neighbors.
 ---
 
+<ComponentPreview name="pricing-tier-focus" />
+
 A composition that stages a classic three-tier pricing table and then dramatically focuses the camera on the recommended plan. The focused card scales up, lifts off the page with a heavy drop shadow, while the side cards retreat into a soft, brightness-dimmed blur. A subtle shimmer sweeps across the CTA button to seal the moment.
 
-<ComponentPreview name="pricing-tier-focus" />
 
 ## Installation
 
@@ -14,9 +15,24 @@ A composition that stages a classic three-tier pricing table and then dramatical
 ## Usage
 
 ```tsx
+// src/Root.tsx
+import { Composition } from "remotion";
 import { PricingTierFocus } from "@/components/remocn/pricing-tier-focus";
 
-<PricingTierFocus focusedTier={1} accentColor="#22c55e" />
+const PricingTierFocusScene = () => (
+  <PricingTierFocus focusedTier={1} accentColor="#22c55e" />
+);
+
+export const RemotionRoot = () => (
+  <Composition
+    id="PricingTierFocus"
+    component={PricingTierFocusScene}
+    durationInFrames={180}
+    fps={30}
+    width={1280}
+    height={720}
+  />
+);
 ```
 
 ## Props

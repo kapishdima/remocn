@@ -3,9 +3,10 @@ title: Terminal To Browser Deploy
 description: A CLI deploy completes and the live site grows out of the URL printed in the console.
 ---
 
+<ComponentPreview name="terminal-to-browser-deploy" />
+
 A composition that pairs a build log with a celebratory reveal. The terminal types out a deploy sequence, and the moment the success line lands, the terminal scales down and blurs while a fully formed browser window springs out from exactly the URL that was just printed — making the deployed site feel like it physically emerged from the command that shipped it.
 
-<ComponentPreview name="terminal-to-browser-deploy" />
 
 ## Installation
 
@@ -14,12 +15,27 @@ A composition that pairs a build log with a celebratory reveal. The terminal typ
 ## Usage
 
 ```tsx
+// src/Root.tsx
+import { Composition } from "remotion";
 import { TerminalToBrowserDeploy } from "@/components/remocn/terminal-to-browser-deploy";
 
-<TerminalToBrowserDeploy
-  siteUrl="https://app.example.com"
-  accentColor="#22c55e"
-/>
+const TerminalToBrowserDeployScene = () => (
+  <TerminalToBrowserDeploy
+    siteUrl="https://app.example.com"
+    accentColor="#22c55e"
+  />
+);
+
+export const RemotionRoot = () => (
+  <Composition
+    id="TerminalToBrowserDeploy"
+    component={TerminalToBrowserDeployScene}
+    durationInFrames={240}
+    fps={30}
+    width={1280}
+    height={720}
+  />
+);
 ```
 
 ## Props

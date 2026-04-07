@@ -3,9 +3,10 @@ title: Dynamic Split Screen
 description: Cinematic two-column split where one panel shrinks and the other expands into view.
 ---
 
+<ComponentPreview name="chat-to-preview-layout" />
+
 A layout block that animates the `flex-basis` of two side-by-side panels — perfect for chat-to-preview handoffs, before/after comparisons, or any moment where one workspace cedes real estate to another. Both panels use `overflow: hidden` so their content doesn't break the layout while the widths animate.
 
-<ComponentPreview name="chat-to-preview-layout" />
 
 ## Installation
 
@@ -14,14 +15,25 @@ A layout block that animates the `flex-basis` of two side-by-side panels — per
 ## Usage
 
 ```tsx
+// src/Root.tsx
+import { Composition } from "remotion";
 import { ChatToPreviewLayout } from "@/components/remocn/chat-to-preview-layout";
 
-<ChatToPreviewLayout
-  chat={<MyChat />}
-  preview={<MyPreview />}
-  startChatRatio={0.5}
-  endChatRatio={0.25}
-/>
+const ChatToPreviewLayoutScene = () => (
+  <ChatToPreviewLayout
+    chat={<MyChat />
+);
+
+export const RemotionRoot = () => (
+  <Composition
+    id="ChatToPreviewLayout"
+    component={ChatToPreviewLayoutScene}
+    durationInFrames={120}
+    fps={30}
+    width={1280}
+    height={720}
+  />
+);
 ```
 
 ## Props

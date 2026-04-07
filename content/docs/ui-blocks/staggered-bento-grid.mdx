@@ -3,9 +3,10 @@ title: Staggered Bento Grid
 description: Cards pop into a bento grid one after another with a spring.
 ---
 
+<ComponentPreview name="staggered-bento-grid" />
+
 A composition that maps an array of items into a CSS grid and wraps each card in a `<Sequence>` offset by `staggerDelay` frames. Each card uses `spring()` for its scale and opacity, so its life cycle starts at frame 0 inside the sequence.
 
-<ComponentPreview name="staggered-bento-grid" />
 
 ## Installation
 
@@ -14,16 +15,31 @@ A composition that maps an array of items into a CSS grid and wraps each card in
 ## Usage
 
 ```tsx
+// src/Root.tsx
+import { Composition } from "remotion";
 import { StaggeredBentoGrid } from "@/components/remocn/staggered-bento-grid";
 
-<StaggeredBentoGrid
-  staggerDelay={8}
-  columns={3}
-  items={[
-    { title: "Fast", body: "Built on Remotion", span: 2 },
-    { title: "Animated", body: "Spring physics" },
-  ]}
-/>
+const StaggeredBentoGridScene = () => (
+  <StaggeredBentoGrid
+    staggerDelay={8}
+    columns={3}
+    items={[
+      { title: "Fast", body: "Built on Remotion", span: 2 },
+      { title: "Animated", body: "Spring physics" },
+    ]}
+  />
+);
+
+export const RemotionRoot = () => (
+  <Composition
+    id="StaggeredBentoGrid"
+    component={StaggeredBentoGridScene}
+    durationInFrames={120}
+    fps={30}
+    width={1280}
+    height={720}
+  />
+);
 ```
 
 ## Props

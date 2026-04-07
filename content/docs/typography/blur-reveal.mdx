@@ -3,9 +3,10 @@ title: Blur Reveal
 description: Text fades in from a heavy blur into sharp focus.
 ---
 
+<ComponentPreview name="blur-reveal" />
+
 A typography primitive that animates `opacity` from 0 to 1 and `filter: blur()` from a configurable amount down to 0. Useful for title cards and intro shots.
 
-<ComponentPreview name="blur-reveal" />
 
 ## Installation
 
@@ -14,9 +15,24 @@ A typography primitive that animates `opacity` from 0 to 1 and `filter: blur()` 
 ## Usage
 
 ```tsx
+// src/Root.tsx
+import { Composition } from "remotion";
 import { BlurReveal } from "@/components/remocn/blur-reveal";
 
-<BlurReveal text="Hello, world" blur={12} fontSize={72} />
+const BlurRevealScene = () => (
+  <BlurReveal text="Hello, world" blur={12} fontSize={72} />
+);
+
+export const RemotionRoot = () => (
+  <Composition
+    id="BlurReveal"
+    component={BlurRevealScene}
+    durationInFrames={90}
+    fps={30}
+    width={1280}
+    height={720}
+  />
+);
 ```
 
 ## Props

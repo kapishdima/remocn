@@ -3,9 +3,10 @@ title: Directional Wipe
 description: Slide one scene in while pushing the other out.
 ---
 
+<ComponentPreview name="directional-wipe" />
+
 A transition primitive that animates two scenes with `transform: translateX/Y`. The outgoing scene slides off in one direction while the incoming scene slides in from the opposite side. Uses `transform` (not `left`/`top`) so the browser doesn't trigger a layout reflow per frame.
 
-<ComponentPreview name="directional-wipe" />
 
 ## Installation
 
@@ -14,14 +15,25 @@ A transition primitive that animates two scenes with `transform: translateX/Y`. 
 ## Usage
 
 ```tsx
+// src/Root.tsx
+import { Composition } from "remotion";
 import { DirectionalWipe } from "@/components/remocn/directional-wipe";
 
-<DirectionalWipe
-  from={<SceneA />}
-  to={<SceneB />}
-  direction="left"
-  transitionDuration={20}
-/>
+const DirectionalWipeScene = () => (
+  <DirectionalWipe
+    from={<SceneA />
+);
+
+export const RemotionRoot = () => (
+  <Composition
+    id="DirectionalWipe"
+    component={DirectionalWipeScene}
+    durationInFrames={90}
+    fps={30}
+    width={1280}
+    height={720}
+  />
+);
 ```
 
 ## Props

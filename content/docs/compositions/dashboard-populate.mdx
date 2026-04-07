@@ -3,9 +3,10 @@ title: Dashboard Populate
 description: An empty dashboard fills itself with data in a cascaded spring sequence.
 ---
 
+<ComponentPreview name="dashboard-populate" />
+
 A composition primitive that stages a full dashboard reveal in two acts. First the structure fades in — tiles, axes, gridlines, legends. Then, with a deliberate beat of silence, the data crashes in: KPIs spin up from zero, bars launch from the baseline on staggered springs, the line chart traces itself left to right, and the donut sweeps to its final value.
 
-<ComponentPreview name="dashboard-populate" />
 
 ## Installation
 
@@ -14,9 +15,24 @@ A composition primitive that stages a full dashboard reveal in two acts. First t
 ## Usage
 
 ```tsx
+// src/Root.tsx
+import { Composition } from "remotion";
 import { DashboardPopulate } from "@/components/remocn/dashboard-populate";
 
-<DashboardPopulate accentColor="#22c55e" kpiTarget={128400} />
+const DashboardPopulateScene = () => (
+  <DashboardPopulate accentColor="#22c55e" kpiTarget={128400} />
+);
+
+export const RemotionRoot = () => (
+  <Composition
+    id="DashboardPopulate"
+    component={DashboardPopulateScene}
+    durationInFrames={180}
+    fps={30}
+    width={1280}
+    height={720}
+  />
+);
 ```
 
 ## Props

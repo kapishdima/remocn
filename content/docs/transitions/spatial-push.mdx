@@ -3,9 +3,10 @@ title: Spatial Push
 description: A new scene physically presses the old one back into the frame.
 ---
 
+<ComponentPreview name="spatial-push" />
+
 A transition primitive with weight. Scene A shrinks, dims, and rounds its corners as if being pushed into the background, while Scene B drops in via a spring with overshoot, carrying a heavy directional drop shadow. The result feels kinetic — as if the incoming scene has real mass pressing against the outgoing one.
 
-<ComponentPreview name="spatial-push" />
 
 ## Installation
 
@@ -14,14 +15,25 @@ A transition primitive with weight. Scene A shrinks, dims, and rounds its corner
 ## Usage
 
 ```tsx
+// src/Root.tsx
+import { Composition } from "remotion";
 import { SpatialPush } from "@/components/remocn/spatial-push";
 
-<SpatialPush
-  from={<SceneA />}
-  to={<SceneB />}
-  direction="up"
-  transitionDuration={30}
-/>
+const SpatialPushScene = () => (
+  <SpatialPush
+    from={<SceneA />
+);
+
+export const RemotionRoot = () => (
+  <Composition
+    id="SpatialPush"
+    component={SpatialPushScene}
+    durationInFrames={90}
+    fps={30}
+    width={1280}
+    height={720}
+  />
+);
 ```
 
 ## Props

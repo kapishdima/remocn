@@ -3,9 +3,10 @@ title: Dynamic Grid
 description: Subtle moving grid background for tech and dev scenes.
 ---
 
+<ComponentPreview name="dynamic-grid" />
+
 A minimal grid background built from two CSS linear gradients, translated each frame via `transform`. Cheaper than animating `background-position` because the browser keeps layout untouched.
 
-<ComponentPreview name="dynamic-grid" />
 
 ## Installation
 
@@ -14,15 +15,30 @@ A minimal grid background built from two CSS linear gradients, translated each f
 ## Usage
 
 ```tsx
+// src/Root.tsx
+import { Composition } from "remotion";
 import { DynamicGrid } from "@/components/remocn/dynamic-grid";
 
-<DynamicGrid
-  cellSize={40}
-  lineColor="#27272a"
-  background="#0a0a0a"
-  speed={0.5}
-  direction="diagonal"
-/>
+const DynamicGridScene = () => (
+  <DynamicGrid
+    cellSize={40}
+    lineColor="#27272a"
+    background="#0a0a0a"
+    speed={0.5}
+    direction="diagonal"
+  />
+);
+
+export const RemotionRoot = () => (
+  <Composition
+    id="DynamicGrid"
+    component={DynamicGridScene}
+    durationInFrames={150}
+    fps={30}
+    width={1280}
+    height={720}
+  />
+);
 ```
 
 ## Props

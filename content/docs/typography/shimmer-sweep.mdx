@@ -3,9 +3,10 @@ title: Shimmer Sweep
 description: A bright shine travels across muted text to draw attention.
 ---
 
+<ComponentPreview name="shimmer-sweep" />
+
 A typography primitive that layers a gradient shine on top of muted base text using `background-clip: text`. The gradient sweeps horizontally across the text, lighting up letters as it passes. Great for AI and generation moments.
 
-<ComponentPreview name="shimmer-sweep" />
 
 ## Installation
 
@@ -14,9 +15,24 @@ A typography primitive that layers a gradient shine on top of muted base text us
 ## Usage
 
 ```tsx
+// src/Root.tsx
+import { Composition } from "remotion";
 import { ShimmerSweep } from "@/components/remocn/shimmer-sweep";
 
-<ShimmerSweep text="Generating..." fontSize={96} />
+const ShimmerSweepScene = () => (
+  <ShimmerSweep text="Generating..." fontSize={96} />
+);
+
+export const RemotionRoot = () => (
+  <Composition
+    id="ShimmerSweep"
+    component={ShimmerSweepScene}
+    durationInFrames={120}
+    fps={30}
+    width={1280}
+    height={720}
+  />
+);
 ```
 
 ## Props

@@ -3,9 +3,10 @@ title: Glass Code Block
 description: A premium frosted-glass code editor window with a regex tokenizer and line-by-line stagger reveal.
 ---
 
+<ComponentPreview name="glass-code-block" />
+
 A code window primitive that ditches the flat black rectangle look. The card uses `backdrop-filter: blur()` over a slow animated aura for real refraction; a 1px linear-gradient ring fakes a top-edge highlight; macOS-style traffic lights are dimmed to 60% so they don't shout. Lines fade in one after another with a tiny upward slide via `Sequence`. Syntax highlighting is a small built-in regex tokenizer — no `highlight.js` dependency.
 
-<ComponentPreview name="glass-code-block" />
 
 ## Installation
 
@@ -14,12 +15,27 @@ A code window primitive that ditches the flat black rectangle look. The card use
 ## Usage
 
 ```tsx
+// src/Root.tsx
+import { Composition } from "remotion";
 import { GlassCodeBlock } from "@/components/remocn/glass-code-block";
 
-<GlassCodeBlock
-  title="hero.tsx"
-  code={`export function Hero() {\n  return <h1>Hello</h1>;\n}`}
-/>
+const GlassCodeBlockScene = () => (
+  <GlassCodeBlock
+    title="hero.tsx"
+    code={`export function Hero() {\n  return <h1>Hello</h1>;\n}`}
+  />
+);
+
+export const RemotionRoot = () => (
+  <Composition
+    id="GlassCodeBlock"
+    component={GlassCodeBlockScene}
+    durationInFrames={180}
+    fps={30}
+    width={1280}
+    height={720}
+  />
+);
 ```
 
 ## Props

@@ -3,9 +3,10 @@ title: Browser Flow
 description: A full Safari/Chrome simulation from URL typing to scroll and click.
 ---
 
+<ComponentPreview name="browser-flow" />
+
 A complete browser interaction in one block. The address bar takes focus, the URL types itself in (with an autocomplete suggestion that follows along), the loading bar stalls at 15% before snapping to 100%, the page renders, and a virtual cursor arcs down toward a CTA — clicking it with a real scale dip and a synchronous press on the button. Every phase is frame-deterministic.
 
-<ComponentPreview name="browser-flow" />
 
 ## Installation
 
@@ -14,9 +15,24 @@ A complete browser interaction in one block. The address bar takes focus, the UR
 ## Usage
 
 ```tsx
+// src/Root.tsx
+import { Composition } from "remotion";
 import { BrowserFlow } from "@/components/remocn/browser-flow";
 
-<BrowserFlow url="remocn.dev" />
+const BrowserFlowScene = () => (
+  <BrowserFlow url="remocn.dev" />
+);
+
+export const RemotionRoot = () => (
+  <Composition
+    id="BrowserFlow"
+    component={BrowserFlowScene}
+    durationInFrames={270}
+    fps={30}
+    width={1280}
+    height={720}
+  />
+);
 ```
 
 ## Props

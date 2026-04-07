@@ -3,9 +3,10 @@ title: Infinite Marquee
 description: A continuously scrolling horizontal text strip that loops seamlessly.
 ---
 
+<ComponentPreview name="infinite-marquee" />
+
 A typography primitive that translates a row of duplicated text spans on the X axis at a fixed pixel-per-frame rate. The offset is taken `mod` the approximate width of one repetition so the loop is seamless and fully deterministic.
 
-<ComponentPreview name="infinite-marquee" />
 
 ## Installation
 
@@ -14,9 +15,24 @@ A typography primitive that translates a row of duplicated text spans on the X a
 ## Usage
 
 ```tsx
+// src/Root.tsx
+import { Composition } from "remotion";
 import { InfiniteMarquee } from "@/components/remocn/infinite-marquee";
 
-<InfiniteMarquee text="ship · build · animate · " pixelsPerFrame={4} stroke />
+const InfiniteMarqueeScene = () => (
+  <InfiniteMarquee text="ship · build · animate · " pixelsPerFrame={4} stroke />
+);
+
+export const RemotionRoot = () => (
+  <Composition
+    id="InfiniteMarquee"
+    component={InfiniteMarqueeScene}
+    durationInFrames={180}
+    fps={30}
+    width={1280}
+    height={720}
+  />
+);
 ```
 
 ## Props

@@ -3,9 +3,10 @@ title: Grid Pixelate Wipe
 description: Dissolve from one scene to the next through a deterministic grid of mask cells.
 ---
 
+<ComponentPreview name="grid-pixelate-wipe" />
+
 The screen is split into a CSS grid of black mask cells covering the outgoing scene. Each cell fades out on its own schedule, computed from a deterministic pattern function (`wave`, `diagonal`, or `spiral`). Because the per-cell delay is pure math over `(x, y)` — no `Math.random` — every frame is reproducible across renders, which is essential for video output.
 
-<ComponentPreview name="grid-pixelate-wipe" />
 
 ## Installation
 
@@ -14,17 +15,25 @@ The screen is split into a CSS grid of black mask cells covering the outgoing sc
 ## Usage
 
 ```tsx
+// src/Root.tsx
+import { Composition } from "remotion";
 import { GridPixelateWipe } from "@/components/remocn/grid-pixelate-wipe";
 
-<GridPixelateWipe
-  from={<SceneA />}
-  to={<SceneB />}
-  cols={12}
-  rows={7}
-  pattern="wave"
-  transitionDuration={30}
-  cellFadeFrames={4}
-/>
+const GridPixelateWipeScene = () => (
+  <GridPixelateWipe
+    from={<SceneA />
+);
+
+export const RemotionRoot = () => (
+  <Composition
+    id="GridPixelateWipe"
+    component={GridPixelateWipeScene}
+    durationInFrames={90}
+    fps={30}
+    width={1280}
+    height={720}
+  />
+);
 ```
 
 ## Props

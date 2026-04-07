@@ -3,9 +3,10 @@ title: Animated Line Chart
 description: A line chart whose path draws on from left to right.
 ---
 
+<ComponentPreview name="animated-line-chart" />
+
 A data-viz primitive built with SVG `<path>`. The full path length is computed analytically (sum of segment distances) and animated via `strokeDasharray` + `strokeDashoffset`. An optional leading dot rides the head of the line as it draws.
 
-<ComponentPreview name="animated-line-chart" />
 
 ## Installation
 
@@ -14,12 +15,27 @@ A data-viz primitive built with SVG `<path>`. The full path length is computed a
 ## Usage
 
 ```tsx
+// src/Root.tsx
+import { Composition } from "remotion";
 import { AnimatedLineChart } from "@/components/remocn/animated-line-chart";
 
-<AnimatedLineChart
-  data={[12, 19, 8, 15, 22, 18, 28, 25, 32]}
-  strokeColor="#22c55e"
-/>
+const AnimatedLineChartScene = () => (
+  <AnimatedLineChart
+    data={[12, 19, 8, 15, 22, 18, 28, 25, 32]}
+    strokeColor="#22c55e"
+  />
+);
+
+export const RemotionRoot = () => (
+  <Composition
+    id="AnimatedLineChart"
+    component={AnimatedLineChartScene}
+    durationInFrames={90}
+    fps={30}
+    width={1280}
+    height={720}
+  />
+);
 ```
 
 ## Props

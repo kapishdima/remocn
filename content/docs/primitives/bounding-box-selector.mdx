@@ -3,9 +3,10 @@ title: Bounding Box Selector
 description: Figma-style selection rectangle appears around any element.
 ---
 
+<ComponentPreview name="bounding-box-selector" />
+
 A composition that wraps its children in a relatively positioned container and overlays an absolutely positioned selection border with eight corner and edge handles. The border fades in and slightly scales up via `spring()` at the configured frame.
 
-<ComponentPreview name="bounding-box-selector" />
 
 ## Installation
 
@@ -14,11 +15,24 @@ A composition that wraps its children in a relatively positioned container and o
 ## Usage
 
 ```tsx
+// src/Root.tsx
+import { Composition } from "remotion";
 import { BoundingBoxSelector } from "@/components/remocn/bounding-box-selector";
 
-<BoundingBoxSelector borderColor="#0ea5e9" appearAt={15}>
+const BoundingBoxSelectorScene = () => (
   <YourElement />
-</BoundingBoxSelector>
+);
+
+export const RemotionRoot = () => (
+  <Composition
+    id="BoundingBoxSelector"
+    component={BoundingBoxSelectorScene}
+    durationInFrames={90}
+    fps={30}
+    width={1280}
+    height={720}
+  />
+);
 ```
 
 ## Props

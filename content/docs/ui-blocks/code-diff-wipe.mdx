@@ -3,9 +3,10 @@ title: Code Diff Wipe
 description: Reveal an "after" code snippet by wiping a "before" snippet away.
 ---
 
+<ComponentPreview name="code-diff-wipe" />
+
 A dev-block that stacks two code panes and animates a vertical wipe from left to right. The top "before" layer is masked with `clip-path: inset(0 X% 0 0)` where `X` interpolates from `0` to `100`, revealing the "after" code beneath. An optional handle marker rides the wipe line.
 
-<ComponentPreview name="code-diff-wipe" />
 
 ## Installation
 
@@ -14,12 +15,27 @@ A dev-block that stacks two code panes and animates a vertical wipe from left to
 ## Usage
 
 ```tsx
+// src/Root.tsx
+import { Composition } from "remotion";
 import { CodeDiffWipe } from "@/components/remocn/code-diff-wipe";
 
-<CodeDiffWipe
-  before={"function get() { /* old */ }"}
-  after={"const get = async () => { /* new */ }"}
-/>
+const CodeDiffWipeScene = () => (
+  <CodeDiffWipe
+    before={"function get() { /* old */ }"}
+    after={"const get = async () => { /* new */ }"}
+  />
+);
+
+export const RemotionRoot = () => (
+  <Composition
+    id="CodeDiffWipe"
+    component={CodeDiffWipeScene}
+    durationInFrames={120}
+    fps={30}
+    width={1280}
+    height={720}
+  />
+);
 ```
 
 ## Props

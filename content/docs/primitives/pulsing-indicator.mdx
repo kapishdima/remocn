@@ -3,9 +3,10 @@ title: Pulsing Indicator
 description: Continuous pulsing dot for loading and "live" states.
 ---
 
+<ComponentPreview name="pulsing-indicator" />
+
 A tiny UI primitive for signalling activity. An inner dot breathes via `Math.sin(frame)` mapped to `scale` and `opacity`, while an outer ring "pings" outward on a separate phase.
 
-<ComponentPreview name="pulsing-indicator" />
 
 ## Installation
 
@@ -14,9 +15,24 @@ A tiny UI primitive for signalling activity. An inner dot breathes via `Math.sin
 ## Usage
 
 ```tsx
+// src/Root.tsx
+import { Composition } from "remotion";
 import { PulsingIndicator } from "@/components/remocn/pulsing-indicator";
 
-<PulsingIndicator color="#22c55e" size={16} speed={8} />
+const PulsingIndicatorScene = () => (
+  <PulsingIndicator color="#22c55e" size={16} speed={8} />
+);
+
+export const RemotionRoot = () => (
+  <Composition
+    id="PulsingIndicator"
+    component={PulsingIndicatorScene}
+    durationInFrames={120}
+    fps={30}
+    width={1280}
+    height={720}
+  />
+);
 ```
 
 ## Props

@@ -3,9 +3,10 @@ title: Terminal Simulator
 description: A console window that types out commands and rolls older lines off the top.
 ---
 
+<ComponentPreview name="terminal-simulator" />
+
 A dev-block that simulates a terminal session. Each line is revealed via `<Sequence>` and typed character-by-character with a substring + `interpolate` pattern. Once the visible line count exceeds the window, the inner container slides up via `translateY` so the latest line is always in view.
 
-<ComponentPreview name="terminal-simulator" />
 
 ## Installation
 
@@ -14,14 +15,29 @@ A dev-block that simulates a terminal session. Each line is revealed via `<Seque
 ## Usage
 
 ```tsx
+// src/Root.tsx
+import { Composition } from "remotion";
 import { TerminalSimulator } from "@/components/remocn/terminal-simulator";
 
-<TerminalSimulator
-  lines={[
-    { text: "npm run build", type: "command" },
-    { text: "Compiled successfully", type: "success", delay: 14 },
-  ]}
-/>
+const TerminalSimulatorScene = () => (
+  <TerminalSimulator
+    lines={[
+      { text: "npm run build", type: "command" },
+      { text: "Compiled successfully", type: "success", delay: 14 },
+    ]}
+  />
+);
+
+export const RemotionRoot = () => (
+  <Composition
+    id="TerminalSimulator"
+    component={TerminalSimulatorScene}
+    durationInFrames={240}
+    fps={30}
+    width={1280}
+    height={720}
+  />
+);
 ```
 
 ## Props

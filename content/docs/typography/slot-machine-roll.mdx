@@ -3,9 +3,10 @@ title: Slot Machine Roll
 description: Vertical reel scrolls each character from an old value to a new value.
 ---
 
+<ComponentPreview name="slot-machine-roll" />
+
 A typography primitive that animates changing values (prices, counters, statuses) as a vertical reel. Each character column rolls independently with a staggered spring, giving a slot-machine feel.
 
-<ComponentPreview name="slot-machine-roll" />
 
 ## Installation
 
@@ -14,9 +15,24 @@ A typography primitive that animates changing values (prices, counters, statuses
 ## Usage
 
 ```tsx
+// src/Root.tsx
+import { Composition } from "remotion";
 import { SlotMachineRoll } from "@/components/remocn/slot-machine-roll";
 
-<SlotMachineRoll from="$99" to="$199" fontSize={120} />
+const SlotMachineRollScene = () => (
+  <SlotMachineRoll from="$99" to="$199" fontSize={120} />
+);
+
+export const RemotionRoot = () => (
+  <Composition
+    id="SlotMachineRoll"
+    component={SlotMachineRollScene}
+    durationInFrames={90}
+    fps={30}
+    width={1280}
+    height={720}
+  />
+);
 ```
 
 ## Props

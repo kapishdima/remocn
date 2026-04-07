@@ -3,9 +3,10 @@ title: Perspective Marquee
 description: A 3D-tilted infinite marquee with depth-of-field blur on items rolling toward the horizon.
 ---
 
+<ComponentPreview name="perspective-marquee" />
+
 A typography primitive that takes the seamless modulo-based loop from `InfiniteMarquee` and tilts it in 3D space using CSS `perspective` and `rotateX/Y`. Items further from the viewport center receive progressively heavier `filter: blur()` and lower opacity, mimicking depth of field. Edge vignettes fade the marquee into the background so the loop is invisible.
 
-<ComponentPreview name="perspective-marquee" />
 
 ## Installation
 
@@ -14,13 +15,28 @@ A typography primitive that takes the seamless modulo-based loop from `InfiniteM
 ## Usage
 
 ```tsx
+// src/Root.tsx
+import { Composition } from "remotion";
 import { PerspectiveMarquee } from "@/components/remocn/perspective-marquee";
 
-<PerspectiveMarquee
-  items={["Vercel", "Linear", "Stripe", "Figma"]}
-  rotateY={-28}
-  pixelsPerFrame={2}
-/>
+const PerspectiveMarqueeScene = () => (
+  <PerspectiveMarquee
+    items={["Vercel", "Linear", "Stripe", "Figma"]}
+    rotateY={-28}
+    pixelsPerFrame={2}
+  />
+);
+
+export const RemotionRoot = () => (
+  <Composition
+    id="PerspectiveMarquee"
+    component={PerspectiveMarqueeScene}
+    durationInFrames={240}
+    fps={30}
+    width={1280}
+    height={720}
+  />
+);
 ```
 
 ## Props
