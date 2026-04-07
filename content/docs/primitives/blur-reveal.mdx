@@ -1,0 +1,66 @@
+---
+title: Blur Reveal
+description: Text fades in from a heavy blur into sharp focus.
+---
+
+A typography primitive that animates `opacity` from 0 to 1 and `filter: blur()` from a configurable amount down to 0. Useful for title cards and intro shots.
+
+<ComponentPreview name="blur-reveal" />
+
+## Installation
+
+<InstallBlock name="blur-reveal" />
+
+## Usage
+
+```tsx
+import { BlurReveal } from "@/components/remocn/blur-reveal";
+
+<BlurReveal text="Hello, world" blur={12} fontSize={72} />
+```
+
+## Props
+
+<PropsTable
+  rows={[
+    {
+      name: "text",
+      type: "string",
+      description: "The text to reveal.",
+    },
+    {
+      name: "blur",
+      type: "number",
+      default: "10",
+      description: "Initial blur radius in pixels. Animates down to 0.",
+    },
+    {
+      name: "fontSize",
+      type: "number",
+      default: "48",
+      description: "Font size in pixels.",
+    },
+    {
+      name: "fontWeight",
+      type: "number",
+      default: "600",
+      description: "CSS font-weight.",
+    },
+    {
+      name: "color",
+      type: "string",
+      default: "\"#171717\"",
+      description: "Text color (any valid CSS color).",
+    },
+    {
+      name: "className",
+      type: "string",
+      description: "Optional className passed to the underlying span.",
+    },
+  ]}
+/>
+
+## Notes
+
+- Make sure your font is loaded before the first frame renders. Use [`@remotion/google-fonts`](https://www.remotion.dev/docs/google-fonts) or `@remotion/fonts` so the blur effect doesn't apply to a fallback system font.
+- Heavy blur on large text blocks is expensive. If you stack multiple `BlurReveal`s, consider rendering them in their own `<Sequence>`.

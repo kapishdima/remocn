@@ -1,0 +1,26 @@
+---
+title: CLI
+description: Install remocn components with the shadcn CLI.
+---
+
+remocn ships as a [shadcn registry](https://ui.shadcn.com/docs/registry), so it works with the standard `shadcn` CLI.
+
+## Add a single component
+
+```bash
+npx shadcn@latest add remocn/blur-reveal
+```
+
+## Add multiple at once
+
+```bash
+npx shadcn@latest add remocn/blur-reveal remocn/typewriter
+```
+
+## Browse the registry
+
+Every component on this site has a corresponding entry in the registry manifest. The naming is flat — no subdirectories. Use the slug shown on each component page (e.g. `remocn/blur-reveal`).
+
+## Updating components
+
+Because the files are copied into your project, there's no upgrade path — you own them. To pull a newer version, re-run `add` with the same name and accept the overwrite. Diff against your local edits before committing.

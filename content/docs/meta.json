@@ -1,0 +1,19 @@
+{
+  "title": "Documentation",
+  "pages": [
+    "index",
+    "---Getting Started---",
+    "getting-started",
+    "---Components---",
+    "primitives",
+    "compositions",
+    "---Categories---",
+    "backgrounds",
+    "ui-elements",
+    "transitions",
+    "data-viz",
+    "dev-blocks",
+    "micro-interactions",
+    "workflows"
+  ]
+}

@@ -1,0 +1,45 @@
+---
+title: Installation
+description: Add remocn to an existing Remotion project.
+---
+
+remocn assumes you already have Remotion installed. If you don't, run `npx create-video@latest` first.
+
+## 1. Initialize shadcn
+
+If your project doesn't already have a `components.json`, run:
+
+```bash
+npx shadcn@latest init
+```
+
+Pick the defaults — remocn components are framework-agnostic and only need the path aliases.
+
+## 2. Add a component
+
+```bash
+npx shadcn@latest add remocn/blur-reveal
+```
+
+This copies `blur-reveal.tsx` into `components/remocn/` (or wherever your `components.json` points).
+
+## 3. Use it in a Remotion composition
+
+```tsx
+import { Composition } from "remotion";
+import { BlurReveal } from "@/components/remocn/blur-reveal";
+
+export const RemotionRoot = () => (
+  <Composition
+    id="HelloWorld"
+    component={BlurReveal}
+    durationInFrames={90}
+    fps={30}
+    width={1280}
+    height={720}
+    defaultProps={{ text: "Hello, world" }}
+  />
+);
+```
+
+That's it. Render with `npx remotion render HelloWorld out.mp4`.
