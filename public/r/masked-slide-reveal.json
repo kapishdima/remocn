@@ -1,0 +1,16 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "masked-slide-reveal",
+  "title": "Masked Slide Reveal",
+  "description": "Words slide up out of an invisible horizontal mask, one after another.",
+  "dependencies": ["remotion"],
+  "files": [
+    {
+      "path": "registry/remocn/masked-slide-reveal/index.tsx",
+      "content": "\"use client\";\n\nimport { spring, useCurrentFrame, useVideoConfig } from \"remotion\";\n\nexport interface MaskedSlideRevealProps {\n  text: string;\n  staggerDelay?: number;\n  fontSize?: number;\n  color?: string;\n  fontWeight?: number;\n  speed?: number;\n  className?: string;\n}\n\nexport function MaskedSlideReveal({\n  text,\n  staggerDelay = 3,\n  fontSize = 72,\n  color = \"#171717\",\n  fontWeight = 700,\n  speed = 1,\n  className,\n}: MaskedSlideRevealProps) {\n  const frame = useCurrentFrame() * speed;\n  const { fps } = useVideoConfig();\n\n  const words = text.split(\" \");\n\n  return (\n    <div\n      style={{\n        position: \"absolute\",\n        inset: 0,\n        display: \"flex\",\n        alignItems: \"center\",\n        justifyContent: \"center\",\n        background: \"white\",\n      }}\n    >\n      <span\n        className={className}\n        style={{\n          fontSize,\n          fontWeight,\n          color,\n          letterSpacing: \"-0.03em\",\n          fontFamily:\n            \"var(--font-geist-sans), -apple-system, BlinkMacSystemFont, sans-serif\",\n        }}\n      >\n        {words.map((word, i) => {\n          const t = spring({\n            frame: frame - i * staggerDelay,\n            fps,\n            config: { damping: 14 },\n          });\n          return (\n            <span\n              key={i}\n              style={{\n                display: \"inline-block\",\n                overflow: \"hidden\",\n                verticalAlign: \"bottom\",\n                lineHeight: 1,\n                marginRight: \"0.25em\",\n              }}\n            >\n              <span\n                style={{\n                  display: \"inline-block\",\n                  transform: `translateY(${(1 - t) * 100}%)`,\n                }}\n              >\n                {word}\n              </span>\n            </span>\n          );\n        })}\n      </span>\n    </div>\n  );\n}\n",
+      "type": "registry:component",
+      "target": "components/remocn/masked-slide-reveal.tsx"
+    }
+  ],
+  "type": "registry:component"
+}

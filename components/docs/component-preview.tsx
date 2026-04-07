@@ -15,100 +15,16 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import {
   type ComponentConfig,
   type ControlConfig,
-  componentConfigs,
   getDefaults,
 } from "@/lib/customizer-config";
 import { cn } from "@/lib/utils";
-import { AnimatedBarChart } from "@/registry/remocn/animated-bar-chart";
-import { AnimatedLineChart } from "@/registry/remocn/animated-line-chart";
-import { BlurReveal } from "@/registry/remocn/blur-reveal";
-import { BoundingBoxSelector } from "@/registry/remocn/bounding-box-selector";
-import { ChatToPreviewLayout } from "@/registry/remocn/chat-to-preview-layout";
-import { CodeAccordion } from "@/registry/remocn/code-accordion";
-import { CursorFlow } from "@/registry/remocn/cursor-flow";
-import { DataFlowPipes } from "@/registry/remocn/data-flow-pipes";
-import { CodeDiffWipe } from "@/registry/remocn/code-diff-wipe";
-import { DeviceMockupZoom } from "@/registry/remocn/device-mockup-zoom";
-import { DirectionalWipe } from "@/registry/remocn/directional-wipe";
-import { DragAndDropFlow } from "@/registry/remocn/drag-and-drop-flow";
-import { DynamicGrid } from "@/registry/remocn/dynamic-grid";
-import { GlassCodeBlock } from "@/registry/remocn/glass-code-block";
-import { InfiniteMarquee } from "@/registry/remocn/infinite-marquee";
-import { InlineHighlight } from "@/registry/remocn/inline-highlight";
-import { MarkerHighlight } from "@/registry/remocn/marker-highlight";
-import { MaskedSlideReveal } from "@/registry/remocn/masked-slide-reveal";
-import { MatrixDecode } from "@/registry/remocn/matrix-decode";
-import { MeshGradientBg } from "@/registry/remocn/mesh-gradient-bg";
-import { MorphingModal } from "@/registry/remocn/morphing-modal";
-import { PerspectiveMarquee } from "@/registry/remocn/perspective-marquee";
-import { ProgressSteps } from "@/registry/remocn/progress-steps";
-import { PulsingIndicator } from "@/registry/remocn/pulsing-indicator";
-import { RGBGlitchText } from "@/registry/remocn/rgb-glitch-text";
-import { ShimmerSweep } from "@/registry/remocn/shimmer-sweep";
-import { SimulatedCursor } from "@/registry/remocn/simulated-cursor";
-import { SpotlightCard } from "@/registry/remocn/spotlight-card";
-import { SlotMachineRoll } from "@/registry/remocn/slot-machine-roll";
-import { SpringPopIn } from "@/registry/remocn/spring-pop-in";
-import { StaggeredBentoGrid } from "@/registry/remocn/staggered-bento-grid";
-import { StaggeredFadeUp } from "@/registry/remocn/staggered-fade-up";
-import { StrikethroughReplace } from "@/registry/remocn/strikethrough-replace";
-import { SuccessConfetti } from "@/registry/remocn/success-confetti";
-import { TerminalSimulator } from "@/registry/remocn/terminal-simulator";
-import { TextFadeReplace } from "@/registry/remocn/text-fade-replace";
-import { ToastNotification } from "@/registry/remocn/toast-notification";
-import { TrackingIn } from "@/registry/remocn/tracking-in";
-import { Typewriter } from "@/registry/remocn/typewriter";
-import { ZoomThroughTransition } from "@/registry/remocn/zoom-through-transition";
+import registry from "@/registry/__index__";
 import { ComponentCustomizer } from "./component-customizer";
 
-const registry: Record<string, React.ComponentType<any>> = {
-  "blur-reveal": BlurReveal,
-  typewriter: Typewriter,
-  "inline-highlight": InlineHighlight,
-  "text-fade-replace": TextFadeReplace,
-  "strikethrough-replace": StrikethroughReplace,
-  "staggered-fade-up": StaggeredFadeUp,
-  "masked-slide-reveal": MaskedSlideReveal,
-  "tracking-in": TrackingIn,
-  "shimmer-sweep": ShimmerSweep,
-  "marker-highlight": MarkerHighlight,
-  "slot-machine-roll": SlotMachineRoll,
-  "matrix-decode": MatrixDecode,
-  "rgb-glitch-text": RGBGlitchText,
-  "infinite-marquee": InfiniteMarquee,
-  "perspective-marquee": PerspectiveMarquee,
-  "spotlight-card": SpotlightCard,
-  "glass-code-block": GlassCodeBlock,
-  "code-accordion": CodeAccordion,
-  "cursor-flow": CursorFlow,
-  "data-flow-pipes": DataFlowPipes,
-  "morphing-modal": MorphingModal,
-  "mesh-gradient-bg": MeshGradientBg,
-  "dynamic-grid": DynamicGrid,
-  "spring-pop-in": SpringPopIn,
-  "simulated-cursor": SimulatedCursor,
-  "pulsing-indicator": PulsingIndicator,
-  "directional-wipe": DirectionalWipe,
-  "device-mockup-zoom": DeviceMockupZoom,
-  "zoom-through-transition": ZoomThroughTransition,
-  "staggered-bento-grid": StaggeredBentoGrid,
-  "chat-to-preview-layout": ChatToPreviewLayout,
-  "bounding-box-selector": BoundingBoxSelector,
-  "animated-line-chart": AnimatedLineChart,
-  "animated-bar-chart": AnimatedBarChart,
-  "terminal-simulator": TerminalSimulator,
-  "code-diff-wipe": CodeDiffWipe,
-  "toast-notification": ToastNotification,
-  "drag-and-drop-flow": DragAndDropFlow,
-  "progress-steps": ProgressSteps,
-  "success-confetti": SuccessConfetti,
-};
-
 export function ComponentPreview({ name }: { name: string }) {
-  const config = componentConfigs[name];
-  const Component = registry[name];
+  const entry = registry[name];
 
-  if (!config || !Component) {
+  if (!entry) {
     return (
       <div className="not-prose my-6 rounded-lg border border-fd-border p-4 text-sm text-fd-muted-foreground">
         Unknown component: <code>{name}</code>
@@ -122,7 +38,7 @@ export function ComponentPreview({ name }: { name: string }) {
         <div className="not-prose my-6 aspect-video w-full animate-pulse rounded-xl bg-muted" />
       }
     >
-      <Preview name={name} config={config} Component={Component} />
+      <Preview name={name} config={entry.config} Component={entry.Component} />
     </Suspense>
   );
 }

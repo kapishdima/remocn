@@ -11,7 +11,7 @@
       "dependencies": ["remotion"],
       "files": [
         {
-          "path": "registry/remocn/blur-reveal.tsx",
+          "path": "registry/remocn/blur-reveal/index.tsx",
           "type": "registry:component",
           "target": "components/remocn/blur-reveal.tsx"
         }
@@ -25,7 +25,7 @@
       "dependencies": ["remotion"],
       "files": [
         {
-          "path": "registry/remocn/typewriter.tsx",
+          "path": "registry/remocn/typewriter/index.tsx",
           "type": "registry:component",
           "target": "components/remocn/typewriter.tsx"
         }
@@ -39,7 +39,7 @@
       "dependencies": ["remotion"],
       "files": [
         {
-          "path": "registry/remocn/inline-highlight.tsx",
+          "path": "registry/remocn/inline-highlight/index.tsx",
           "type": "registry:component",
           "target": "components/remocn/inline-highlight.tsx"
         }
@@ -53,7 +53,7 @@
       "dependencies": ["remotion"],
       "files": [
         {
-          "path": "registry/remocn/text-fade-replace.tsx",
+          "path": "registry/remocn/text-fade-replace/index.tsx",
           "type": "registry:component",
           "target": "components/remocn/text-fade-replace.tsx"
         }
@@ -67,7 +67,7 @@
       "dependencies": ["remotion"],
       "files": [
         {
-          "path": "registry/remocn/strikethrough-replace.tsx",
+          "path": "registry/remocn/strikethrough-replace/index.tsx",
           "type": "registry:component",
           "target": "components/remocn/strikethrough-replace.tsx"
         }
@@ -81,7 +81,7 @@
       "dependencies": ["remotion"],
       "files": [
         {
-          "path": "registry/remocn/staggered-fade-up.tsx",
+          "path": "registry/remocn/staggered-fade-up/index.tsx",
           "type": "registry:component",
           "target": "components/remocn/staggered-fade-up.tsx"
         }
@@ -95,7 +95,7 @@
       "dependencies": ["remotion"],
       "files": [
         {
-          "path": "registry/remocn/masked-slide-reveal.tsx",
+          "path": "registry/remocn/masked-slide-reveal/index.tsx",
           "type": "registry:component",
           "target": "components/remocn/masked-slide-reveal.tsx"
         }
@@ -109,7 +109,7 @@
       "dependencies": ["remotion"],
       "files": [
         {
-          "path": "registry/remocn/tracking-in.tsx",
+          "path": "registry/remocn/tracking-in/index.tsx",
           "type": "registry:component",
           "target": "components/remocn/tracking-in.tsx"
         }
@@ -123,7 +123,7 @@
       "dependencies": ["remotion"],
       "files": [
         {
-          "path": "registry/remocn/shimmer-sweep.tsx",
+          "path": "registry/remocn/shimmer-sweep/index.tsx",
           "type": "registry:component",
           "target": "components/remocn/shimmer-sweep.tsx"
         }
@@ -137,7 +137,7 @@
       "dependencies": ["remotion"],
       "files": [
         {
-          "path": "registry/remocn/marker-highlight.tsx",
+          "path": "registry/remocn/marker-highlight/index.tsx",
           "type": "registry:component",
           "target": "components/remocn/marker-highlight.tsx"
         }
@@ -151,7 +151,7 @@
       "dependencies": ["remotion"],
       "files": [
         {
-          "path": "registry/remocn/slot-machine-roll.tsx",
+          "path": "registry/remocn/slot-machine-roll/index.tsx",
           "type": "registry:component",
           "target": "components/remocn/slot-machine-roll.tsx"
         }
@@ -165,7 +165,7 @@
       "dependencies": ["remotion"],
       "files": [
         {
-          "path": "registry/remocn/matrix-decode.tsx",
+          "path": "registry/remocn/matrix-decode/index.tsx",
           "type": "registry:component",
           "target": "components/remocn/matrix-decode.tsx"
         }
@@ -179,7 +179,7 @@
       "dependencies": ["remotion"],
       "files": [
         {
-          "path": "registry/remocn/rgb-glitch-text.tsx",
+          "path": "registry/remocn/rgb-glitch-text/index.tsx",
           "type": "registry:component",
           "target": "components/remocn/rgb-glitch-text.tsx"
         }
@@ -193,7 +193,7 @@
       "dependencies": ["remotion"],
       "files": [
         {
-          "path": "registry/remocn/infinite-marquee.tsx",
+          "path": "registry/remocn/infinite-marquee/index.tsx",
           "type": "registry:component",
           "target": "components/remocn/infinite-marquee.tsx"
         }
@@ -207,7 +207,7 @@
       "dependencies": ["remotion"],
       "files": [
         {
-          "path": "registry/remocn/mesh-gradient-bg.tsx",
+          "path": "registry/remocn/mesh-gradient-bg/index.tsx",
           "type": "registry:component",
           "target": "components/remocn/mesh-gradient-bg.tsx"
         }
@@ -221,7 +221,7 @@
       "dependencies": ["remotion"],
       "files": [
         {
-          "path": "registry/remocn/dynamic-grid.tsx",
+          "path": "registry/remocn/dynamic-grid/index.tsx",
           "type": "registry:component",
           "target": "components/remocn/dynamic-grid.tsx"
         }
@@ -235,7 +235,7 @@
       "dependencies": ["remotion"],
       "files": [
         {
-          "path": "registry/remocn/spring-pop-in.tsx",
+          "path": "registry/remocn/spring-pop-in/index.tsx",
           "type": "registry:component",
           "target": "components/remocn/spring-pop-in.tsx"
         }
@@ -249,7 +249,7 @@
       "dependencies": ["remotion"],
       "files": [
         {
-          "path": "registry/remocn/simulated-cursor.tsx",
+          "path": "registry/remocn/simulated-cursor/index.tsx",
           "type": "registry:component",
           "target": "components/remocn/simulated-cursor.tsx"
         }
@@ -263,7 +263,7 @@
       "dependencies": ["remotion"],
       "files": [
         {
-          "path": "registry/remocn/pulsing-indicator.tsx",
+          "path": "registry/remocn/pulsing-indicator/index.tsx",
           "type": "registry:component",
           "target": "components/remocn/pulsing-indicator.tsx"
         }
@@ -277,7 +277,7 @@
       "dependencies": ["remotion"],
       "files": [
         {
-          "path": "registry/remocn/directional-wipe.tsx",
+          "path": "registry/remocn/directional-wipe/index.tsx",
           "type": "registry:component",
           "target": "components/remocn/directional-wipe.tsx"
         }
@@ -291,7 +291,7 @@
       "dependencies": ["remotion"],
       "files": [
         {
-          "path": "registry/remocn/device-mockup-zoom.tsx",
+          "path": "registry/remocn/device-mockup-zoom/index.tsx",
           "type": "registry:component",
           "target": "components/remocn/device-mockup-zoom.tsx"
         }
@@ -305,7 +305,7 @@
       "dependencies": ["remotion"],
       "files": [
         {
-          "path": "registry/remocn/zoom-through-transition.tsx",
+          "path": "registry/remocn/zoom-through-transition/index.tsx",
           "type": "registry:component",
           "target": "components/remocn/zoom-through-transition.tsx"
         }
@@ -319,7 +319,7 @@
       "dependencies": ["remotion"],
       "files": [
         {
-          "path": "registry/remocn/staggered-bento-grid.tsx",
+          "path": "registry/remocn/staggered-bento-grid/index.tsx",
           "type": "registry:component",
           "target": "components/remocn/staggered-bento-grid.tsx"
         }
@@ -333,7 +333,7 @@
       "dependencies": ["remotion"],
       "files": [
         {
-          "path": "registry/remocn/chat-to-preview-layout.tsx",
+          "path": "registry/remocn/chat-to-preview-layout/index.tsx",
           "type": "registry:component",
           "target": "components/remocn/chat-to-preview-layout.tsx"
         }
@@ -347,7 +347,7 @@
       "dependencies": ["remotion"],
       "files": [
         {
-          "path": "registry/remocn/bounding-box-selector.tsx",
+          "path": "registry/remocn/bounding-box-selector/index.tsx",
           "type": "registry:component",
           "target": "components/remocn/bounding-box-selector.tsx"
         }
@@ -361,7 +361,7 @@
       "dependencies": ["remotion"],
       "files": [
         {
-          "path": "registry/remocn/animated-line-chart.tsx",
+          "path": "registry/remocn/animated-line-chart/index.tsx",
           "type": "registry:component",
           "target": "components/remocn/animated-line-chart.tsx"
         }
@@ -375,7 +375,7 @@
       "dependencies": ["remotion"],
       "files": [
         {
-          "path": "registry/remocn/animated-bar-chart.tsx",
+          "path": "registry/remocn/animated-bar-chart/index.tsx",
           "type": "registry:component",
           "target": "components/remocn/animated-bar-chart.tsx"
         }
@@ -389,7 +389,7 @@
       "dependencies": ["remotion"],
       "files": [
         {
-          "path": "registry/remocn/terminal-simulator.tsx",
+          "path": "registry/remocn/terminal-simulator/index.tsx",
           "type": "registry:component",
           "target": "components/remocn/terminal-simulator.tsx"
         }
@@ -403,7 +403,7 @@
       "dependencies": ["remotion"],
       "files": [
         {
-          "path": "registry/remocn/code-diff-wipe.tsx",
+          "path": "registry/remocn/code-diff-wipe/index.tsx",
           "type": "registry:component",
           "target": "components/remocn/code-diff-wipe.tsx"
         }
@@ -417,7 +417,7 @@
       "dependencies": ["remotion"],
       "files": [
         {
-          "path": "registry/remocn/toast-notification.tsx",
+          "path": "registry/remocn/toast-notification/index.tsx",
           "type": "registry:component",
           "target": "components/remocn/toast-notification.tsx"
         }
@@ -431,7 +431,7 @@
       "dependencies": ["remotion"],
       "files": [
         {
-          "path": "registry/remocn/drag-and-drop-flow.tsx",
+          "path": "registry/remocn/drag-and-drop-flow/index.tsx",
           "type": "registry:component",
           "target": "components/remocn/drag-and-drop-flow.tsx"
         }
@@ -445,7 +445,7 @@
       "dependencies": ["remotion"],
       "files": [
         {
-          "path": "registry/remocn/progress-steps.tsx",
+          "path": "registry/remocn/progress-steps/index.tsx",
           "type": "registry:component",
           "target": "components/remocn/progress-steps.tsx"
         }
@@ -459,7 +459,7 @@
       "dependencies": ["remotion"],
       "files": [
         {
-          "path": "registry/remocn/morphing-modal.tsx",
+          "path": "registry/remocn/morphing-modal/index.tsx",
           "type": "registry:component",
           "target": "components/remocn/morphing-modal.tsx"
         }
@@ -473,7 +473,7 @@
       "dependencies": ["remotion"],
       "files": [
         {
-          "path": "registry/remocn/data-flow-pipes.tsx",
+          "path": "registry/remocn/data-flow-pipes/index.tsx",
           "type": "registry:component",
           "target": "components/remocn/data-flow-pipes.tsx"
         }
@@ -487,7 +487,7 @@
       "dependencies": ["remotion"],
       "files": [
         {
-          "path": "registry/remocn/cursor-flow.tsx",
+          "path": "registry/remocn/cursor-flow/index.tsx",
           "type": "registry:component",
           "target": "components/remocn/cursor-flow.tsx"
         }
@@ -501,7 +501,7 @@
       "dependencies": ["remotion"],
       "files": [
         {
-          "path": "registry/remocn/code-accordion.tsx",
+          "path": "registry/remocn/code-accordion/index.tsx",
           "type": "registry:component",
           "target": "components/remocn/code-accordion.tsx"
         }
@@ -515,7 +515,7 @@
       "dependencies": ["remotion"],
       "files": [
         {
-          "path": "registry/remocn/glass-code-block.tsx",
+          "path": "registry/remocn/glass-code-block/index.tsx",
           "type": "registry:component",
           "target": "components/remocn/glass-code-block.tsx"
         }
@@ -529,7 +529,7 @@
       "dependencies": ["remotion"],
       "files": [
         {
-          "path": "registry/remocn/spotlight-card.tsx",
+          "path": "registry/remocn/spotlight-card/index.tsx",
           "type": "registry:component",
           "target": "components/remocn/spotlight-card.tsx"
         }
@@ -543,7 +543,7 @@
       "dependencies": ["remotion"],
       "files": [
         {
-          "path": "registry/remocn/perspective-marquee.tsx",
+          "path": "registry/remocn/perspective-marquee/index.tsx",
           "type": "registry:component",
           "target": "components/remocn/perspective-marquee.tsx"
         }
@@ -557,7 +557,7 @@
       "dependencies": ["remotion"],
       "files": [
         {
-          "path": "registry/remocn/success-confetti.tsx",
+          "path": "registry/remocn/success-confetti/index.tsx",
           "type": "registry:component",
           "target": "components/remocn/success-confetti.tsx"
         }

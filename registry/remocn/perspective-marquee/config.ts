@@ -1,0 +1,67 @@
+import {
+  type ComponentConfig,
+  FONT_WEIGHT_OPTIONS,
+  FPS,
+  H,
+  W,
+} from "@/lib/customizer-config";
+
+export const perspectiveMarqueeConfig: ComponentConfig = {
+  componentName: "PerspectiveMarquee",
+  importPath: "@/components/remocn/perspective-marquee",
+  controls: {
+    fontSize: {
+      type: "number",
+      default: 84,
+      min: 24,
+      max: 200,
+      step: 2,
+      label: "Font size",
+    },
+    color: { type: "color", default: "#fafafa", label: "Color" },
+    fontWeight: {
+      type: "select",
+      default: "700",
+      options: FONT_WEIGHT_OPTIONS,
+      label: "Font weight",
+    },
+    pixelsPerFrame: {
+      type: "number",
+      default: 2,
+      min: 0.25,
+      max: 10,
+      step: 0.25,
+      label: "Pixels / frame",
+    },
+    rotateY: {
+      type: "number",
+      default: -28,
+      min: -60,
+      max: 60,
+      step: 1,
+      label: "Rotate Y (deg)",
+    },
+    rotateX: {
+      type: "number",
+      default: 8,
+      min: -30,
+      max: 30,
+      step: 1,
+      label: "Rotate X (deg)",
+    },
+    perspective: {
+      type: "number",
+      default: 1200,
+      min: 400,
+      max: 3000,
+      step: 50,
+      label: "Perspective",
+    },
+    fadeColor: { type: "color", default: "#050505", label: "Fade color" },
+    background: { type: "color", default: "#050505", label: "Background" },
+  },
+  durationInFrames: 240,
+  fps: FPS,
+  compositionWidth: W,
+  compositionHeight: H,
+};
