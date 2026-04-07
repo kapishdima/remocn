@@ -1,0 +1,69 @@
+---
+title: Device Mockup Zoom
+description: Pull back from a UI to reveal it inside a device frame.
+---
+
+A transition that starts zoomed into a UI screen and animates `transform: scale()` from 2 down to 1, revealing an inline SVG laptop or phone frame around it. No external assets — the device chrome is rendered with plain divs.
+
+<ComponentPreview name="device-mockup-zoom" />
+
+## Installation
+
+<InstallBlock name="device-mockup-zoom" />
+
+## Usage
+
+```tsx
+import { DeviceMockupZoom } from "@/components/remocn/device-mockup-zoom";
+
+<DeviceMockupZoom device="laptop">
+  <YourAppScreen />
+</DeviceMockupZoom>
+```
+
+## Props
+
+<PropsTable
+  rows={[
+    {
+      name: "children",
+      type: "ReactNode",
+      description: "Content rendered inside the device screen. Falls back to a sample gradient screen.",
+    },
+    {
+      name: "device",
+      type: '"laptop" | "phone"',
+      default: '"laptop"',
+      description: "Which inline mockup to render.",
+    },
+    {
+      name: "frameColor",
+      type: "string",
+      default: '"#1f1f1f"',
+      description: "Color of the device chrome.",
+    },
+    {
+      name: "screenColor",
+      type: "string",
+      default: '"#0a0a0a"',
+      description: "Background color shown behind the screen content.",
+    },
+    {
+      name: "background",
+      type: "string",
+      default: '"#fafafa"',
+      description: "Outer background color.",
+    },
+    {
+      name: "className",
+      type: "string",
+      description: "Optional className for the outer container.",
+    },
+  ]}
+/>
+
+## Notes
+
+<Note title="Replace with real mockups">
+  The inline SVG/div frame is intentional so the component has zero asset dependencies. If you want a photoreal mockup, swap the frame for an image loaded via `staticFile()` and place your UI underneath it.
+</Note>

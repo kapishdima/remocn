@@ -16,6 +16,328 @@
           "target": "components/remocn/blur-reveal.tsx"
         }
       ]
+    },
+    {
+      "name": "typewriter",
+      "type": "registry:component",
+      "title": "Typewriter",
+      "description": "Character-by-character text reveal with a deterministic blinking cursor.",
+      "dependencies": ["remotion"],
+      "files": [
+        {
+          "path": "registry/remocn/typewriter.tsx",
+          "type": "registry:component",
+          "target": "components/remocn/typewriter.tsx"
+        }
+      ]
+    },
+    {
+      "name": "inline-highlight",
+      "type": "registry:component",
+      "title": "Inline Highlight",
+      "description": "Animates one word inside a sentence from a base color to a brand color.",
+      "dependencies": ["remotion"],
+      "files": [
+        {
+          "path": "registry/remocn/inline-highlight.tsx",
+          "type": "registry:component",
+          "target": "components/remocn/inline-highlight.tsx"
+        }
+      ]
+    },
+    {
+      "name": "text-fade-replace",
+      "type": "registry:component",
+      "title": "Text Fade Replace",
+      "description": "Cross-fades between two strings on the same line without layout shift.",
+      "dependencies": ["remotion"],
+      "files": [
+        {
+          "path": "registry/remocn/text-fade-replace.tsx",
+          "type": "registry:component",
+          "target": "components/remocn/text-fade-replace.tsx"
+        }
+      ]
+    },
+    {
+      "name": "strikethrough-replace",
+      "type": "registry:component",
+      "title": "Strikethrough Replace",
+      "description": "Draws a strike line across old text then reveals new text in its place.",
+      "dependencies": ["remotion"],
+      "files": [
+        {
+          "path": "registry/remocn/strikethrough-replace.tsx",
+          "type": "registry:component",
+          "target": "components/remocn/strikethrough-replace.tsx"
+        }
+      ]
+    },
+    {
+      "name": "mesh-gradient-bg",
+      "type": "registry:component",
+      "title": "Mesh Gradient Background",
+      "description": "Living gradient with amorphous color blobs slowly drifting across the frame.",
+      "dependencies": ["remotion"],
+      "files": [
+        {
+          "path": "registry/remocn/mesh-gradient-bg.tsx",
+          "type": "registry:component",
+          "target": "components/remocn/mesh-gradient-bg.tsx"
+        }
+      ]
+    },
+    {
+      "name": "dynamic-grid",
+      "type": "registry:component",
+      "title": "Dynamic Grid",
+      "description": "Subtle moving grid background with configurable cell size and direction.",
+      "dependencies": ["remotion"],
+      "files": [
+        {
+          "path": "registry/remocn/dynamic-grid.tsx",
+          "type": "registry:component",
+          "target": "components/remocn/dynamic-grid.tsx"
+        }
+      ]
+    },
+    {
+      "name": "spring-pop-in",
+      "type": "registry:component",
+      "title": "Spring Pop In",
+      "description": "Elastic spring-driven scale-in wrapper for any child element.",
+      "dependencies": ["remotion"],
+      "files": [
+        {
+          "path": "registry/remocn/spring-pop-in.tsx",
+          "type": "registry:component",
+          "target": "components/remocn/spring-pop-in.tsx"
+        }
+      ]
+    },
+    {
+      "name": "simulated-cursor",
+      "type": "registry:component",
+      "title": "Simulated Cursor",
+      "description": "Animated mouse cursor moving between waypoints with click ripple feedback.",
+      "dependencies": ["remotion"],
+      "files": [
+        {
+          "path": "registry/remocn/simulated-cursor.tsx",
+          "type": "registry:component",
+          "target": "components/remocn/simulated-cursor.tsx"
+        }
+      ]
+    },
+    {
+      "name": "pulsing-indicator",
+      "type": "registry:component",
+      "title": "Pulsing Indicator",
+      "description": "Continuous pulsing dot with ping ring for loading or live states.",
+      "dependencies": ["remotion"],
+      "files": [
+        {
+          "path": "registry/remocn/pulsing-indicator.tsx",
+          "type": "registry:component",
+          "target": "components/remocn/pulsing-indicator.tsx"
+        }
+      ]
+    },
+    {
+      "name": "directional-wipe",
+      "type": "registry:component",
+      "title": "Directional Wipe",
+      "description": "Slide one scene in while pushing the other out.",
+      "dependencies": ["remotion"],
+      "files": [
+        {
+          "path": "registry/remocn/directional-wipe.tsx",
+          "type": "registry:component",
+          "target": "components/remocn/directional-wipe.tsx"
+        }
+      ]
+    },
+    {
+      "name": "device-mockup-zoom",
+      "type": "registry:component",
+      "title": "Device Mockup Zoom",
+      "description": "Pull back from a UI to reveal it inside a device frame.",
+      "dependencies": ["remotion"],
+      "files": [
+        {
+          "path": "registry/remocn/device-mockup-zoom.tsx",
+          "type": "registry:component",
+          "target": "components/remocn/device-mockup-zoom.tsx"
+        }
+      ]
+    },
+    {
+      "name": "zoom-through-transition",
+      "type": "registry:component",
+      "title": "Zoom Through Transition",
+      "description": "Aggressively scale into the center of an element.",
+      "dependencies": ["remotion"],
+      "files": [
+        {
+          "path": "registry/remocn/zoom-through-transition.tsx",
+          "type": "registry:component",
+          "target": "components/remocn/zoom-through-transition.tsx"
+        }
+      ]
+    },
+    {
+      "name": "staggered-bento-grid",
+      "type": "registry:component",
+      "title": "Staggered Bento Grid",
+      "description": "Cards pop into a bento grid one after another with a spring.",
+      "dependencies": ["remotion"],
+      "files": [
+        {
+          "path": "registry/remocn/staggered-bento-grid.tsx",
+          "type": "registry:component",
+          "target": "components/remocn/staggered-bento-grid.tsx"
+        }
+      ]
+    },
+    {
+      "name": "chat-to-preview-layout",
+      "type": "registry:component",
+      "title": "Chat to Preview Layout",
+      "description": "Two-column layout where chat shrinks and preview expands.",
+      "dependencies": ["remotion"],
+      "files": [
+        {
+          "path": "registry/remocn/chat-to-preview-layout.tsx",
+          "type": "registry:component",
+          "target": "components/remocn/chat-to-preview-layout.tsx"
+        }
+      ]
+    },
+    {
+      "name": "bounding-box-selector",
+      "type": "registry:component",
+      "title": "Bounding Box Selector",
+      "description": "Figma-style selection rectangle appears around any element.",
+      "dependencies": ["remotion"],
+      "files": [
+        {
+          "path": "registry/remocn/bounding-box-selector.tsx",
+          "type": "registry:component",
+          "target": "components/remocn/bounding-box-selector.tsx"
+        }
+      ]
+    },
+    {
+      "name": "animated-line-chart",
+      "type": "registry:component",
+      "title": "Animated Line Chart",
+      "description": "Line chart whose SVG path draws on from left to right with a leading dot.",
+      "dependencies": ["remotion"],
+      "files": [
+        {
+          "path": "registry/remocn/animated-line-chart.tsx",
+          "type": "registry:component",
+          "target": "components/remocn/animated-line-chart.tsx"
+        }
+      ]
+    },
+    {
+      "name": "animated-bar-chart",
+      "type": "registry:component",
+      "title": "Animated Bar Chart",
+      "description": "Bars spring up from the baseline in a staggered cascade.",
+      "dependencies": ["remotion"],
+      "files": [
+        {
+          "path": "registry/remocn/animated-bar-chart.tsx",
+          "type": "registry:component",
+          "target": "components/remocn/animated-bar-chart.tsx"
+        }
+      ]
+    },
+    {
+      "name": "terminal-simulator",
+      "type": "registry:component",
+      "title": "Terminal Simulator",
+      "description": "Terminal window that types out commands and rolls old lines off the top.",
+      "dependencies": ["remotion"],
+      "files": [
+        {
+          "path": "registry/remocn/terminal-simulator.tsx",
+          "type": "registry:component",
+          "target": "components/remocn/terminal-simulator.tsx"
+        }
+      ]
+    },
+    {
+      "name": "code-diff-wipe",
+      "type": "registry:component",
+      "title": "Code Diff Wipe",
+      "description": "Before/after code reveal via clip-path wipe with a handle marker.",
+      "dependencies": ["remotion"],
+      "files": [
+        {
+          "path": "registry/remocn/code-diff-wipe.tsx",
+          "type": "registry:component",
+          "target": "components/remocn/code-diff-wipe.tsx"
+        }
+      ]
+    },
+    {
+      "name": "toast-notification",
+      "type": "registry:component",
+      "title": "Toast Notification",
+      "description": "System-style toast pops in, holds, then slides out.",
+      "dependencies": ["remotion"],
+      "files": [
+        {
+          "path": "registry/remocn/toast-notification.tsx",
+          "type": "registry:component",
+          "target": "components/remocn/toast-notification.tsx"
+        }
+      ]
+    },
+    {
+      "name": "drag-and-drop-flow",
+      "type": "registry:component",
+      "title": "Drag and Drop Flow",
+      "description": "Simulated file drag into a dropzone followed by upload progress.",
+      "dependencies": ["remotion"],
+      "files": [
+        {
+          "path": "registry/remocn/drag-and-drop-flow.tsx",
+          "type": "registry:component",
+          "target": "components/remocn/drag-and-drop-flow.tsx"
+        }
+      ]
+    },
+    {
+      "name": "progress-steps",
+      "type": "registry:component",
+      "title": "Progress Steps",
+      "description": "Multi-step pipeline with sequentially activating nodes and filling lines.",
+      "dependencies": ["remotion"],
+      "files": [
+        {
+          "path": "registry/remocn/progress-steps.tsx",
+          "type": "registry:component",
+          "target": "components/remocn/progress-steps.tsx"
+        }
+      ]
+    },
+    {
+      "name": "success-confetti",
+      "type": "registry:component",
+      "title": "Success Confetti",
+      "description": "Deterministic seeded confetti burst with optional headline.",
+      "dependencies": ["remotion"],
+      "files": [
+        {
+          "path": "registry/remocn/success-confetti.tsx",
+          "type": "registry:component",
+          "target": "components/remocn/success-confetti.tsx"
+        }
+      ]
     }
   ]
 }

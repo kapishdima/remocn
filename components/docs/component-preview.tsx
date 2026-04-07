@@ -19,11 +19,57 @@ import {
   getDefaults,
 } from "@/lib/customizer-config";
 import { cn } from "@/lib/utils";
+import { AnimatedBarChart } from "@/registry/remocn/animated-bar-chart";
+import { AnimatedLineChart } from "@/registry/remocn/animated-line-chart";
 import { BlurReveal } from "@/registry/remocn/blur-reveal";
+import { BoundingBoxSelector } from "@/registry/remocn/bounding-box-selector";
+import { ChatToPreviewLayout } from "@/registry/remocn/chat-to-preview-layout";
+import { CodeDiffWipe } from "@/registry/remocn/code-diff-wipe";
+import { DeviceMockupZoom } from "@/registry/remocn/device-mockup-zoom";
+import { DirectionalWipe } from "@/registry/remocn/directional-wipe";
+import { DragAndDropFlow } from "@/registry/remocn/drag-and-drop-flow";
+import { DynamicGrid } from "@/registry/remocn/dynamic-grid";
+import { InlineHighlight } from "@/registry/remocn/inline-highlight";
+import { MeshGradientBg } from "@/registry/remocn/mesh-gradient-bg";
+import { ProgressSteps } from "@/registry/remocn/progress-steps";
+import { PulsingIndicator } from "@/registry/remocn/pulsing-indicator";
+import { SimulatedCursor } from "@/registry/remocn/simulated-cursor";
+import { SpringPopIn } from "@/registry/remocn/spring-pop-in";
+import { StaggeredBentoGrid } from "@/registry/remocn/staggered-bento-grid";
+import { StrikethroughReplace } from "@/registry/remocn/strikethrough-replace";
+import { SuccessConfetti } from "@/registry/remocn/success-confetti";
+import { TerminalSimulator } from "@/registry/remocn/terminal-simulator";
+import { TextFadeReplace } from "@/registry/remocn/text-fade-replace";
+import { ToastNotification } from "@/registry/remocn/toast-notification";
+import { Typewriter } from "@/registry/remocn/typewriter";
+import { ZoomThroughTransition } from "@/registry/remocn/zoom-through-transition";
 import { ComponentCustomizer } from "./component-customizer";
 
 const registry: Record<string, React.ComponentType<any>> = {
   "blur-reveal": BlurReveal,
+  typewriter: Typewriter,
+  "inline-highlight": InlineHighlight,
+  "text-fade-replace": TextFadeReplace,
+  "strikethrough-replace": StrikethroughReplace,
+  "mesh-gradient-bg": MeshGradientBg,
+  "dynamic-grid": DynamicGrid,
+  "spring-pop-in": SpringPopIn,
+  "simulated-cursor": SimulatedCursor,
+  "pulsing-indicator": PulsingIndicator,
+  "directional-wipe": DirectionalWipe,
+  "device-mockup-zoom": DeviceMockupZoom,
+  "zoom-through-transition": ZoomThroughTransition,
+  "staggered-bento-grid": StaggeredBentoGrid,
+  "chat-to-preview-layout": ChatToPreviewLayout,
+  "bounding-box-selector": BoundingBoxSelector,
+  "animated-line-chart": AnimatedLineChart,
+  "animated-bar-chart": AnimatedBarChart,
+  "terminal-simulator": TerminalSimulator,
+  "code-diff-wipe": CodeDiffWipe,
+  "toast-notification": ToastNotification,
+  "drag-and-drop-flow": DragAndDropFlow,
+  "progress-steps": ProgressSteps,
+  "success-confetti": SuccessConfetti,
 };
 
 export function ComponentPreview({ name }: { name: string }) {

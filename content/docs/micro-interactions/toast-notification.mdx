@@ -1,0 +1,88 @@
+---
+title: Toast Notification
+description: System-style toast that pops in, holds, then slides out.
+---
+
+A micro-interaction primitive that drives a toast through three phases — `spring()`-based enter (translateY + opacity), a hold, and an `interpolate`-based exit. Position is anchored to the bottom-right of the frame and the variant controls the icon and accent.
+
+<ComponentPreview name="toast-notification" />
+
+## Installation
+
+<InstallBlock name="toast-notification" />
+
+## Usage
+
+```tsx
+import { ToastNotification } from "@/components/remocn/toast-notification";
+
+<ToastNotification
+  title="Deployment successful"
+  message="Your changes are live at remocn.dev"
+  variant="success"
+/>
+```
+
+## Props
+
+<PropsTable
+  rows={[
+    {
+      name: "title",
+      type: "string",
+      default: "\"Deployment successful\"",
+      description: "Bold headline shown at the top of the toast.",
+    },
+    {
+      name: "message",
+      type: "string",
+      default: "\"Your changes are live at remocn.dev\"",
+      description: "Secondary message shown below the title.",
+    },
+    {
+      name: "variant",
+      type: "\"success\" | \"error\" | \"info\" | \"warning\"",
+      default: "\"success\"",
+      description: "Controls the inline icon and accent color.",
+    },
+    {
+      name: "background",
+      type: "string",
+      default: "\"#fafafa\"",
+      description: "Frame background color.",
+    },
+    {
+      name: "cardColor",
+      type: "string",
+      default: "\"white\"",
+      description: "Toast card background color.",
+    },
+    {
+      name: "textColor",
+      type: "string",
+      default: "\"#171717\"",
+      description: "Color of the toast title.",
+    },
+    {
+      name: "mutedColor",
+      type: "string",
+      default: "\"#71717a\"",
+      description: "Color of the toast message.",
+    },
+    {
+      name: "className",
+      type: "string",
+      description: "Optional className passed to the toast card.",
+    },
+  ]}
+/>
+
+## Notes
+
+<Note title="Phase timing is derived from durationInFrames">
+  The toast reserves 15 frames for enter and 15 frames for exit, with the rest of the composition serving as the hold phase. Increase `durationInFrames` if you want the toast to linger longer.
+</Note>
+
+<Warning title="Anchored absolutely">
+  The toast is positioned with `position: absolute` at `right: 32, bottom: 32`. Make sure the parent composition fills the frame so it lands where you expect.
+</Warning>

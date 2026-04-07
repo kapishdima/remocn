@@ -1,0 +1,74 @@
+---
+title: Dynamic Grid
+description: Subtle moving grid background for tech and dev scenes.
+---
+
+A minimal grid background built from two CSS linear gradients, translated each frame via `transform`. Cheaper than animating `background-position` because the browser keeps layout untouched.
+
+<ComponentPreview name="dynamic-grid" />
+
+## Installation
+
+<InstallBlock name="dynamic-grid" />
+
+## Usage
+
+```tsx
+import { DynamicGrid } from "@/components/remocn/dynamic-grid";
+
+<DynamicGrid
+  cellSize={40}
+  lineColor="#27272a"
+  background="#0a0a0a"
+  speed={0.5}
+  direction="diagonal"
+/>
+```
+
+## Props
+
+<PropsTable
+  rows={[
+    {
+      name: "cellSize",
+      type: "number",
+      default: "40",
+      description: "Grid cell size in pixels.",
+    },
+    {
+      name: "lineColor",
+      type: "string",
+      default: "\"#27272a\"",
+      description: "Grid line color.",
+    },
+    {
+      name: "background",
+      type: "string",
+      default: "\"#0a0a0a\"",
+      description: "Base background color behind the grid.",
+    },
+    {
+      name: "speed",
+      type: "number",
+      default: "0.5",
+      description: "Pixels moved per frame. Motion wraps at cellSize to loop seamlessly.",
+    },
+    {
+      name: "direction",
+      type: "\"diagonal\" | \"horizontal\" | \"vertical\"",
+      default: "\"diagonal\"",
+      description: "Direction the grid drifts.",
+    },
+    {
+      name: "className",
+      type: "string",
+      description: "Optional className passed to the outer container.",
+    },
+  ]}
+/>
+
+## Notes
+
+<Note title="Seamless loop">
+  Offset uses modulo `cellSize`, so the grid loops perfectly — ideal as a base layer under intros and outros.
+</Note>

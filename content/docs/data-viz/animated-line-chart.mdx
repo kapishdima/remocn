@@ -1,0 +1,93 @@
+---
+title: Animated Line Chart
+description: A line chart whose path draws on from left to right.
+---
+
+A data-viz primitive built with SVG `<path>`. The full path length is computed analytically (sum of segment distances) and animated via `strokeDasharray` + `strokeDashoffset`. An optional leading dot rides the head of the line as it draws.
+
+<ComponentPreview name="animated-line-chart" />
+
+## Installation
+
+<InstallBlock name="animated-line-chart" />
+
+## Usage
+
+```tsx
+import { AnimatedLineChart } from "@/components/remocn/animated-line-chart";
+
+<AnimatedLineChart
+  data={[12, 19, 8, 15, 22, 18, 28, 25, 32]}
+  strokeColor="#22c55e"
+/>
+```
+
+## Props
+
+<PropsTable
+  rows={[
+    {
+      name: "data",
+      type: "number[]",
+      default: "[12, 19, 8, 15, 22, 18, 28, 25, 32]",
+      description: "Y-values of the chart. Auto-scaled to the available height.",
+    },
+    {
+      name: "width",
+      type: "number",
+      default: "1000",
+      description: "SVG viewBox width.",
+    },
+    {
+      name: "height",
+      type: "number",
+      default: "500",
+      description: "SVG viewBox height.",
+    },
+    {
+      name: "strokeColor",
+      type: "string",
+      default: "\"#22c55e\"",
+      description: "Color of the line stroke.",
+    },
+    {
+      name: "strokeWidth",
+      type: "number",
+      default: "4",
+      description: "Line stroke width in pixels.",
+    },
+    {
+      name: "background",
+      type: "string",
+      default: "\"#0a0a0a\"",
+      description: "Outer background color.",
+    },
+    {
+      name: "gridColor",
+      type: "string",
+      default: "\"#27272a\"",
+      description: "Grid and axis line color.",
+    },
+    {
+      name: "showDot",
+      type: "boolean",
+      default: "true",
+      description: "Render a dot at the leading edge of the line as it draws.",
+    },
+    {
+      name: "className",
+      type: "string",
+      description: "Optional className passed to the outer container.",
+    },
+  ]}
+/>
+
+## Notes
+
+<Note title="No getTotalLength()">
+  The path length is computed analytically by summing distances between consecutive points. This avoids `useEffect` and DOM measurement, so the first frame renders correctly during server-side bundling.
+</Note>
+
+<Warning title="Data range">
+  The chart auto-scales to the min/max of `data`. If all values are equal, the line is drawn at the top of the chart area.
+</Warning>

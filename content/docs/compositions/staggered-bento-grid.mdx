@@ -1,0 +1,81 @@
+---
+title: Staggered Bento Grid
+description: Cards pop into a bento grid one after another with a spring.
+---
+
+A composition that maps an array of items into a CSS grid and wraps each card in a `<Sequence>` offset by `staggerDelay` frames. Each card uses `spring()` for its scale and opacity, so its life cycle starts at frame 0 inside the sequence.
+
+<ComponentPreview name="staggered-bento-grid" />
+
+## Installation
+
+<InstallBlock name="staggered-bento-grid" />
+
+## Usage
+
+```tsx
+import { StaggeredBentoGrid } from "@/components/remocn/staggered-bento-grid";
+
+<StaggeredBentoGrid
+  staggerDelay={8}
+  columns={3}
+  items={[
+    { title: "Fast", body: "Built on Remotion", span: 2 },
+    { title: "Animated", body: "Spring physics" },
+  ]}
+/>
+```
+
+## Props
+
+<PropsTable
+  rows={[
+    {
+      name: "items",
+      type: "Array<{ title: string; body?: string; span?: 1 | 2 }>",
+      default: "6 sample cards",
+      description: "Cards to render in the grid.",
+    },
+    {
+      name: "staggerDelay",
+      type: "number",
+      default: "8",
+      description: "Frames between each card's entrance.",
+    },
+    {
+      name: "columns",
+      type: "number",
+      default: "3",
+      description: "Number of grid columns.",
+    },
+    {
+      name: "background",
+      type: "string",
+      default: '"#0a0a0a"',
+      description: "Outer background color.",
+    },
+    {
+      name: "cardColor",
+      type: "string",
+      default: '"#1a1a1a"',
+      description: "Card background color.",
+    },
+    {
+      name: "textColor",
+      type: "string",
+      default: '"white"',
+      description: "Card text color.",
+    },
+    {
+      name: "className",
+      type: "string",
+      description: "Optional className for the outer container.",
+    },
+  ]}
+/>
+
+## Notes
+
+<Note title="Sequence per card">
+  Wrapping each card in `<Sequence from={index * staggerDelay}>` resets `useCurrentFrame()` to 0 inside that card, so the spring math stays clean and per-item.
+</Note>

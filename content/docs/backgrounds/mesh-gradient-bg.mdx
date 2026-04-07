@@ -1,0 +1,70 @@
+---
+title: Mesh Gradient Background
+description: Living gradient with amorphous color blobs slowly drifting across the frame.
+---
+
+A background primitive that renders several large radial-gradient blobs and animates them via `transform: translate()` using `Math.sin(frame)` and `Math.cos(frame)` for organic, deterministic drift. Heavy CSS blur plus `mix-blend-mode` creates a soft mesh gradient without shaders.
+
+<ComponentPreview name="mesh-gradient-bg" />
+
+## Installation
+
+<InstallBlock name="mesh-gradient-bg" />
+
+## Usage
+
+```tsx
+import { MeshGradientBg } from "@/components/remocn/mesh-gradient-bg";
+
+<MeshGradientBg
+  colors={["#ff0080", "#7928ca", "#00d4ff", "#ffb800"]}
+  speed={1}
+  background="#0a0a0a"
+/>
+```
+
+## Props
+
+<PropsTable
+  rows={[
+    {
+      name: "colors",
+      type: "string[]",
+      default: "[\"#ff0080\", \"#7928ca\", \"#00d4ff\", \"#ffb800\"]",
+      description: "Colors used for the radial blobs. Any number of CSS colors.",
+    },
+    {
+      name: "speed",
+      type: "number",
+      default: "1",
+      description: "Drift speed multiplier. Higher = faster motion.",
+    },
+    {
+      name: "background",
+      type: "string",
+      default: "\"#0a0a0a\"",
+      description: "Base canvas color. Blend mode is auto-picked (screen on dark, multiply on light).",
+    },
+    {
+      name: "blur",
+      type: "number",
+      default: "80",
+      description: "CSS blur radius (in pixels) applied to each blob.",
+    },
+    {
+      name: "className",
+      type: "string",
+      description: "Optional className passed to the outer container.",
+    },
+  ]}
+/>
+
+## Notes
+
+<Note title="Deterministic motion">
+  Motion uses `Math.sin(frame)` and `Math.cos(frame)`, so every render produces the same output for the same frame — safe for server-side rendering.
+</Note>
+
+<Warning title="Blur performance">
+  Large blur radii on big elements are expensive. If you see slow renders, reduce `blur` or the blob size before reaching for shaders.
+</Warning>

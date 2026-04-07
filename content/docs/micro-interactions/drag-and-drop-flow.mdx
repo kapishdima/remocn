@@ -1,0 +1,70 @@
+---
+title: Drag And Drop Flow
+description: Simulates dragging a file into a drop zone, then a progress bar fills.
+---
+
+A micro-interaction composition: a file icon is dragged across the frame into a dashed dropzone. The dropzone border highlights via `interpolateColors`, the file fades, and a progress bar grows from 0 to 100%.
+
+<ComponentPreview name="drag-and-drop-flow" />
+
+## Installation
+
+<InstallBlock name="drag-and-drop-flow" />
+
+## Usage
+
+```tsx
+import { DragAndDropFlow } from "@/components/remocn/drag-and-drop-flow";
+
+<DragAndDropFlow
+  accent="#0ea5e9"
+  dropzoneLabel="Drop file to upload"
+  fileName="design.fig"
+/>
+```
+
+## Props
+
+<PropsTable
+  rows={[
+    {
+      name: "accent",
+      type: "string",
+      default: "\"#0ea5e9\"",
+      description: "Accent color for the file icon, dropzone highlight, and progress bar.",
+    },
+    {
+      name: "dropzoneLabel",
+      type: "string",
+      default: "\"Drop file to upload\"",
+      description: "Label rendered inside the dropzone.",
+    },
+    {
+      name: "fileName",
+      type: "string",
+      default: "\"design.fig\"",
+      description: "File name shown above the progress bar.",
+    },
+    {
+      name: "background",
+      type: "string",
+      default: "\"#fafafa\"",
+      description: "Frame background color.",
+    },
+    {
+      name: "className",
+      type: "string",
+      description: "Optional className passed to the outer container.",
+    },
+  ]}
+/>
+
+## Notes
+
+<Note title="Three timed phases">
+  The animation splits `durationInFrames` into a drag phase (~45%), a highlight handoff (~10%), and an upload phase (the remainder). All phases derive from `durationInFrames`, so resizing the composition stays in sync.
+</Note>
+
+<Warning title="Width is intentional here">
+  The progress bar grows by animating `width` instead of `transform: scaleX` so the rounded ends stay crisp at any progress value.
+</Warning>

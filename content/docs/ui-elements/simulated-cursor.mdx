@@ -1,0 +1,73 @@
+---
+title: Simulated Cursor
+description: Animated mouse cursor that moves between waypoints with optional click feedback.
+---
+
+A UI primitive that renders a macOS-style cursor (inline SVG, no external assets) and moves it between a list of points. Each waypoint can hold for a configurable number of frames and optionally trigger a click animation: a brief scale dip plus an expanding SVG ripple.
+
+<ComponentPreview name="simulated-cursor" />
+
+## Installation
+
+<InstallBlock name="simulated-cursor" />
+
+## Usage
+
+```tsx
+import { SimulatedCursor } from "@/components/remocn/simulated-cursor";
+
+<SimulatedCursor
+  points={[
+    { x: 200, y: 150, hold: 20 },
+    { x: 800, y: 360, hold: 25, click: true },
+    { x: 1050, y: 560, hold: 20 },
+  ]}
+  color="#ffffff"
+/>
+```
+
+## Props
+
+<PropsTable
+  rows={[
+    {
+      name: "points",
+      type: "Array<{ x: number; y: number; hold?: number; click?: boolean }>",
+      default: "3 sample waypoints",
+      description: "Cursor waypoints in pixel coordinates. hold = frames to pause at the point, click = trigger click ripple.",
+    },
+    {
+      name: "color",
+      type: "string",
+      default: "\"#ffffff\"",
+      description: "Cursor fill color. The cursor always has a thin black outline for contrast.",
+    },
+    {
+      name: "size",
+      type: "number",
+      default: "32",
+      description: "Cursor size in pixels (SVG width and height).",
+    },
+    {
+      name: "background",
+      type: "string",
+      default: "\"#0a0a0a\"",
+      description: "Background color of the frame the cursor lives in.",
+    },
+    {
+      name: "className",
+      type: "string",
+      description: "Optional className passed to the outer container.",
+    },
+  ]}
+/>
+
+## Notes
+
+<Note title="Inline SVG, no assets">
+  The cursor is drawn as inline SVG, so you don't need to copy anything into `public/`. Drop the component into any composition and it just works.
+</Note>
+
+<Note title="Coordinate space">
+  `x` and `y` are in pixels relative to the composition size (e.g. 1280x720). Coordinates larger than the canvas will still render but be clipped by `overflow: hidden`.
+</Note>

@@ -1,0 +1,72 @@
+---
+title: Spring Pop In
+description: Elastic scale-in wrapper for any element.
+---
+
+A UI primitive that wraps its children in a spring-driven `transform: scale()`. Based directly on Remotion's `spring()` so timing and overshoot stay framerate-independent.
+
+<ComponentPreview name="spring-pop-in" />
+
+## Installation
+
+<InstallBlock name="spring-pop-in" />
+
+## Usage
+
+```tsx
+import { SpringPopIn } from "@/components/remocn/spring-pop-in";
+
+<SpringPopIn damping={12}>
+  <div style={{ padding: 24, background: "#111", color: "white" }}>
+    Hello
+  </div>
+</SpringPopIn>
+```
+
+## Props
+
+<PropsTable
+  rows={[
+    {
+      name: "children",
+      type: "ReactNode",
+      required: true,
+      description: "Element(s) to animate.",
+    },
+    {
+      name: "damping",
+      type: "number",
+      default: "12",
+      description: "Spring damping. Lower = more bounce.",
+    },
+    {
+      name: "mass",
+      type: "number",
+      default: "1",
+      description: "Spring mass.",
+    },
+    {
+      name: "stiffness",
+      type: "number",
+      default: "100",
+      description: "Spring stiffness.",
+    },
+    {
+      name: "delayInFrames",
+      type: "number",
+      default: "0",
+      description: "Delay before the spring starts, in frames.",
+    },
+    {
+      name: "className",
+      type: "string",
+      description: "Optional className passed to the outer container.",
+    },
+  ]}
+/>
+
+## Notes
+
+<Note title="Transform origin">
+  The scale is applied with `transform-origin: center`. Override it via `className` if you need corner-anchored growth.
+</Note>

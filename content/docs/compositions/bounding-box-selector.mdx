@@ -1,0 +1,75 @@
+---
+title: Bounding Box Selector
+description: Figma-style selection rectangle appears around any element.
+---
+
+A composition that wraps its children in a relatively positioned container and overlays an absolutely positioned selection border with eight corner and edge handles. The border fades in and slightly scales up via `spring()` at the configured frame.
+
+<ComponentPreview name="bounding-box-selector" />
+
+## Installation
+
+<InstallBlock name="bounding-box-selector" />
+
+## Usage
+
+```tsx
+import { BoundingBoxSelector } from "@/components/remocn/bounding-box-selector";
+
+<BoundingBoxSelector borderColor="#0ea5e9" appearAt={15}>
+  <YourElement />
+</BoundingBoxSelector>
+```
+
+## Props
+
+<PropsTable
+  rows={[
+    {
+      name: "children",
+      type: "ReactNode",
+      description: "The element to wrap. Falls back to a placeholder rectangle.",
+    },
+    {
+      name: "borderColor",
+      type: "string",
+      default: '"#0ea5e9"',
+      description: "Color of the selection border.",
+    },
+    {
+      name: "handleColor",
+      type: "string",
+      default: '"#0ea5e9"',
+      description: "Stroke color of the corner/edge handles.",
+    },
+    {
+      name: "borderWidth",
+      type: "number",
+      default: "2",
+      description: "Border width in pixels.",
+    },
+    {
+      name: "appearAt",
+      type: "number",
+      default: "15",
+      description: "Frame at which the selection box appears.",
+    },
+    {
+      name: "background",
+      type: "string",
+      default: '"#fafafa"',
+      description: "Outer background color.",
+    },
+    {
+      name: "className",
+      type: "string",
+      description: "Optional className for the outer container.",
+    },
+  ]}
+/>
+
+## Notes
+
+<Note title="Sizing">
+  This component reads its size from the wrapped child via `display: inline-block`. If you need pixel-perfect placement around dynamic content, pass children with explicit `width`/`height` instead of relying on intrinsic sizing.
+</Note>

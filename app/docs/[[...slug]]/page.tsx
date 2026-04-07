@@ -35,7 +35,7 @@ export default async function Page(props: {
       <DocsTitle className="text-5xl font-bold tracking-tighter md:text-6xl lg:text-7xl">
         {data.title}
       </DocsTitle>
-      <DocsDescription className="mt-4 max-w-3xl text-balance text-lg text-muted-foreground md:text-xl">
+      <DocsDescription className="mt-0 max-w-3xl text-balance text-lg text-muted-foreground md:text-xl">
         {data.description}
       </DocsDescription>
       <DocsBody>

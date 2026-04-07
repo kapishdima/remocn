@@ -1,4 +1,11 @@
 {
   "title": "Primitives",
-  "pages": ["index", "blur-reveal"]
+  "pages": [
+    "index",
+    "blur-reveal",
+    "typewriter",
+    "inline-highlight",
+    "text-fade-replace",
+    "strikethrough-replace"
+  ]
 }

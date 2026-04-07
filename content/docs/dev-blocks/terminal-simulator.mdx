@@ -1,0 +1,88 @@
+---
+title: Terminal Simulator
+description: A console window that types out commands and rolls older lines off the top.
+---
+
+A dev-block that simulates a terminal session. Each line is revealed via `<Sequence>` and typed character-by-character with a substring + `interpolate` pattern. Once the visible line count exceeds the window, the inner container slides up via `translateY` so the latest line is always in view.
+
+<ComponentPreview name="terminal-simulator" />
+
+## Installation
+
+<InstallBlock name="terminal-simulator" />
+
+## Usage
+
+```tsx
+import { TerminalSimulator } from "@/components/remocn/terminal-simulator";
+
+<TerminalSimulator
+  lines={[
+    { text: "npm run build", type: "command" },
+    { text: "Compiled successfully", type: "success", delay: 14 },
+  ]}
+/>
+```
+
+## Props
+
+<PropsTable
+  rows={[
+    {
+      name: "lines",
+      type: "Array<{ text: string; type: 'command' | 'log' | 'success' | 'error'; delay?: number }>",
+      description: "The lines to render. `delay` is the frame gap before the line starts typing.",
+    },
+    {
+      name: "prompt",
+      type: "string",
+      default: "\"$\"",
+      description: "Prompt prefix shown before `command` lines.",
+    },
+    {
+      name: "title",
+      type: "string",
+      default: "\"~/projects/remocn\"",
+      description: "Title shown in the window chrome bar.",
+    },
+    {
+      name: "background",
+      type: "string",
+      default: "\"#0a0a0a\"",
+      description: "Terminal background color.",
+    },
+    {
+      name: "chromeColor",
+      type: "string",
+      default: "\"#1a1a1a\"",
+      description: "Window chrome bar color.",
+    },
+    {
+      name: "fontSize",
+      type: "number",
+      default: "18",
+      description: "Monospace font size in pixels.",
+    },
+    {
+      name: "charsPerFrame",
+      type: "number",
+      default: "1",
+      description: "Typing speed: how many characters appear per frame.",
+    },
+    {
+      name: "className",
+      type: "string",
+      description: "Optional className passed to the outer container.",
+    },
+  ]}
+/>
+
+## Notes
+
+<Note title="Deterministic cursor">
+  The blinking cursor uses `Math.floor(frame / 15) % 2 === 0` rather than `setInterval`, so the animation is fully deterministic and renders the same on every machine.
+</Note>
+
+<Note title="Auto scroll">
+  Once more lines have started than fit in the window, the entire content layer translates upward in `lineHeight` increments, simulating scroll without overflow.
+</Note>

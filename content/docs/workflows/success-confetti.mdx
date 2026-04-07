@@ -1,0 +1,106 @@
+---
+title: Success Confetti
+description: Deterministic confetti burst from a focal point with optional headline.
+---
+
+A workflow finale: a burst of SVG confetti particles fanning out from a configurable origin under gravity. Particle directions, colors, sizes, and rotations are derived from Remotion's seeded `random()`, so renders are perfectly deterministic.
+
+<ComponentPreview name="success-confetti" />
+
+## Installation
+
+<InstallBlock name="success-confetti" />
+
+## Usage
+
+```tsx
+import { SuccessConfetti } from "@/components/remocn/success-confetti";
+
+<SuccessConfetti
+  text="Merged!"
+  count={60}
+  colors={["#ff5e3a", "#22c55e", "#0ea5e9", "#facc15", "#a855f7"]}
+/>
+```
+
+## Props
+
+<PropsTable
+  rows={[
+    {
+      name: "count",
+      type: "number",
+      default: "60",
+      description: "Number of confetti particles.",
+    },
+    {
+      name: "colors",
+      type: "string[]",
+      default: "[\"#ff5e3a\",\"#22c55e\",\"#0ea5e9\",\"#facc15\",\"#a855f7\"]",
+      description: "Pool of colors that particles are randomly drawn from.",
+    },
+    {
+      name: "originX",
+      type: "number",
+      default: "0.5",
+      description: "Horizontal burst origin as a fraction of the frame width (0..1).",
+    },
+    {
+      name: "originY",
+      type: "number",
+      default: "0.5",
+      description: "Vertical burst origin as a fraction of the frame height (0..1).",
+    },
+    {
+      name: "gravity",
+      type: "number",
+      default: "0.4",
+      description: "Downward acceleration applied per frame squared.",
+    },
+    {
+      name: "velocity",
+      type: "number",
+      default: "12",
+      description: "Base outward speed for each particle in pixels per frame.",
+    },
+    {
+      name: "text",
+      type: "string",
+      default: "\"Merged!\"",
+      description: "Optional headline rendered in the middle of the burst. Pass an empty string to hide.",
+    },
+    {
+      name: "textColor",
+      type: "string",
+      default: "\"#171717\"",
+      description: "Color of the headline.",
+    },
+    {
+      name: "background",
+      type: "string",
+      default: "\"#fafafa\"",
+      description: "Frame background color.",
+    },
+    {
+      name: "seed",
+      type: "string",
+      default: "\"remocn\"",
+      description: "Seed used to generate particle randomness. Change to get a different burst.",
+    },
+    {
+      name: "className",
+      type: "string",
+      description: "Optional className passed to the outer container.",
+    },
+  ]}
+/>
+
+## Notes
+
+<Note title="Deterministic randomness">
+  Particle properties are derived from `random("seed:i:property")` so the same seed always yields the same burst — critical for chunked video renders.
+</Note>
+
+<Warning title="Avoid Math.random">
+  Never replace `random()` with `Math.random()` here. It would produce different results on every frame and tear the burst across rendered chunks.
+</Warning>

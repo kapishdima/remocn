@@ -1,0 +1,84 @@
+---
+title: Typewriter
+description: Character-by-character text reveal with a deterministic blinking cursor.
+---
+
+A typography primitive that reveals text one character at a time using `interpolate` and `substring`. The cursor blinks via integer math on the current frame, so it stays consistent across re-renders.
+
+<ComponentPreview name="typewriter" />
+
+## Installation
+
+<InstallBlock name="typewriter" />
+
+## Usage
+
+```tsx
+import { Typewriter } from "@/components/remocn/typewriter";
+
+<Typewriter text="Hello, world" speed={20} fontSize={72} />
+```
+
+## Props
+
+<PropsTable
+  rows={[
+    {
+      name: "text",
+      type: "string",
+      required: true,
+      description: "The text to type out.",
+    },
+    {
+      name: "cursor",
+      type: "boolean",
+      default: "true",
+      description: "Whether to render the blinking cursor at the end.",
+    },
+    {
+      name: "speed",
+      type: "number",
+      default: "20",
+      description: "Typing speed in characters per second.",
+    },
+    {
+      name: "fontSize",
+      type: "number",
+      default: "48",
+      description: "Font size in pixels.",
+    },
+    {
+      name: "fontWeight",
+      type: "number",
+      default: "600",
+      description: "CSS font-weight.",
+    },
+    {
+      name: "color",
+      type: "string",
+      default: "\"#171717\"",
+      description: "Text color (any valid CSS color).",
+    },
+    {
+      name: "cursorColor",
+      type: "string",
+      default: "\"#171717\"",
+      description: "Color of the blinking cursor block.",
+    },
+    {
+      name: "className",
+      type: "string",
+      description: "Optional className passed to the underlying span.",
+    },
+  ]}
+/>
+
+## Notes
+
+<Note title="Deterministic blink">
+  The cursor uses `Math.floor(frame / 15) % 2 === 0` instead of `setInterval` or `Math.random()`. This is required for Remotion: every frame must be a pure function of `frame`, otherwise the rendered video will glitch.
+</Note>
+
+<Warning title="Composition length">
+  Make sure your composition's `durationInFrames` is long enough to fit `text.length / speed` seconds of typing plus a hold at the end.
+</Warning>

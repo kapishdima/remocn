@@ -1,0 +1,88 @@
+---
+title: Progress Steps
+description: Multi-step pipeline with nodes lighting up sequentially.
+---
+
+A workflow primitive that visualizes a multi-step process. Each node is staggered through `spring()` scale and `interpolateColors`, while connecting SVG lines fill via `strokeDashoffset`. Switch `orientation` to render as a horizontal pipeline or a vertical timeline.
+
+<ComponentPreview name="progress-steps" />
+
+## Installation
+
+<InstallBlock name="progress-steps" />
+
+## Usage
+
+```tsx
+import { ProgressSteps } from "@/components/remocn/progress-steps";
+
+<ProgressSteps
+  steps={[{ label: "Connect" }, { label: "Process" }, { label: "Deploy" }]}
+  orientation="horizontal"
+  stepDuration={30}
+/>
+```
+
+## Props
+
+<PropsTable
+  rows={[
+    {
+      name: "steps",
+      type: "Array<{ label: string }>",
+      default: "[{label:\"Connect\"},{label:\"Process\"},{label:\"Deploy\"}]",
+      description: "Ordered list of steps. The component renders one circular node per entry.",
+    },
+    {
+      name: "orientation",
+      type: "\"horizontal\" | \"vertical\"",
+      default: "\"horizontal\"",
+      description: "Layout direction. Use vertical for timeline-style visuals.",
+    },
+    {
+      name: "activeColor",
+      type: "string",
+      default: "\"#22c55e\"",
+      description: "Fill color used once a step has been activated.",
+    },
+    {
+      name: "inactiveColor",
+      type: "string",
+      default: "\"#27272a\"",
+      description: "Fill color used before a step is activated.",
+    },
+    {
+      name: "background",
+      type: "string",
+      default: "\"#0a0a0a\"",
+      description: "Frame background color.",
+    },
+    {
+      name: "textColor",
+      type: "string",
+      default: "\"white\"",
+      description: "Color of the step label.",
+    },
+    {
+      name: "stepDuration",
+      type: "number",
+      default: "30",
+      description: "Number of frames between successive step activations.",
+    },
+    {
+      name: "className",
+      type: "string",
+      description: "Optional className passed to the outer container.",
+    },
+  ]}
+/>
+
+## Notes
+
+<Note title="Lines fill via strokeDashoffset">
+  Connecting lines use `strokeDasharray` set to the segment length and animate `strokeDashoffset` from full length down to zero. This is GPU-friendly and stays crisp at any composition size.
+</Note>
+
+<Warning title="Pick a duration that fits all steps">
+  Make sure `durationInFrames` is at least `steps.length * stepDuration + 30` so the final node has time to pop into its active state.
+</Warning>

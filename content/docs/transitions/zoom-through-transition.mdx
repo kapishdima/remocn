@@ -1,0 +1,67 @@
+---
+title: Zoom Through Transition
+description: Aggressively scale into the center of an element to fly through it.
+---
+
+A scene transition that interpolates `transform: scale()` with an exponential easing curve, creating the impression of flying *through* an element. Pair with the next scene rendered behind it for a continuous reveal.
+
+<ComponentPreview name="zoom-through-transition" />
+
+## Installation
+
+<InstallBlock name="zoom-through-transition" />
+
+## Usage
+
+```tsx
+import { ZoomThroughTransition } from "@/components/remocn/zoom-through-transition";
+
+<ZoomThroughTransition targetScale={20}>
+  <Logo />
+</ZoomThroughTransition>
+```
+
+## Props
+
+<PropsTable
+  rows={[
+    {
+      name: "children",
+      type: "ReactNode",
+      description: "The element to zoom through. Falls back to a sample gradient card.",
+    },
+    {
+      name: "targetScale",
+      type: "number",
+      default: "20",
+      description: "Final scale value at the end of the duration.",
+    },
+    {
+      name: "transformOrigin",
+      type: "string",
+      default: '"center center"',
+      description: "CSS transform-origin for the zoom point.",
+    },
+    {
+      name: "background",
+      type: "string",
+      default: '"white"',
+      description: "Background color visible during the zoom.",
+    },
+    {
+      name: "className",
+      type: "string",
+      description: "Optional className for the outer container.",
+    },
+  ]}
+/>
+
+## Notes
+
+<Note title="Aim the camera">
+  `transformOrigin` controls the focal point of the zoom. Set it to the exact pixel of the element you want to fly through (e.g. `"50% 30%"`).
+</Note>
+
+<Warning title="Match with the next scene">
+  This transition reads as a real fly-through only if the next scene is composited underneath. Use `<Sequence>` to overlap timings.
+</Warning>
