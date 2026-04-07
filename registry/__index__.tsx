@@ -1,6 +1,8 @@
 import type React from "react";
 import { type ComponentConfig, SHARED_CONTROLS } from "@/lib/customizer-config";
 
+import { AIGenerateOverlay } from "@/registry/remocn/ai-generate-overlay";
+import { aiGenerateOverlayConfig } from "@/registry/remocn/ai-generate-overlay/config";
 import { AIGenerationCanvas } from "@/registry/remocn/ai-generation-canvas";
 import { aiGenerationCanvasConfig } from "@/registry/remocn/ai-generation-canvas/config";
 import { AnimatedBarChart } from "@/registry/remocn/animated-bar-chart";
@@ -13,6 +15,8 @@ import { BoundingBoxSelector } from "@/registry/remocn/bounding-box-selector";
 import { boundingBoxSelectorConfig } from "@/registry/remocn/bounding-box-selector/config";
 import { BrowserFlow } from "@/registry/remocn/browser-flow";
 import { browserFlowConfig } from "@/registry/remocn/browser-flow/config";
+import { BrushStrokeSimulator } from "@/registry/remocn/brush-stroke-simulator";
+import { brushStrokeSimulatorConfig } from "@/registry/remocn/brush-stroke-simulator/config";
 import { ChatToPreviewLayout } from "@/registry/remocn/chat-to-preview-layout";
 import { chatToPreviewLayoutConfig } from "@/registry/remocn/chat-to-preview-layout/config";
 import { ChromaticAberrationWipe } from "@/registry/remocn/chromatic-aberration-wipe";
@@ -45,6 +49,8 @@ import { GridPixelateWipe } from "@/registry/remocn/grid-pixelate-wipe";
 import { gridPixelateWipeConfig } from "@/registry/remocn/grid-pixelate-wipe/config";
 import { HeroDeviceAssemble } from "@/registry/remocn/hero-device-assemble";
 import { heroDeviceAssembleConfig } from "@/registry/remocn/hero-device-assemble/config";
+import { ImageExpandToFullscreen } from "@/registry/remocn/image-expand-to-fullscreen";
+import { imageExpandToFullscreenConfig } from "@/registry/remocn/image-expand-to-fullscreen/config";
 import { InfiniteBentoPan } from "@/registry/remocn/infinite-bento-pan";
 import { infiniteBentoPanConfig } from "@/registry/remocn/infinite-bento-pan/config";
 import { InfiniteMarquee } from "@/registry/remocn/infinite-marquee";
@@ -97,6 +103,8 @@ import { StrikethroughReplace } from "@/registry/remocn/strikethrough-replace";
 import { strikethroughReplaceConfig } from "@/registry/remocn/strikethrough-replace/config";
 import { SuccessConfetti } from "@/registry/remocn/success-confetti";
 import { successConfettiConfig } from "@/registry/remocn/success-confetti/config";
+import { SwipeTransitionWipe } from "@/registry/remocn/swipe-transition-wipe";
+import { swipeTransitionWipeConfig } from "@/registry/remocn/swipe-transition-wipe/config";
 import { TerminalSimulator } from "@/registry/remocn/terminal-simulator";
 import { terminalSimulatorConfig } from "@/registry/remocn/terminal-simulator/config";
 import { TerminalToBrowserDeploy } from "@/registry/remocn/terminal-to-browser-deploy";
@@ -105,6 +113,8 @@ import { TextFadeReplace } from "@/registry/remocn/text-fade-replace";
 import { textFadeReplaceConfig } from "@/registry/remocn/text-fade-replace/config";
 import { ToastNotification } from "@/registry/remocn/toast-notification";
 import { toastNotificationConfig } from "@/registry/remocn/toast-notification/config";
+import { ToolMenuSlideIn } from "@/registry/remocn/tool-menu-slide-in";
+import { toolMenuSlideInConfig } from "@/registry/remocn/tool-menu-slide-in/config";
 import { TrackingIn } from "@/registry/remocn/tracking-in";
 import { trackingInConfig } from "@/registry/remocn/tracking-in/config";
 import { Typewriter } from "@/registry/remocn/typewriter";
@@ -286,6 +296,26 @@ const registry: Record<string, RegistryEntry> = {
   "infinite-bento-pan": {
     Component: InfiniteBentoPan,
     config: infiniteBentoPanConfig,
+  },
+  "brush-stroke-simulator": {
+    Component: BrushStrokeSimulator,
+    config: brushStrokeSimulatorConfig,
+  },
+  "ai-generate-overlay": {
+    Component: AIGenerateOverlay,
+    config: aiGenerateOverlayConfig,
+  },
+  "tool-menu-slide-in": {
+    Component: ToolMenuSlideIn,
+    config: toolMenuSlideInConfig,
+  },
+  "image-expand-to-fullscreen": {
+    Component: ImageExpandToFullscreen,
+    config: imageExpandToFullscreenConfig,
+  },
+  "swipe-transition-wipe": {
+    Component: SwipeTransitionWipe,
+    config: swipeTransitionWipeConfig,
   },
 };
 

@@ -1,0 +1,110 @@
+---
+title: Tool Menu Slide In
+description: A horizontal pill of tool icons whips up from below the canvas, then each icon pops in with a staggered spring.
+---
+
+<ComponentPreview name="tool-menu-slide-in" />
+
+A snappy editor-style toolbar reveal. The frosted-glass panel slides up from `translateY(120%)` to `0%` via a stiff, low-mass spring — no overshoot, no slow ramp — and as soon as it locks in place each icon pops from `scale: 0` to `1` with a small caskaded delay. Every icon is wrapped in its own `<Sequence>` so its internal `useCurrentFrame` resets cleanly to zero, which keeps the spring math local and predictable.
+
+## Installation
+
+<InstallBlock name="tool-menu-slide-in" />
+
+## Usage
+
+```tsx
+// src/Root.tsx
+import { Composition } from "remotion";
+import { ToolMenuSlideIn } from "@/components/remocn/tool-menu-slide-in";
+
+const ToolMenuScene = () => (
+  <ToolMenuSlideIn
+    panelStartFrame={18}
+    iconStagger={4}
+    iconCount={5}
+    accent="#a78bfa"
+  />
+);
+
+export const RemotionRoot = () => (
+  <Composition
+    id="ToolMenuSlideIn"
+    component={ToolMenuScene}
+    durationInFrames={180}
+    fps={30}
+    width={1280}
+    height={720}
+  />
+);
+```
+
+## Props
+
+<PropsTable
+  rows={[
+    {
+      name: "panelStartFrame",
+      type: "number",
+      default: "18",
+      description: "Frame at which the panel begins sliding up.",
+    },
+    {
+      name: "iconStagger",
+      type: "number",
+      default: "4",
+      description: "Frames of delay between each icon's pop-in spring.",
+    },
+    {
+      name: "iconCount",
+      type: "number",
+      default: "5",
+      description: "Number of fake tool icons to render (clamped 1–8).",
+    },
+    {
+      name: "accent",
+      type: "string",
+      default: "\"#a78bfa\"",
+      description: "Accent color used for the active icon glow and border.",
+    },
+    {
+      name: "panelColor",
+      type: "string",
+      default: "\"rgba(18, 18, 22, 0.72)\"",
+      description: "Frosted-glass fill of the menu pill.",
+    },
+    {
+      name: "background",
+      type: "string",
+      default: "\"#070708\"",
+      description: "Background color of the editor canvas.",
+    },
+    {
+      name: "iconBg",
+      type: "string",
+      default: "\"rgba(255,255,255,0.06)\"",
+      description: "Background of inactive tool icons.",
+    },
+    {
+      name: "speed",
+      type: "number",
+      default: "1",
+      description: "Playback speed multiplier.",
+    },
+    {
+      name: "className",
+      type: "string",
+      description: "Optional className passed to the root container.",
+    },
+  ]}
+/>
+
+## Notes
+
+<Note title="Snappy, not bouncy">
+  The slide-in spring uses `stiffness: 320`, `damping: 20`, `mass: 0.6` — high stiffness with enough damping to land hard without overshoot. Tool menus that bounce read as toy-like; this one feels like macOS.
+</Note>
+
+<Warning title="Sequence resets the icon clock">
+  Each icon is rendered inside its own `<Sequence from={...}>` so that the spring inside `<ToolIcon>` always sees `frame: 0` at the moment it should start. Don't try to compute the offset manually — let `<Sequence>` reset the clock for you.
+</Warning>

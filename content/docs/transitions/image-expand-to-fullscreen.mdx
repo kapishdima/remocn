@@ -1,0 +1,142 @@
+---
+title: Image Expand To Fullscreen
+description: A thumbnail in a feed post lifts off the card and morphs seamlessly into a fullscreen editor, with toolbars sliding in to meet it.
+---
+
+<ComponentPreview name="image-expand-to-fullscreen" />
+
+A shared-element transition in the spirit of native iOS photo editors. The image starts life as a thumbnail inside a fake feed post — when the morph fires, the post UI fades, the dark editor canvas swells in underneath, and the image itself rides a single spring all the way to its fullscreen rect. Toolbars slide in from the top and bottom in the last third, called in by the image landing.
+
+## Installation
+
+<InstallBlock name="image-expand-to-fullscreen" />
+
+## Usage
+
+```tsx
+// src/Root.tsx
+import { Composition } from "remotion";
+import { ImageExpandToFullscreen } from "@/components/remocn/image-expand-to-fullscreen";
+
+const ImageExpandScene = () => (
+  <ImageExpandToFullscreen
+    from={{ left: 460, top: 280, width: 360, height: 200 }}
+    to={{ left: 200, top: 120, width: 880, height: 480 }}
+    morphAt={30}
+  />
+);
+
+export const RemotionRoot = () => (
+  <Composition
+    id="ImageExpandToFullscreen"
+    component={ImageExpandScene}
+    durationInFrames={180}
+    fps={30}
+    width={1280}
+    height={720}
+  />
+);
+```
+
+## Props
+
+<PropsTable
+  rows={[
+    {
+      name: "from",
+      type: "{ top, left, width, height }",
+      description: "Source rect of the thumbnail inside the feed post.",
+    },
+    {
+      name: "to",
+      type: "{ top, left, width, height }",
+      description: "Target rect of the image inside the fullscreen editor.",
+    },
+    {
+      name: "borderRadiusFrom",
+      type: "number",
+      default: "12",
+      description: "Border radius of the thumbnail in pixels.",
+    },
+    {
+      name: "borderRadiusTo",
+      type: "number",
+      default: "16",
+      description: "Border radius of the editor image in pixels.",
+    },
+    {
+      name: "morphAt",
+      type: "number",
+      default: "30",
+      description: "Frame at which the shared-element morph fires.",
+    },
+    {
+      name: "imageColorA",
+      type: "string",
+      default: "\"#ff6b6b\"",
+      description: "First stop of the faked image gradient.",
+    },
+    {
+      name: "imageColorB",
+      type: "string",
+      default: "\"#845ec2\"",
+      description: "Second stop of the faked image gradient.",
+    },
+    {
+      name: "imageColorC",
+      type: "string",
+      default: "\"#4d8dff\"",
+      description: "Third stop of the faked image gradient.",
+    },
+    {
+      name: "feedBackground",
+      type: "string",
+      default: "\"#f4f4f5\"",
+      description: "Page background color of the feed (before the morph).",
+    },
+    {
+      name: "editorBackground",
+      type: "string",
+      default: "\"#0a0a0a\"",
+      description: "Canvas background color of the editor (after the morph).",
+    },
+    {
+      name: "accent",
+      type: "string",
+      default: "\"#fafafa\"",
+      description: "Accent color used for toolbar text and the active tool chip.",
+    },
+    {
+      name: "postAuthor",
+      type: "string",
+      default: "\"Maya Larsson\"",
+      description: "Author name shown on the feed post.",
+    },
+    {
+      name: "postBody",
+      type: "string",
+      description: "Caption shown on the feed post above the thumbnail.",
+    },
+    {
+      name: "speed",
+      type: "number",
+      default: "1",
+      description: "Playback speed multiplier.",
+    },
+    {
+      name: "className",
+      type: "string",
+      description: "Optional className passed to the root container.",
+    },
+  ]}
+/>
+
+## Notes
+
+<Note title="One spring, four properties">
+  `top`, `left`, `width`, and `height` are all derived from a single `spring()` value. Independent springs would drift out of phase and the image would warp during travel.
+</Note>
+
+<Warning title="Toolbars arrive last">
+  The toolbars only slide in across `[0.5, 1]` of the morph spring — that delay is what makes them feel summoned by the image landing, instead of racing it to the finish line.
+</Warning>

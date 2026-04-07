@@ -772,6 +772,76 @@
           "target": "components/remocn/infinite-bento-pan.tsx"
         }
       ]
+    },
+    {
+      "name": "brush-stroke-simulator",
+      "type": "registry:component",
+      "title": "Brush Stroke Simulator",
+      "description": "A simulated finger brushes across an image, revealing a pixelated layer along its bezier path.",
+      "dependencies": ["remotion"],
+      "files": [
+        {
+          "path": "registry/remocn/brush-stroke-simulator/index.tsx",
+          "type": "registry:component",
+          "target": "components/remocn/brush-stroke-simulator.tsx"
+        }
+      ]
+    },
+    {
+      "name": "ai-generate-overlay",
+      "type": "registry:component",
+      "title": "AI Generate Overlay",
+      "description": "Source image blurs under a shimmering dot grid and a pulsing 'Generating…' pill before a new image fades in.",
+      "dependencies": ["remotion"],
+      "files": [
+        {
+          "path": "registry/remocn/ai-generate-overlay/index.tsx",
+          "type": "registry:component",
+          "target": "components/remocn/ai-generate-overlay.tsx"
+        }
+      ]
+    },
+    {
+      "name": "tool-menu-slide-in",
+      "type": "registry:component",
+      "title": "Tool Menu Slide In",
+      "description": "A glass tool palette whips up from below the editor canvas while its icons pop in with a stagger.",
+      "dependencies": ["remotion"],
+      "files": [
+        {
+          "path": "registry/remocn/tool-menu-slide-in/index.tsx",
+          "type": "registry:component",
+          "target": "components/remocn/tool-menu-slide-in.tsx"
+        }
+      ]
+    },
+    {
+      "name": "image-expand-to-fullscreen",
+      "type": "registry:component",
+      "title": "Image Expand To Fullscreen",
+      "description": "An image lifts out of a feed post and morphs into a fullscreen editor with toolbars sliding in.",
+      "dependencies": ["remotion"],
+      "files": [
+        {
+          "path": "registry/remocn/image-expand-to-fullscreen/index.tsx",
+          "type": "registry:component",
+          "target": "components/remocn/image-expand-to-fullscreen.tsx"
+        }
+      ]
+    },
+    {
+      "name": "swipe-transition-wipe",
+      "type": "registry:component",
+      "title": "Swipe Transition Wipe",
+      "description": "Two scenes laid out side-by-side flick across the screen with a parallax background and a darkening outgoing layer.",
+      "dependencies": ["remotion"],
+      "files": [
+        {
+          "path": "registry/remocn/swipe-transition-wipe/index.tsx",
+          "type": "registry:component",
+          "target": "components/remocn/swipe-transition-wipe.tsx"
+        }
+      ]
     }
   ]
 }
