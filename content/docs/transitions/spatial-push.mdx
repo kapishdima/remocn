@@ -1,0 +1,71 @@
+---
+title: Spatial Push
+description: A new scene physically presses the old one back into the frame.
+---
+
+A transition primitive with weight. Scene A shrinks, dims, and rounds its corners as if being pushed into the background, while Scene B drops in via a spring with overshoot, carrying a heavy directional drop shadow. The result feels kinetic — as if the incoming scene has real mass pressing against the outgoing one.
+
+<ComponentPreview name="spatial-push" />
+
+## Installation
+
+<InstallBlock name="spatial-push" />
+
+## Usage
+
+```tsx
+import { SpatialPush } from "@/components/remocn/spatial-push";
+
+<SpatialPush
+  from={<SceneA />}
+  to={<SceneB />}
+  direction="up"
+  transitionDuration={30}
+/>
+```
+
+## Props
+
+<PropsTable
+  rows={[
+    {
+      name: "from",
+      type: "ReactNode",
+      description: "The outgoing scene. Falls back to a labeled colored panel.",
+    },
+    {
+      name: "to",
+      type: "ReactNode",
+      description: "The incoming scene. Falls back to a labeled colored panel.",
+    },
+    {
+      name: "direction",
+      type: '"up" | "down" | "left" | "right"',
+      default: '"up"',
+      description: "Direction the incoming scene enters from.",
+    },
+    {
+      name: "transitionStart",
+      type: "number",
+      default: "durationInFrames * 0.4",
+      description: "Frame at which the push begins.",
+    },
+    {
+      name: "transitionDuration",
+      type: "number",
+      default: "30",
+      description: "Easing window for Scene A's retreat, in frames.",
+    },
+    {
+      name: "className",
+      type: "string",
+      description: "Optional className for the outer container.",
+    },
+  ]}
+/>
+
+## Notes
+
+<Note title="Spring overshoot creates mass">
+  The incoming scene uses a spring with `mass: 1.2` and moderate damping so it overshoots its final position by a hair before settling. That tiny bounce — combined with the directional drop shadow — is what sells the illusion of physical weight pressing into the frame.
+</Note>

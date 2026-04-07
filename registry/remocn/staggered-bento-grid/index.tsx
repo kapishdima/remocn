@@ -27,7 +27,9 @@ const DEFAULT_ITEMS: BentoItem[] = [
   { title: "Animated", body: "Spring physics" },
   { title: "Composable", body: "Drop-in blocks" },
   { title: "Themed", body: "Tailwind ready" },
+  { title: "Typed", body: "First-class TS" },
   { title: "Open", body: "MIT licensed", span: 2 },
+  { title: "Tiny", body: "Zero runtime cost" },
 ];
 
 function Card({

@@ -1,28 +1,14 @@
 {
-  "title": "Primitives",
+  "title": "Core Primitives",
   "pages": [
     "index",
-    "blur-reveal",
-    "typewriter",
-    "inline-highlight",
-    "text-fade-replace",
-    "strikethrough-replace",
-    "staggered-fade-up",
-    "masked-slide-reveal",
-    "tracking-in",
-    "shimmer-sweep",
-    "marker-highlight",
-    "slot-machine-roll",
-    "matrix-decode",
-    "rgb-glitch-text",
-    "video-mask-text",
-    "infinite-marquee",
-    "perspective-marquee",
-    "spotlight-card",
-    "glass-code-block",
-    "code-accordion",
+    "---Animations---",
+    "spring-pop-in",
+    "pulsing-indicator",
+    "success-confetti",
+    "---Interactions---",
     "cursor-flow",
-    "data-flow-pipes",
-    "morphing-modal"
+    "bounding-box-selector",
+    "toast-notification"
   ]
 }

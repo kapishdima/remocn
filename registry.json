@@ -562,6 +562,216 @@
           "target": "components/remocn/success-confetti.tsx"
         }
       ]
+    },
+    {
+      "name": "frosted-glass-wipe",
+      "type": "registry:component",
+      "title": "Frosted Glass Wipe",
+      "description": "Elegant scene transition through a sliding pane of frosted glass.",
+      "dependencies": ["remotion"],
+      "files": [
+        {
+          "path": "registry/remocn/frosted-glass-wipe/index.tsx",
+          "type": "registry:component",
+          "target": "components/remocn/frosted-glass-wipe.tsx"
+        }
+      ]
+    },
+    {
+      "name": "kinetic-type-mask",
+      "type": "registry:component",
+      "title": "Kinetic Type Mask",
+      "description": "Use giant typography as a window into the next scene.",
+      "dependencies": ["remotion"],
+      "files": [
+        {
+          "path": "registry/remocn/kinetic-type-mask/index.tsx",
+          "type": "registry:component",
+          "target": "components/remocn/kinetic-type-mask.tsx"
+        }
+      ]
+    },
+    {
+      "name": "spatial-push",
+      "type": "registry:component",
+      "title": "Spatial Push",
+      "description": "A new scene physically presses the old one back into the frame.",
+      "dependencies": ["remotion"],
+      "files": [
+        {
+          "path": "registry/remocn/spatial-push/index.tsx",
+          "type": "registry:component",
+          "target": "components/remocn/spatial-push.tsx"
+        }
+      ]
+    },
+    {
+      "name": "grid-pixelate-wipe",
+      "type": "registry:component",
+      "title": "Grid Pixelate Wipe",
+      "description": "Dissolve from one scene to the next through a deterministic grid of mask cells.",
+      "dependencies": ["remotion"],
+      "files": [
+        {
+          "path": "registry/remocn/grid-pixelate-wipe/index.tsx",
+          "type": "registry:component",
+          "target": "components/remocn/grid-pixelate-wipe.tsx"
+        }
+      ]
+    },
+    {
+      "name": "chromatic-aberration-wipe",
+      "type": "registry:component",
+      "title": "Chromatic Aberration Wipe",
+      "description": "An ultra-fast slide transition with an RGB glitch on the peak frames.",
+      "dependencies": ["remotion"],
+      "files": [
+        {
+          "path": "registry/remocn/chromatic-aberration-wipe/index.tsx",
+          "type": "registry:component",
+          "target": "components/remocn/chromatic-aberration-wipe.tsx"
+        }
+      ]
+    },
+    {
+      "name": "hero-device-assemble",
+      "type": "registry:component",
+      "title": "Hero Device Assemble",
+      "description": "Floating device layers spring together into a laptop or phone mockup, then the screen wakes with a shimmer.",
+      "dependencies": ["remotion"],
+      "files": [
+        {
+          "path": "registry/remocn/hero-device-assemble/index.tsx",
+          "type": "registry:component",
+          "target": "components/remocn/hero-device-assemble.tsx"
+        }
+      ]
+    },
+    {
+      "name": "ecosystem-constellation",
+      "type": "registry:component",
+      "title": "Ecosystem Constellation",
+      "description": "A central logo orbited by integration satellites with pulsing data lines.",
+      "dependencies": ["remotion"],
+      "files": [
+        {
+          "path": "registry/remocn/ecosystem-constellation/index.tsx",
+          "type": "registry:component",
+          "target": "components/remocn/ecosystem-constellation.tsx"
+        }
+      ]
+    },
+    {
+      "name": "ai-generation-canvas",
+      "type": "registry:component",
+      "title": "AI Generation Canvas",
+      "description": "A prompt input transforms into a header, then a skeleton dashboard flips into populated cards.",
+      "dependencies": ["remotion"],
+      "files": [
+        {
+          "path": "registry/remocn/ai-generation-canvas/index.tsx",
+          "type": "registry:component",
+          "target": "components/remocn/ai-generation-canvas.tsx"
+        }
+      ]
+    },
+    {
+      "name": "live-code-compilation",
+      "type": "registry:component",
+      "title": "Live Code Compilation",
+      "description": "Split-screen where typed code on the left snaps a live UI preview on the right, HMR-style.",
+      "dependencies": ["remotion"],
+      "files": [
+        {
+          "path": "registry/remocn/live-code-compilation/index.tsx",
+          "type": "registry:component",
+          "target": "components/remocn/live-code-compilation.tsx"
+        }
+      ]
+    },
+    {
+      "name": "pipeline-journey",
+      "type": "registry:component",
+      "title": "Pipeline Journey",
+      "description": "A Kanban ticket arcs across columns triggering landings and a final confetti burst.",
+      "dependencies": ["remotion"],
+      "files": [
+        {
+          "path": "registry/remocn/pipeline-journey/index.tsx",
+          "type": "registry:component",
+          "target": "components/remocn/pipeline-journey.tsx"
+        }
+      ]
+    },
+    {
+      "name": "dashboard-populate",
+      "type": "registry:component",
+      "title": "Dashboard Populate",
+      "description": "An empty dashboard cascades to life with KPI count-ups, bar bounces, line traces, and a donut fill.",
+      "dependencies": ["remotion"],
+      "files": [
+        {
+          "path": "registry/remocn/dashboard-populate/index.tsx",
+          "type": "registry:component",
+          "target": "components/remocn/dashboard-populate.tsx"
+        }
+      ]
+    },
+    {
+      "name": "terminal-to-browser-deploy",
+      "type": "registry:component",
+      "title": "Terminal to Browser Deploy",
+      "description": "A CLI deploy completes, the terminal blurs back, and a browser window springs from the deploy URL.",
+      "dependencies": ["remotion"],
+      "files": [
+        {
+          "path": "registry/remocn/terminal-to-browser-deploy/index.tsx",
+          "type": "registry:component",
+          "target": "components/remocn/terminal-to-browser-deploy.tsx"
+        }
+      ]
+    },
+    {
+      "name": "browser-flow",
+      "type": "registry:component",
+      "title": "Browser Flow",
+      "description": "Full Safari/Chrome simulation: typed URL, progress bar, page render, scroll, and a virtual cursor click.",
+      "dependencies": ["remotion"],
+      "files": [
+        {
+          "path": "registry/remocn/browser-flow/index.tsx",
+          "type": "registry:component",
+          "target": "components/remocn/browser-flow.tsx"
+        }
+      ]
+    },
+    {
+      "name": "pricing-tier-focus",
+      "type": "registry:component",
+      "title": "Pricing Tier Focus",
+      "description": "Three pricing cards where the focused tier rises and brightens while siblings dim and blur.",
+      "dependencies": ["remotion"],
+      "files": [
+        {
+          "path": "registry/remocn/pricing-tier-focus/index.tsx",
+          "type": "registry:component",
+          "target": "components/remocn/pricing-tier-focus.tsx"
+        }
+      ]
+    },
+    {
+      "name": "infinite-bento-pan",
+      "type": "registry:component",
+      "title": "Infinite Bento Pan",
+      "description": "A camera diagonally drifts across an oversized bento grid behind a soft vignette.",
+      "dependencies": ["remotion"],
+      "files": [
+        {
+          "path": "registry/remocn/infinite-bento-pan/index.tsx",
+          "type": "registry:component",
+          "target": "components/remocn/infinite-bento-pan.tsx"
+        }
+      ]
     }
   ]
 }

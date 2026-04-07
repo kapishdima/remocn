@@ -1,0 +1,56 @@
+---
+title: Pricing Tier Focus
+description: Highlight the recommended pricing tier by dimming and blurring its neighbors.
+---
+
+A composition that stages a classic three-tier pricing table and then dramatically focuses the camera on the recommended plan. The focused card scales up, lifts off the page with a heavy drop shadow, while the side cards retreat into a soft, brightness-dimmed blur. A subtle shimmer sweeps across the CTA button to seal the moment.
+
+<ComponentPreview name="pricing-tier-focus" />
+
+## Installation
+
+<InstallBlock name="pricing-tier-focus" />
+
+## Usage
+
+```tsx
+import { PricingTierFocus } from "@/components/remocn/pricing-tier-focus";
+
+<PricingTierFocus focusedTier={1} accentColor="#22c55e" />
+```
+
+## Props
+
+<PropsTable
+  rows={[
+    {
+      name: "focusedTier",
+      type: "0 | 1 | 2",
+      default: "1",
+      description: "Index of the tier to highlight (0 = Free, 1 = Pro, 2 = Enterprise).",
+    },
+    {
+      name: "accentColor",
+      type: "string",
+      default: '"#22c55e"',
+      description: "Brand color for the focused tier badge, checkmarks, and CTA button.",
+    },
+    {
+      name: "speed",
+      type: "number",
+      default: "1",
+      description: "Multiplier applied to the current frame for global timing control.",
+    },
+    {
+      name: "className",
+      type: "string",
+      description: "Optional className for the outer container.",
+    },
+  ]}
+/>
+
+## Notes
+
+<Note title="Shimmer is the closer">
+  The focus animation lands the visual hierarchy, but the shimmer sweep on the Pro CTA button is what makes the moment feel cinematic. It runs once around frame 90 — late enough that the eye has already settled on the focused card, so the highlight reads as confirmation rather than distraction.
+</Note>

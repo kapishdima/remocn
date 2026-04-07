@@ -1,0 +1,60 @@
+---
+title: Ecosystem Constellation
+description: A central product logo orbited by integration satellites with pulsing data lines.
+---
+
+A composition for telling an "everything connects" story. A pulsing logo sits in the center while integration satellites fly in from beyond the frame and settle into elliptical orbits at different radii and angular speeds. Connection lines between the hub and each satellite periodically light up — and the firing satellite scales up by a hair to feel like real data is moving.
+
+<ComponentPreview name="ecosystem-constellation" />
+
+## Installation
+
+<InstallBlock name="ecosystem-constellation" />
+
+## Usage
+
+```tsx
+import { EcosystemConstellation } from "@/components/remocn/ecosystem-constellation";
+
+<EcosystemConstellation
+  satelliteCount={6}
+  centerLabel="V"
+  accentColor="#a855f7"
+/>
+```
+
+## Props
+
+<PropsTable
+  rows={[
+    {
+      name: "satelliteCount",
+      type: "number",
+      default: "6",
+      description: "Number of orbiting integration satellites (clamped to 3..8).",
+    },
+    {
+      name: "centerLabel",
+      type: "string",
+      default: '"V"',
+      description: "Single character or short label rendered inside the central hub.",
+    },
+    {
+      name: "accentColor",
+      type: "string",
+      default: '"#a855f7"',
+      description: "Color of the hub, glow, and connection lines.",
+    },
+    {
+      name: "className",
+      type: "string",
+      description: "Optional className for the outer container.",
+    },
+  ]}
+/>
+
+## Notes
+
+<Note title="Orbits are elliptical, not circular">
+  Each satellite uses a slightly different `radiusX` and `radiusY` plus its own angular speed, so the constellation never falls into a robotic, perfectly-symmetric pattern. Data pulses cycle through satellites deterministically using `Math.floor(frame / 30) % count`, which keeps the animation render-stable while still feeling alive.
+</Note>

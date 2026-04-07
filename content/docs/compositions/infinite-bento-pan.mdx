@@ -1,0 +1,56 @@
+---
+title: Infinite Bento Pan
+description: A hypnotic diagonal camera glide over an oversized grid of bento cards.
+---
+
+A composition that builds a super-sized bento grid (well beyond the canvas) and slowly drifts the camera across it on a diagonal trajectory. Each card renders a different miniature — line charts, counters, code fragments, gradients, logo marks — with subtle deterministic micro-animations driven by `Math.sin(frame)`. A radial vignette swallows the edges so cards seem to fade in and out of darkness as the camera moves.
+
+<ComponentPreview name="infinite-bento-pan" />
+
+## Installation
+
+<InstallBlock name="infinite-bento-pan" />
+
+## Usage
+
+```tsx
+import { InfiniteBentoPan } from "@/components/remocn/infinite-bento-pan";
+
+<InfiniteBentoPan panSpeed={1} accentColor="#7c3aed" />
+```
+
+## Props
+
+<PropsTable
+  rows={[
+    {
+      name: "panSpeed",
+      type: "number",
+      default: "1",
+      description: "Multiplier for the diagonal camera distance traveled across the duration. Clamped to a single full traversal at 1.",
+    },
+    {
+      name: "accentColor",
+      type: "string",
+      default: '"#7c3aed"',
+      description: "Color used by chart strokes, bar fills, counters, and logo gradients.",
+    },
+    {
+      name: "speed",
+      type: "number",
+      default: "1",
+      description: "Multiplier applied to the current frame for global timing control.",
+    },
+    {
+      name: "className",
+      type: "string",
+      description: "Optional className for the outer container.",
+    },
+  ]}
+/>
+
+## Notes
+
+<Note title="Vignette is the trick">
+  The grid itself is an absurdly large absolutely-positioned super-container that you `translate(-X, -Y)` linearly. The illusion of "infinite" depth comes entirely from the radial vignette painted on top — without it, the edges of the card wall would be visible and the spell would break.
+</Note>

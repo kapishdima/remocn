@@ -1,0 +1,44 @@
+---
+title: Live Code Compilation
+description: A split-screen where code is typed on the left and the right-side UI snaps to match in a single frame.
+---
+
+A timeline-driven composition that pairs a glass code editor with a live preview pane. As each event fires, a new code fragment is appended to the editor and the preview button instantly applies the matching style — no CSS transitions, no easing — mimicking the feel of a real Vite HMR update.
+
+<ComponentPreview name="live-code-compilation" />
+
+## Installation
+
+<InstallBlock name="live-code-compilation" />
+
+## Usage
+
+```tsx
+import { LiveCodeCompilation } from "@/components/remocn/live-code-compilation";
+
+<LiveCodeCompilation accentColor="#3b82f6" />
+```
+
+## Props
+
+<PropsTable
+  rows={[
+    {
+      name: "accentColor",
+      type: "string",
+      default: '"#3b82f6"',
+      description: "Color used for the JSX prop highlight, the HMR flash, and the default button background.",
+    },
+    {
+      name: "className",
+      type: "string",
+      description: "Optional className for the outer container.",
+    },
+  ]}
+/>
+
+## Notes
+
+<Note title="No transitions on the preview">
+  The preview button intentionally sets `transition: none`. Each style change snaps in on a single frame so the right pane reads as a real hot module reload — instant, mechanical, and synchronized to the code being typed on the left.
+</Note>

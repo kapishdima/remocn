@@ -1,9 +1,36 @@
 ---
-title: Transitions & Camera
-description: Scene transitions and camera moves.
+title: Transitions
+description: Scene transitions, camera moves, and stylized wipes.
 ---
 
-Wipes, slides, zooms, and camera moves between scenes.
+Wipes, slides, zooms, and camera moves between scenes. Group your scenes inside `<Sequence>` and let these handle the seam.
+
+## Camera & Scale
+
+<ComponentCardGrid
+  items={[
+    {
+      name: "ZoomThroughTransition",
+      description: "Aggressive scale-in 'through' an element to the next scene.",
+      status: "stable",
+      href: "/docs/transitions/zoom-through-transition",
+    },
+    {
+      name: "DeviceMockupZoom",
+      description: "Pull back from a UI to reveal it inside a phone or laptop frame.",
+      status: "stable",
+      href: "/docs/transitions/device-mockup-zoom",
+    },
+    {
+      name: "MorphingModal",
+      description: "Card lifts off a grid and expands into a full-screen modal.",
+      status: "stable",
+      href: "/docs/transitions/morphing-modal",
+    },
+  ]}
+/>
+
+## Spatial Wipes
 
 <ComponentCardGrid
   items={[
@@ -14,16 +41,41 @@ Wipes, slides, zooms, and camera moves between scenes.
       href: "/docs/transitions/directional-wipe",
     },
     {
-      name: "DeviceMockupZoom",
-      description: "Pull back from a UI to reveal it inside a phone or laptop frame.",
+      name: "SpatialPush",
+      description: "A new scene physically presses the old one back into the frame.",
       status: "stable",
-      href: "/docs/transitions/device-mockup-zoom",
+      href: "/docs/transitions/spatial-push",
     },
     {
-      name: "ZoomThroughTransition",
-      description: "Aggressive scale-in 'through' an element to the next scene.",
+      name: "FrostedGlassWipe",
+      description: "Elegant scene transition through a sliding pane of frosted glass.",
       status: "stable",
-      href: "/docs/transitions/zoom-through-transition",
+      href: "/docs/transitions/frosted-glass-wipe",
+    },
+    {
+      name: "KineticTypeMask",
+      description: "Use giant typography as a window into the next scene.",
+      status: "stable",
+      href: "/docs/transitions/kinetic-type-mask",
+    },
+  ]}
+/>
+
+## Stylized
+
+<ComponentCardGrid
+  items={[
+    {
+      name: "GridPixelateWipe",
+      description: "Dissolve from one scene to the next through a deterministic grid of mask cells.",
+      status: "stable",
+      href: "/docs/transitions/grid-pixelate-wipe",
+    },
+    {
+      name: "ChromaticAberrationWipe",
+      description: "An ultra-fast slide transition with an RGB glitch on the peak frames.",
+      status: "stable",
+      href: "/docs/transitions/chromatic-aberration-wipe",
     },
   ]}
 />

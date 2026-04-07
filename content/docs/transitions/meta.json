@@ -1,0 +1,18 @@
+{
+  "title": "Transitions",
+  "pages": [
+    "index",
+    "---Camera & Scale---",
+    "zoom-through-transition",
+    "device-mockup-zoom",
+    "morphing-modal",
+    "---Spatial Wipes---",
+    "directional-wipe",
+    "spatial-push",
+    "frosted-glass-wipe",
+    "kinetic-type-mask",
+    "---Stylized---",
+    "grid-pixelate-wipe",
+    "chromatic-aberration-wipe"
+  ]
+}

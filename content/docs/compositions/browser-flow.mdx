@@ -1,0 +1,50 @@
+---
+title: Browser Flow
+description: A full Safari/Chrome simulation from URL typing to scroll and click.
+---
+
+A complete browser interaction in one block. The address bar takes focus, the URL types itself in (with an autocomplete suggestion that follows along), the loading bar stalls at 15% before snapping to 100%, the page renders, and a virtual cursor arcs down toward a CTA — clicking it with a real scale dip and a synchronous press on the button. Every phase is frame-deterministic.
+
+<ComponentPreview name="browser-flow" />
+
+## Installation
+
+<InstallBlock name="browser-flow" />
+
+## Usage
+
+```tsx
+import { BrowserFlow } from "@/components/remocn/browser-flow";
+
+<BrowserFlow url="remocn.dev" />
+```
+
+## Props
+
+<PropsTable
+  rows={[
+    {
+      name: "url",
+      type: "string",
+      default: '"remocn.dev"',
+      description: "The URL typed into the address bar and used in the autocomplete suggestion.",
+    },
+    {
+      name: "speed",
+      type: "number",
+      default: "1",
+      description: "Multiplier applied to the current frame to slow down or speed up the entire sequence.",
+    },
+    {
+      name: "className",
+      type: "string",
+      description: "Optional className for the outer container.",
+    },
+  ]}
+/>
+
+## Notes
+
+<Note title="The 15% stall is what sells it">
+  Real browsers fake progress. The loading bar jumps to 15% on Enter, holds there for half a second of suspense, then races to 100%. Removing that pause makes the whole flow feel synthetic — keep it.
+</Note>

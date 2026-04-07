@@ -1,0 +1,96 @@
+---
+title: Grid Pixelate Wipe
+description: Dissolve from one scene to the next through a deterministic grid of mask cells.
+---
+
+The screen is split into a CSS grid of black mask cells covering the outgoing scene. Each cell fades out on its own schedule, computed from a deterministic pattern function (`wave`, `diagonal`, or `spiral`). Because the per-cell delay is pure math over `(x, y)` — no `Math.random` — every frame is reproducible across renders, which is essential for video output.
+
+<ComponentPreview name="grid-pixelate-wipe" />
+
+## Installation
+
+<InstallBlock name="grid-pixelate-wipe" />
+
+## Usage
+
+```tsx
+import { GridPixelateWipe } from "@/components/remocn/grid-pixelate-wipe";
+
+<GridPixelateWipe
+  from={<SceneA />}
+  to={<SceneB />}
+  cols={12}
+  rows={7}
+  pattern="wave"
+  transitionDuration={30}
+  cellFadeFrames={4}
+/>
+```
+
+## Props
+
+<PropsTable
+  rows={[
+    {
+      name: "from",
+      type: "ReactNode",
+      description: "The outgoing scene. Falls back to a labeled colored panel.",
+    },
+    {
+      name: "to",
+      type: "ReactNode",
+      description: "The incoming scene. Falls back to a labeled colored panel.",
+    },
+    {
+      name: "cols",
+      type: "number",
+      default: "12",
+      description: "Number of mask grid columns.",
+    },
+    {
+      name: "rows",
+      type: "number",
+      default: "7",
+      description: "Number of mask grid rows.",
+    },
+    {
+      name: "pattern",
+      type: '"wave" | "diagonal" | "spiral"',
+      default: '"wave"',
+      description: "Deterministic function used to compute per-cell delay.",
+    },
+    {
+      name: "transitionStart",
+      type: "number",
+      default: "durationInFrames * 0.4",
+      description: "Frame at which the dissolve begins.",
+    },
+    {
+      name: "transitionDuration",
+      type: "number",
+      default: "30",
+      description: "Total length of the dissolve in frames.",
+    },
+    {
+      name: "cellFadeFrames",
+      type: "number",
+      default: "4",
+      description: "How many frames a single cell takes to fade out.",
+    },
+    {
+      name: "className",
+      type: "string",
+      description: "Optional className for the outer container.",
+    },
+  ]}
+/>
+
+## Notes
+
+<Note title="Pick a pattern that fits the beat">
+  `wave` radiates from the center and feels organic. `diagonal` reads as a sweep — great for hand-off between two product shots. `spiral` is the most dramatic and works best for hero reveals.
+</Note>
+
+<Warning title="Never reach for Math.random">
+  Random per-cell delays will resample on every render call, producing flickering noise instead of a clean dissolve. Always derive cell timing from `(x, y)` coordinates or `@remotion/random` with a stable seed.
+</Warning>

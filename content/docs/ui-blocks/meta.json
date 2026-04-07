@@ -1,0 +1,21 @@
+{
+  "title": "UI Blocks",
+  "pages": [
+    "index",
+    "---Code & CLI---",
+    "glass-code-block",
+    "terminal-simulator",
+    "code-accordion",
+    "code-diff-wipe",
+    "---Layouts---",
+    "staggered-bento-grid",
+    "dynamic-split-screen",
+    "---Data & System---",
+    "animated-line-chart",
+    "animated-bar-chart",
+    "data-flow-pipes",
+    "---Workflows---",
+    "progress-steps",
+    "drag-and-drop-flow"
+  ]
+}

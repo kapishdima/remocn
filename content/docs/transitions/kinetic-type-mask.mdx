@@ -1,0 +1,85 @@
+---
+title: Kinetic Type Mask
+description: Use giant typography as a window into the next scene.
+---
+
+A transition primitive that turns a giant headline into a window into the next scene. The text is rendered as an SVG `<clipPath>` over the incoming scene, so its interior literally shows what's underneath. After a brief hold, the text scales exponentially until the inside of one letter expands past the screen edges and fully reveals the new scene.
+
+<ComponentPreview name="kinetic-type-mask" />
+
+## Installation
+
+<InstallBlock name="kinetic-type-mask" />
+
+## Usage
+
+```tsx
+import { KineticTypeMask } from "@/components/remocn/kinetic-type-mask";
+
+<KineticTypeMask
+  from={<SceneA />}
+  to={<SceneB />}
+  text="NEXT"
+  holdFrames={12}
+  transitionDuration={24}
+  maxScale={120}
+/>
+```
+
+## Props
+
+<PropsTable
+  rows={[
+    {
+      name: "from",
+      type: "ReactNode",
+      description: "The outgoing scene rendered behind the text. Falls back to a labeled colored panel.",
+    },
+    {
+      name: "to",
+      type: "ReactNode",
+      description: "The incoming scene revealed through the text mask. Falls back to a labeled colored panel.",
+    },
+    {
+      name: "text",
+      type: "string",
+      default: '"NEXT"',
+      description: "The headline used as a clipping mask.",
+    },
+    {
+      name: "transitionStart",
+      type: "number",
+      default: "durationInFrames * 0.3",
+      description: "Frame at which the hold (pre-zoom) begins.",
+    },
+    {
+      name: "holdFrames",
+      type: "number",
+      default: "12",
+      description: "How long the text sits at rest before the zoom kicks in.",
+    },
+    {
+      name: "transitionDuration",
+      type: "number",
+      default: "24",
+      description: "Length of the exponential scale-up in frames.",
+    },
+    {
+      name: "maxScale",
+      type: "number",
+      default: "120",
+      description: "Final scale value applied to the text. Must be large enough that one letter's interior covers the screen.",
+    },
+    {
+      name: "className",
+      type: "string",
+      description: "Optional className for the outer container.",
+    },
+  ]}
+/>
+
+## Notes
+
+<Note title="Use a heavy display weight">
+  The mask works best with the boldest weight you have on hand (Geist 900 or similar). Heavy letterforms have generous interior space, so the camera has somewhere to fly through before the reveal.
+</Note>

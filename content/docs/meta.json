@@ -1,19 +1,12 @@
 {
   "title": "Documentation",
   "pages": [
-    "index",
-    "---Getting Started---",
     "getting-started",
-    "---Components---",
+    "typography",
     "primitives",
-    "compositions",
-    "---Categories---",
-    "backgrounds",
-    "ui-elements",
+    "environment",
+    "ui-blocks",
     "transitions",
-    "data-viz",
-    "dev-blocks",
-    "micro-interactions",
-    "workflows"
+    "compositions"
   ]
 }

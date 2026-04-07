@@ -1,0 +1,71 @@
+---
+title: Frosted Glass Wipe
+description: Elegant scene transition through a sliding pane of frosted glass.
+---
+
+A transition primitive that slides a pane of frosted glass across the screen between two scenes. The outgoing scene blurs beneath the glass; once the pane crosses the midpoint, the incoming scene is revealed in its place. Uses `backdrop-filter` for the glass and `transform: translateX` for movement so the browser stays on the compositor.
+
+<ComponentPreview name="frosted-glass-wipe" />
+
+## Installation
+
+<InstallBlock name="frosted-glass-wipe" />
+
+## Usage
+
+```tsx
+import { FrostedGlassWipe } from "@/components/remocn/frosted-glass-wipe";
+
+<FrostedGlassWipe
+  from={<SceneA />}
+  to={<SceneB />}
+  transitionDuration={30}
+  glassBlur={24}
+/>
+```
+
+## Props
+
+<PropsTable
+  rows={[
+    {
+      name: "from",
+      type: "ReactNode",
+      description: "The outgoing scene. Falls back to a labeled colored panel.",
+    },
+    {
+      name: "to",
+      type: "ReactNode",
+      description: "The incoming scene. Falls back to a labeled colored panel.",
+    },
+    {
+      name: "transitionStart",
+      type: "number",
+      default: "durationInFrames * 0.4",
+      description: "Frame at which the wipe begins.",
+    },
+    {
+      name: "transitionDuration",
+      type: "number",
+      default: "30",
+      description: "Length of the wipe in frames.",
+    },
+    {
+      name: "glassBlur",
+      type: "number",
+      default: "24",
+      description: "Backdrop blur radius of the glass pane in pixels.",
+    },
+    {
+      name: "className",
+      type: "string",
+      description: "Optional className for the outer container.",
+    },
+  ]}
+/>
+
+## Notes
+
+<Note title="Give the glass physical properties">
+  The pane uses thin 1px white borders on its left and right edges so light catches as it slides over darker scenes. Keep the blur radius high enough (16-32px) for the glass to feel substantial rather than like a flat tint.
+</Note>

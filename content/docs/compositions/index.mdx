@@ -1,29 +1,87 @@
 ---
 title: Compositions
-description: Full scenes built by composing primitives.
+description: Full scenes built by composing primitives and UI blocks.
 ---
 
-Higher-level layouts and scene templates that combine multiple primitives into a finished shot.
+Higher-level templates that combine multiple primitives, UI blocks, and transitions into finished shots — heroes, product showcases, and journeys.
+
+## Hero & Outro
 
 <ComponentCardGrid
   items={[
     {
-      name: "StaggeredBentoGrid",
-      description: "Cards pop into a bento grid one after another with a spring.",
+      name: "HeroDeviceAssemble",
+      description: "Floating device layers spring into a laptop or phone, then the screen wakes with a shimmer.",
       status: "stable",
-      href: "/docs/compositions/staggered-bento-grid",
+      href: "/docs/compositions/hero-device-assemble",
     },
     {
-      name: "ChatToPreviewLayout",
-      description: "Two-column layout where chat shrinks and preview expands.",
+      name: "EcosystemConstellation",
+      description: "Central logo orbited by integration satellites with pulsing data lines.",
       status: "stable",
-      href: "/docs/compositions/chat-to-preview-layout",
+      href: "/docs/compositions/ecosystem-constellation",
     },
     {
-      name: "BoundingBoxSelector",
-      description: "Figma-style selection rectangle appears around any element.",
+      name: "InfiniteBentoPan",
+      description: "Camera diagonally drifts across an oversized bento grid behind a soft vignette.",
       status: "stable",
-      href: "/docs/compositions/bounding-box-selector",
+      href: "/docs/compositions/infinite-bento-pan",
+    },
+  ]}
+/>
+
+## Product Showcases
+
+<ComponentCardGrid
+  items={[
+    {
+      name: "BrowserFlow",
+      description: "Full Safari/Chrome simulation: URL typing, loading bar, scroll, and click.",
+      status: "stable",
+      href: "/docs/compositions/browser-flow",
+    },
+    {
+      name: "AIGenerationCanvas",
+      description: "Prompt input morphs into a header, then a skeleton dashboard flips into populated cards.",
+      status: "stable",
+      href: "/docs/compositions/ai-generation-canvas",
+    },
+    {
+      name: "LiveCodeCompilation",
+      description: "Split-screen where typed code on the left snaps a live UI preview on the right.",
+      status: "stable",
+      href: "/docs/compositions/live-code-compilation",
+    },
+    {
+      name: "TerminalToBrowserDeploy",
+      description: "CLI deploy completes, terminal blurs back, and a browser window springs from the deploy URL.",
+      status: "stable",
+      href: "/docs/compositions/terminal-to-browser-deploy",
+    },
+  ]}
+/>
+
+## App States & Journeys
+
+<ComponentCardGrid
+  items={[
+    {
+      name: "DashboardPopulate",
+      description: "Empty dashboard cascades to life with KPI count-ups, bar bounces, line traces, and a donut fill.",
+      status: "stable",
+      href: "/docs/compositions/dashboard-populate",
+    },
+    {
+      name: "PipelineJourney",
+      description: "Kanban ticket flies between columns, triggering events on landing.",
+      status: "stable",
+      href: "/docs/compositions/pipeline-journey",
+    },
+    {
+      name: "PricingTierFocus",
+      description: "Three pricing cards where the focused tier rises and brightens while siblings dim and blur.",
+      status: "stable",
+      href: "/docs/compositions/pricing-tier-focus",
     },
   ]}
 />
