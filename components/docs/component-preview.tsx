@@ -1,10 +1,25 @@
 "use client";
 
 import { Player } from "@remotion/player";
-import { useMemo, useState } from "react";
-import { BlurReveal } from "@/components/remocn/blur-reveal";
-import { componentConfigs, getDefaults } from "@/lib/customizer-config";
+import { DynamicCodeBlock } from "fumadocs-ui/components/dynamic-codeblock";
+import { CheckIcon, LinkIcon, RotateCcwIcon } from "lucide-react";
+import {
+  parseAsBoolean,
+  parseAsFloat,
+  parseAsString,
+  parseAsStringLiteral,
+  useQueryStates,
+} from "nuqs";
+import { Suspense, useMemo, useState } from "react";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import {
+  type ComponentConfig,
+  type ControlConfig,
+  componentConfigs,
+  getDefaults,
+} from "@/lib/customizer-config";
 import { cn } from "@/lib/utils";
+import { BlurReveal } from "@/registry/remocn/blur-reveal";
 import { ComponentCustomizer } from "./component-customizer";
 
 const registry: Record<string, React.ComponentType<any>> = {
@@ -14,12 +29,6 @@ const registry: Record<string, React.ComponentType<any>> = {
 export function ComponentPreview({ name }: { name: string }) {
   const config = componentConfigs[name];
   const Component = registry[name];
-  const initialValues = useMemo(
-    () => (config ? getDefaults(config.controls) : {}),
-    [config],
-  );
-  const [values, setValues] = useState<Record<string, unknown>>(initialValues);
-  const [tab, setTab] = useState<"preview" | "code">("preview");
 
   if (!config || !Component) {
     return (
@@ -29,76 +38,179 @@ export function ComponentPreview({ name }: { name: string }) {
     );
   }
 
-  const inputProps = values;
+  return (
+    <Suspense
+      fallback={
+        <div className="not-prose my-6 aspect-video w-full animate-pulse rounded-xl bg-muted" />
+      }
+    >
+      <Preview name={name} config={config} Component={Component} />
+    </Suspense>
+  );
+}
+
+function buildParsers(name: string, controls: ControlConfig) {
+  const parsers: Record<string, any> = {};
+  const urlKeys: Record<string, string> = {};
+  const prefix = name.replace(/-/g, "_");
+
+  for (const [key, ctrl] of Object.entries(controls)) {
+    urlKeys[key] = `${prefix}_${key}`;
+    if (ctrl.type === "text") {
+      parsers[key] = parseAsString.withDefault(ctrl.default);
+    } else if (ctrl.type === "number") {
+      parsers[key] = parseAsFloat.withDefault(ctrl.default);
+    } else if (ctrl.type === "color") {
+      parsers[key] = parseAsString.withDefault(ctrl.default);
+    } else if (ctrl.type === "select") {
+      parsers[key] = parseAsStringLiteral(
+        ctrl.options as readonly string[],
+      ).withDefault(ctrl.default);
+    } else if (ctrl.type === "boolean") {
+      parsers[key] = parseAsBoolean.withDefault(ctrl.default);
+    }
+  }
+  return { parsers, urlKeys };
+}
+
+function Preview({
+  name,
+  config,
+  Component,
+}: {
+  name: string;
+  config: ComponentConfig;
+  Component: React.ComponentType<any>;
+}) {
+  const { parsers, urlKeys } = useMemo(
+    () => buildParsers(name, config.controls),
+    [name, config.controls],
+  );
+  const defaults = useMemo(
+    () => getDefaults(config.controls),
+    [config.controls],
+  );
+
+  const [values, setValues] = useQueryStates(parsers, {
+    urlKeys,
+    clearOnDefault: true,
+    shallow: true,
+  });
+
+  const isDefault = useMemo(
+    () => Object.entries(defaults).every(([k, v]) => values[k] === v),
+    [defaults, values],
+  );
+
+  const code = useMemo(() => generateCode(config, values), [config, values]);
+
+  const [copied, setCopied] = useState(false);
+  const handleCopyLink = () => {
+    if (typeof window === "undefined") return;
+    navigator.clipboard.writeText(window.location.href);
+    setCopied(true);
+    setTimeout(() => setCopied(false), 1500);
+  };
+
+  const handleReset = () => {
+    setValues(null);
+  };
 
   return (
-    <div className="not-prose my-6 overflow-hidden rounded-xl border border-fd-border bg-fd-card">
-      <div className="flex items-center gap-1 border-b border-fd-border px-3 py-2">
-        {(["preview", "code"] as const).map((t) => (
-          <button
-            type="button"
-            key={t}
-            onClick={() => setTab(t)}
-            className={cn(
-              "rounded-md px-3 py-1 text-xs font-medium capitalize transition-colors",
-              tab === t
-                ? "bg-fd-accent text-fd-accent-foreground"
-                : "text-fd-muted-foreground hover:text-fd-foreground",
-            )}
-          >
-            {t}
-          </button>
-        ))}
-      </div>
+    <div className="not-prose my-6 flex w-full flex-col gap-4">
+      <Tabs defaultValue="preview" className="gap-3">
+        <TabsList>
+          <TabsTrigger value="preview">Preview</TabsTrigger>
+          <TabsTrigger value="code">Code</TabsTrigger>
+        </TabsList>
 
-      {tab === "preview" ? (
-        <div className="grid gap-0 md:grid-cols-[1fr_280px]">
-          <div className="flex items-center justify-center bg-fd-muted/30 p-6">
-            <div className="aspect-video w-full max-w-2xl overflow-hidden rounded-lg border border-fd-border bg-white shadow-sm">
-              <Player
-                component={Component}
-                inputProps={inputProps}
-                durationInFrames={config.durationInFrames}
-                fps={config.fps}
-                compositionWidth={config.compositionWidth}
-                compositionHeight={config.compositionHeight}
-                style={{ width: "100%", height: "100%" }}
-                controls
-                loop
-                autoPlay
-                acknowledgeRemotionLicense
-              />
-            </div>
-          </div>
-          <div className="border-t border-fd-border md:border-l md:border-t-0">
-            <ComponentCustomizer
-              controls={config.controls}
-              values={values}
-              onChange={(key, value) =>
-                setValues((prev) => ({ ...prev, [key]: value }))
-              }
+        <TabsContent value="preview" className="mt-0">
+          <div className="aspect-video w-full overflow-hidden rounded-xl bg-muted">
+            <Player
+              component={Component}
+              inputProps={values}
+              durationInFrames={config.durationInFrames}
+              fps={config.fps}
+              compositionWidth={config.compositionWidth}
+              compositionHeight={config.compositionHeight}
+              style={{ width: "100%", height: "100%" }}
+              controls
+              loop
+              autoPlay
+              acknowledgeRemotionLicense
             />
           </div>
+        </TabsContent>
+
+        <TabsContent value="code" className="mt-0">
+          <div className="overflow-hidden rounded-xl bg-muted [&_pre]:!rounded-none [&_pre]:!border-0 [&_pre]:!bg-transparent">
+            <DynamicCodeBlock lang="tsx" code={code} />
+          </div>
+        </TabsContent>
+      </Tabs>
+
+      <div className="overflow-hidden rounded-xl bg-muted">
+        <div className="flex items-center justify-between px-5 pt-4 pb-2">
+          <span className="text-xs font-medium uppercase tracking-wider text-muted-foreground">
+            Customize
+          </span>
+          <div className="flex items-center gap-1">
+            <button
+              type="button"
+              onClick={handleCopyLink}
+              aria-label="Copy share link"
+              title="Copy share link"
+              className={cn(
+                "inline-flex size-7 items-center justify-center rounded-md text-muted-foreground transition-colors",
+                "hover:bg-background hover:text-foreground",
+              )}
+            >
+              {copied ? (
+                <CheckIcon className="size-3.5" />
+              ) : (
+                <LinkIcon className="size-3.5" />
+              )}
+            </button>
+            <button
+              type="button"
+              onClick={handleReset}
+              disabled={isDefault}
+              aria-label="Reset to defaults"
+              title="Reset to defaults"
+              className={cn(
+                "inline-flex size-7 items-center justify-center rounded-md text-muted-foreground transition-colors",
+                "hover:bg-background hover:text-foreground",
+                "disabled:opacity-40 disabled:hover:bg-transparent disabled:hover:text-muted-foreground",
+              )}
+            >
+              <RotateCcwIcon className="size-3.5" />
+            </button>
+          </div>
         </div>
-      ) : (
-        <pre className="overflow-x-auto bg-fd-muted/30 p-5 text-xs leading-relaxed">
-          <code>{generateCode(name, inputProps)}</code>
-        </pre>
-      )}
+        <div className="px-5 pb-5">
+          <ComponentCustomizer
+            controls={config.controls}
+            values={values as Record<string, unknown>}
+            onChange={(key, value) =>
+              setValues((prev) => ({ ...prev, [key]: value }))
+            }
+          />
+        </div>
+      </div>
     </div>
   );
 }
 
-function generateCode(name: string, props: Record<string, unknown>) {
-  const componentName = name
-    .split("-")
-    .map((s) => s[0].toUpperCase() + s.slice(1))
-    .join("");
+function generateCode(config: ComponentConfig, props: Record<string, unknown>) {
   const propsString = Object.entries(props)
     .map(([k, v]) => {
       if (typeof v === "string") return `  ${k}="${v}"`;
       return `  ${k}={${JSON.stringify(v)}}`;
     })
     .join("\n");
-  return `<${componentName}\n${propsString}\n/>`;
+  return `import { ${config.componentName} } from "${config.importPath}";
+
+<${config.componentName}
+${propsString}
+/>`;
 }

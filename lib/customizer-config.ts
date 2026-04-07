@@ -20,10 +20,21 @@ export interface ComponentConfig {
   fps: number;
   compositionWidth: number;
   compositionHeight: number;
+  /**
+   * Import statement shown in the generated code snippet.
+   * Example: `import { BlurReveal } from "@/components/remocn/blur-reveal";`
+   */
+  importPath: string;
+  /**
+   * Pascal-case component name used in the generated JSX snippet.
+   */
+  componentName: string;
 }
 
 export const componentConfigs: Record<string, ComponentConfig> = {
   "blur-reveal": {
+    componentName: "BlurReveal",
+    importPath: "@/components/remocn/blur-reveal",
     controls: {
       text: { type: "text", default: "BlurReveal", label: "Text" },
       blur: {

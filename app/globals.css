@@ -131,3 +131,45 @@
     @apply font-sans;
   }
 }
+
+/* Match fumadocs MDX code blocks (```tsx ... ```) to the CodeBlockCommand look */
+.prose figure.shiki {
+  background-color: var(--muted) !important;
+  border-width: 0 !important;
+  box-shadow: none !important;
+}
+.prose figure.shiki pre,
+.prose figure.shiki [class*="bg-"] {
+  background-color: transparent !important;
+}
+
+/* Docs prose vertical rhythm — explicit so headings group with following content */
+.prose h2 {
+  @apply mt-16 mb-4 text-3xl font-semibold tracking-tight;
+}
+.prose > :first-child h2,
+.prose h2:first-child {
+  @apply mt-12;
+}
+.prose h3 {
+  @apply mt-10 mb-3 text-xl font-semibold tracking-tight;
+}
+.prose h4 {
+  @apply mt-8 mb-2 text-base font-semibold tracking-tight;
+}
+
+/* Reading paragraphs cap — keep prose readable while interactive blocks stay wide */
+.prose p,
+.prose ul,
+.prose ol {
+  @apply max-w-3xl;
+}
+
+/* Sidebar tightening — fumadocs sidebar typography */
+#nd-sidebar a {
+  font-size: 0.8125rem;
+  letter-spacing: -0.01em;
+}
+#nd-sidebar [data-active="true"] {
+  font-weight: 500;
+}

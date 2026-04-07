@@ -3,10 +3,24 @@ title: Data Visualization
 description: Animated charts for product dashboards and reports.
 ---
 
-> 🚧 Coming soon.
+Charts that draw themselves on, with proper Remotion-friendly animation primitives.
 
-## Roadmap
-
-- **`AnimatedLineChart`** — SVG `<path>` drawn left-to-right via `stroke-dashoffset`.
-- **`AnimatedBarChart`** — bars springing up from `transform-origin: bottom`.
-- Counted-up axis labels via `@remotion/animation-math`.
+<ComponentCardGrid
+  items={[
+    {
+      name: "AnimatedLineChart",
+      description: "SVG <path> drawn left-to-right via stroke-dashoffset interpolation.",
+      status: "soon",
+    },
+    {
+      name: "AnimatedBarChart",
+      description: "Bars springing up from transform-origin: bottom with overshoot.",
+      status: "soon",
+    },
+    {
+      name: "CountUpNumber",
+      description: "Tabular-num counter that interpolates from 0 to target value.",
+      status: "soon",
+    },
+  ]}
+/>

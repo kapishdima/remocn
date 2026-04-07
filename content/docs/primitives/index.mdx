@@ -5,12 +5,28 @@ description: Single-purpose animation building blocks for Remotion.
 
 Primitives are small, focused components — one animation, one effect, one purpose. Compose them into scenes, or use them directly inside a `<Composition>`.
 
-## Available
-
-- [Blur Reveal](/docs/primitives/blur-reveal) — text fades in from a heavy blur.
-
-## Coming soon
-
-- `Typewriter` — character-by-character text reveal with a deterministic blinking cursor.
-- `InlineHighlight` — color sweep across a span inside a sentence.
-- `TextFadeReplace` — swap one line of text for another in place.
+<ComponentCardGrid
+  items={[
+    {
+      name: "BlurReveal",
+      description: "Text fades in from a heavy blur into sharp focus.",
+      status: "stable",
+      href: "/docs/primitives/blur-reveal",
+    },
+    {
+      name: "Typewriter",
+      description: "Character-by-character text reveal with a deterministic blinking cursor.",
+      status: "soon",
+    },
+    {
+      name: "InlineHighlight",
+      description: "Animated color sweep across a span inside a sentence.",
+      status: "soon",
+    },
+    {
+      name: "TextFadeReplace",
+      description: "Swap one line of text for another in place with cross-fade.",
+      status: "soon",
+    },
+  ]}
+/>

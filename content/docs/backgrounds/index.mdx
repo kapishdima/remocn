@@ -3,9 +3,19 @@ title: Backgrounds
 description: Living, atmospheric backgrounds for video scenes.
 ---
 
-> 🚧 Coming soon. The components below are in the roadmap but not yet shipped.
+Backdrops, gradients, and noise patterns for full-frame compositions. All deterministic, all built on Remotion's frame-based rendering.
 
-## Roadmap
-
-- **`MeshGradientBg`** — amorphous color blobs animated with `@remotion/noise` for organic, deterministic motion. Optionally backed by GLSL shaders for high-end gradients.
-- **`DynamicGrid`** — subtle moving grid (or dot pattern) used as a backdrop. Animated via `transform: translate()` for cheap rendering.
+<ComponentCardGrid
+  items={[
+    {
+      name: "MeshGradientBg",
+      description: "Amorphous color blobs animated with @remotion/noise for organic, deterministic motion.",
+      status: "soon",
+    },
+    {
+      name: "DynamicGrid",
+      description: "Subtle moving grid (or dot pattern) backdrop. Animated via transform translate for cheap rendering.",
+      status: "soon",
+    },
+  ]}
+/>

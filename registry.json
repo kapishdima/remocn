@@ -1,0 +1,21 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry.json",
+  "name": "remocn",
+  "homepage": "https://remocn.dev",
+  "items": [
+    {
+      "name": "blur-reveal",
+      "type": "registry:component",
+      "title": "Blur Reveal",
+      "description": "Text fades in from a heavy blur into sharp focus.",
+      "dependencies": ["remotion"],
+      "files": [
+        {
+          "path": "registry/remocn/blur-reveal.tsx",
+          "type": "registry:component",
+          "target": "components/remocn/blur-reveal.tsx"
+        }
+      ]
+    }
+  ]
+}

@@ -1,5 +1,16 @@
 "use client";
 
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
+import { Slider } from "@/components/ui/slider";
+import { Switch } from "@/components/ui/switch";
 import type { ControlConfig } from "@/lib/customizer-config";
 
 export function ComponentCustomizer({
@@ -12,85 +23,96 @@ export function ComponentCustomizer({
   onChange: (key: string, value: unknown) => void;
 }) {
   return (
-    <div className="flex flex-col gap-4 p-5">
-      {Object.entries(controls).map(([key, ctrl]) => (
-        <div key={key} className="flex flex-col gap-1.5">
-          <label
-            htmlFor={`ctrl-${key}`}
-            className="text-xs font-medium text-fd-muted-foreground"
-          >
-            {ctrl.label}
-          </label>
+    <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+      {Object.entries(controls).map(([key, ctrl]) => {
+        const id = `ctrl-${key}`;
+        return (
+          <div key={key} className="flex flex-col gap-2">
+            <div className="flex items-center justify-between gap-2">
+              <Label
+                htmlFor={id}
+                className="text-xs font-medium text-fd-muted-foreground"
+              >
+                {ctrl.label}
+              </Label>
+              {ctrl.type === "number" && (
+                <span className="font-mono text-xs tabular-nums text-fd-muted-foreground">
+                  {values[key] as number}
+                </span>
+              )}
+              {ctrl.type === "color" && (
+                <span className="font-mono text-xs uppercase text-fd-muted-foreground">
+                  {values[key] as string}
+                </span>
+              )}
+            </div>
 
-          {ctrl.type === "text" && (
-            <input
-              id={`ctrl-${key}`}
-              type="text"
-              value={values[key] as string}
-              onChange={(e) => onChange(key, e.target.value)}
-              className="rounded-md border border-fd-border bg-fd-background px-3 py-1.5 text-sm focus:border-fd-ring focus:outline-none"
-            />
-          )}
+            {ctrl.type === "text" && (
+              <Input
+                id={id}
+                type="text"
+                value={values[key] as string}
+                onChange={(e) => onChange(key, e.target.value)}
+              />
+            )}
 
-          {ctrl.type === "number" && (
-            <div className="flex items-center gap-3">
-              <input
-                id={`ctrl-${key}`}
-                type="range"
+            {ctrl.type === "number" && (
+              <Slider
+                id={id}
                 min={ctrl.min}
                 max={ctrl.max}
                 step={ctrl.step}
                 value={values[key] as number}
-                onChange={(e) => onChange(key, Number(e.target.value))}
-                className="flex-1 accent-fd-foreground"
+                onValueChange={(v) => onChange(key, v)}
               />
-              <span className="w-10 text-right font-mono text-xs text-fd-muted-foreground">
-                {values[key] as number}
-              </span>
-            </div>
-          )}
+            )}
 
-          {ctrl.type === "color" && (
-            <div className="flex items-center gap-2">
-              <input
-                id={`ctrl-${key}`}
-                type="color"
+            {ctrl.type === "color" && (
+              <div className="flex items-center gap-2">
+                <input
+                  id={id}
+                  type="color"
+                  value={values[key] as string}
+                  onChange={(e) => onChange(key, e.target.value)}
+                  className="size-9 shrink-0 cursor-pointer rounded-md border border-fd-border bg-transparent p-0.5"
+                />
+                <Input
+                  type="text"
+                  value={values[key] as string}
+                  onChange={(e) => onChange(key, e.target.value)}
+                  className="font-mono text-xs"
+                />
+              </div>
+            )}
+
+            {ctrl.type === "select" && (
+              <Select
                 value={values[key] as string}
-                onChange={(e) => onChange(key, e.target.value)}
-                className="size-8 cursor-pointer rounded-md border border-fd-border bg-transparent"
+                onValueChange={(v) => onChange(key, v as string)}
+              >
+                <SelectTrigger id={id} className="w-full">
+                  <SelectValue />
+                </SelectTrigger>
+                <SelectContent>
+                  {ctrl.options.map((opt) => (
+                    <SelectItem key={opt} value={opt}>
+                      {opt}
+                    </SelectItem>
+                  ))}
+                </SelectContent>
+              </Select>
+            )}
+
+            {ctrl.type === "boolean" && (
+              <Switch
+                id={id}
+                checked={values[key] as boolean}
+                onCheckedChange={(checked) => onChange(key, checked)}
               />
-              <span className="font-mono text-xs text-fd-muted-foreground">
-                {values[key] as string}
-              </span>
-            </div>
-          )}
-
-          {ctrl.type === "select" && (
-            <select
-              id={`ctrl-${key}`}
-              value={values[key] as string}
-              onChange={(e) => onChange(key, e.target.value)}
-              className="rounded-md border border-fd-border bg-fd-background px-3 py-1.5 text-sm focus:border-fd-ring focus:outline-none"
-            >
-              {ctrl.options.map((opt) => (
-                <option key={opt} value={opt}>
-                  {opt}
-                </option>
-              ))}
-            </select>
-          )}
-
-          {ctrl.type === "boolean" && (
-            <input
-              id={`ctrl-${key}`}
-              type="checkbox"
-              checked={values[key] as boolean}
-              onChange={(e) => onChange(key, e.target.checked)}
-              className="size-4 accent-fd-foreground"
-            />
-          )}
-        </div>
-      ))}
+            )}
+          </div>
+        );
+      })}
     </div>
   );
 }

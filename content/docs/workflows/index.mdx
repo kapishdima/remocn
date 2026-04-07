@@ -3,9 +3,24 @@ title: Workflows
 description: Multi-step process visualizations.
 ---
 
-> 🚧 Coming soon.
+Step-by-step visualizations — pipelines, deploys, build processes.
 
-## Roadmap
-
-- **`ProgressSteps`** / **`Timeline`** — sequential step indicator, fills the connecting line via `stroke-dashoffset`.
-- **`SuccessConfetti`** — particle burst rendered to `<canvas>`, seeded with `random()` from `@remotion/random` for deterministic playback.
+<ComponentCardGrid
+  items={[
+    {
+      name: "ProgressSteps",
+      description: "Sequential step indicator, fills the connecting line via stroke-dashoffset.",
+      status: "soon",
+    },
+    {
+      name: "Timeline",
+      description: "Vertical timeline with animated dots and connecting lines.",
+      status: "soon",
+    },
+    {
+      name: "SuccessConfetti",
+      description: "Particle burst rendered to <canvas>, seeded with random() from @remotion/random.",
+      status: "soon",
+    },
+  ]}
+/>

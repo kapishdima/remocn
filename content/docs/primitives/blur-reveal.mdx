@@ -11,6 +11,8 @@ A typography primitive that animates `opacity` from 0 to 1 and `filter: blur()` 
 
 <InstallBlock name="blur-reveal" />
 
+<Dependencies items={["remotion@>=4.0", "@remotion/google-fonts (recommended)"]} />
+
 ## Usage
 
 ```tsx
@@ -26,6 +28,7 @@ import { BlurReveal } from "@/components/remocn/blur-reveal";
     {
       name: "text",
       type: "string",
+      required: true,
       description: "The text to reveal.",
     },
     {
@@ -62,5 +65,10 @@ import { BlurReveal } from "@/components/remocn/blur-reveal";
 
 ## Notes
 
-- Make sure your font is loaded before the first frame renders. Use [`@remotion/google-fonts`](https://www.remotion.dev/docs/google-fonts) or `@remotion/fonts` so the blur effect doesn't apply to a fallback system font.
-- Heavy blur on large text blocks is expensive. If you stack multiple `BlurReveal`s, consider rendering them in their own `<Sequence>`.
+<Note title="Load fonts before render">
+  Make sure your font is loaded before the first frame renders. Use [`@remotion/google-fonts`](https://www.remotion.dev/docs/google-fonts) or `@remotion/fonts` so the blur effect doesn't apply to a fallback system font.
+</Note>
+
+<Warning title="Performance">
+  Heavy blur on large text blocks is expensive. If you stack multiple `BlurReveal`s, consider rendering them in their own `<Sequence>` to keep render time predictable.
+</Warning>
