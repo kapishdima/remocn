@@ -4,6 +4,7 @@ import { Geist, Geist_Mono, Manrope, Outfit } from "next/font/google";
 import { NuqsAdapter } from "nuqs/adapters/next/app";
 import "./globals.css";
 import { cn } from "@/lib/utils";
+import { Analytics } from "@vercel/analytics/next";
 
 const inter = Manrope({ subsets: ["latin"], variable: "--font-sans" });
 
@@ -64,6 +65,7 @@ export default function RootLayout({
             {children}
           </RootProvider>
         </NuqsAdapter>
+        <Analytics />
       </body>
     </html>
   );
