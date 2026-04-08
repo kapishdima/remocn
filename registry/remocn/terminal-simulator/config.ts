@@ -26,7 +26,7 @@ export const terminalSimulatorConfig: ComponentConfig = {
     },
     chunkSize: {
       type: "number",
-      default: 4,
+      default: 1,
       min: 1,
       max: 20,
       step: 1,
