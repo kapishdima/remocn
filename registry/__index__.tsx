@@ -59,6 +59,8 @@ import { InlineHighlight } from "@/registry/remocn/inline-highlight";
 import { inlineHighlightConfig } from "@/registry/remocn/inline-highlight/config";
 import { KineticTypeMask } from "@/registry/remocn/kinetic-type-mask";
 import { kineticTypeMaskConfig } from "@/registry/remocn/kinetic-type-mask/config";
+import { LandingCodeShowcase } from "@/registry/remocn/landing-code-showcase";
+import { landingCodeShowcaseConfig } from "@/registry/remocn/landing-code-showcase/config";
 import { LiveCodeCompilation } from "@/registry/remocn/live-code-compilation";
 import { liveCodeCompilationConfig } from "@/registry/remocn/live-code-compilation/config";
 import { MarkerHighlight } from "@/registry/remocn/marker-highlight";
@@ -275,6 +277,10 @@ const registry: Record<string, RegistryEntry> = {
   "live-code-compilation": {
     Component: LiveCodeCompilation,
     config: liveCodeCompilationConfig,
+  },
+  "landing-code-showcase": {
+    Component: LandingCodeShowcase,
+    config: landingCodeShowcaseConfig,
   },
   "pipeline-journey": {
     Component: PipelineJourney,

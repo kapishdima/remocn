@@ -690,6 +690,20 @@
       ]
     },
     {
+      "name": "landing-code-showcase",
+      "type": "registry:component",
+      "title": "Landing Code Showcase",
+      "description": "Magical split-screen: code types itself on the left while the preview reactively re-renders on the right with sparks and tactile bounce.",
+      "dependencies": ["remotion"],
+      "files": [
+        {
+          "path": "registry/remocn/landing-code-showcase/index.tsx",
+          "type": "registry:component",
+          "target": "components/remocn/landing-code-showcase.tsx"
+        }
+      ]
+    },
+    {
       "name": "pipeline-journey",
       "type": "registry:component",
       "title": "Pipeline Journey",

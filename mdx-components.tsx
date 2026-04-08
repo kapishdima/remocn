@@ -9,7 +9,7 @@ import { PropsTable } from "@/components/docs/props-table";
 
 export function getMDXComponents(components?: MDXComponents): MDXComponents {
   return {
-    ...defaultMdxComponents,
+    ...(defaultMdxComponents as MDXComponents),
     ComponentPreview,
     InstallBlock,
     PropsTable,

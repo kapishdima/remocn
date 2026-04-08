@@ -1,16 +1,15 @@
 "use client";
 
 import { Player, type PlayerRef } from "@remotion/player";
-import { DynamicCodeBlock } from "fumadocs-ui/components/dynamic-codeblock";
-import { ArrowRight, Check, Copy } from "lucide-react";
+import { ArrowRight } from "lucide-react";
 import { motion, useInView, useReducedMotion } from "motion/react";
 import Link from "next/link";
 import { type CSSProperties, type ReactNode, useRef, useState } from "react";
-import registry from "@/registry/__index__";
 import Aurora from "@/components/Aurora";
-import Silk from "@/components/Silk";
 import Dither from "@/components/Dither";
+import Silk from "@/components/Silk";
 import { Button } from "@/components/ui/button";
+import registry from "@/registry/__index__";
 
 /* -------------------------------------------------------------------------- */
 /*                                  Tokens                                    */
@@ -91,6 +90,24 @@ function Header() {
           remocn
         </Link>
         <nav className="flex items-center gap-7 text-sm text-[#8B8A91]">
+          <Link
+            href="#showcase"
+            className="hidden transition-colors hover:text-white focus-visible:text-white focus-visible:outline-none sm:inline"
+          >
+            Showcase
+          </Link>
+          <Link
+            href="#components"
+            className="hidden transition-colors hover:text-white focus-visible:text-white focus-visible:outline-none sm:inline"
+          >
+            Components
+          </Link>
+          <Link
+            href="#use-cases"
+            className="hidden transition-colors hover:text-white focus-visible:text-white focus-visible:outline-none sm:inline"
+          >
+            Use cases
+          </Link>
           <Link
             href="/docs"
             className="transition-colors hover:text-white focus-visible:text-white focus-visible:outline-none"
@@ -216,92 +233,61 @@ function Hero() {
 }
 
 /* -------------------------------------------------------------------------- */
-/*                                DX showcase                                 */
+/*                            Landing code showcase                           */
 /* -------------------------------------------------------------------------- */
 
-function DXShowcase() {
-  const sample = `import { StaggeredFadeUp } from "@/components/remocn/staggered-fade-up";
-import { AbsoluteFill } from "remotion";
-
-export default function Scene() {
-  return (
-    <AbsoluteFill style={{ background: "#fafafa" }}>
-      <StaggeredFadeUp
-        text="Ship faster with remocn"
-        fontSize={88}
-        color="#0A0A0A"
-        staggerDelay={4}
-      />
-    </AbsoluteFill>
-  );
-}`;
-  const entry = registry["staggered-fade-up"];
+function LandingCodeShowcaseSection() {
+  const entry = registry["landing-code-showcase"];
+  const aspectRatio =
+    entry &&
+    `${entry.config.compositionWidth} / ${entry.config.compositionHeight}`;
 
   return (
-    <section className="relative py-32">
+    <section id="showcase" className="relative py-32">
+      {/* Header sits inside the standard SECTION width for readable copy */}
       <div className={SECTION}>
         <FadeUp>
           <div className="mb-16 max-w-2xl">
             <h2 className="font-[var(--font-display)] text-4xl font-semibold -tracking-wide text-[#EDEDED] md:text-5xl">
-              Code on the left
+              Type a prop
               <br />
-              <span className="text-[#8B8A91]">pixels on the right</span>
+              <span className="text-[#8B8A91]">ship a frame</span>
             </h2>
             <p className="mt-4 text-[#8B8A91]">
-              Every component is just React. No timeline editor, no magic
+              Every component is just React. Watch the preview react to your
+              code in real time
             </p>
           </div>
         </FadeUp>
+      </div>
 
+      {/* Showcase block breaks out of the section width so the player has
+          room for the wide composition. */}
+      <div className="mx-auto w-full max-w-[1600px] px-6">
         <FadeUp delay={0.1}>
           <motion.div
             whileHover={{ y: -4 }}
             transition={SPRING_SOFT}
-            className="grid overflow-hidden rounded-3xl border border-white/[0.06] bg-white/[0.02] backdrop-blur-2xl lg:grid-cols-2 lg:items-stretch"
+            className="overflow-hidden rounded-3xl border border-white/[0.06] bg-white/[0.02] backdrop-blur-2xl"
             style={{
               boxShadow: `0 30px 80px -30px rgba(0,0,0,0.6), inset 0 1px 0 rgba(255,255,255,0.05)`,
             }}
           >
-            {/* Code side */}
-            <div className="flex flex-col">
-              <div className="flex items-center gap-1 border-b border-white/[0.05] px-5 py-3">
-                <span className="rounded-full bg-white/[0.06] px-3 py-1 font-mono text-[11px] text-[#EDEDED]">
-                  page.tsx
-                </span>
-                <span className="rounded-full px-3 py-1 font-mono text-[11px] text-[#666]">
-                  Terminal
-                </span>
-              </div>
-              <div className="flex-1 [&_.shiki]:!bg-transparent [&_figure]:!m-0 [&_figure]:!h-full [&_pre]:!m-0 [&_pre]:!h-full [&_pre]:!max-h-none [&_pre]:!overflow-visible [&_pre]:!rounded-none [&_pre]:!border-0 [&_pre]:!bg-transparent [&_pre]:!p-6 [&_pre]:!text-[13px]">
-                <DynamicCodeBlock lang="tsx" code={sample} />
-              </div>
-            </div>
-
-            {/* Preview side */}
-            <div className="flex items-center justify-center border-t border-white/[0.05] bg-[#fafafa] p-8 lg:border-l lg:border-t-0">
-              <div className="aspect-video w-full overflow-hidden rounded-2xl bg-[#fafafa]">
-                {entry ? (
-                  <Player
-                    component={entry.Component}
-                    inputProps={{
-                      text: "Ship faster with remocn",
-                      fontSize: 88,
-                      color: "#0A0A0A",
-                      staggerDelay: 4,
-                      distance: 20,
-                      fontWeight: "600",
-                    }}
-                    durationInFrames={entry.config.durationInFrames}
-                    fps={entry.config.fps}
-                    compositionWidth={entry.config.compositionWidth}
-                    compositionHeight={entry.config.compositionHeight}
-                    style={{ width: "100%", height: "100%" }}
-                    autoPlay
-                    loop
-                    acknowledgeRemotionLicense
-                  />
-                ) : null}
-              </div>
+            <div className="w-full" style={{ aspectRatio }}>
+              {entry ? (
+                <Player
+                  component={entry.Component}
+                  inputProps={{ accentColor: PEACH }}
+                  durationInFrames={entry.config.durationInFrames}
+                  fps={entry.config.fps}
+                  compositionWidth={entry.config.compositionWidth}
+                  compositionHeight={entry.config.compositionHeight}
+                  style={{ width: "100%", height: "100%", display: "block" }}
+                  autoPlay
+                  loop
+                  acknowledgeRemotionLicense
+                />
+              ) : null}
             </div>
           </motion.div>
         </FadeUp>
@@ -396,7 +382,7 @@ function BentoRegistry() {
   };
 
   return (
-    <section className="relative py-32">
+    <section id="components" className="relative py-32">
       <div className={SECTION}>
         <FadeUp>
           <div className="mb-16 flex flex-col gap-6 sm:flex-row sm:items-end sm:justify-between">
@@ -587,7 +573,7 @@ function UseCases() {
   ];
 
   return (
-    <section className="relative py-32">
+    <section id="use-cases" className="relative py-32">
       <div className={SECTION}>
         <FadeUp>
           <div className="mb-16 max-w-2xl">
@@ -809,7 +795,7 @@ export default function Page() {
       <Header />
       <main className="relative">
         <Hero />
-        <DXShowcase />
+        <LandingCodeShowcaseSection />
         <BentoRegistry />
         <UseCases />
         <FinalCTA />
