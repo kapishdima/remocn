@@ -5,6 +5,7 @@ import { useAtom } from "jotai";
 import { atomWithStorage } from "jotai/utils";
 import { TerminalIcon, TextAlignStartIcon } from "lucide-react";
 import { useMemo } from "react";
+import { trackEvent } from "@/lib/analytics";
 import { cn } from "@/lib/utils";
 import { CopyButton } from "./copy-button";
 
@@ -25,6 +26,7 @@ export interface CodeBlockCommandProps {
   yarn?: string;
   npm?: string;
   bun?: string;
+  component?: string;
 }
 
 export function CodeBlockCommand({
@@ -33,6 +35,7 @@ export function CodeBlockCommand({
   yarn,
   npm,
   bun,
+  component,
 }: CodeBlockCommandProps) {
   const [packageManager, setPackageManager] = usePackageManager();
 
@@ -105,6 +108,14 @@ export function CodeBlockCommand({
       <CopyButton
         value={activeCommand}
         className="absolute top-2 right-2 z-10"
+        onCopy={() => {
+          if (!component) return;
+          trackEvent("install_command_copied", {
+            component,
+            package_manager: packageManager,
+            surface: "docs",
+          });
+        }}
       />
     </div>
   );

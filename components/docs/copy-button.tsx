@@ -7,9 +7,11 @@ import { cn } from "@/lib/utils";
 export function CopyButton({
   value,
   className,
+  onCopy,
 }: {
   value: string;
   className?: string;
+  onCopy?: () => void;
 }) {
   const [copied, setCopied] = useState(false);
 
@@ -20,6 +22,7 @@ export function CopyButton({
       onClick={() => {
         navigator.clipboard.writeText(value);
         setCopied(true);
+        onCopy?.();
         setTimeout(() => setCopied(false), 1500);
       }}
       className={cn(

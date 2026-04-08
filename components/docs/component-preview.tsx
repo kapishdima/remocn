@@ -10,8 +10,9 @@ import {
   parseAsStringLiteral,
   useQueryStates,
 } from "nuqs";
-import { Suspense, useMemo, useState } from "react";
+import { Suspense, useEffect, useMemo, useRef, useState } from "react";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { trackEvent } from "@/lib/analytics";
 import {
   type ComponentConfig,
   type ControlConfig,
@@ -103,11 +104,40 @@ function Preview({
     if (typeof window === "undefined") return;
     navigator.clipboard.writeText(window.location.href);
     setCopied(true);
+    trackEvent("customized_link_shared", { component: name });
     setTimeout(() => setCopied(false), 1500);
   };
 
   const handleReset = () => {
     setValues(null);
+    trackEvent("customizer_reset", { component: name });
+  };
+
+  useEffect(() => {
+    trackEvent("docs_component_viewed", { component: name });
+  }, [name]);
+
+  const customizeTimers = useRef<Map<string, ReturnType<typeof setTimeout>>>(
+    new Map(),
+  );
+  useEffect(() => {
+    const timers = customizeTimers.current;
+    return () => {
+      for (const timer of timers.values()) clearTimeout(timer);
+      timers.clear();
+    };
+  }, []);
+  const handleCustomizeChange = (key: string, value: unknown) => {
+    setValues((prev) => ({ ...prev, [key]: value }));
+    const existing = customizeTimers.current.get(key);
+    if (existing) clearTimeout(existing);
+    customizeTimers.current.set(
+      key,
+      setTimeout(() => {
+        trackEvent("component_customized", { component: name, prop: key });
+        customizeTimers.current.delete(key);
+      }, 500),
+    );
   };
 
   return (
@@ -185,9 +215,7 @@ function Preview({
           <ComponentCustomizer
             controls={config.controls}
             values={values as Record<string, unknown>}
-            onChange={(key, value) =>
-              setValues((prev) => ({ ...prev, [key]: value }))
-            }
+            onChange={handleCustomizeChange}
           />
         </div>
       </div>

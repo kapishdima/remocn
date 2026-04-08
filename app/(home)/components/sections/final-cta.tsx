@@ -12,6 +12,7 @@ import {
   SPRING_BOUNCE,
   SPRING_SOFT,
 } from "@/config/landing";
+import { trackEvent } from "@/lib/analytics";
 import { FadeUp } from "../fade-up";
 
 export function FinalCTA() {
@@ -56,6 +57,12 @@ export function FinalCTA() {
           >
             <Link
               href="/docs/getting-started/introduction"
+              onClick={() =>
+                trackEvent("cta_clicked", {
+                  cta: "final_cta",
+                  destination: "/docs/getting-started/introduction",
+                })
+              }
               className="mt-12 inline-flex h-14 items-center gap-2 rounded-full bg-white px-8 text-base font-medium text-[#141318] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/40 focus-visible:ring-offset-2 focus-visible:ring-offset-[#141318]"
               style={{
                 boxShadow: `0 0 0 1px rgba(255,255,255,0.2), 0 12px 50px ${LAVENDER}40, inset 0 1px 0 rgba(255,255,255,0.6)`,

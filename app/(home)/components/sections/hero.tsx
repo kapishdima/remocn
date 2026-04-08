@@ -8,6 +8,7 @@ import { useCallback, useRef, useState } from "react";
 import Dither from "@/components/Dither";
 import { Button } from "@/components/ui/button";
 import { SECTION, SPRING_BOUNCE, SPRING_SOFT } from "@/config/landing";
+import { trackEvent } from "@/lib/analytics";
 import registry from "@/registry/__index__";
 import { FadeUp } from "../fade-up";
 
@@ -22,9 +23,18 @@ export function Hero() {
     if (p.isPlaying()) {
       p.pause();
       setPlaying(false);
+      trackEvent("preview_paused", {
+        component: "browser-flow",
+        surface: "hero",
+      });
     } else {
       p.play();
       setPlaying(true);
+      trackEvent("preview_played", {
+        component: "browser-flow",
+        surface: "hero",
+        trigger: "click",
+      });
     }
   }, []);
 
@@ -74,7 +84,16 @@ export function Hero() {
                 transition={SPRING_SOFT}
               >
                 <Button className="hover:bg-white h-14 px-10">
-                  <Link href="/docs/getting-started/introduction" className="inline-flex items-center gap-2">
+                  <Link
+                    href="/docs/getting-started/introduction"
+                    className="inline-flex items-center gap-2"
+                    onClick={() =>
+                      trackEvent("cta_clicked", {
+                        cta: "hero_browse",
+                        destination: "/docs/getting-started/introduction",
+                      })
+                    }
+                  >
                     Browse components
                     <ArrowRight className="size-4" aria-hidden="true" />
                   </Link>

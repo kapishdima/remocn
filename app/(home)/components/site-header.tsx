@@ -12,6 +12,14 @@ import {
   SheetTrigger,
 } from "@/components/ui/sheet";
 import { type NavLink, SECTION } from "@/config/landing";
+import { trackEvent } from "@/lib/analytics";
+
+const GITHUB_URL = "https://github.com/kapishdima/remocn";
+const trackGitHubClick = () =>
+  trackEvent("cta_clicked", {
+    cta: "github_header",
+    destination: GITHUB_URL,
+  });
 
 const GitHubIcon = ({ className }: { className?: string }) => (
   <svg
@@ -58,9 +66,10 @@ export function SiteHeader({ navLinks }: { navLinks: NavLink[] }) {
             </Link>
           ))}
           <Link
-            href="https://github.com/kapishdima/remocn"
+            href={GITHUB_URL}
             target="_blank"
             rel="noreferrer noopener"
+            onClick={trackGitHubClick}
             className="flex items-center gap-1.5 transition-colors hover:text-white focus-visible:text-white focus-visible:outline-none"
           >
             <GitHubIcon className="size-4" />
@@ -100,10 +109,13 @@ export function SiteHeader({ navLinks }: { navLinks: NavLink[] }) {
                 </Link>
               ))}
               <Link
-                href="https://github.com/kapishdima/remocn"
+                href={GITHUB_URL}
                 target="_blank"
                 rel="noreferrer noopener"
-                onClick={() => setOpen(false)}
+                onClick={() => {
+                  setOpen(false);
+                  trackGitHubClick();
+                }}
                 className="mt-2 inline-flex items-center gap-2 py-3 text-[#EDEDED]/90 transition-colors hover:text-white focus-visible:text-white focus-visible:outline-none"
               >
                 <GitHubIcon className="size-4" />

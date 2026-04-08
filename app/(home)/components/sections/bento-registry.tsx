@@ -7,6 +7,7 @@ import Link from "next/link";
 import { type CSSProperties, useCallback, useRef, useState } from "react";
 import { Button } from "@/components/ui/button";
 import { SECTION, SPRING_SOFT } from "@/config/landing";
+import { trackEvent } from "@/lib/analytics";
 import registry from "@/registry/__index__";
 import { FadeUp } from "../fade-up";
 
@@ -26,10 +27,19 @@ function BentoCard({
   const entry = registry[name];
   const playerRef = useRef<PlayerRef>(null);
   const [playing, setPlaying] = useState(false);
+  const hoverTracked = useRef(false);
 
   const handleEnter = () => {
     playerRef.current?.play();
     setPlaying(true);
+    if (!hoverTracked.current) {
+      hoverTracked.current = true;
+      trackEvent("preview_played", {
+        component: name,
+        surface: "bento",
+        trigger: "hover",
+      });
+    }
   };
   const handleLeave = () => {
     playerRef.current?.pause();
@@ -41,11 +51,17 @@ function BentoCard({
     if (p.isPlaying()) {
       p.pause();
       setPlaying(false);
+      trackEvent("preview_paused", { component: name, surface: "bento" });
     } else {
       p.play();
       setPlaying(true);
+      trackEvent("preview_played", {
+        component: name,
+        surface: "bento",
+        trigger: "click",
+      });
     }
-  }, []);
+  }, [name]);
 
   return (
     // biome-ignore lint/a11y/noStaticElementInteractions: hover-to-play is decorative video preview
@@ -150,7 +166,16 @@ export function BentoRegistry() {
                 size="lg"
                 className="h-11 rounded-full border-white/10 bg-white/4 px-5 text-[#EDEDED] backdrop-blur-xl hover:border-white/20 hover:bg-white/6 hover:text-[#EDEDED]"
               >
-                <Link href="/docs/getting-started/introduction" className="inline-flex items-center gap-2">
+                <Link
+                  href="/docs/getting-started/introduction"
+                  className="inline-flex items-center gap-2"
+                  onClick={() =>
+                    trackEvent("cta_clicked", {
+                      cta: "bento_browse",
+                      destination: "/docs/getting-started/introduction",
+                    })
+                  }
+                >
                   Browse components
                   <ArrowRight className="size-4" aria-hidden="true" />
                 </Link>

@@ -5,6 +5,7 @@ import { Pause, Play } from "lucide-react";
 import { motion } from "motion/react";
 import { useCallback, useRef, useState } from "react";
 import { PEACH, SECTION, SPRING_SOFT } from "@/config/landing";
+import { trackEvent } from "@/lib/analytics";
 import registry from "@/registry/__index__";
 import { FadeUp } from "../fade-up";
 
@@ -22,9 +23,18 @@ export function LandingCodeShowcase() {
     if (p.isPlaying()) {
       p.pause();
       setPlaying(false);
+      trackEvent("preview_paused", {
+        component: "landing-code-showcase",
+        surface: "landing_code_showcase",
+      });
     } else {
       p.play();
       setPlaying(true);
+      trackEvent("preview_played", {
+        component: "landing-code-showcase",
+        surface: "landing_code_showcase",
+        trigger: "click",
+      });
     }
   }, []);
 
