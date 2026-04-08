@@ -34,8 +34,8 @@ export type NavLink = {
 };
 
 export const HOME_NAV: NavLink[] = [
+  { href: "/docs/components", label: "Components", smOnly: true },
   { href: "#showcase", label: "Showcase", smOnly: true },
-  { href: "#components", label: "Components", smOnly: true },
   { href: "#use-cases", label: "Use cases", smOnly: true },
   { href: "/sponsors", label: "Sponsors", smOnly: true },
   { href: "/docs/getting-started/introduction", label: "Docs" },
