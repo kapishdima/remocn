@@ -3,7 +3,9 @@
   "name": "typewriter",
   "title": "Typewriter",
   "description": "Character-by-character text reveal with a deterministic blinking cursor.",
-  "dependencies": ["remotion"],
+  "dependencies": [
+    "remotion"
+  ],
   "files": [
     {
       "path": "registry/remocn/typewriter/index.tsx",

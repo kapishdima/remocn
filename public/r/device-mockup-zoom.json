@@ -3,7 +3,9 @@
   "name": "device-mockup-zoom",
   "title": "Device Mockup Zoom",
   "description": "Pull back from a UI to reveal it inside a device frame.",
-  "dependencies": ["remotion"],
+  "dependencies": [
+    "remotion"
+  ],
   "files": [
     {
       "path": "registry/remocn/device-mockup-zoom/index.tsx",

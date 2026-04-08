@@ -3,7 +3,9 @@
   "name": "animated-bar-chart",
   "title": "Animated Bar Chart",
   "description": "Bars spring up from the baseline in a staggered cascade.",
-  "dependencies": ["remotion"],
+  "dependencies": [
+    "remotion"
+  ],
   "files": [
     {
       "path": "registry/remocn/animated-bar-chart/index.tsx",

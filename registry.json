@@ -856,6 +856,48 @@
           "target": "components/remocn/swipe-transition-wipe.tsx"
         }
       ]
+    },
+    {
+      "name": "product-launch-trailer",
+      "type": "registry:component",
+      "title": "Product Launch Trailer",
+      "description": "Cinematic Product Hunt teaser: pulsing logo, zoom-through transition, 3D bento fly-over, and a confetti version drop.",
+      "dependencies": ["remotion"],
+      "files": [
+        {
+          "path": "registry/remocn/product-launch-trailer/index.tsx",
+          "type": "registry:component",
+          "target": "components/remocn/product-launch-trailer.tsx"
+        }
+      ]
+    },
+    {
+      "name": "changelog-bite",
+      "type": "registry:component",
+      "title": "Changelog Bite",
+      "description": "Seamlessly looping square card showing a before/after diff with a frosted glass wipe and a pulsing New pill.",
+      "dependencies": ["remotion"],
+      "files": [
+        {
+          "path": "registry/remocn/changelog-bite/index.tsx",
+          "type": "registry:component",
+          "target": "components/remocn/changelog-bite.tsx"
+        }
+      ]
+    },
+    {
+      "name": "visual-docs-snippet",
+      "type": "registry:component",
+      "title": "Visual Docs Snippet",
+      "description": "Calm tutorial flow: a virtual cursor arcs to a button, clicks, and a bounding box plus tooltip explain what just happened.",
+      "dependencies": ["remotion"],
+      "files": [
+        {
+          "path": "registry/remocn/visual-docs-snippet/index.tsx",
+          "type": "registry:component",
+          "target": "components/remocn/visual-docs-snippet.tsx"
+        }
+      ]
     }
   ]
 }

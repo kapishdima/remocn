@@ -3,7 +3,9 @@
   "name": "code-diff-wipe",
   "title": "Code Diff Wipe",
   "description": "Before/after code reveal via clip-path wipe with a handle marker.",
-  "dependencies": ["remotion"],
+  "dependencies": [
+    "remotion"
+  ],
   "files": [
     {
       "path": "registry/remocn/code-diff-wipe/index.tsx",

@@ -3,7 +3,9 @@
   "name": "spring-pop-in",
   "title": "Spring Pop In",
   "description": "Elastic spring-driven scale-in wrapper for any child element.",
-  "dependencies": ["remotion"],
+  "dependencies": [
+    "remotion"
+  ],
   "files": [
     {
       "path": "registry/remocn/spring-pop-in/index.tsx",

@@ -3,7 +3,9 @@
   "name": "bounding-box-selector",
   "title": "Bounding Box Selector",
   "description": "Figma-style selection rectangle appears around any element.",
-  "dependencies": ["remotion"],
+  "dependencies": [
+    "remotion"
+  ],
   "files": [
     {
       "path": "registry/remocn/bounding-box-selector/index.tsx",

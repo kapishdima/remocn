@@ -3,7 +3,9 @@
   "name": "code-accordion",
   "title": "Code Accordion",
   "description": "A code window that springs a range of lines closed and replaces them with a \"N lines collapsed\" placeholder.",
-  "dependencies": ["remotion"],
+  "dependencies": [
+    "remotion"
+  ],
   "files": [
     {
       "path": "registry/remocn/code-accordion/index.tsx",

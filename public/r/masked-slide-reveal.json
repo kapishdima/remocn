@@ -3,7 +3,9 @@
   "name": "masked-slide-reveal",
   "title": "Masked Slide Reveal",
   "description": "Words slide up out of an invisible horizontal mask, one after another.",
-  "dependencies": ["remotion"],
+  "dependencies": [
+    "remotion"
+  ],
   "files": [
     {
       "path": "registry/remocn/masked-slide-reveal/index.tsx",

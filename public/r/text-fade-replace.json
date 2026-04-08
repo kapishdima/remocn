@@ -3,7 +3,9 @@
   "name": "text-fade-replace",
   "title": "Text Fade Replace",
   "description": "Cross-fades between two strings on the same line without layout shift.",
-  "dependencies": ["remotion"],
+  "dependencies": [
+    "remotion"
+  ],
   "files": [
     {
       "path": "registry/remocn/text-fade-replace/index.tsx",

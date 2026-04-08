@@ -1,0 +1,93 @@
+import { LAVENDER, MINT, PEACH } from "@/config/landing";
+
+export type SponsorTier = "partner" | "builder" | "supporter";
+
+export type Sponsor = {
+  id: string;
+  name: string;
+  logoUrl: string;
+  website: string;
+  tier: SponsorTier;
+  /** Default 1. Manually tweak to fix logos that look too small or too big. */
+  logoScale?: number;
+  /** Optional Tailwind classes for fine-tuning a specific logo. */
+  customStyles?: string;
+};
+
+export const sponsors: Sponsor[] = [
+  // Add sponsors here by hand. Empty by default — the page renders an
+  // empty-state CTA when no sponsors exist.
+  //
+  // Example:
+  // {
+  //   id: "acme-corp",
+  //   name: "Acme Corp",
+  //   logoUrl: "/sponsors/acme.svg",
+  //   website: "https://acme.com",
+  //   tier: "partner",
+  //   logoScale: 1.2,
+  //   customStyles: "mt-2 opacity-90",
+  // },
+];
+
+export type BillingMode = "monthly" | "one-time";
+
+export type Tier = {
+  id: "supporter" | "builder" | "partner";
+  price: number;
+  name: string;
+  tagline: string;
+  perks: string[];
+  glow: string;
+  highlighted: boolean;
+  monthlyUrl: string;
+  oneTimeUrl: string;
+};
+
+export const tiers: Tier[] = [
+  {
+    id: "supporter",
+    price: 5,
+    name: "Supporter",
+    tagline: "Show some love",
+    perks: [
+      "Sponsor badge in our Discord",
+      "Our endless gratitude",
+      "Early access to release notes",
+    ],
+    glow: MINT,
+    highlighted: false,
+    monthlyUrl: "https://www.creem.io/payment/prod_1PtwNGZVHfXZgChBSCwmJA",
+    oneTimeUrl: "https://www.creem.io/payment/prod_66n8fHDfCVmwSNswCHL5OH",
+  },
+  {
+    id: "builder",
+    price: 10,
+    name: "Builder",
+    tagline: "Help us build",
+    perks: [
+      "Everything in Supporter",
+      "Your name in the repository README",
+      "Priority on feature requests",
+    ],
+    glow: PEACH,
+    highlighted: false,
+    monthlyUrl: "https://www.creem.io/payment/prod_6fpKhXCzk9KkbA4FSUzGIU",
+    oneTimeUrl: "https://www.creem.io/payment/prod_1C3cCbVoYsDPJrdlDhrhSG",
+  },
+  {
+    id: "partner",
+    price: 50,
+    name: "Partner",
+    tagline: "Power the project",
+    perks: [
+      "Everything in Builder",
+      "Your logo featured on the main remocn landing page",
+      "Direct line to the maintainers",
+    ],
+    glow: LAVENDER,
+    highlighted: true,
+    monthlyUrl: "https://www.creem.io/payment/prod_6tdCLqKgSA14P0IEVZ2GaG",
+    oneTimeUrl: "https://www.creem.io/payment/prod_2sb9zG2oJn232utqh5TN1S",
+  },
+];

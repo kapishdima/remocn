@@ -3,7 +3,9 @@
   "name": "blur-reveal",
   "title": "Blur Reveal",
   "description": "Text fades in from a heavy blur into sharp focus.",
-  "dependencies": ["remotion"],
+  "dependencies": [
+    "remotion"
+  ],
   "files": [
     {
       "path": "registry/remocn/blur-reveal/index.tsx",

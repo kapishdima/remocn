@@ -168,6 +168,16 @@
   @apply max-w-3xl;
 }
 
+/* Landing page marquee (used by app/(home)/components/sections/stack-marquee.tsx) */
+@keyframes remocn-marquee {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-33.3333%);
+  }
+}
+
 /* Sidebar tightening — fumadocs sidebar typography */
 #nd-sidebar a {
   font-size: 0.8125rem;

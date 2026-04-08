@@ -17,6 +17,8 @@ import { BrowserFlow } from "@/registry/remocn/browser-flow";
 import { browserFlowConfig } from "@/registry/remocn/browser-flow/config";
 import { BrushStrokeSimulator } from "@/registry/remocn/brush-stroke-simulator";
 import { brushStrokeSimulatorConfig } from "@/registry/remocn/brush-stroke-simulator/config";
+import { ChangelogBite } from "@/registry/remocn/changelog-bite";
+import { changelogBiteConfig } from "@/registry/remocn/changelog-bite/config";
 import { ChatToPreviewLayout } from "@/registry/remocn/chat-to-preview-layout";
 import { chatToPreviewLayoutConfig } from "@/registry/remocn/chat-to-preview-layout/config";
 import { ChromaticAberrationWipe } from "@/registry/remocn/chromatic-aberration-wipe";
@@ -79,6 +81,8 @@ import { PipelineJourney } from "@/registry/remocn/pipeline-journey";
 import { pipelineJourneyConfig } from "@/registry/remocn/pipeline-journey/config";
 import { PricingTierFocus } from "@/registry/remocn/pricing-tier-focus";
 import { pricingTierFocusConfig } from "@/registry/remocn/pricing-tier-focus/config";
+import { ProductLaunchTrailer } from "@/registry/remocn/product-launch-trailer";
+import { productLaunchTrailerConfig } from "@/registry/remocn/product-launch-trailer/config";
 import { ProgressSteps } from "@/registry/remocn/progress-steps";
 import { progressStepsConfig } from "@/registry/remocn/progress-steps/config";
 import { PulsingIndicator } from "@/registry/remocn/pulsing-indicator";
@@ -121,6 +125,8 @@ import { TrackingIn } from "@/registry/remocn/tracking-in";
 import { trackingInConfig } from "@/registry/remocn/tracking-in/config";
 import { Typewriter } from "@/registry/remocn/typewriter";
 import { typewriterConfig } from "@/registry/remocn/typewriter/config";
+import { VisualDocsSnippet } from "@/registry/remocn/visual-docs-snippet";
+import { visualDocsSnippetConfig } from "@/registry/remocn/visual-docs-snippet/config";
 import { ZoomThroughTransition } from "@/registry/remocn/zoom-through-transition";
 import { zoomThroughTransitionConfig } from "@/registry/remocn/zoom-through-transition/config";
 
@@ -322,6 +328,18 @@ const registry: Record<string, RegistryEntry> = {
   "swipe-transition-wipe": {
     Component: SwipeTransitionWipe,
     config: swipeTransitionWipeConfig,
+  },
+  "product-launch-trailer": {
+    Component: ProductLaunchTrailer,
+    config: productLaunchTrailerConfig,
+  },
+  "changelog-bite": {
+    Component: ChangelogBite,
+    config: changelogBiteConfig,
+  },
+  "visual-docs-snippet": {
+    Component: VisualDocsSnippet,
+    config: visualDocsSnippetConfig,
   },
 };
 

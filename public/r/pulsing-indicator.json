@@ -3,7 +3,9 @@
   "name": "pulsing-indicator",
   "title": "Pulsing Indicator",
   "description": "Continuous pulsing dot with ping ring for loading or live states.",
-  "dependencies": ["remotion"],
+  "dependencies": [
+    "remotion"
+  ],
   "files": [
     {
       "path": "registry/remocn/pulsing-indicator/index.tsx",

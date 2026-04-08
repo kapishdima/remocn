@@ -1,0 +1,67 @@
+---
+title: Product Launch Trailer
+description: Cinematic Product Hunt teaser with logo pulse, zoom-through, 3D bento fly-over, and a confetti version drop.
+---
+
+<ComponentPreview name="product-launch-trailer" />
+
+A drop-in launch video for Product Hunt, Twitter, or your homepage hero. The composition opens on a pulsing logo, punches through it with a zoom transition, assembles a faux app shell (glass code block on the left, bento grid on the right) inside a 3D camera fly-over, and lands on a "v1.0 is live" headline with a soft confetti burst.
+
+Built around four pastel tokens — peach, lavender, mint, and the `#141318` obsidian background — so it sits naturally next to the rest of the remocn registry. Every camera move uses the soft `cubic-bezier(0.16, 1, 0.3, 1)` easing for the "tactile" feel.
+
+## Installation
+
+<InstallBlock name="product-launch-trailer" />
+
+## Usage
+
+```tsx
+// src/Root.tsx
+import { Composition } from "remotion";
+import { ProductLaunchTrailer } from "@/components/remocn/product-launch-trailer";
+
+const Trailer = () => (
+  <ProductLaunchTrailer
+    logoLabel="R"
+    productName="Remocn"
+    versionLabel="v1.0 is live"
+  />
+);
+
+export const RemotionRoot = () => (
+  <Composition
+    id="ProductLaunchTrailer"
+    component={Trailer}
+    durationInFrames={240}
+    fps={30}
+    width={1280}
+    height={720}
+  />
+);
+```
+
+## Props
+
+<PropsTable
+  rows={[
+    { name: "logoLabel", type: "string", default: '"R"', description: "Single-character mark shown inside the centered logo squircle." },
+    { name: "productName", type: "string", default: '"Remocn"', description: "Subtitle rendered below the logo while it pulses." },
+    { name: "versionLabel", type: "string", default: '"v1.0 is live"', description: "Headline that drops in during the outro." },
+    { name: "accentPeach", type: "string", default: '"#FFB38E"', description: "Peach accent for bento card shadows and confetti." },
+    { name: "accentLavender", type: "string", default: '"#D4B3FF"', description: "Lavender accent for the logo glow and code block border." },
+    { name: "accentMint", type: "string", default: '"#A1EEBD"', description: "Mint accent for traffic lights and confetti." },
+    { name: "background", type: "string", default: '"#141318"', description: "Stage background color." },
+    { name: "speed", type: "number", default: "1", description: "Playback speed multiplier." },
+    { name: "className", type: "string", description: "Optional className for the outer container." },
+  ]}
+/>
+
+## Notes
+
+<Note title="Audio hooks are stubbed">
+  The composition leaves a `// TODO(audio)` marker at frames 38 and 200 — those are the natural anchors for a `TransitionWhoosh` and a `SuccessChime` once the audio module ships. The visual track works on its own with no audio.
+</Note>
+
+<Note title="3D camera">
+  The fly-over uses a `perspective: 2000px` parent and a `transformStyle: preserve-3d` child. If you nest this composition inside another transformed container, the 3D may flatten — render it at the top level for best results.
+</Note>

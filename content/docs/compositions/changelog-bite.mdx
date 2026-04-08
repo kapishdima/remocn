@@ -1,0 +1,68 @@
+---
+title: Changelog Bite
+description: Seamlessly looping square card showing a before/after diff with a frosted glass wipe and a pulsing New pill.
+---
+
+<ComponentPreview name="changelog-bite" />
+
+A square (1080×1080) micro-loop built for changelog posts and social. A centered squircle card holds a before/after diff that's revealed by a frosted glass shutter sweeping left-to-right, with a pulsing "New" pill anchored top-right. The loop is gapless: the first 10 frames and the last 15 frames mirror each other (scale `0.95 → 1.0`, opacity `0 → 1`) so you can export straight to GIF/MP4 without a visible seam.
+
+Pass any React node into `oldContent` and `newContent` to drop in your own before/after — the defaults render a simple code diff so the composition works out of the box.
+
+## Installation
+
+<InstallBlock name="changelog-bite" />
+
+## Usage
+
+```tsx
+// src/Root.tsx
+import { Composition } from "remotion";
+import { ChangelogBite } from "@/components/remocn/changelog-bite";
+
+const Bite = () => (
+  <ChangelogBite
+    label="New"
+    title="Inline diff view"
+    accent="#FFB38E"
+  />
+);
+
+export const RemotionRoot = () => (
+  <Composition
+    id="ChangelogBite"
+    component={Bite}
+    durationInFrames={150}
+    fps={30}
+    width={1080}
+    height={1080}
+  />
+);
+```
+
+## Props
+
+<PropsTable
+  rows={[
+    { name: "label", type: "string", default: '"New"', description: "Text shown inside the pulsing pill." },
+    { name: "title", type: "string", default: '"Inline diff view"', description: "Caption rendered above the diff stage." },
+    { name: "oldContent", type: "ReactNode", description: "Custom before content. Defaults to a simple code panel." },
+    { name: "newContent", type: "ReactNode", description: "Custom after content. Defaults to a polished code panel." },
+    { name: "format", type: '"square" | "portrait"', default: '"square"', description: "Aspect ratio of the inner card. Set the matching `compositionWidth/compositionHeight` on your <Composition>." },
+    { name: "background", type: "string", default: '"#141318"', description: "Stage background color." },
+    { name: "cardBackground", type: "string", default: '"rgba(20, 19, 24, 0.92)"', description: "Card fill color." },
+    { name: "accent", type: "string", default: '"#FFB38E"', description: "Accent color for the pill, seam, and badges." },
+    { name: "speed", type: "number", default: "1", description: "Playback speed multiplier." },
+    { name: "className", type: "string", description: "Optional className for the outer container." },
+  ]}
+/>
+
+## Notes
+
+<Note title="The loop is already seamless">
+  The first 10 frames and the last 15 frames intentionally mirror each other so a flat loop never shows a seam. Don't add a separate fade-in / fade-out on top of the composition — you'll double up the envelope.
+</Note>
+
+<Note title="Portrait format">
+  Setting `format="portrait"` only changes the inner card aspect. Your `<Composition>` still needs to declare `compositionWidth: 1080`, `compositionHeight: 1350` to match.
+</Note>
