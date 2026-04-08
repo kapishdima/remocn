@@ -20,7 +20,7 @@ export function FinalCTA() {
   const reduced = useReducedMotion();
 
   return (
-    <section className="relative overflow-hidden py-40">
+    <section className="relative overflow-hidden py-24 sm:py-40">
       <div
         aria-hidden
         className="absolute inset-0 -z-10"
@@ -32,7 +32,7 @@ export function FinalCTA() {
       <div className={`${SECTION} flex flex-col items-center text-center`}>
         <motion.h2
           ref={ref}
-          className="text-balance font-[var(--font-display)] text-5xl font-semibold -tracking-wide text-[#EDEDED] md:text-6xl"
+          className="text-balance font-[var(--font-display)] text-3xl sm:text-5xl font-semibold -tracking-wide text-[#EDEDED] md:text-6xl"
           initial={
             reduced ? false : { opacity: 0, y: 30, filter: "blur(14px)" }
           }

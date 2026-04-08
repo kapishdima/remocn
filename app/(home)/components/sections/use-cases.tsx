@@ -160,11 +160,11 @@ function UseCaseCard({
 
 export function UseCases() {
   return (
-    <section id="use-cases" className="relative py-32">
+    <section id="use-cases" className="relative py-20 sm:py-32">
       <div className={SECTION}>
         <FadeUp>
-          <div className="mb-16 max-w-2xl">
-            <h2 className="font-[var(--font-display)] text-4xl font-semibold -tracking-wide text-[#EDEDED] md:text-5xl">
+          <div className="mb-12 sm:mb-16 max-w-2xl">
+            <h2 className="font-[var(--font-display)] text-3xl sm:text-4xl font-semibold -tracking-wide text-[#EDEDED] md:text-5xl">
               Built for three jobs
             </h2>
             <p className="mt-4 text-[#8B8A91]">
@@ -174,7 +174,7 @@ export function UseCases() {
           </div>
         </FadeUp>
 
-        <div className="grid gap-6 md:grid-cols-3">
+        <div className="grid gap-4 sm:gap-6 md:grid-cols-3">
           <FadeUp delay={0}>
             <UseCaseCard
               label="Marketing"

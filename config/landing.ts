@@ -3,7 +3,7 @@ export const PEACH = "#FFB38E";
 export const LAVENDER = "#D4B3FF";
 export const MINT = "#A1EEBD";
 
-export const SECTION = "mx-auto w-full max-w-6xl px-6";
+export const SECTION = "mx-auto w-full max-w-6xl px-4 sm:px-6";
 
 export const SPRING_BOUNCE = {
   type: "spring" as const,

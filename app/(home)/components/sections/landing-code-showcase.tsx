@@ -1,7 +1,9 @@
 "use client";
 
-import { Player } from "@remotion/player";
+import { Player, type PlayerRef } from "@remotion/player";
+import { Pause, Play } from "lucide-react";
 import { motion } from "motion/react";
+import { useCallback, useRef, useState } from "react";
 import { PEACH, SECTION, SPRING_SOFT } from "@/config/landing";
 import registry from "@/registry/__index__";
 import { FadeUp } from "../fade-up";
@@ -11,14 +13,28 @@ export function LandingCodeShowcase() {
   const aspectRatio =
     entry &&
     `${entry.config.compositionWidth} / ${entry.config.compositionHeight}`;
+  const playerRef = useRef<PlayerRef>(null);
+  const [playing, setPlaying] = useState(true);
+
+  const togglePlay = useCallback(() => {
+    const p = playerRef.current;
+    if (!p) return;
+    if (p.isPlaying()) {
+      p.pause();
+      setPlaying(false);
+    } else {
+      p.play();
+      setPlaying(true);
+    }
+  }, []);
 
   return (
-    <section id="showcase" className="relative py-32">
+    <section id="showcase" className="relative py-20 sm:py-32">
       {/* Header sits inside the standard SECTION width for readable copy */}
       <div className={SECTION}>
         <FadeUp>
-          <div className="mb-16 max-w-2xl">
-            <h2 className="text-4xl font-semibold  -tracking-wide text-[#EDEDED] md:text-5xl">
+          <div className="mb-12 sm:mb-16 max-w-2xl">
+            <h2 className="text-3xl sm:text-4xl font-semibold  -tracking-wide text-[#EDEDED] md:text-5xl">
               Type a prop
               <span className="text-[#8B8A91]"> ship a frame</span>
             </h2>
@@ -32,12 +48,12 @@ export function LandingCodeShowcase() {
 
       {/* Showcase block breaks out of the section width so the player has
           room for the wide composition. */}
-      <div className="mx-auto w-full max-w-400 px-6">
+      <div className="mx-auto w-full max-w-[100rem] px-4 sm:px-6">
         <FadeUp delay={0.1}>
           <motion.div
             whileHover={{ y: -4 }}
             transition={SPRING_SOFT}
-            className="overflow-hidden rounded-3xl border border-white/6 bg-white/2 backdrop-blur-2xl"
+            className="group relative overflow-hidden rounded-2xl sm:rounded-3xl border border-white/6 bg-white/2 backdrop-blur-2xl"
             style={{
               boxShadow: `0 30px 80px -30px rgba(0,0,0,0.6), inset 0 1px 0 rgba(255,255,255,0.05)`,
             }}
@@ -45,6 +61,7 @@ export function LandingCodeShowcase() {
             <div className="w-full" style={{ aspectRatio }}>
               {entry ? (
                 <Player
+                  ref={playerRef}
                   component={entry.Component}
                   inputProps={{ accentColor: PEACH }}
                   durationInFrames={entry.config.durationInFrames}
@@ -58,6 +75,24 @@ export function LandingCodeShowcase() {
                 />
               ) : null}
             </div>
+            <button
+              type="button"
+              onClick={togglePlay}
+              aria-label={playing ? "Pause preview" : "Play preview"}
+              className="absolute inset-0 flex items-center justify-center bg-transparent focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/40"
+            >
+              <span
+                aria-hidden
+                data-show={!playing}
+                className="pointer-events-none flex size-14 items-center justify-center rounded-full bg-black/50 text-white opacity-0 backdrop-blur-md transition-opacity duration-200 group-hover:opacity-100 motion-reduce:transition-none data-[show=true]:opacity-100"
+              >
+                {playing ? (
+                  <Pause className="size-5" />
+                ) : (
+                  <Play className="size-5 translate-x-0.5" />
+                )}
+              </span>
+            </button>
           </motion.div>
         </FadeUp>
       </div>

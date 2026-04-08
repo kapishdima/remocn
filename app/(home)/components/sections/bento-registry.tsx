@@ -1,10 +1,10 @@
 "use client";
 
 import { Player, type PlayerRef } from "@remotion/player";
-import { ArrowRight } from "lucide-react";
+import { ArrowRight, Pause, Play } from "lucide-react";
 import { motion } from "motion/react";
 import Link from "next/link";
-import { type CSSProperties, useRef } from "react";
+import { type CSSProperties, useCallback, useRef, useState } from "react";
 import { Button } from "@/components/ui/button";
 import { SECTION, SPRING_SOFT } from "@/config/landing";
 import registry from "@/registry/__index__";
@@ -25,9 +25,27 @@ function BentoCard({
 }) {
   const entry = registry[name];
   const playerRef = useRef<PlayerRef>(null);
+  const [playing, setPlaying] = useState(false);
 
-  const handleEnter = () => playerRef.current?.play();
-  const handleLeave = () => playerRef.current?.pause();
+  const handleEnter = () => {
+    playerRef.current?.play();
+    setPlaying(true);
+  };
+  const handleLeave = () => {
+    playerRef.current?.pause();
+    setPlaying(false);
+  };
+  const togglePlay = useCallback(() => {
+    const p = playerRef.current;
+    if (!p) return;
+    if (p.isPlaying()) {
+      p.pause();
+      setPlaying(false);
+    } else {
+      p.play();
+      setPlaying(true);
+    }
+  }, []);
 
   return (
     // biome-ignore lint/a11y/noStaticElementInteractions: hover-to-play is decorative video preview
@@ -36,7 +54,7 @@ function BentoCard({
       onMouseLeave={handleLeave}
       whileHover={{ y: -4 }}
       transition={SPRING_SOFT}
-      className={`group relative flex flex-col overflow-hidden rounded-3xl border border-white/[0.06] bg-white/[0.03] backdrop-blur-2xl ${className}`}
+      className={`group relative flex flex-col overflow-hidden rounded-2xl sm:rounded-3xl border border-white/[0.06] bg-white/[0.03] backdrop-blur-2xl ${className}`}
       style={{
         boxShadow: `0 20px 50px -20px rgba(0,0,0,0.6), inset 0 1px 0 rgba(255,255,255,0.06)`,
       }}
@@ -66,8 +84,25 @@ function BentoCard({
             acknowledgeRemotionLicense
           />
         ) : null}
+        <button
+          type="button"
+          onClick={togglePlay}
+          aria-label={playing ? "Pause preview" : "Play preview"}
+          className="absolute inset-0 flex items-center justify-center bg-transparent focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/40 sm:hidden"
+        >
+          <span
+            aria-hidden
+            className="pointer-events-none flex size-12 items-center justify-center rounded-full bg-black/50 text-white backdrop-blur-md"
+          >
+            {playing ? (
+              <Pause className="size-4" />
+            ) : (
+              <Play className="size-4 translate-x-0.5" />
+            )}
+          </span>
+        </button>
       </div>
-      <div className="relative flex-1 p-6">
+      <div className="relative flex-1 p-5 sm:p-6">
         <h3 className="font-[var(--font-display)] text-base font-medium text-[#EDEDED]">
           {title}
         </h3>
@@ -92,12 +127,12 @@ export function BentoRegistry() {
   };
 
   return (
-    <section id="components" className="relative py-32">
+    <section id="components" className="relative py-20 sm:py-32">
       <div className={SECTION}>
         <FadeUp>
-          <div className="mb-16 flex flex-col gap-6 sm:flex-row sm:items-end sm:justify-between">
+          <div className="mb-12 sm:mb-16 flex flex-col gap-6 sm:flex-row sm:items-end sm:justify-between">
             <div className="max-w-2xl">
-              <h2 className="text-4xl font-semibold -tracking-wide text-[#EDEDED] md:text-5xl">
+              <h2 className="text-3xl sm:text-4xl font-semibold -tracking-wide text-[#EDEDED] md:text-5xl">
                 A registry of motion
               </h2>
               <p className="mt-4 text-[#8B8A91]">
@@ -129,7 +164,7 @@ export function BentoRegistry() {
           <div
             ref={gridRef}
             onMouseMove={(e) => handleMove(e, gridRef.current)}
-            className="grid gap-6 md:grid-cols-3 md:grid-rows-2"
+            className="grid gap-4 sm:gap-6 md:grid-cols-3 md:grid-rows-2"
             style={{ "--mx": "50%", "--my": "50%" } as CSSProperties}
           >
             <BentoCard
@@ -157,7 +192,7 @@ export function BentoRegistry() {
           <div
             ref={grid2Ref}
             onMouseMove={(e) => handleMove(e, grid2Ref.current)}
-            className="mt-6 grid gap-6 md:grid-cols-2"
+            className="mt-4 sm:mt-6 grid gap-4 sm:gap-6 md:grid-cols-2"
             style={{ "--mx": "50%", "--my": "50%" } as CSSProperties}
           >
             <BentoCard
