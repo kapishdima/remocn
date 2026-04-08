@@ -130,7 +130,6 @@ function TierCard({
         <Link
           href={checkoutUrl}
           target="_blank"
-          rel="noreferrer noopener"
           className="inline-flex h-12 w-full items-center justify-center gap-2 rounded-full border border-white/10 bg-white/[0.04] text-sm font-medium text-[#EDEDED] backdrop-blur-xl transition-colors hover:border-white/20 hover:bg-white/[0.08] focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-white/30"
         >
           Become a {tier.name}

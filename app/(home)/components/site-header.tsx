@@ -68,7 +68,6 @@ export function SiteHeader({ navLinks }: { navLinks: NavLink[] }) {
           <Link
             href={GITHUB_URL}
             target="_blank"
-            rel="noreferrer noopener"
             onClick={trackGitHubClick}
             className="flex items-center gap-1.5 transition-colors hover:text-white focus-visible:text-white focus-visible:outline-none"
           >
@@ -111,7 +110,6 @@ export function SiteHeader({ navLinks }: { navLinks: NavLink[] }) {
               <Link
                 href={GITHUB_URL}
                 target="_blank"
-                rel="noreferrer noopener"
                 onClick={() => {
                   setOpen(false);
                   trackGitHubClick();

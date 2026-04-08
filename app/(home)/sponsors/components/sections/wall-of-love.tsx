@@ -19,7 +19,6 @@ function SponsorLogoCard({
     <a
       href={sponsor.website}
       target="_blank"
-      rel="noreferrer noopener"
       className="group relative flex items-center justify-center overflow-hidden rounded-2xl border border-white/[0.05] bg-white/[0.02] p-6 transition-colors duration-300 hover:border-white/[0.1] hover:bg-white/[0.05] focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-white/30"
     >
       {/** biome-ignore lint/performance/noImgElement: sponsor logos are SVGs of arbitrary sizes */}
