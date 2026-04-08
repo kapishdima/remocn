@@ -23,7 +23,7 @@ export const sponsors: Sponsor[] = [
     id: "efferd",
     name: "Efferd",
     logoUrl: "/sponsors/efferd.svg",
-    website: "https://efferd.com/?utm_source=fonttrio&utm_medium=sponsor&utm_campaign=fonttrio_sponsors_page",
+    website: "https://efferd.com/?utm_source=remocn&utm_medium=sponsor&utm_campaign=remocn_sponsors_page",
     tier: "partner",
     logoScale: 1.2,
     customStyles: "opacity-90",
