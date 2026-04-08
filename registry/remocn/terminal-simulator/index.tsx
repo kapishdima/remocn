@@ -73,7 +73,7 @@ export function TerminalSimulator({
   chromeColor = "#1a1a1a",
   fontSize = 18,
   charsPerFrame = 1,
-  chunkSize = 4,
+  chunkSize = 1,
   speed = 1,
   className,
 }: TerminalSimulatorProps) {
