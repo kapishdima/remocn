@@ -1,36 +1,61 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+<p align="center">
+  <img src="./public/hero.png" alt="remocn — shadcn registry for Remotion" />
+</p>
 
-## Getting Started
+# remocn
 
-First, run the development server:
+> A shadcn registry of production-ready animations, transitions, backgrounds, and scenes for [Remotion](https://www.remotion.dev/).
+
+remocn is a copy-paste component library for building videos in Remotion. Instead of writing every fade, wipe, and kinetic title from scratch, you `npx shadcn add` a polished primitive into your project and own the code. Built for solo builders and small teams who need a product demo video shipped today, not next week.
+
+## Why remocn
+
+- **Remotion has no batteries-included component library** You either build every animation from scratch or copy snippets from blog posts. remocn gives you a curated registry of primitives and full scenes that just work.
+- **Polished motion is hard** Easing curves, spring physics, transition timing — remocn ships components that already feel right, so you can focus on storytelling instead of tuning `interpolate()` calls.
+- **You own the code** Components are copied into your repo (shadcn philosophy). No runtime dependency, no version lock-in, no black box — tweak anything you want.
+- **Solo builders need demo videos fast** Compose a launch trailer, changelog clip, or feature walkthrough from prebuilt blocks in an afternoon.
+
+## What's inside
+
+64+ components across five categories:
+
+- **Text animations** — Blur Reveal, Typewriter, Shimmer Sweep, Tracking In, Slot Machine Roll, Matrix Decode, RGB Glitch Text, Kinetic Type Mask, Marker Highlight, Infinite Marquee, and more
+- **Backgrounds & visual primitives** — Mesh Gradient Background, Dynamic Grid, Spring Pop In, Pulsing Indicator
+- **Transitions & wipes** — Chromatic Aberration Wipe, Frosted Glass Wipe, Directional Wipe, Grid Pixelate, Spatial Push, Zoom Through Transition
+- **UI blocks** — Glass Code Block, Terminal Simulator, Browser Flow, Toast Notification, Animated Charts, Code Diff Wipe, Device Mockup Zoom, Simulated Cursor, Morphing Modal, Progress Steps
+- **Full compositions** — Product Launch Trailer, Hero Device Assemble, Changelog Bite, Pricing Tier Focus, Landing Code Showcase, Terminal to Browser Deploy, Live Code Compilation
+
+Browse the full catalog with interactive previews at [remocn.dev](https://remocn.dev).
+
+## Installation
+
+Remotion is a prerequisite — set up a Remotion project first if you don't have one (`npx create-video@latest`). Then add any component from the registry:
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+npx shadcn@latest add @remocn/blur-reveal
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+The component lands in `components/remocn/blur-reveal.tsx` and is yours to edit.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Local development
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+This repo is a single Next.js app that hosts both the landing page / docs and the registry endpoint at `/r/[name]`.
 
-## Learn More
+```bash
+bun install              # install dependencies
+bun dev                  # run the site locally
+bun run registry:build   # rebuild the shadcn registry JSON
+bun run lint             # biome check
+```
 
-To learn more about Next.js, take a look at the following resources:
+## Tech stack
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+- [Remotion](https://www.remotion.dev/) 4.0 + `@remotion/player` for in-browser previews
+- [Next.js](https://nextjs.org/) 16 + React 19
+- [Tailwind CSS](https://tailwindcss.com/) 4
+- [Fumadocs](https://fumadocs.vercel.app/) for documentation
+- [shadcn](https://ui.shadcn.com/) registry format
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+## License
 
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+MIT. Open core — primitives and base compositions are free forever. Premium blocks and a video builder are on the roadmap.
