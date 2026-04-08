@@ -4,6 +4,7 @@ import { BentoRegistry } from "./components/sections/bento-registry";
 import { FinalCTA } from "./components/sections/final-cta";
 import { Hero } from "./components/sections/hero";
 import { LandingCodeShowcase } from "./components/sections/landing-code-showcase";
+import { LandingPartners } from "./components/sections/landing-partners";
 import { UseCases } from "./components/sections/use-cases";
 import { SiteFooter } from "./components/site-footer";
 import { SiteHeader } from "./components/site-header";
@@ -17,6 +18,7 @@ export default function Page() {
         <LandingCodeShowcase />
         <BentoRegistry />
         <UseCases />
+        <LandingPartners />
         <FinalCTA />
         <SiteFooter navLinks={FOOTER_NAV} className="mt-12" />
       </main>

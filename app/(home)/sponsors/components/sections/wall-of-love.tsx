@@ -28,7 +28,7 @@ function SponsorLogoCard({
         alt={sponsor.name}
         className={cn(
           maxH,
-          "w-auto object-contain opacity-60 transition-all duration-300 [filter:grayscale(1)_brightness(0)_invert(1)] group-hover:opacity-100 group-hover:[filter:none]",
+          "w-auto object-contain opacity-60 transition-all duration-300 [filter:grayscale(1)_brightness(0)_invert(1)] group-hover:opacity-100 ",
           sponsor.customStyles,
         )}
         style={{ transform: `scale(${sponsor.logoScale ?? 1})` }}
@@ -53,7 +53,7 @@ function SponsorGroup({
   if (items.length === 0) return null;
   return (
     <div className="mb-12">
-      <div className="mb-4 font-mono text-[11px] text-[#666]">{label}</div>
+      <div className="mb-4 text-md text-[#666]">{label}</div>
       <div className={gridClassName}>
         {items.map((s) => (
           <div key={s.id} className={aspectClassName}>
@@ -76,7 +76,7 @@ export function WallOfLove() {
       <div className={SECTION}>
         <FadeUp>
           <div className="mb-16 max-w-2xl">
-            <h2 className="font-[var(--font-display)] text-4xl font-semibold -tracking-wide text-[#EDEDED] md:text-5xl">
+            <h2 className="text-4xl font-semibold -tracking-wide text-[#EDEDED] md:text-5xl">
               Wall of love
             </h2>
             <p className="mt-4 text-[#8B8A91]">

@@ -19,15 +19,15 @@ export const sponsors: Sponsor[] = [
   // empty-state CTA when no sponsors exist.
   //
   // Example:
-  // {
-  //   id: "acme-corp",
-  //   name: "Acme Corp",
-  //   logoUrl: "/sponsors/acme.svg",
-  //   website: "https://acme.com",
-  //   tier: "partner",
-  //   logoScale: 1.2,
-  //   customStyles: "mt-2 opacity-90",
-  // },
+  {
+    id: "efferd",
+    name: "Efferd",
+    logoUrl: "/sponsors/efferd.svg",
+    website: "https://efferd.com/?utm_source=fonttrio&utm_medium=sponsor&utm_campaign=fonttrio_sponsors_page",
+    tier: "partner",
+    logoScale: 1.2,
+    customStyles: "opacity-90",
+  },
 ];
 
 export type BillingMode = "monthly" | "one-time";
