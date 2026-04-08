@@ -3,60 +3,34 @@
 import { Player, type PlayerRef } from "@remotion/player";
 import { DynamicCodeBlock } from "fumadocs-ui/components/dynamic-codeblock";
 import { ArrowRight, Check, Copy } from "lucide-react";
+import { motion, useInView, useReducedMotion } from "motion/react";
 import Link from "next/link";
-import {
-  type CSSProperties,
-  type ReactNode,
-  useEffect,
-  useRef,
-  useState,
-} from "react";
+import { type CSSProperties, type ReactNode, useRef, useState } from "react";
 import registry from "@/registry/__index__";
+import Aurora from "@/components/Aurora";
+import Silk from "@/components/Silk";
+import Dither from "@/components/Dither";
+import { Button } from "@/components/ui/button";
 
 /* -------------------------------------------------------------------------- */
-/*                             Reusable utilities                             */
+/*                                  Tokens                                    */
 /* -------------------------------------------------------------------------- */
 
-const APPLE_EASE = "cubic-bezier(0.16, 1, 0.3, 1)";
-const SECTION_WRAPPER = "mx-auto w-full max-w-6xl px-6";
+const SECTION = "mx-auto w-full max-w-6xl px-6";
 
-function usePrefersReducedMotion() {
-  const [reduced, setReduced] = useState(false);
-  useEffect(() => {
-    const mq = window.matchMedia("(prefers-reduced-motion: reduce)");
-    setReduced(mq.matches);
-    const listener = (e: MediaQueryListEvent) => setReduced(e.matches);
-    mq.addEventListener("change", listener);
-    return () => mq.removeEventListener("change", listener);
-  }, []);
-  return reduced;
-}
+// Pastel accent palette — peach / lavender / mint
+const PEACH = "#FFB38E";
+const LAVENDER = "#D4B3FF";
+const MINT = "#A1EEBD";
 
-function useInViewReveal<T extends HTMLElement>(threshold = 0.15) {
-  const ref = useRef<T>(null);
-  const [shown, setShown] = useState(false);
-  useEffect(() => {
-    const node = ref.current;
-    if (!node) return;
-    const io = new IntersectionObserver(
-      (entries) => {
-        for (const e of entries) {
-          if (e.isIntersecting) {
-            setShown(true);
-            io.disconnect();
-            break;
-          }
-        }
-      },
-      { threshold },
-    );
-    io.observe(node);
-    return () => io.disconnect();
-  }, [threshold]);
-  return { ref, shown };
-}
+const SPRING_BOUNCE = { type: "spring" as const, stiffness: 120, damping: 14 };
+const SPRING_SOFT = { type: "spring" as const, stiffness: 180, damping: 22 };
 
-function Reveal({
+/* -------------------------------------------------------------------------- */
+/*                              Helper components                             */
+/* -------------------------------------------------------------------------- */
+
+function FadeUp({
   children,
   delay = 0,
   className = "",
@@ -65,81 +39,37 @@ function Reveal({
   delay?: number;
   className?: string;
 }) {
-  const { ref, shown } = useInViewReveal<HTMLDivElement>();
-  const reduced = usePrefersReducedMotion();
-  const visible = reduced || shown;
+  const ref = useRef<HTMLDivElement>(null);
+  const inView = useInView(ref, { once: true, amount: 0.2 });
+  const reduced = useReducedMotion();
   return (
-    <div
+    <motion.div
       ref={ref}
       className={className}
-      style={{
-        opacity: visible ? 1 : 0,
-        transform: visible ? "translateY(0)" : "translateY(20px)",
-        transition: reduced
-          ? "none"
-          : `opacity 800ms ${APPLE_EASE} ${delay}ms, transform 800ms ${APPLE_EASE} ${delay}ms`,
-      }}
+      initial={reduced ? false : { opacity: 0, y: 24, filter: "blur(8px)" }}
+      animate={
+        inView
+          ? { opacity: 1, y: 0, filter: "blur(0px)" }
+          : { opacity: 0, y: 24, filter: "blur(8px)" }
+      }
+      transition={{ ...SPRING_BOUNCE, delay }}
     >
       {children}
-    </div>
-  );
-}
-
-function MacWindow({
-  children,
-  className = "",
-  style,
-}: {
-  children: ReactNode;
-  className?: string;
-  style?: CSSProperties;
-}) {
-  return (
-    <div
-      className={`relative overflow-hidden rounded-xl bg-[#0A0A0A] shadow-[0_40px_120px_-20px_rgba(0,0,0,0.9),0_0_0_1px_rgba(255,255,255,0.06)_inset] ${className}`}
-      style={style}
-    >
-      <div className="flex h-9 items-center gap-1.5 border-b border-white/5 bg-[#0A0A0A] px-4">
-        <span className="size-2.5 rounded-full bg-[#ff5f57]/60" />
-        <span className="size-2.5 rounded-full bg-[#febc2e]/60" />
-        <span className="size-2.5 rounded-full bg-[#28c840]/60" />
-      </div>
-      {children}
-    </div>
-  );
-}
-
-function GridBackground() {
-  // Faint grid that fades out via a radial mask so it never competes for attention.
-  const grid =
-    "linear-gradient(to right, rgba(255,255,255,0.09) 1px, transparent 1px), linear-gradient(to bottom, rgba(255,255,255,0.09) 1px, transparent 1px)";
-  const mask =
-    "radial-gradient(ellipse 70% 55% at 50% 35%, black 0%, rgba(0,0,0,0.6) 45%, transparent 80%)";
-  return (
-    <div
-      aria-hidden
-      className="pointer-events-none fixed inset-0 z-0"
-      style={{
-        backgroundImage: grid,
-        backgroundSize: "56px 56px",
-        maskImage: mask,
-        WebkitMaskImage: mask,
-      }}
-    />
+    </motion.div>
   );
 }
 
 function NoiseOverlay() {
-  // Inline SVG turbulence — kills color banding on the void-black background.
+  // Inline turbulence — sits on top of everything, ties tones together
   const svg = `<svg xmlns='http://www.w3.org/2000/svg' width='200' height='200'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>`;
   const url = `url("data:image/svg+xml;utf8,${svg}")`;
   return (
     <div
       aria-hidden
-      className="pointer-events-none fixed inset-0 z-50"
+      className="pointer-events-none fixed inset-0 z-[60]"
       style={{
         backgroundImage: url,
-        opacity: 0.035,
+        opacity: 0.04,
         mixBlendMode: "overlay",
       }}
     />
@@ -147,25 +77,23 @@ function NoiseOverlay() {
 }
 
 /* -------------------------------------------------------------------------- */
-/*                                  Sections                                  */
+/*                                   Header                                   */
 /* -------------------------------------------------------------------------- */
 
 function Header() {
   return (
-    <header className="fixed inset-x-0 top-0 z-40 border-b border-white/[0.06] bg-black/60 backdrop-blur-xl">
-      <div
-        className={`flex h-14 items-center justify-between ${SECTION_WRAPPER}`}
-      >
+    <header className="fixed inset-x-0 top-0 z-40 border-b border-white/[0.05] bg-[#141318]/60 backdrop-blur-2xl">
+      <div className={`flex h-16 items-center justify-between ${SECTION}`}>
         <Link
           href="/"
-          className="font-semibold tracking-[-0.02em] text-[#EDEDED] focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-white/30 focus-visible:rounded-sm"
+          className="font-[var(--font-display)] text-lg font-semibold -tracking-wide text-[#EDEDED] focus-visible:outline-none"
         >
           remocn
         </Link>
-        <nav className="flex items-center gap-6 text-sm text-[#888]">
+        <nav className="flex items-center gap-7 text-sm text-[#8B8A91]">
           <Link
             href="/docs"
-            className="transition-colors duration-75 hover:text-white focus-visible:text-white focus-visible:outline-none"
+            className="transition-colors hover:text-white focus-visible:text-white focus-visible:outline-none"
           >
             Docs
           </Link>
@@ -173,7 +101,7 @@ function Header() {
             href="https://github.com/remocn/remocn"
             target="_blank"
             rel="noreferrer noopener"
-            className="flex items-center gap-1.5 transition-colors duration-75 hover:text-white focus-visible:text-white focus-visible:outline-none"
+            className="flex items-center gap-1.5 transition-colors hover:text-white focus-visible:text-white focus-visible:outline-none"
           >
             <svg
               viewBox="0 0 24 24"
@@ -193,102 +121,103 @@ function Header() {
   );
 }
 
+/* -------------------------------------------------------------------------- */
+/*                                    Hero                                    */
+/* -------------------------------------------------------------------------- */
+
 function Hero() {
   const heroEntry = registry["browser-flow"];
-  const [copied, setCopied] = useState(false);
-  const cmd = "npx shadcn add remocn/browser-flow";
-
-  const copy = () => {
-    navigator.clipboard?.writeText(cmd);
-    setCopied(true);
-    setTimeout(() => setCopied(false), 1500);
-  };
 
   return (
-    <section className={`relative ${SECTION_WRAPPER} pt-40 pb-24`}>
-      <div className="flex flex-col items-center text-center">
-        <Reveal>
-          <Link
-            href="/docs"
-            className="inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/[0.02] px-3 py-1 font-mono text-xs text-[#888] transition-colors hover:text-white focus-visible:text-white focus-visible:outline-none"
-          >
-            <span className="size-1.5 rounded-full bg-[#5E6AD2]" />
-            v1.0 is live
-            <ArrowRight className="size-3" aria-hidden="true" />
-          </Link>
-        </Reveal>
-
-        <Reveal delay={80}>
-          <h1 className="mt-8 max-w-6xl text-balance text-4xl font-semibold leading-[1.05] tracking-[-0.04em] text-[#EDEDED] md:text-6xl">
-            Cinematic video components for React developers
-          </h1>
-        </Reveal>
-
-        <Reveal delay={160}>
-          <p className="mt-6 max-w-2xl text-balance text-lg font-light leading-relaxed text-[#888]">
-            Build launch videos, changelogs, and product demos using code. Copy,
-            paste, and render in Remotion. Free &amp; open source
-          </p>
-        </Reveal>
-
-        <Reveal delay={240}>
-          <div className="mt-10 flex flex-col items-stretch gap-3 sm:flex-row sm:items-center">
-            <Link
-              href="/docs"
-              className="inline-flex h-12 items-center justify-center gap-2 rounded-full bg-white px-6 text-sm font-medium text-black transition-transform duration-75 hover:scale-[1.02] active:scale-[0.99] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/30 focus-visible:ring-offset-2 focus-visible:ring-offset-black"
-            >
-              Browse components
-              <ArrowRight className="size-4" aria-hidden="true" />
-            </Link>
-            <button
-              type="button"
-              onClick={copy}
-              aria-label={copied ? "Command copied" : `Copy ${cmd}`}
-              className="group inline-flex h-12 items-center gap-3 rounded-full border border-white/10 bg-white/[0.02] px-5 font-mono text-sm text-[#888] transition-colors duration-75 hover:border-white/20 hover:text-white focus-visible:border-white/30 focus-visible:text-white focus-visible:outline-none"
-            >
-              <span className="text-[#5E6AD2]" aria-hidden="true">
-                $
-              </span>
-              <span>{cmd}</span>
-              {copied ? (
-                <Check
-                  className="size-3.5 text-emerald-400"
-                  aria-hidden="true"
-                />
-              ) : (
-                <Copy
-                  className="size-3.5 opacity-60 group-hover:opacity-100"
-                  aria-hidden="true"
-                />
-              )}
-            </button>
-          </div>
-        </Reveal>
-
-        <Reveal delay={320} className="w-full">
-          <div className="relative mt-20 w-full">
-            <div className="aspect-video w-full bg-black">
-              {heroEntry ? (
-                <Player
-                  component={heroEntry.Component}
-                  inputProps={{ url: "remocn.dev" }}
-                  durationInFrames={heroEntry.config.durationInFrames}
-                  fps={heroEntry.config.fps}
-                  compositionWidth={heroEntry.config.compositionWidth}
-                  compositionHeight={heroEntry.config.compositionHeight}
-                  style={{ width: "100%", height: "100%" }}
-                  autoPlay
-                  loop
-                  acknowledgeRemotionLicense
-                />
-              ) : null}
-            </div>
-          </div>
-        </Reveal>
+    <section className="relative overflow-hidden pt-44 pb-28">
+      <div className="w-full h-screen absolute top-0 left-0">
+        <Dither
+          waveColor={[
+            0.25098039215686274, 0.25098039215686274, 0.25098039215686274,
+          ]}
+          disableAnimation={false}
+          enableMouseInteraction={false}
+          mouseRadius={1}
+          colorNum={6}
+          pixelSize={2}
+          waveAmplitude={0.35}
+          waveFrequency={5.5}
+          waveSpeed={0.01}
+        />
       </div>
+      <div className={SECTION}>
+        <div className="flex flex-col items-center text-center">
+          <FadeUp delay={0.08}>
+            <h1 className="mt-8 max-w-8xl text-balance font-sans text-5xl font-semibold leading-[1.05] -tracking-[0.04em] text-[#EDEDED] md:text-7xl">
+              Cinematic video components
+              <br />
+              Now copy-pasteable
+            </h1>
+          </FadeUp>
+
+          <FadeUp delay={0.16}>
+            <p className="mt-6 max-w-2xl text-balance text-xl font-light leading-relaxed text-white">
+              Build product demos, changelogs, and launch videos in React. Open
+              source and delightfully easy
+            </p>
+          </FadeUp>
+
+          <FadeUp delay={0.24}>
+            <div className="mt-10 flex flex-col items-stretch gap-3 sm:flex-row sm:items-center">
+              <motion.div
+                whileHover={{ scale: 1.03 }}
+                whileTap={{ scale: 0.97 }}
+                transition={SPRING_SOFT}
+              >
+                <Button className="hover:bg-white h-14 px-10">
+                  <Link href="/docs" className="inline-flex items-center gap-2">
+                    Browse components
+                    <ArrowRight className="size-4" aria-hidden="true" />
+                  </Link>
+                </Button>
+              </motion.div>
+            </div>
+          </FadeUp>
+        </div>
+      </div>
+
+      <FadeUp delay={0.32} className="relative mt-10 w-full">
+        <motion.div
+          className="relative flex justify-center"
+          initial={{ y: 40 }}
+          whileInView={{ y: 0 }}
+          viewport={{ once: true, amount: 0.2 }}
+          transition={{ ...SPRING_BOUNCE, delay: 0.1 }}
+        >
+          <div className="relative w-[80vw] h-screen overflow-hidden rounded-3xl">
+            {heroEntry ? (
+              <Player
+                component={heroEntry.Component}
+                inputProps={{ url: "remocn.dev" }}
+                durationInFrames={heroEntry.config.durationInFrames}
+                fps={heroEntry.config.fps}
+                compositionWidth={heroEntry.config.compositionWidth}
+                compositionHeight={heroEntry.config.compositionHeight}
+                style={{
+                  width: "100%",
+                  height: "100%",
+                  display: "block",
+                }}
+                autoPlay
+                loop
+                acknowledgeRemotionLicense
+              />
+            ) : null}
+          </div>
+        </motion.div>
+      </FadeUp>
     </section>
   );
 }
+
+/* -------------------------------------------------------------------------- */
+/*                                DX showcase                                 */
+/* -------------------------------------------------------------------------- */
 
 function DXShowcase() {
   const sample = `import { StaggeredFadeUp } from "@/components/remocn/staggered-fade-up";
@@ -306,34 +235,40 @@ export default function Scene() {
     </AbsoluteFill>
   );
 }`;
-
   const entry = registry["staggered-fade-up"];
 
   return (
-    <section className="relative border-t border-white/[0.04] py-32">
-      <div className={SECTION_WRAPPER}>
-        <Reveal>
+    <section className="relative py-32">
+      <div className={SECTION}>
+        <FadeUp>
           <div className="mb-16 max-w-2xl">
-            <h2 className="text-4xl font-semibold tracking-[-0.03em] text-[#EDEDED] md:text-5xl">
+            <h2 className="font-[var(--font-display)] text-4xl font-semibold -tracking-wide text-[#EDEDED] md:text-5xl">
               Code on the left
               <br />
-              <span className="text-[#666]">pixels on the right</span>
+              <span className="text-[#8B8A91]">pixels on the right</span>
             </h2>
-            <p className="mt-4 text-[#888]">
+            <p className="mt-4 text-[#8B8A91]">
               Every component is just React. No timeline editor, no magic
             </p>
           </div>
-        </Reveal>
+        </FadeUp>
 
-        <Reveal delay={120}>
-          <div className="grid overflow-hidden rounded-2xl border border-white/[0.08] bg-[#0A0A0A] lg:grid-cols-2 lg:items-stretch">
+        <FadeUp delay={0.1}>
+          <motion.div
+            whileHover={{ y: -4 }}
+            transition={SPRING_SOFT}
+            className="grid overflow-hidden rounded-3xl border border-white/[0.06] bg-white/[0.02] backdrop-blur-2xl lg:grid-cols-2 lg:items-stretch"
+            style={{
+              boxShadow: `0 30px 80px -30px rgba(0,0,0,0.6), inset 0 1px 0 rgba(255,255,255,0.05)`,
+            }}
+          >
             {/* Code side */}
             <div className="flex flex-col">
-              <div className="flex items-center gap-1 border-b border-white/[0.06] px-4 py-2.5">
-                <span className="rounded-md bg-white/[0.06] px-2.5 py-1 font-mono text-[11px] text-[#EDEDED]">
+              <div className="flex items-center gap-1 border-b border-white/[0.05] px-5 py-3">
+                <span className="rounded-full bg-white/[0.06] px-3 py-1 font-mono text-[11px] text-[#EDEDED]">
                   page.tsx
                 </span>
-                <span className="rounded-md px-2.5 py-1 font-mono text-[11px] text-[#666]">
+                <span className="rounded-full px-3 py-1 font-mono text-[11px] text-[#666]">
                   Terminal
                 </span>
               </div>
@@ -343,8 +278,8 @@ export default function Scene() {
             </div>
 
             {/* Preview side */}
-            <div className="flex items-center justify-center border-t border-white/[0.06] bg-[#fafafa] p-8 lg:border-l lg:border-t-0">
-              <div className="aspect-video w-full overflow-hidden rounded-lg bg-[#fafafa]">
+            <div className="flex items-center justify-center border-t border-white/[0.05] bg-[#fafafa] p-8 lg:border-l lg:border-t-0">
+              <div className="aspect-video w-full overflow-hidden rounded-2xl bg-[#fafafa]">
                 {entry ? (
                   <Player
                     component={entry.Component}
@@ -368,12 +303,16 @@ export default function Scene() {
                 ) : null}
               </div>
             </div>
-          </div>
-        </Reveal>
+          </motion.div>
+        </FadeUp>
       </div>
     </section>
   );
 }
+
+/* -------------------------------------------------------------------------- */
+/*                              Bento registry                                */
+/* -------------------------------------------------------------------------- */
 
 function BentoCard({
   name,
@@ -391,19 +330,20 @@ function BentoCard({
   const entry = registry[name];
   const playerRef = useRef<PlayerRef>(null);
 
-  const handleEnter = () => {
-    playerRef.current?.play();
-  };
-  const handleLeave = () => {
-    playerRef.current?.pause();
-  };
+  const handleEnter = () => playerRef.current?.play();
+  const handleLeave = () => playerRef.current?.pause();
 
   return (
-    // biome-ignore lint/a11y/noStaticElementInteractions: hover-to-play is decorative video preview, no semantic action
-    <div
+    // biome-ignore lint/a11y/noStaticElementInteractions: hover-to-play is decorative video preview
+    <motion.div
       onMouseEnter={handleEnter}
       onMouseLeave={handleLeave}
-      className={`group relative flex flex-col overflow-hidden rounded-2xl border border-white/[0.08] bg-[#0A0A0A] ${className}`}
+      whileHover={{ y: -4 }}
+      transition={SPRING_SOFT}
+      className={`group relative flex flex-col overflow-hidden rounded-3xl border border-white/[0.06] bg-white/[0.03] backdrop-blur-2xl ${className}`}
+      style={{
+        boxShadow: `0 20px 50px -20px rgba(0,0,0,0.6), inset 0 1px 0 rgba(255,255,255,0.06)`,
+      }}
     >
       {/* Spotlight overlay (driven by parent --mx/--my) */}
       <div
@@ -411,11 +351,11 @@ function BentoCard({
         className="pointer-events-none absolute inset-0 opacity-0 transition-opacity duration-300 group-hover:opacity-100"
         style={{
           background:
-            "radial-gradient(600px circle at var(--mx) var(--my), rgba(255,255,255,0.06), transparent 40%)",
+            "radial-gradient(500px circle at var(--mx) var(--my), rgba(255,255,255,0.07), transparent 40%)",
         }}
       />
 
-      <div className="relative aspect-[16/9] w-full overflow-hidden bg-black">
+      <div className="relative aspect-[16/9] w-full overflow-hidden bg-[#0A090E]">
         {entry ? (
           <Player
             ref={playerRef}
@@ -432,62 +372,66 @@ function BentoCard({
         ) : null}
       </div>
       <div className="relative flex-1 p-6">
-        <h3 className="text-base font-medium text-[#EDEDED]">{title}</h3>
-        <p className="mt-1 text-sm text-[#888]">{description}</p>
+        <h3 className="font-[var(--font-display)] text-base font-medium text-[#EDEDED]">
+          {title}
+        </h3>
+        <p className="mt-1 text-sm text-[#8B8A91]">{description}</p>
       </div>
-    </div>
+    </motion.div>
   );
 }
 
 function BentoRegistry() {
   const gridRef = useRef<HTMLDivElement>(null);
+  const grid2Ref = useRef<HTMLDivElement>(null);
 
-  const handleMove = (e: React.MouseEvent<HTMLDivElement>) => {
-    const rect = gridRef.current?.getBoundingClientRect();
-    if (!rect) return;
-    gridRef.current?.style.setProperty("--mx", `${e.clientX - rect.left}px`);
-    gridRef.current?.style.setProperty("--my", `${e.clientY - rect.top}px`);
+  const handleMove = (
+    e: React.MouseEvent<HTMLDivElement>,
+    target: HTMLDivElement | null,
+  ) => {
+    if (!target) return;
+    const rect = target.getBoundingClientRect();
+    target.style.setProperty("--mx", `${e.clientX - rect.left}px`);
+    target.style.setProperty("--my", `${e.clientY - rect.top}px`);
   };
 
   return (
     <section className="relative py-32">
-      <div className={SECTION_WRAPPER}>
-        <Reveal>
+      <div className={SECTION}>
+        <FadeUp>
           <div className="mb-16 flex flex-col gap-6 sm:flex-row sm:items-end sm:justify-between">
             <div className="max-w-2xl">
-              <h2 className="text-4xl font-semibold tracking-[-0.03em] text-[#EDEDED] md:text-5xl">
+              <h2 className="font-[var(--font-display)] text-4xl font-semibold -tracking-wide text-[#EDEDED] md:text-5xl">
                 A registry of motion
               </h2>
-              <p className="mt-4 text-[#888]">
+              <p className="mt-4 text-[#8B8A91]">
                 Transitions, primitives, text reveals — production-ready and
                 hover to play
               </p>
             </div>
-            <Link
-              href="/docs"
-              className="group inline-flex h-11 shrink-0 items-center gap-2 self-start rounded-full border border-white/10 bg-white/[0.02] px-5 text-sm font-medium text-[#EDEDED] transition-colors duration-75 hover:border-white/20 hover:bg-white/[0.04] focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-white/30 sm:self-auto"
+            <motion.div
+              whileHover={{ scale: 1.03 }}
+              whileTap={{ scale: 0.97 }}
+              transition={SPRING_SOFT}
             >
-              Browse components
-              <ArrowRight
-                className="size-4 transition-transform duration-150 group-hover:translate-x-0.5"
-                aria-hidden="true"
-              />
-            </Link>
+              <Link
+                href="/docs"
+                className="group inline-flex h-11 shrink-0 items-center gap-2 self-start rounded-full border border-white/10 bg-white/[0.04] px-5 text-sm font-medium text-[#EDEDED] backdrop-blur-xl transition-colors hover:border-white/20 hover:bg-white/[0.06] focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-white/30 sm:self-auto"
+              >
+                Browse components
+                <ArrowRight className="size-4" aria-hidden="true" />
+              </Link>
+            </motion.div>
           </div>
-        </Reveal>
+        </FadeUp>
 
-        <Reveal delay={120}>
+        <FadeUp delay={0.1}>
           {/* biome-ignore lint/a11y/noStaticElementInteractions: spotlight cursor tracking is purely visual */}
           <div
             ref={gridRef}
-            onMouseMove={handleMove}
-            className="grid gap-4 md:grid-cols-3 md:grid-rows-2"
-            style={
-              {
-                "--mx": "50%",
-                "--my": "50%",
-              } as CSSProperties
-            }
+            onMouseMove={(e) => handleMove(e, gridRef.current)}
+            className="grid gap-6 md:grid-cols-3 md:grid-rows-2"
+            style={{ "--mx": "50%", "--my": "50%" } as CSSProperties}
           >
             <BentoCard
               name="ai-generation-canvas"
@@ -507,13 +451,15 @@ function BentoRegistry() {
               description="Orbits of integration logos around your brand"
             />
           </div>
-        </Reveal>
+        </FadeUp>
 
-        <Reveal delay={200}>
+        <FadeUp delay={0.18}>
           {/* biome-ignore lint/a11y/noStaticElementInteractions: spotlight cursor tracking is purely visual */}
           <div
-            onMouseMove={handleMove}
-            className="mt-4 grid gap-4 md:grid-cols-2"
+            ref={grid2Ref}
+            onMouseMove={(e) => handleMove(e, grid2Ref.current)}
+            className="mt-6 grid gap-6 md:grid-cols-2"
+            style={{ "--mx": "50%", "--my": "50%" } as CSSProperties}
           >
             <BentoCard
               name="grid-pixelate-wipe"
@@ -526,7 +472,7 @@ function BentoRegistry() {
               description="An elegant transition through a sheet of glass"
             />
           </div>
-        </Reveal>
+        </FadeUp>
       </div>
     </section>
   );
@@ -544,14 +490,17 @@ function CaseChartVisual() {
           <div
             // biome-ignore lint/suspicious/noArrayIndexKey: static demo data
             key={i}
-            className="flex-1 rounded-sm bg-white/15"
-            style={{ height: `${h}%` }}
+            className="flex-1 rounded-t-md"
+            style={{
+              height: `${h}%`,
+              background: `linear-gradient(to top, ${PEACH}50, ${PEACH}10)`,
+            }}
           />
         ))}
       </div>
       <div className="absolute inset-x-4 top-3 flex items-center justify-between font-mono text-[10px] text-white/40 tabular-nums">
         <span>upvotes</span>
-        <span className="text-emerald-300/70">+412</span>
+        <span style={{ color: PEACH }}>+412</span>
       </div>
     </div>
   );
@@ -559,20 +508,30 @@ function CaseChartVisual() {
 
 function CaseChangelogVisual() {
   return (
-    <div className="flex h-full flex-col gap-2 p-4 font-mono text-[11px] text-white/50">
+    <div className="flex h-full flex-col gap-2 p-5 font-mono text-[11px] text-white/50">
       <div className="flex items-center gap-2">
-        <span className="rounded-sm border border-white/15 bg-white/[0.04] px-1.5 py-0.5 text-[10px] text-white/70">
+        <span
+          className="rounded-full border px-2 py-0.5 text-[10px]"
+          style={{
+            borderColor: `${MINT}40`,
+            color: MINT,
+            background: `${MINT}10`,
+          }}
+        >
           v1.4.0
         </span>
         <span className="text-white/30">just now</span>
       </div>
-      <div className="space-y-1 leading-relaxed text-white/40">
+      <div className="space-y-1 leading-relaxed text-white/50">
         <div>+ added marquee easing</div>
         <div>+ shipped 12 new transitions</div>
         <div className="text-white/30">- removed legacy spring helper</div>
       </div>
-      <div className="mt-auto flex items-center gap-1.5 text-[10px] text-white/30">
-        <span className="size-1 rounded-full bg-emerald-400/70" />
+      <div className="mt-auto flex items-center gap-1.5 text-[10px] text-white/40">
+        <span
+          className="size-1.5 rounded-full"
+          style={{ background: MINT, boxShadow: `0 0 8px ${MINT}` }}
+        />
         rendered &amp; pushed
       </div>
     </div>
@@ -581,15 +540,18 @@ function CaseChangelogVisual() {
 
 function CaseDocsVisual() {
   return (
-    <div className="grid h-full grid-cols-3 gap-2 p-4">
+    <div className="grid h-full grid-cols-3 gap-2 p-5">
       {[0, 1, 2, 3, 4, 5].map((i) => (
         <div
           key={i}
-          className="rounded-md border border-white/10 bg-white/[0.02] p-2"
+          className="rounded-xl border border-white/10 bg-white/[0.03] p-2.5"
         >
-          <div className="h-1.5 w-2/3 rounded-full bg-white/15" />
-          <div className="mt-1.5 h-1 w-full rounded-full bg-white/8" />
-          <div className="mt-1 h-1 w-4/5 rounded-full bg-white/8" />
+          <div
+            className="h-1.5 w-2/3 rounded-full"
+            style={{ background: `${LAVENDER}50` }}
+          />
+          <div className="mt-1.5 h-1 w-full rounded-full bg-white/10" />
+          <div className="mt-1 h-1 w-4/5 rounded-full bg-white/10" />
         </div>
       ))}
     </div>
@@ -603,7 +565,7 @@ function UseCases() {
       title: "Launch videos",
       copy: "Ship to Product Hunt with a masterpiece. Wire components, render once, post anywhere",
       stat: "12 PH #1s",
-      glow: "rgba(94, 106, 210, 0.18)",
+      glow: PEACH,
       Visual: CaseChartVisual,
     },
     {
@@ -611,7 +573,7 @@ function UseCases() {
       title: "Changelogs",
       copy: "Turn boring release notes into viral tweets. One commit, one composition, one render",
       stat: "Render in 8s",
-      glow: "rgba(16, 185, 129, 0.16)",
+      glow: MINT,
       Visual: CaseChangelogVisual,
     },
     {
@@ -619,65 +581,75 @@ function UseCases() {
       title: "Docs that move",
       copy: "Explain complex workflows visually. A twelve second clip beats a thousand words every time",
       stat: "12s clips",
-      glow: "rgba(244, 114, 182, 0.14)",
+      glow: LAVENDER,
       Visual: CaseDocsVisual,
     },
   ];
 
   return (
-    <section className="relative border-t border-white/[0.04] py-32">
-      <div className={SECTION_WRAPPER}>
-        <Reveal>
+    <section className="relative py-32">
+      <div className={SECTION}>
+        <FadeUp>
           <div className="mb-16 max-w-2xl">
-            <h2 className="text-4xl font-semibold tracking-[-0.03em] text-[#EDEDED] md:text-5xl">
+            <h2 className="font-[var(--font-display)] text-4xl font-semibold -tracking-wide text-[#EDEDED] md:text-5xl">
               Built for three jobs
             </h2>
-            <p className="mt-4 text-[#888]">
+            <p className="mt-4 text-[#8B8A91]">
               Marketing launches, release notes, and visual docs — without
               opening a video editor
             </p>
           </div>
-        </Reveal>
+        </FadeUp>
 
-        <div className="grid gap-4 md:grid-cols-3">
+        <div className="grid gap-6 md:grid-cols-3">
           {cases.map((c, i) => {
             const Visual = c.Visual;
             return (
-              <Reveal key={c.title} delay={i * 80}>
-                <article
-                  className="group relative flex h-full flex-col overflow-hidden rounded-2xl border border-white/[0.08] bg-[#0A0A0A]"
-                  style={{
-                    boxShadow: `inset 0 -120px 140px -100px ${c.glow}`,
-                  }}
+              <FadeUp key={c.title} delay={i * 0.08}>
+                <motion.article
+                  whileHover={{ y: -6 }}
+                  transition={SPRING_BOUNCE}
+                  className="group relative flex h-full flex-col overflow-hidden rounded-3xl border border-white/[0.06] bg-white/[0.03] backdrop-blur-2xl"
                 >
-                  <div className="relative h-44 w-full overflow-hidden border-b border-white/[0.06] bg-black/40">
+                  <div
+                    aria-hidden
+                    className="pointer-events-none absolute -bottom-20 -right-20 h-60 w-60 rounded-full opacity-60 transition-opacity group-hover:opacity-100"
+                    style={{
+                      background: `radial-gradient(circle, ${c.glow}40, transparent 60%)`,
+                      filter: "blur(40px)",
+                    }}
+                  />
+                  <div className="relative h-44 w-full overflow-hidden border-b border-white/[0.05]">
                     <Visual />
                   </div>
-                  <div className="flex flex-1 flex-col p-6">
+                  <div className="relative flex flex-1 flex-col p-6">
                     <span className="font-mono text-[11px] text-[#666]">
                       {c.label}
                     </span>
-                    <h3 className="mt-2 text-2xl font-semibold tracking-[-0.02em] text-[#EDEDED]">
+                    <h3 className="mt-2 font-[var(--font-display)] text-2xl font-semibold -tracking-wide text-[#EDEDED]">
                       {c.title}
                     </h3>
-                    <p className="mt-3 text-sm leading-relaxed text-[#888]">
+                    <p className="mt-3 text-sm leading-relaxed text-[#8B8A91]">
                       {c.copy}
                     </p>
                     <div className="mt-6 flex items-center justify-between border-t border-white/[0.04] pt-4">
-                      <span className="font-mono text-[11px] text-[#666] tabular-nums">
+                      <span
+                        className="font-mono text-[11px] tabular-nums"
+                        style={{ color: c.glow }}
+                      >
                         {c.stat}
                       </span>
                       <Link
                         href="/docs"
-                        className="inline-flex items-center gap-1 text-xs text-[#888] transition-colors duration-75 hover:text-white focus-visible:text-white focus-visible:outline-none"
+                        className="inline-flex items-center gap-1 text-xs text-[#8B8A91] transition-colors hover:text-white focus-visible:text-white focus-visible:outline-none"
                       >
                         Learn more
                         <ArrowRight className="size-3" aria-hidden="true" />
                       </Link>
                     </div>
                   </div>
-                </article>
-              </Reveal>
+                </motion.article>
+              </FadeUp>
             );
           })}
         </div>
@@ -686,65 +658,134 @@ function UseCases() {
   );
 }
 
+/* -------------------------------------------------------------------------- */
+/*                                Stack marquee                               */
+/* -------------------------------------------------------------------------- */
+
+const STACK = [
+  "Remotion",
+  "React",
+  "Next.js",
+  "Tailwind",
+  "TypeScript",
+  "shadcn/ui",
+  "Vercel",
+];
+
+function StackMarquee() {
+  return (
+    <section className="relative py-20">
+      <div
+        className="relative overflow-hidden"
+        style={{
+          maskImage:
+            "linear-gradient(to right, transparent, black 15%, black 85%, transparent)",
+          WebkitMaskImage:
+            "linear-gradient(to right, transparent, black 15%, black 85%, transparent)",
+        }}
+      >
+        <div className="flex w-max animate-[remocn-marquee_36s_linear_infinite] gap-16">
+          {[...STACK, ...STACK, ...STACK].map((item, i) => (
+            <span
+              // biome-ignore lint/suspicious/noArrayIndexKey: marquee duplication
+              key={i}
+              className="whitespace-nowrap font-[var(--font-display)] text-2xl font-medium -tracking-wide text-white/30"
+            >
+              {item}
+            </span>
+          ))}
+        </div>
+      </div>
+
+      <style jsx global>{`
+        @keyframes remocn-marquee {
+          0% { transform: translateX(0); }
+          100% { transform: translateX(-33.3333%); }
+        }
+      `}</style>
+    </section>
+  );
+}
+
+/* -------------------------------------------------------------------------- */
+/*                                 Final CTA                                  */
+/* -------------------------------------------------------------------------- */
+
 function FinalCTA() {
-  const { ref, shown } = useInViewReveal<HTMLHeadingElement>(0.4);
-  const reduced = usePrefersReducedMotion();
-  const visible = reduced || shown;
+  const ref = useRef<HTMLHeadingElement>(null);
+  const inView = useInView(ref, { once: true, amount: 0.4 });
+  const reduced = useReducedMotion();
 
   return (
-    <section className="relative border-t border-white/[0.04] py-40">
+    <section className="relative overflow-hidden py-40">
       <div
-        className={`${SECTION_WRAPPER} flex flex-col items-center text-center`}
-      >
-        <h2
+        aria-hidden
+        className="absolute inset-0 -z-10"
+        style={{
+          background: `radial-gradient(60% 50% at 50% 50%, ${LAVENDER}15, transparent 70%), radial-gradient(40% 40% at 20% 80%, ${PEACH}12, transparent 60%), radial-gradient(40% 40% at 80% 20%, ${MINT}12, transparent 60%)`,
+          filter: "blur(40px)",
+        }}
+      />
+      <div className={`${SECTION} flex flex-col items-center text-center`}>
+        <motion.h2
           ref={ref}
-          className="text-balance text-5xl font-semibold tracking-[-0.03em] text-[#EDEDED] md:text-6xl"
-          style={{
-            opacity: visible ? 1 : 0,
-            transform: visible ? "translateY(0)" : "translateY(24px)",
-            filter: visible ? "blur(0px)" : "blur(12px)",
-            transition: reduced
-              ? "none"
-              : `opacity 900ms ${APPLE_EASE}, transform 900ms ${APPLE_EASE}, filter 900ms ${APPLE_EASE}`,
-          }}
+          className="text-balance font-[var(--font-display)] text-5xl font-semibold -tracking-wide text-[#EDEDED] md:text-6xl"
+          initial={
+            reduced ? false : { opacity: 0, y: 30, filter: "blur(14px)" }
+          }
+          animate={
+            inView
+              ? { opacity: 1, y: 0, filter: "blur(0px)" }
+              : { opacity: 0, y: 30, filter: "blur(14px)" }
+          }
+          transition={{ ...SPRING_BOUNCE, duration: 1 }}
         >
           Stop fighting keyframes
           <br />
           Start writing code
-        </h2>
+        </motion.h2>
 
-        <Reveal delay={300}>
-          <Link
-            href="/docs"
-            className="mt-12 inline-flex h-12 items-center gap-2 rounded-full border border-white/10 bg-[#0A0A0A] px-6 text-sm font-medium text-[#EDEDED] transition-colors duration-75 hover:border-white/20 hover:bg-[#121212] focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-white/30"
+        <FadeUp delay={0.3}>
+          <motion.div
+            whileHover={{ scale: 1.03 }}
+            whileTap={{ scale: 0.97 }}
+            transition={SPRING_SOFT}
           >
-            View documentation
-            <ArrowRight className="size-4" aria-hidden="true" />
-          </Link>
-        </Reveal>
+            <Link
+              href="/docs"
+              className="mt-12 inline-flex h-14 items-center gap-2 rounded-full bg-white px-8 text-base font-medium text-[#141318] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/40 focus-visible:ring-offset-2 focus-visible:ring-offset-[#141318]"
+              style={{
+                boxShadow: `0 0 0 1px rgba(255,255,255,0.2), 0 12px 50px ${LAVENDER}40, inset 0 1px 0 rgba(255,255,255,0.6)`,
+              }}
+            >
+              View documentation
+              <ArrowRight className="size-5" aria-hidden="true" />
+            </Link>
+          </motion.div>
+        </FadeUp>
       </div>
 
-      <div className={SECTION_WRAPPER}>
-        <footer className="mt-32 flex flex-col items-start justify-between gap-4 border-t border-white/[0.04] pt-8 text-xs text-[#666] md:flex-row md:items-center">
+      <div className={SECTION}>
+        <footer className="mt-32 flex flex-col items-start justify-between gap-4 border-t border-white/[0.05] pt-8 text-xs text-[#666] md:flex-row md:items-center">
           <span suppressHydrationWarning>
             © {new Date().getFullYear()} remocn — MIT licensed
           </span>
           <nav className="flex gap-6">
             <Link
               href="/docs"
-              className="transition-colors duration-75 hover:text-white focus-visible:text-white focus-visible:outline-none"
+              className="transition-colors hover:text-white focus-visible:text-white focus-visible:outline-none"
             >
               Docs
             </Link>
             <Link
               href="https://github.com/remocn/remocn"
-              className="transition-colors duration-75 hover:text-white focus-visible:text-white focus-visible:outline-none"
+              className="transition-colors hover:text-white focus-visible:text-white focus-visible:outline-none"
             >
               GitHub
             </Link>
             <Link
               href="/docs"
-              className="transition-colors duration-75 hover:text-white focus-visible:text-white focus-visible:outline-none"
+              className="transition-colors hover:text-white focus-visible:text-white focus-visible:outline-none"
             >
               Components
             </Link>
@@ -762,13 +803,11 @@ function FinalCTA() {
 export default function Page() {
   return (
     <div
-      className="relative min-h-screen bg-black font-sans text-[#EDEDED] antialiased"
+      className="relative min-h-screen overflow-hidden bg-black font-sans text-[#EDEDED] antialiased"
       style={{ colorScheme: "dark" }}
     >
-      <GridBackground />
-      <NoiseOverlay />
       <Header />
-      <main className="relative z-10">
+      <main className="relative">
         <Hero />
         <DXShowcase />
         <BentoRegistry />
