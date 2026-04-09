@@ -27,7 +27,7 @@ function SponsorLogoCard({
         alt={sponsor.name}
         className={cn(
           maxH,
-          "w-auto object-contain opacity-60 transition-all duration-300 [filter:grayscale(1)_brightness(0)_invert(1)] group-hover:opacity-100 ",
+          "w-auto object-contain opacity-60 transition-all duration-300 grauscale invert group-hover:opacity-100 ",
           sponsor.customStyles,
         )}
         style={{ transform: `scale(${sponsor.logoScale ?? 1})` }}

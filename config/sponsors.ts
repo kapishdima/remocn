@@ -28,6 +28,15 @@ export const sponsors: Sponsor[] = [
     logoScale: 1.2,
     customStyles: "opacity-90",
   },
+  {
+    id: "shadcnstudio",
+    name: "ShadcnStudio",
+    logoUrl: "https://cdn.shadcnstudio.com/ss-assets/marketing/shadcn-studio-logos/shadcn-studio-light-full-logo.png",
+    website: "https://shadcnstudio.com/?utm_source=remocn&utm_medium=sponsor&utm_campaign=remocn_sponsors_page",
+    tier: "builder",
+    logoScale: 1.2,
+    customStyles: "invert opacity-90 h-8",
+  },
 ];
 
 export type BillingMode = "monthly" | "one-time";
