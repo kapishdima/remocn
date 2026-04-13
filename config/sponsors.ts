@@ -37,6 +37,15 @@ export const sponsors: Sponsor[] = [
     logoScale: 1.2,
     customStyles: "invert opacity-90 h-8",
   },
+  {
+    id: "shadcnspace",
+    name: "ShadcnSpace",
+    logoUrl: "https://shadcnspace.com/images/logo/shadcnspace.svg",
+    website: "https://shadcnspace.com/?utm_source=remocn&utm_medium=sponsor&utm_campaign=remocn_sponsors_page",
+    tier: "builder",
+    logoScale: 1.2,
+    customStyles: "grayscale invert opacity-90 h-8",
+  },
 ];
 
 export type BillingMode = "monthly" | "one-time";
