@@ -12,13 +12,21 @@ export type Sponsor = {
   logoScale?: number;
   /** Optional Tailwind classes for fine-tuning a specific logo. */
   customStyles?: string;
+  isPaste?: boolean; // Whether this sponsor is from our Paste integration. Used to add a "via Paste" badge on the frontend.
 };
 
 export const sponsors: Sponsor[] = [
-  // Add sponsors here by hand. Empty by default — the page renders an
-  // empty-state CTA when no sponsors exist.
-  //
-  // Example:
+  {
+    id: "efferd",
+    name: "Efferd",
+    logoUrl: "/sponsors/shadcnblocks.svg",
+    website: "https://shadcnblocks.com/?utm_source=remocn&utm_medium=sponsor&utm_campaign=remocn_sponsors_page",
+    tier: "partner",
+    logoScale: 1.2,
+    customStyles: "opacity-90",
+    isPaste: false,
+  },
+  // Paste:
   {
     id: "efferd",
     name: "Efferd",
@@ -27,6 +35,7 @@ export const sponsors: Sponsor[] = [
     tier: "partner",
     logoScale: 1.2,
     customStyles: "opacity-90",
+    isPaste: true,
   },
   {
     id: "shadcnstudio",
@@ -36,6 +45,7 @@ export const sponsors: Sponsor[] = [
     tier: "builder",
     logoScale: 1.2,
     customStyles: "invert opacity-90 h-8",
+    isPaste: true,
   },
   {
     id: "shadcnspace",
@@ -45,8 +55,9 @@ export const sponsors: Sponsor[] = [
     tier: "builder",
     logoScale: 1.2,
     customStyles: "grayscale invert opacity-90 h-8",
+    isPaste: true,
   },
-];
+].filter(sponsor => !sponsor.isPaste);
 
 export type BillingMode = "monthly" | "one-time";
 
