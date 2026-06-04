@@ -5,9 +5,6 @@ description: A console window that types out commands and rolls older lines off 
 
 <ComponentPreview name="terminal-simulator" />
 
-A dev-block that simulates a terminal session. Each line is revealed via `<Sequence>` and typed character-by-character with a substring + `interpolate` pattern. Once the visible line count exceeds the window, the inner container slides up via `translateY` so the latest line is always in view.
-
-
 ## Installation
 
 <InstallBlock name="terminal-simulator" />
@@ -92,13 +89,3 @@ export const RemotionRoot = () => (
     },
   ]}
 />
-
-## Notes
-
-<Note title="Deterministic cursor">
-  The blinking cursor uses `Math.floor(frame / 15) % 2 === 0` rather than `setInterval`, so the animation is fully deterministic and renders the same on every machine.
-</Note>
-
-<Note title="Auto scroll">
-  Once more lines have started than fit in the window, the entire content layer translates upward in `lineHeight` increments, simulating scroll without overflow.
-</Note>

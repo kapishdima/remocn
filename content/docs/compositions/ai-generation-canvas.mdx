@@ -5,9 +5,6 @@ description: A prompt input morphs into a dashboard header, then skeletons flip 
 
 <ComponentPreview name="ai-generation-canvas" />
 
-A four-phase composition that tells the story of AI generation in one shot. The prompt types into a centered input, the input springs upward and stretches into a header bar, brand-tinted skeleton cards fade in beneath it, then each card flips on its Y axis to reveal the rendered dashboard content with a staggered cascade.
-
-
 ## Installation
 
 <InstallBlock name="ai-generation-canvas" />
@@ -68,9 +65,3 @@ export const RemotionRoot = () => (
     },
   ]}
 />
-
-## Notes
-
-<Note title="Skeletons should not feel like loading spinners">
-  The shimmer is intentionally tinted with the accent color at low alpha rather than the usual neutral gray. That single detail reframes the wait as anticipation — it reads as the model thinking, not as the network stalling.
-</Note>

@@ -5,9 +5,6 @@ description: A Kanban ticket flies between columns, triggering events along the 
 
 <ComponentPreview name="pipeline-journey" />
 
-A workflow primitive that animates a single ticket on a Kanban board. The card lifts out of Todo, arcs through the air with a tilt and growing shadow, lands in In Progress where a brief timer ticks, then takes off again toward Done — where it triggers a deterministic confetti burst on touchdown.
-
-
 ## Installation
 
 <InstallBlock name="pipeline-journey" />
@@ -64,9 +61,3 @@ export const RemotionRoot = () => (
     },
   ]}
 />
-
-## Notes
-
-<Note title="Determinism beats Math.random">
-  The confetti burst looks chaotic but is fully deterministic — particle angles, distances, and colors are derived from `Math.sin(i * 12.9898) * 43758.5453` style hashing so every render produces an identical frame. Never reach for `Math.random` inside a Remotion component.
-</Note>

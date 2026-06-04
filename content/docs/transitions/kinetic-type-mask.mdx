@@ -5,9 +5,6 @@ description: Use giant typography as a window into the next scene.
 
 <ComponentPreview name="kinetic-type-mask" />
 
-A transition primitive that turns a giant headline into a window into the next scene. The text is rendered as an SVG `<clipPath>` over the incoming scene, so its interior literally shows what's underneath. After a brief hold, the text scales exponentially until the inside of one letter expands past the screen edges and fully reveals the new scene.
-
-
 ## Installation
 
 <InstallBlock name="kinetic-type-mask" />
@@ -87,9 +84,3 @@ export const RemotionRoot = () => (
     },
   ]}
 />
-
-## Notes
-
-<Note title="Use a heavy display weight">
-  The mask works best with the boldest weight you have on hand (Geist 900 or similar). Heavy letterforms have generous interior space, so the camera has somewhere to fly through before the reveal.
-</Note>

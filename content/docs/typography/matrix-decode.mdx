@@ -5,9 +5,6 @@ description: Random scramble resolves left-to-right into target text.
 
 <ComponentPreview name="matrix-decode" />
 
-A typography primitive that starts as a stream of random symbols and decodes character by character into the target text. Perfect for DevTools, cybersecurity, and AI reveal moments.
-
-
 ## Installation
 
 <InstallBlock name="matrix-decode" />
@@ -88,9 +85,3 @@ export const RemotionRoot = () => (
     },
   ]}
 />
-
-## Notes
-
-<Note title="Deterministic randomness">
-  Uses Remotion's `random(seed)` keyed on character index and frame, so scrambled glyphs are stable across renders — no flicker between frames.
-</Note>

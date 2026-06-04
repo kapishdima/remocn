@@ -36,7 +36,7 @@ export function ComponentPreview({ name }: { name: string }) {
   return (
     <Suspense
       fallback={
-        <div className="not-prose mb-6 aspect-video w-full animate-pulse rounded-xl bg-muted" />
+        <div className="not-prose mb-6 aspect-video w-full animate-pulse rounded-2xl bg-muted" />
       }
     >
       <Preview name={name} config={entry.config} Component={entry.Component} />
@@ -150,7 +150,7 @@ function Preview({
         </TabsList>
 
         <TabsContent value="preview" className="mt-0">
-          <div className="aspect-video w-full overflow-hidden rounded-xl bg-muted">
+          <div className="surface-card aspect-video w-full overflow-hidden rounded-2xl">
             <Player
               component={Component}
               inputProps={values}
@@ -168,17 +168,15 @@ function Preview({
         </TabsContent>
 
         <TabsContent value="code" className="mt-0">
-          <div className="overflow-hidden rounded-xl bg-muted [&_pre]:!rounded-none [&_pre]:!border-0 [&_pre]:!bg-transparent">
+          <div className="surface-card overflow-hiddenrounded-2xl [&_pre]:!rounded-none [&_pre]:!border-0 [&_pre]:!bg-transparent">
             <DynamicCodeBlock lang="tsx" code={code} />
           </div>
         </TabsContent>
       </Tabs>
 
-      <div className="overflow-hidden rounded-xl bg-muted">
-        <div className="flex items-center justify-between px-5 pt-4 pb-2">
-          <span className="text-xs font-medium uppercase tracking-wider text-muted-foreground">
-            Customize
-          </span>
+      <div className="overflow-hidden rounded-2xl">
+        <div className="flex items-center justify-between pt-4 pb-2">
+          <h2>Customize</h2>
           <div className="flex items-center gap-1">
             <button
               type="button"
@@ -212,13 +210,11 @@ function Preview({
             </button>
           </div>
         </div>
-        <div className="px-5 pb-5">
-          <ComponentCustomizer
-            controls={config.controls}
-            values={values as Record<string, unknown>}
-            onChange={handleCustomizeChange}
-          />
-        </div>
+        <ComponentCustomizer
+          controls={config.controls}
+          values={values as Record<string, unknown>}
+          onChange={handleCustomizeChange}
+        />
       </div>
     </div>
   );

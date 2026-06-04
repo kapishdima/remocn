@@ -5,9 +5,6 @@ description: A full Safari/Chrome simulation from URL typing to scroll and click
 
 <ComponentPreview name="browser-flow" />
 
-A complete browser interaction in one block. The address bar takes focus, the URL types itself in (with an autocomplete suggestion that follows along), the loading bar stalls at 15% before snapping to 100%, the page renders, and a virtual cursor arcs down toward a CTA — clicking it with a real scale dip and a synchronous press on the button. Every phase is frame-deterministic.
-
-
 ## Installation
 
 <InstallBlock name="browser-flow" />
@@ -58,9 +55,3 @@ export const RemotionRoot = () => (
     },
   ]}
 />
-
-## Notes
-
-<Note title="The 15% stall is what sells it">
-  Real browsers fake progress. The loading bar jumps to 15% on Enter, holds there for half a second of suspense, then races to 100%. Removing that pause makes the whole flow feel synthetic — keep it.
-</Note>

@@ -5,9 +5,6 @@ description: Figma-style selection rectangle appears around any element.
 
 <ComponentPreview name="bounding-box-selector" />
 
-A composition that wraps its children in a relatively positioned container and overlays an absolutely positioned selection border with eight corner and edge handles. The border fades in and slightly scales up via `spring()` at the configured frame.
-
-
 ## Installation
 
 <InstallBlock name="bounding-box-selector" />
@@ -81,9 +78,3 @@ export const RemotionRoot = () => (
     },
   ]}
 />
-
-## Notes
-
-<Note title="Sizing">
-  This component reads its size from the wrapped child via `display: inline-block`. If you need pixel-perfect placement around dynamic content, pass children with explicit `width`/`height` instead of relying on intrinsic sizing.
-</Note>

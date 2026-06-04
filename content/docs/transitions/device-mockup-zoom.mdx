@@ -5,9 +5,6 @@ description: Pull back from a UI to reveal it inside a device frame.
 
 <ComponentPreview name="device-mockup-zoom" />
 
-A transition that starts zoomed into a UI screen and animates `transform: scale()` from 2 down to 1, revealing an inline SVG laptop or phone frame around it. No external assets — the device chrome is rendered with plain divs.
-
-
 ## Installation
 
 <InstallBlock name="device-mockup-zoom" />
@@ -75,9 +72,3 @@ export const RemotionRoot = () => (
     },
   ]}
 />
-
-## Notes
-
-<Note title="Replace with real mockups">
-  The inline SVG/div frame is intentional so the component has zero asset dependencies. If you want a photoreal mockup, swap the frame for an image loaded via `staticFile()` and place your UI underneath it.
-</Note>

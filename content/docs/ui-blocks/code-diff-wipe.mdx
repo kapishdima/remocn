@@ -5,9 +5,6 @@ description: Reveal an "after" code snippet by wiping a "before" snippet away.
 
 <ComponentPreview name="code-diff-wipe" />
 
-A dev-block that stacks two code panes and animates a vertical wipe from left to right. The top "before" layer is masked with `clip-path: inset(0 X% 0 0)` where `X` interpolates from `0` to `100`, revealing the "after" code beneath. An optional handle marker rides the wipe line.
-
-
 ## Installation
 
 <InstallBlock name="code-diff-wipe" />
@@ -95,13 +92,3 @@ export const RemotionRoot = () => (
     },
   ]}
 />
-
-## Notes
-
-<Note title="GPU friendly">
-  `clip-path` is composited on the GPU in modern browsers, so the wipe stays cheap even with long code blocks.
-</Note>
-
-<Warning title="Long lines">
-  The pane uses `whiteSpace: pre` and `overflow: hidden`, so very long lines get clipped rather than wrapped. Pre-format your snippets if you need them to fit.
-</Warning>

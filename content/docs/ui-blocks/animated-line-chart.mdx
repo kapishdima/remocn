@@ -5,9 +5,6 @@ description: A line chart whose path draws on from left to right.
 
 <ComponentPreview name="animated-line-chart" />
 
-A data-viz primitive built with SVG `<path>`. The full path length is computed analytically (sum of segment distances) and animated via `strokeDasharray` + `strokeDashoffset`. An optional leading dot rides the head of the line as it draws.
-
-
 ## Installation
 
 <InstallBlock name="animated-line-chart" />
@@ -97,13 +94,3 @@ export const RemotionRoot = () => (
     },
   ]}
 />
-
-## Notes
-
-<Note title="No getTotalLength()">
-  The path length is computed analytically by summing distances between consecutive points. This avoids `useEffect` and DOM measurement, so the first frame renders correctly during server-side bundling.
-</Note>
-
-<Warning title="Data range">
-  The chart auto-scales to the min/max of `data`. If all values are equal, the line is drawn at the top of the chart area.
-</Warning>

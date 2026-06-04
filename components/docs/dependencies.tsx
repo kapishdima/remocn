@@ -8,7 +8,7 @@ export function Dependencies({ items }: { items: string[] }) {
       {items.map((item) => (
         <code
           key={item}
-          className="rounded-md bg-muted px-2 py-0.5 font-mono text-xs text-foreground"
+          className="rounded-lg border border-border bg-muted/40 px-2 py-0.5 font-mono text-xs text-foreground"
         >
           {item}
         </code>

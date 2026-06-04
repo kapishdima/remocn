@@ -5,9 +5,6 @@ description: Words rise out of an invisible horizontal mask with a springy motio
 
 <ComponentPreview name="masked-slide-reveal" />
 
-A strict, architectural typography primitive: each word is wrapped in a fixed-height container with `overflow: hidden`, and the inner span springs upward from `translateY(100%)` to `0`. The result is text that grows out of an invisible baseline.
-
-
 ## Installation
 
 <InstallBlock name="masked-slide-reveal" />
@@ -82,9 +79,3 @@ export const RemotionRoot = () => (
     },
   ]}
 />
-
-## Notes
-
-<Note title="Mind descenders">
-  The mask uses `lineHeight: 1`, which clips letter descenders (g, y, p) by design. If you need extra room, wrap the component in your own container with padding.
-</Note>

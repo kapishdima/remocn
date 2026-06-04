@@ -5,9 +5,6 @@ description: Bars spring up from the baseline with a staggered cascade.
 
 <ComponentPreview name="animated-bar-chart" />
 
-A data-viz primitive that renders SVG `<rect>` bars and animates each one with a `spring()` driven `scaleY` transform. Each bar is offset by `staggerFrames`, producing a clean cascade.
-
-
 ## Installation
 
 <InstallBlock name="animated-bar-chart" />
@@ -96,9 +93,3 @@ export const RemotionRoot = () => (
     },
   ]}
 />
-
-## Notes
-
-<Note title="Transform origin">
-  Each bar uses `transformOrigin: bottom` so the spring animation grows from the baseline rather than the center. We rely on `transformBox: fill-box` to scope the origin to the rect's own box.
-</Note>

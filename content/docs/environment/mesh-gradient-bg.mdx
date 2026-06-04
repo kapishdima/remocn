@@ -5,9 +5,6 @@ description: Living gradient with amorphous color blobs slowly drifting across t
 
 <ComponentPreview name="mesh-gradient-bg" />
 
-A background primitive that renders several large radial-gradient blobs and animates them via `transform: translate()` using `Math.sin(frame)` and `Math.cos(frame)` for organic, deterministic drift. Heavy CSS blur plus `mix-blend-mode` creates a soft mesh gradient without shaders.
-
-
 ## Installation
 
 <InstallBlock name="mesh-gradient-bg" />
@@ -74,13 +71,3 @@ export const RemotionRoot = () => (
     },
   ]}
 />
-
-## Notes
-
-<Note title="Deterministic motion">
-  Motion uses `Math.sin(frame)` and `Math.cos(frame)`, so every render produces the same output for the same frame — safe for server-side rendering.
-</Note>
-
-<Warning title="Blur performance">
-  Large blur radii on big elements are expensive. If you see slow renders, reduce `blur` or the blob size before reaching for shaders.
-</Warning>

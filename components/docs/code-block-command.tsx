@@ -27,6 +27,11 @@ export interface CodeBlockCommandProps {
   npm?: string;
   bun?: string;
   component?: string;
+  /**
+   * Surface treatment. `muted` (default) is the filled gray slab used in docs.
+   * `outline` is a lighter bordered terminal that sits softer on light cards.
+   */
+  variant?: "muted" | "outline";
 }
 
 export function CodeBlockCommand({
@@ -36,6 +41,7 @@ export function CodeBlockCommand({
   npm,
   bun,
   component,
+  variant = "muted",
 }: CodeBlockCommandProps) {
   const [packageManager, setPackageManager] = usePackageManager();
   const trackEvent = useTrackEvent();
@@ -53,7 +59,14 @@ export function CodeBlockCommand({
   const activeCommand = tabs[packageManager] || "";
 
   return (
-    <div className="not-prose relative overflow-hidden rounded-xl bg-muted">
+    <div
+      className={cn(
+        "not-prose relative overflow-hidden rounded-xl",
+        variant === "outline"
+          ? "border border-border bg-card"
+          : "bg-muted",
+      )}
+    >
       <TabsPrimitive.Root
         value={packageManager}
         onValueChange={(value) => setPackageManager(value as PackageManager)}
@@ -81,8 +94,7 @@ export function CodeBlockCommand({
             <TabsPrimitive.Indicator
               className={cn(
                 "absolute bottom-0 left-0 -z-1",
-                "h-(--active-tab-height) w-(--active-tab-width)",
-                "translate-x-(--active-tab-left) -translate-y-(--active-tab-bottom)",
+                "w-(--active-tab-width) translate-x-(--active-tab-left)",
                 "h-0.5 rounded-none bg-foreground",
                 "transition-[width,translate] duration-200 ease-in-out",
               )}

@@ -5,9 +5,6 @@ description: A code window that springs a range of lines closed and replaces the
 
 <ComponentPreview name="code-accordion" />
 
-A code primitive for fixing camera attention. The window starts fully open, then a single spring drives the height of a wrapped range from `lineCount * lineHeight` down to one line, fading the original code out and the placeholder in. Because both inner content and the bar share the same spring, the bottom of the window snaps up with the same micro-bounce — the accordion feels like it has weight.
-
-
 ## Installation
 
 <InstallBlock name="code-accordion" />
@@ -115,9 +112,3 @@ export const RemotionRoot = () => (
     },
   ]}
 />
-
-## Notes
-
-<Note title="One spring, many properties">
-  A single `spring()` with `damping: 10` drives the inner height, original-code opacity, placeholder opacity, and the window's effective height all from one value. Animating from a single source is what makes the bounce feel coherent.
-</Note>

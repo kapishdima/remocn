@@ -5,15 +5,31 @@ import { ArrowRight, Pause, Play } from "lucide-react";
 import { motion } from "motion/react";
 import Link from "next/link";
 import { useCallback, useRef, useState } from "react";
-import Dither from "@/components/Dither";
 import { Button } from "@/components/ui/button";
-import { SECTION, SPRING_BOUNCE, SPRING_SOFT } from "@/config/landing";
+import { INSTALL_COMMAND, SECTION, SPRING_BOUNCE } from "@/config/landing";
 import { useTrackEvent } from "@/lib/analytics";
 import registry from "@/registry/__index__";
 import { FadeUp } from "../fade-up";
+import { InstallCommand } from "../install-command";
+
+// Shown inside the hero's glass-code-block player — the real remocn flow:
+// install components from the registry, then compose them in a Remotion scene.
+const HERO_CODE = `// npx shadcn@latest add remocn/blur-reveal remocn/mesh-gradient-bg
+import { AbsoluteFill } from "remotion";
+import { BlurReveal } from "@/components/remocn/blur-reveal";
+import { MeshGradientBg } from "@/components/remocn/mesh-gradient-bg";
+
+export function LaunchScene() {
+  return (
+    <AbsoluteFill>
+      <MeshGradientBg />
+      <BlurReveal text="Ship your launch video" />
+    </AbsoluteFill>
+  );
+}`;
 
 export function Hero() {
-  const heroEntry = registry["browser-flow"];
+  const heroEntry = registry["glass-code-block"];
   const playerRef = useRef<PlayerRef>(null);
   const [playing, setPlaying] = useState(true);
   const trackEvent = useTrackEvent();
@@ -25,14 +41,14 @@ export function Hero() {
       p.pause();
       setPlaying(false);
       trackEvent("preview_paused", {
-        component: "browser-flow",
+        component: "glass-code-block",
         surface: "hero",
       });
     } else {
       p.play();
       setPlaying(true);
       trackEvent("preview_played", {
-        component: "browser-flow",
+        component: "glass-code-block",
         surface: "hero",
         trigger: "click",
       });
@@ -44,119 +60,114 @@ export function Hero() {
     : "16 / 9";
 
   return (
-    <section className="relative overflow-hidden pt-32 pb-20 sm:pt-44 sm:pb-28">
-      <div className="w-full h-screen absolute top-0 left-0">
-        <Dither
-          waveColor={[
-            0.25098039215686274, 0.25098039215686274, 0.25098039215686274,
-          ]}
-          disableAnimation={false}
-          enableMouseInteraction={false}
-          mouseRadius={1}
-          colorNum={6}
-          pixelSize={2}
-          waveAmplitude={0.35}
-          waveFrequency={5.5}
-          waveSpeed={0.01}
-        />
+    <section className="relative overflow-hidden pt-10 pb-16 sm:pt-16 sm:pb-24">
+      {/* Theme-aware backdrop: dotted grid that fades out + a soft top glow. */}
+      <div aria-hidden className="absolute inset-0 -z-10">
+        <div className="absolute inset-0 bg-grid-fade" />
+        <div className="absolute inset-x-0 top-0 h-[420px] bg-[radial-gradient(60%_100%_at_50%_0%,var(--color-muted),transparent_70%)] opacity-70" />
       </div>
+
       <div className={SECTION}>
         <div className="flex flex-col items-center text-center">
-          <FadeUp delay={0.08}>
-            <h1 className="mt-8 max-w-8xl text-balance font-sans text-4xl font-semibold leading-[1.05] -tracking-[0.04em] text-[#EDEDED] sm:text-5xl md:text-7xl">
-              Cinematic video components
-              <br />
-              Now copy-pasteable
+          <FadeUp delay={0.06}>
+            <h1 className="max-w-3xl text-balance text-3xl font-semibold leading-[1.1] tracking-tight text-foreground sm:text-4xl md:text-5xl">
+              Cinematic video components,
+              <br className="hidden sm:block" /> now copy-pasteable
             </h1>
           </FadeUp>
 
-          <FadeUp delay={0.16}>
-            <p className="mt-6 max-w-2xl text-balance text-base sm:text-xl font-light leading-relaxed text-white">
-              Build product demos, changelogs, and launch videos in React. Open
-              source and delightfully easy
+          <FadeUp delay={0.12}>
+            <p className="mt-4 max-w-2xl text-balance text-base leading-relaxed text-muted-foreground sm:text-lg">
+              Production-ready Remotion animations, transitions and backgrounds.
+              Install with the shadcn CLI and own every line of code.
             </p>
           </FadeUp>
 
-          <FadeUp delay={0.24}>
-            <div className="mt-10 flex flex-col items-center gap-3 sm:flex-row">
-              <motion.div
-                whileHover={{ scale: 1.03 }}
-                whileTap={{ scale: 0.97 }}
-                transition={SPRING_SOFT}
-              >
-                <Button className="hover:bg-white h-14 px-10">
+          <FadeUp delay={0.18}>
+            <div className="mt-7 flex flex-col items-center gap-3 sm:flex-row">
+              <Button
+                size="lg"
+                className="h-11 gap-2 rounded-full px-6 text-sm"
+                render={
                   <Link
                     href="/docs/getting-started/introduction"
-                    className="inline-flex items-center gap-2"
                     onClick={() =>
                       trackEvent("cta_clicked", {
                         cta: "hero_browse",
                         destination: "/docs/getting-started/introduction",
                       })
                     }
-                  >
-                    Browse components
-                    <ArrowRight className="size-4" aria-hidden="true" />
-                  </Link>
-                </Button>
-              </motion.div>
+                  />
+                }
+              >
+                Browse components
+                <ArrowRight className="size-4" aria-hidden="true" />
+              </Button>
+              <InstallCommand command={INSTALL_COMMAND} />
             </div>
           </FadeUp>
         </div>
       </div>
 
-      <FadeUp delay={0.32} className="relative mt-10 w-full">
-        <motion.div
-          className="relative flex justify-center"
-          initial={{ y: 40 }}
-          whileInView={{ y: 0 }}
-          viewport={{ once: true, amount: 0.2 }}
-          transition={{ ...SPRING_BOUNCE, delay: 0.1 }}
-        >
-          <div
-            className="group relative w-[92vw] max-w-6xl overflow-hidden rounded-2xl sm:rounded-3xl"
-            style={{ aspectRatio }}
+      <div className={SECTION}>
+        <FadeUp delay={0.24} className="relative mt-10 w-full sm:mt-12">
+          <motion.div
+            className="relative"
+            initial={{ y: 40, opacity: 0 }}
+            whileInView={{ y: 0, opacity: 1 }}
+            viewport={{ once: true, amount: 0.2 }}
+            transition={{ ...SPRING_BOUNCE, delay: 0.05 }}
           >
-            {heroEntry ? (
-              <Player
-                ref={playerRef}
-                component={heroEntry.Component}
-                inputProps={{ url: "remocn.dev" }}
-                durationInFrames={heroEntry.config.durationInFrames}
-                fps={heroEntry.config.fps}
-                compositionWidth={heroEntry.config.compositionWidth}
-                compositionHeight={heroEntry.config.compositionHeight}
-                style={{
-                  width: "100%",
-                  height: "100%",
-                  display: "block",
-                }}
-                autoPlay
-                loop
-                acknowledgeRemotionLicense
-              />
-            ) : null}
-            <button
-              type="button"
-              onClick={togglePlay}
-              aria-label={playing ? "Pause preview" : "Play preview"}
-              className="absolute inset-0 flex items-center justify-center bg-transparent focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/40 focus-visible:ring-offset-0"
+            <div
+              className="group surface-card relative w-full overflow-hidden rounded-2xl shadow-2xl shadow-black/5 sm:rounded-3xl dark:shadow-black/40"
+              style={{ aspectRatio }}
             >
-              <span
-                aria-hidden
-                className="pointer-events-none flex size-14 items-center justify-center rounded-full bg-black/50 text-white opacity-0 backdrop-blur-md transition-opacity duration-200 group-hover:opacity-100 motion-reduce:transition-none data-[show=true]:opacity-100"
-                data-show={!playing}
+              {heroEntry ? (
+                <Player
+                  ref={playerRef}
+                  component={heroEntry.Component}
+                  inputProps={{
+                    code: HERO_CODE,
+                    title: "LaunchScene.tsx",
+                    width: 860,
+                    height: 480,
+                    // Scene backdrop behind the glass card — the abstract texture
+                    // with a dark wash so the code stays legible through the glass.
+                    background:
+                      "linear-gradient(rgba(5,5,8,0.5), rgba(5,5,8,0.62)), url(/bg.jpg) center / cover no-repeat",
+                  }}
+                  durationInFrames={heroEntry.config.durationInFrames}
+                  fps={heroEntry.config.fps}
+                  compositionWidth={heroEntry.config.compositionWidth}
+                  compositionHeight={heroEntry.config.compositionHeight}
+                  style={{ width: "100%", height: "100%", display: "block" }}
+                  autoPlay
+                  loop
+                  acknowledgeRemotionLicense
+                />
+              ) : null}
+              <button
+                type="button"
+                onClick={togglePlay}
+                aria-label={playing ? "Pause preview" : "Play preview"}
+                className="absolute inset-0 flex items-center justify-center bg-transparent focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring/40"
               >
-                {playing ? (
-                  <Pause className="size-5" />
-                ) : (
-                  <Play className="size-5 translate-x-0.5" />
-                )}
-              </span>
-            </button>
-          </div>
-        </motion.div>
-      </FadeUp>
+                <span
+                  aria-hidden
+                  data-show={!playing}
+                  className="pointer-events-none flex size-14 items-center justify-center rounded-full bg-background/70 text-foreground opacity-0 backdrop-blur-md transition-opacity duration-200 group-hover:opacity-100 motion-reduce:transition-none data-[show=true]:opacity-100"
+                >
+                  {playing ? (
+                    <Pause className="size-5" />
+                  ) : (
+                    <Play className="size-5 translate-x-0.5" />
+                  )}
+                </span>
+              </button>
+            </div>
+          </motion.div>
+        </FadeUp>
+      </div>
     </section>
   );
 }

@@ -5,9 +5,6 @@ description: Cards pop into a bento grid one after another with a spring.
 
 <ComponentPreview name="staggered-bento-grid" />
 
-A composition that maps an array of items into a CSS grid and wraps each card in a `<Sequence>` offset by `staggerDelay` frames. Each card uses `spring()` for its scale and opacity, so its life cycle starts at frame 0 inside the sequence.
-
-
 ## Installation
 
 <InstallBlock name="staggered-bento-grid" />
@@ -89,9 +86,3 @@ export const RemotionRoot = () => (
     },
   ]}
 />
-
-## Notes
-
-<Note title="Sequence per card">
-  Wrapping each card in `<Sequence from={index * staggerDelay}>` resets `useCurrentFrame()` to 0 inside that card, so the spring math stays clean and per-item.
-</Note>

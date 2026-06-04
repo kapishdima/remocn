@@ -5,9 +5,6 @@ description: A continuously scrolling horizontal text strip that loops seamlessl
 
 <ComponentPreview name="infinite-marquee" />
 
-A typography primitive that translates a row of duplicated text spans on the X axis at a fixed pixel-per-frame rate. The offset is taken `mod` the approximate width of one repetition so the loop is seamless and fully deterministic.
-
-
 ## Installation
 
 <InstallBlock name="infinite-marquee" />
@@ -100,13 +97,3 @@ export const RemotionRoot = () => (
     },
   ]}
 />
-
-## Notes
-
-<Note title="Seamless looping">
-  Width is approximated as `text.length * fontSize * 0.55`. For very wide or very narrow fonts you may see a small jump on loop — tweak the multiplier to match your typeface, or pass a longer `text` to make any seam imperceptible.
-</Note>
-
-<Warning title="No layout reads">
-  This component intentionally avoids `useRef` / measurement so it stays render-deterministic. If you need pixel-perfect looping for a specific font, hard-code the repetition width via `text` length and `fontSize`.
-</Warning>

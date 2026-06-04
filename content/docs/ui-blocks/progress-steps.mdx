@@ -5,9 +5,6 @@ description: Multi-step pipeline with nodes lighting up sequentially.
 
 <ComponentPreview name="progress-steps" />
 
-A workflow primitive that visualizes a multi-step process. Each node is staggered through `spring()` scale and `interpolateColors`, while connecting SVG lines fill via `strokeDashoffset`. Switch `orientation` to render as a horizontal pipeline or a vertical timeline.
-
-
 ## Installation
 
 <InstallBlock name="progress-steps" />
@@ -92,13 +89,3 @@ export const RemotionRoot = () => (
     },
   ]}
 />
-
-## Notes
-
-<Note title="Lines fill via strokeDashoffset">
-  Connecting lines use `strokeDasharray` set to the segment length and animate `strokeDashoffset` from full length down to zero. This is GPU-friendly and stays crisp at any composition size.
-</Note>
-
-<Warning title="Pick a duration that fits all steps">
-  Make sure `durationInFrames` is at least `steps.length * stepDuration + 30` so the final node has time to pop into its active state.
-</Warning>

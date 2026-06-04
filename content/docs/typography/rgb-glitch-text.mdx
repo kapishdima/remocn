@@ -5,9 +5,6 @@ description: Three RGB-offset text copies jitter for a few frames to create a ch
 
 <ComponentPreview name="rgb-glitch-text" />
 
-A typography primitive that stacks red, green, and blue copies of the same text and offsets them on each frame during a short glitch window. Uses `random(seed)` from Remotion so the jitter is fully deterministic across renders.
-
-
 ## Installation
 
 <InstallBlock name="rgb-glitch-text" />
@@ -100,13 +97,3 @@ export const RemotionRoot = () => (
     },
   ]}
 />
-
-## Notes
-
-<Note title="Determinism">
-  The RGB offsets use `random(seed)` from `remotion`, never `Math.random()`. The same `seed` and `frame` always produce the same offset, so the glitch renders identically on every frame.
-</Note>
-
-<Warning title="Light backgrounds only">
-  The RGB copies use `mixBlendMode: "multiply"` so they read correctly on a light background. On a dark background you'll want to switch to `screen` or stack opaque copies instead.
-</Warning>

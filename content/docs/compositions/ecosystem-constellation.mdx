@@ -5,9 +5,6 @@ description: A central product logo orbited by integration satellites with pulsi
 
 <ComponentPreview name="ecosystem-constellation" />
 
-A composition for telling an "everything connects" story. A pulsing logo sits in the center while integration satellites fly in from beyond the frame and settle into elliptical orbits at different radii and angular speeds. Connection lines between the hub and each satellite periodically light up — and the firing satellite scales up by a hair to feel like real data is moving.
-
-
 ## Installation
 
 <InstallBlock name="ecosystem-constellation" />
@@ -68,9 +65,3 @@ export const RemotionRoot = () => (
     },
   ]}
 />
-
-## Notes
-
-<Note title="Orbits are elliptical, not circular">
-  Each satellite uses a slightly different `radiusX` and `radiusY` plus its own angular speed, so the constellation never falls into a robotic, perfectly-symmetric pattern. Data pulses cycle through satellites deterministically using `Math.floor(frame / 30) % count`, which keeps the animation render-stable while still feeling alive.
-</Note>

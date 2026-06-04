@@ -5,8 +5,6 @@ description: A "thinking" overlay for AI-driven UI — source image blurs out un
 
 <ComponentPreview name="ai-generate-overlay" />
 
-The overlay you reach for any time you need to communicate "the model is working on it." The source image blurs from `0px` to `~20px`, a screen-blended SVG dot pattern shimmers in over the top with a tiny `Math.sin(frame / 6)` jitter, and a pill-shaped indicator with a backdrop-filtered glass background pulses in the center. When the spring-driven reveal fires, the generated image fades in over the blurred source and the pill (and grid) fades back out. Every layer is driven by the current frame so it renders deterministically — no `setInterval`, no random flicker.
-
 ## Installation
 
 <InstallBlock name="ai-generate-overlay" />
@@ -130,17 +128,3 @@ export const RemotionRoot = () => (
     },
   ]}
 />
-
-## Notes
-
-<Note title="Deterministic shimmer">
-  The dot grid jitter is `Math.sin(frame / 6) * 0.05` — a pure function of the current frame. Don't be tempted to reach for `Math.random()` or `setInterval`; both will introduce mismatched output between preview and final render.
-</Note>
-
-<Note title="Swap in real images">
-  The defaults render two CSS gradients so the component is dependency-free, but in practice you'll pass `sourceImageBg`/`generatedImageBg` as `url(...)` strings (loaded via `staticFile()` in your scene) so the blur is applied to a real photo.
-</Note>
-
-<Warning title="Heavy blur is expensive">
-  `filter: blur(20px)` on a viewport-sized layer is one of the costlier CSS effects. Keep the blurred layer on its own absolutely-positioned `<div>` (as it is here) so the browser can promote it and avoid re-layouting the rest of the scene each frame.
-</Warning>

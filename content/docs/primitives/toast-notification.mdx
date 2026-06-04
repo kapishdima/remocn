@@ -5,9 +5,6 @@ description: System-style toast that pops in, holds, then slides out.
 
 <ComponentPreview name="toast-notification" />
 
-A micro-interaction primitive that drives a toast through three phases — `spring()`-based enter (translateY + opacity), a hold, and an `interpolate`-based exit. Position is anchored to the bottom-right of the frame and the variant controls the icon and accent.
-
-
 ## Installation
 
 <InstallBlock name="toast-notification" />
@@ -92,13 +89,3 @@ export const RemotionRoot = () => (
     },
   ]}
 />
-
-## Notes
-
-<Note title="Phase timing is derived from durationInFrames">
-  The toast reserves 15 frames for enter and 15 frames for exit, with the rest of the composition serving as the hold phase. Increase `durationInFrames` if you want the toast to linger longer.
-</Note>
-
-<Warning title="Anchored absolutely">
-  The toast is positioned with `position: absolute` at `right: 32, bottom: 32`. Make sure the parent composition fills the frame so it lands where you expect.
-</Warning>

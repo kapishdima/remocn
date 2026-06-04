@@ -5,9 +5,6 @@ description: A bento card lifts off the grid and blooms into a full-screen modal
 
 <ComponentPreview name="morphing-modal" />
 
-The most expensive transition in the kit. Five properties — `top`, `left`, `width`, `height`, and `borderRadius` — are all driven by **one** spring with high mass and low stiffness so the modal "blooms" instead of jumping. The source card's content fades out in the first third of the morph, the modal's content fades in (with a 20px translateY) only in the last third — that asymmetric handoff is what stops it from feeling like a cheap slideshow. Backdrop dims in lockstep with the spring.
-
-
 ## Installation
 
 <InstallBlock name="morphing-modal" />
@@ -141,13 +138,3 @@ export const RemotionRoot = () => (
     },
   ]}
 />
-
-## Notes
-
-<Note title="One spring, five properties">
-  Animating each rect property from a single spring value is the trick — independent springs would drift out of phase and the morph would feel jelly-like in the worst way.
-</Note>
-
-<Warning title="Asymmetric content fade">
-  Source content fades over `[0, 0.33]`, modal content arrives over `[0.66, 1]`. Don't overlap them — the empty middle third is what makes the bloom feel intentional.
-</Warning>

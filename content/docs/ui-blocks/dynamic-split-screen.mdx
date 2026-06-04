@@ -5,9 +5,6 @@ description: Cinematic two-column split where one panel shrinks and the other ex
 
 <ComponentPreview name="chat-to-preview-layout" />
 
-A layout block that animates the `flex-basis` of two side-by-side panels — perfect for chat-to-preview handoffs, before/after comparisons, or any moment where one workspace cedes real estate to another. Both panels use `overflow: hidden` so their content doesn't break the layout while the widths animate.
-
-
 ## Installation
 
 <InstallBlock name="chat-to-preview-layout" />
@@ -75,9 +72,3 @@ export const RemotionRoot = () => (
     },
   ]}
 />
-
-## Notes
-
-<Note title="Why flex-basis is OK here">
-  Most Remotion animations should stick to `transform`/`opacity`. This component is an exception because the resizing of two panels *is* the effect — there's no way to fake it with `transform`. Keep both child panels' contents inside an `overflow: hidden` wrapper to avoid reflow artifacts.
-</Note>

@@ -5,9 +5,6 @@ description: Subtle moving grid background for tech and dev scenes.
 
 <ComponentPreview name="dynamic-grid" />
 
-A minimal grid background built from two CSS linear gradients, translated each frame via `transform`. Cheaper than animating `background-position` because the browser keeps layout untouched.
-
-
 ## Installation
 
 <InstallBlock name="dynamic-grid" />
@@ -82,9 +79,3 @@ export const RemotionRoot = () => (
     },
   ]}
 />
-
-## Notes
-
-<Note title="Seamless loop">
-  Offset uses modulo `cellSize`, so the grid loops perfectly — ideal as a base layer under intros and outros.
-</Note>
