@@ -1,7 +1,7 @@
 {
-  "tool_name": "mcp__plugin_oh-my-claudecode_t__lsp_diagnostics",
-  "tool_input_preview": "{\"file\":\"config/landing.ts\",\"severity\":\"error\"}",
-  "error": "Language server 'typescript-language-server' not found.\nInstall with: npm install -g typescript-language-server typescript",
-  "timestamp": "2026-06-04T13:54:08.237Z",
-  "retry_count": 2
+  "tool_name": "Read",
+  "tool_input_preview": "{\"file_path\":\"/Users/dev_wandry/projects/opensource/remocn/apps/web/app/(home)/components/sections/hero.tsx\"}",
+  "error": "File does not exist. Note: your current working directory is /Users/dev_wandry/projects/opensource/remocn.",
+  "timestamp": "2026-06-04T14:32:10.667Z",
+  "retry_count": 1
 }

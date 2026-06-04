@@ -199,6 +199,12 @@
   },
   "hotPaths": [
     {
+      "path": "app/(home)/components/sections/hero.tsx",
+      "accessCount": 19,
+      "lastAccessed": 1780583543244,
+      "type": "file"
+    },
+    {
       "path": "app/(home)/components/site-header.tsx",
       "accessCount": 10,
       "lastAccessed": 1780581332299,
@@ -229,12 +235,6 @@
       "type": "file"
     },
     {
-      "path": "app/(home)/components/sections/hero.tsx",
-      "accessCount": 6,
-      "lastAccessed": 1780580652498,
-      "type": "file"
-    },
-    {
       "path": "app/(home)/components/page-shell.tsx",
       "accessCount": 6,
       "lastAccessed": 1780581332349,
@@ -244,6 +244,12 @@
       "path": "app/(home)/components/site-footer.tsx",
       "accessCount": 6,
       "lastAccessed": 1780581347929,
+      "type": "file"
+    },
+    {
+      "path": "registry/remocn/browser-flow/index.tsx",
+      "accessCount": 6,
+      "lastAccessed": 1780583059589,
       "type": "file"
     },
     {
@@ -373,6 +379,18 @@
       "type": "file"
     },
     {
+      "path": "registry/remocn/glass-code-block/index.tsx",
+      "accessCount": 2,
+      "lastAccessed": 1780583531822,
+      "type": "file"
+    },
+    {
+      "path": "registry/remocn/glass-code-block/config.ts",
+      "accessCount": 2,
+      "lastAccessed": 1780583532201,
+      "type": "file"
+    },
+    {
       "path": "lib/utils.ts",
       "accessCount": 1,
       "lastAccessed": 1780578756259,
@@ -448,6 +466,30 @@
       "path": "app/(home)/layout.tsx",
       "accessCount": 1,
       "lastAccessed": 1780581337914,
+      "type": "file"
+    },
+    {
+      "path": "public/bg.jpg",
+      "accessCount": 1,
+      "lastAccessed": 1780582782422,
+      "type": "file"
+    },
+    {
+      "path": "registry/__index__.tsx",
+      "accessCount": 1,
+      "lastAccessed": 1780583532254,
+      "type": "file"
+    },
+    {
+      "path": "registry/remocn/blur-reveal/index.tsx",
+      "accessCount": 1,
+      "lastAccessed": 1780583532611,
+      "type": "file"
+    },
+    {
+      "path": "registry/remocn/mesh-gradient-bg/index.tsx",
+      "accessCount": 1,
+      "lastAccessed": 1780583533117,
       "type": "file"
     }
   ],

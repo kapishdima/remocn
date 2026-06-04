@@ -12,8 +12,24 @@ import registry from "@/registry/__index__";
 import { FadeUp } from "../fade-up";
 import { InstallCommand } from "../install-command";
 
+// Shown inside the hero's glass-code-block player — the real remocn flow:
+// install components from the registry, then compose them in a Remotion scene.
+const HERO_CODE = `// npx shadcn@latest add remocn/blur-reveal remocn/mesh-gradient-bg
+import { AbsoluteFill } from "remotion";
+import { BlurReveal } from "@/components/remocn/blur-reveal";
+import { MeshGradientBg } from "@/components/remocn/mesh-gradient-bg";
+
+export function LaunchScene() {
+  return (
+    <AbsoluteFill>
+      <MeshGradientBg />
+      <BlurReveal text="Ship your launch video" />
+    </AbsoluteFill>
+  );
+}`;
+
 export function Hero() {
-  const heroEntry = registry["browser-flow"];
+  const heroEntry = registry["glass-code-block"];
   const playerRef = useRef<PlayerRef>(null);
   const [playing, setPlaying] = useState(true);
   const trackEvent = useTrackEvent();
@@ -25,14 +41,14 @@ export function Hero() {
       p.pause();
       setPlaying(false);
       trackEvent("preview_paused", {
-        component: "browser-flow",
+        component: "glass-code-block",
         surface: "hero",
       });
     } else {
       p.play();
       setPlaying(true);
       trackEvent("preview_played", {
-        component: "browser-flow",
+        component: "glass-code-block",
         surface: "hero",
         trigger: "click",
       });
@@ -44,7 +60,7 @@ export function Hero() {
     : "16 / 9";
 
   return (
-    <section className="relative overflow-hidden pt-28 pb-16 sm:pt-36 sm:pb-24">
+    <section className="relative overflow-hidden pt-10 pb-16 sm:pt-16 sm:pb-24">
       {/* Theme-aware backdrop: dotted grid that fades out + a soft top glow. */}
       <div aria-hidden className="absolute inset-0 -z-10">
         <div className="absolute inset-0 bg-grid-fade" />
@@ -53,32 +69,22 @@ export function Hero() {
 
       <div className={SECTION}>
         <div className="flex flex-col items-center text-center">
-          <FadeUp delay={0.04}>
-            <Link
-              href="/docs/getting-started/introduction"
-              className="inline-flex items-center gap-2 rounded-full border border-border bg-card/50 px-3 py-1 text-sm text-muted-foreground backdrop-blur-sm transition-colors hover:text-foreground"
-            >
-              <span className="size-1.5 rounded-full bg-foreground/70" />
-              Open source · MIT licensed
-            </Link>
-          </FadeUp>
-
-          <FadeUp delay={0.1}>
-            <h1 className="mt-6 max-w-4xl text-balance text-4xl font-semibold leading-[1.05] tracking-tight text-foreground sm:text-6xl md:text-7xl">
+          <FadeUp delay={0.06}>
+            <h1 className="max-w-3xl text-balance text-3xl font-semibold leading-[1.1] tracking-tight text-foreground sm:text-4xl md:text-5xl">
               Cinematic video components,
               <br className="hidden sm:block" /> now copy-pasteable
             </h1>
           </FadeUp>
 
-          <FadeUp delay={0.16}>
-            <p className="mt-6 max-w-2xl text-balance text-base leading-relaxed text-muted-foreground sm:text-xl">
+          <FadeUp delay={0.12}>
+            <p className="mt-4 max-w-2xl text-balance text-base leading-relaxed text-muted-foreground sm:text-lg">
               Production-ready Remotion animations, transitions and backgrounds.
               Install with the shadcn CLI and own every line of code.
             </p>
           </FadeUp>
 
-          <FadeUp delay={0.22}>
-            <div className="mt-9 flex flex-col items-center gap-3 sm:flex-row">
+          <FadeUp delay={0.18}>
+            <div className="mt-7 flex flex-col items-center gap-3 sm:flex-row">
               <Button
                 size="lg"
                 className="h-11 gap-2 rounded-full px-6 text-sm"
@@ -103,7 +109,7 @@ export function Hero() {
         </div>
       </div>
 
-      <FadeUp delay={0.3} className="relative mt-14 w-full">
+      <FadeUp delay={0.24} className="relative mt-10 w-full sm:mt-12">
         <motion.div
           className="relative flex justify-center px-4 sm:px-6"
           initial={{ y: 40, opacity: 0 }}
@@ -119,7 +125,16 @@ export function Hero() {
               <Player
                 ref={playerRef}
                 component={heroEntry.Component}
-                inputProps={{ url: "remocn.dev" }}
+                inputProps={{
+                  code: HERO_CODE,
+                  title: "LaunchScene.tsx",
+                  width: 860,
+                  height: 480,
+                  // Scene backdrop behind the glass card — the abstract texture
+                  // with a dark wash so the code stays legible through the glass.
+                  background:
+                    "linear-gradient(rgba(5,5,8,0.5), rgba(5,5,8,0.62)), url(/bg.jpg) center / cover no-repeat",
+                }}
                 durationInFrames={heroEntry.config.durationInFrames}
                 fps={heroEntry.config.fps}
                 compositionWidth={heroEntry.config.compositionWidth}

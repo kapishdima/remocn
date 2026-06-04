@@ -1,29 +1,18 @@
 {
-  "title": "Container class + scroll-shrinking header",
-  "task": "Extract the page width wrapper into a reusable `container` class applied across the page, and make the header shrink in width to the container size on scroll.",
+  "title": "Hero player uses glass-code-block showing registry usage",
+  "task": "Switch the hero's Remotion player from browser-flow to the glass-code-block component, and feed it a `code` snippet that best demonstrates how to use the remocn registry (install via shadcn CLI + compose real registry components in a Remotion scene). Keep the bg.jpg scene background for continuity.",
   "stories": [
     {
       "id": "US-001",
-      "title": "Introduce a scoped `container` class and use it page-wide",
+      "title": "Render glass-code-block in the hero with demonstrative registry code",
       "passes": true,
       "acceptanceCriteria": [
-        "globals.css defines a `.container` rule scoped under `.page-shell` so it does NOT override Tailwind/fumadocs `container` utility used in docs layout",
-        "The `.container` rule sets width:100%, max-width:72rem (== max-w-6xl), margin-inline:auto, padding-inline:1rem with 1.5rem at >=640px (== px-4 sm:px-6)",
-        "PageShell root element carries the `page-shell` class",
-        "config/landing.ts SECTION constant equals \"container\" so every section/header/footer consumes the class",
-        "No section visually changes width (still centered at 72rem with the same horizontal padding)"
-      ]
-    },
-    {
-      "id": "US-002",
-      "title": "Header shrinks to container width on scroll",
-      "passes": true,
-      "acceptanceCriteria": [
-        "At scroll position 0 the header background+border spans the full viewport width with content aligned to the container",
-        "After scrolling (> ~8px) the visible header bar shrinks to the container width (72rem), centered, as a floating bar with border, shadow, rounding and a small top gap",
-        "The transition between the two states is animated (CSS transition) and reversible when scrolling back to top",
-        "Scroll state is tracked with a passive scroll listener that is cleaned up on unmount; no hydration mismatch",
-        "Works on both home and /sponsors pages and in light + dark themes"
+        "hero.tsx uses registry[\"glass-code-block\"] instead of registry[\"browser-flow\"] for the hero player entry",
+        "A demonstrative `code` string is passed via inputProps that shows the real remocn workflow: the shadcn CLI install command for remocn components (as a comment) AND importing + composing actual registry components (blur-reveal and mesh-gradient-bg, which both exist in registry/remocn/) inside a Remotion scene",
+        "The code references only components that actually exist in the registry (no fictional component names) and uses correct prop names (e.g. BlurReveal text=...)",
+        "inputProps no longer passes browser-flow-only props (url); analytics component labels referencing the preview are updated to 'glass-code-block'",
+        "The bg.jpg scene background is preserved by passing glass-code-block's `background` prop (image + subtle dark overlay) so the glass card floats over the texture",
+        "glass card sizing (width/height/fontSize/title) is set so all code lines fit inside the card without overflow at the 1280x720 canvas; component stays type-correct with no unused imports"
       ]
     }
   ]
