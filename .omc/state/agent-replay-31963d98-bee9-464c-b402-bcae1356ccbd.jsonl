@@ -1,6 +1,0 @@
-{"t":0,"agent":"system","event":"keyword_detected","keyword":"ralph"}
-{"t":0,"agent":"system","event":"mode_change","mode_from":"none","mode_to":"ralph"}
-{"t":0,"agent":"af9b67b","agent_type":"code-reviewer","event":"agent_start","parent_mode":"none"}
-{"t":0,"agent":"af9b67b","agent_type":"code-reviewer","event":"agent_stop","success":true,"duration_ms":35830}
-{"t":0,"agent":"system","event":"skill_invoked","skill_name":"oh-my-claudecode:ai-slop-cleaner"}
-{"t":0,"agent":"system","event":"skill_invoked","skill_name":"oh-my-claudecode:cancel"}

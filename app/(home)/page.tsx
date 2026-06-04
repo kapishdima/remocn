@@ -19,7 +19,7 @@ export default async function Page() {
       <SiteHeader navLinks={HOME_NAV} githubStars={githubStars} />
       <main className="relative flex-1">
         <Hero />
-        <WorksWith />
+        {/* <WorksWith /> */}
         <InteractiveCode />
         <BentoRegistry />
         <GetStarted />
