@@ -24,16 +24,6 @@ export const SPRING_SOFT = {
   damping: 22,
 };
 
-export const STACK = [
-  "Remotion",
-  "React",
-  "Next.js",
-  "Tailwind",
-  "TypeScript",
-  "shadcn/ui",
-  "Vercel",
-] as const;
-
 export type NavLink = {
   href: string;
   label: string;

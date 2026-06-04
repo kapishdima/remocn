@@ -53,7 +53,7 @@ function SponsorGroup({
   if (items.length === 0) return null;
   return (
     <div className="mb-12">
-      <div className="mb-4 font-mono text-xs font-medium tracking-[0.18em] text-muted-foreground uppercase">
+      <div className="mb-4 font-mono text-xs font-medium text-muted-foreground">
         {label}
       </div>
       <div className={gridClassName}>

@@ -1,21 +1,21 @@
-# Ralph progress — hero player → glass-code-block with registry-usage code
+# Ralph progress — remove AI-slop eyebrow styling (uppercase + wide letter-spacing)
 
 ## US-001 (DONE)
-File: app/(home)/components/sections/hero.tsx
-- Switched hero player entry: registry["browser-flow"] → registry["glass-code-block"].
-- Added module-scope HERO_CODE string passed via inputProps.code. It demonstrates the real remocn flow:
-  - comment with the shadcn CLI install: `npx shadcn@latest add remocn/blur-reveal remocn/mesh-gradient-bg`
-  - imports of the copied components from @/components/remocn/*
-  - composing them in a Remotion scene: <AbsoluteFill><MeshGradientBg /><BlurReveal text="..." /></AbsoluteFill>
-- Both referenced components are REAL registry entries (registry/remocn/blur-reveal, mesh-gradient-bg). Verified prop names: BlurReveal requires `text: string` (used); MeshGradientBg props all optional (self-closing OK).
-- inputProps: dropped browser-flow-only `url`; pass title "LaunchScene.tsx", width 860, height 480, and background = "linear-gradient(rgba(5,5,8,0.5), rgba(5,5,8,0.62)), url(/bg.jpg) center / cover no-repeat" — keeps the bg.jpg texture behind the glass card (continuity with previous task) with a darker wash so code stays legible through the glass.
-- Analytics component labels updated browser-flow → glass-code-block (preview_played/paused).
+The classic AI eyebrow (uppercase + tracking-[0.18em] mono) appeared in 4 places. Removed
+`uppercase` and `tracking-[0.18em]` from each, keeping margin/size/color:
+- app/(home)/components/section-heading.tsx:43  (shared SectionHeading eyebrow — covers bento, get-started, landing-partners, sponsors wall-of-love)
+- app/(home)/components/sections/works-with.tsx:10
+- app/(home)/sponsors/components/sections/hero.tsx:17
+- app/(home)/sponsors/components/sections/wall-of-love.tsx:56 (SponsorGroup label)
 
-## Sizing math (fits 1280x720 canvas, no overflow)
-- glass-code-block config: durationInFrames 180, fps 30, canvas W=1280 H=720 (same as before, so hero preview aspect unchanged).
-- Card 860x480 centered. Body height = 480-40(chrome)-40(padding)=400; ~14 lines (one blank) ≈ 387px < 400. Longest line ~68 chars ≈ 653px < ~784px usable. All lines fit.
+Result class: `font-mono text-xs font-medium text-muted-foreground` (normal case, normal spacing).
+
+## Verification (grep)
+- `uppercase` under app/(home): 0.
+- wide letter-spacing (tracking-[..em] / tracking-wide/wider/widest / CSS letter-spacing / inline letterSpacing / textTransform): 0.
+- `tracking-tight` (negative heading kerning — intended, NOT slop) preserved across 9 files.
 
 ## Learnings
-- glass-code-block uses a simple regex tokenizer + per-line Sequence stagger (staggerFrames default 4). Keywords purple, strings green, comments gray.
-- Site renders components from SOURCE via registry/__index__.tsx, so editing inputProps on the landing is enough; no registry rebuild needed for the hero to change.
-- Project convention (CLAUDE memory): never run build/dev — user verifies. Verified via grep + source inspection + architect.
+- Eyebrow strings are already title/sentence case ("Get started", "The registry", "Sponsors", "Wall of love", "Built on tools you already use", "It's just React"), so dropping the CSS `uppercase` renders them correctly with no string edits.
+- Distinguish negative `tracking-tight` (good, tightens large headings) from positive wide tracking (the AI-slop tell). Only the latter was removed.
+- Project convention (CLAUDE memory): never run build/dev — user verifies. Verified via grep + architect.

@@ -205,33 +205,51 @@
       "type": "file"
     },
     {
+      "path": "config/landing.ts",
+      "accessCount": 16,
+      "lastAccessed": 1780586748360,
+      "type": "file"
+    },
+    {
+      "path": "app/globals.css",
+      "accessCount": 11,
+      "lastAccessed": 1780584350297,
+      "type": "file"
+    },
+    {
+      "path": "app/(home)/components/sections/works-with.tsx",
+      "accessCount": 11,
+      "lastAccessed": 1780586743036,
+      "type": "file"
+    },
+    {
       "path": "app/(home)/components/site-header.tsx",
       "accessCount": 10,
       "lastAccessed": 1780581332299,
       "type": "file"
     },
     {
-      "path": "app/globals.css",
+      "path": "app/(home)/page.tsx",
       "accessCount": 10,
-      "lastAccessed": 1780581499542,
-      "type": "file"
-    },
-    {
-      "path": "config/landing.ts",
-      "accessCount": 8,
-      "lastAccessed": 1780581331166,
+      "lastAccessed": 1780585297011,
       "type": "file"
     },
     {
       "path": "app/(home)/components/sections/landing-code-showcase.tsx",
-      "accessCount": 7,
-      "lastAccessed": 1780581371672,
+      "accessCount": 8,
+      "lastAccessed": 1780584271485,
       "type": "file"
     },
     {
       "path": "app/layout.tsx",
       "accessCount": 7,
       "lastAccessed": 1780581441600,
+      "type": "file"
+    },
+    {
+      "path": "lib/analytics.ts",
+      "accessCount": 7,
+      "lastAccessed": 1780585298196,
       "type": "file"
     },
     {
@@ -253,9 +271,21 @@
       "type": "file"
     },
     {
+      "path": "app/(home)/sponsors/components/sections/wall-of-love.tsx",
+      "accessCount": 6,
+      "lastAccessed": 1780583874244,
+      "type": "file"
+    },
+    {
+      "path": "app/(home)/components/section-heading.tsx",
+      "accessCount": 6,
+      "lastAccessed": 1780584514033,
+      "type": "file"
+    },
+    {
       "path": "app/(home)/components/sections/bento-registry.tsx",
-      "accessCount": 5,
-      "lastAccessed": 1780580659591,
+      "accessCount": 6,
+      "lastAccessed": 1780585299103,
       "type": "file"
     },
     {
@@ -265,9 +295,15 @@
       "type": "file"
     },
     {
-      "path": "app/(home)/page.tsx",
+      "path": "app/(home)/sponsors/components/sections/hero.tsx",
       "accessCount": 5,
-      "lastAccessed": 1780581336943,
+      "lastAccessed": 1780583873557,
+      "type": "file"
+    },
+    {
+      "path": "app/(home)/components/fade-up.tsx",
+      "accessCount": 5,
+      "lastAccessed": 1780585308003,
       "type": "file"
     },
     {
@@ -283,15 +319,15 @@
       "type": "file"
     },
     {
-      "path": "app/(home)/sponsors/components/sections/wall-of-love.tsx",
-      "accessCount": 4,
-      "lastAccessed": 1780580687878,
-      "type": "file"
-    },
-    {
       "path": "app/(home)/sponsors/page.tsx",
       "accessCount": 4,
       "lastAccessed": 1780581337301,
+      "type": "file"
+    },
+    {
+      "path": "registry/__index__.tsx",
+      "accessCount": 4,
+      "lastAccessed": 1780585306795,
       "type": "file"
     },
     {
@@ -301,33 +337,21 @@
       "type": "file"
     },
     {
-      "path": "lib/analytics.ts",
-      "accessCount": 3,
-      "lastAccessed": 1780580543526,
-      "type": "file"
-    },
-    {
-      "path": "app/(home)/sponsors/components/sections/hero.tsx",
-      "accessCount": 3,
-      "lastAccessed": 1780580543978,
-      "type": "file"
-    },
-    {
       "path": "app/(home)/components/theme-toggle.tsx",
       "accessCount": 3,
       "lastAccessed": 1780580702586,
       "type": "file"
     },
     {
-      "path": "app/(home)/components/sections/use-cases.tsx",
-      "accessCount": 2,
-      "lastAccessed": 1780579600308,
+      "path": "registry/remocn/typewriter/index.tsx",
+      "accessCount": 3,
+      "lastAccessed": 1780585297723,
       "type": "file"
     },
     {
-      "path": "app/(home)/components/fade-up.tsx",
+      "path": "app/(home)/components/sections/use-cases.tsx",
       "accessCount": 2,
-      "lastAccessed": 1780579609758,
+      "lastAccessed": 1780579600308,
       "type": "file"
     },
     {
@@ -361,21 +385,9 @@
       "type": "file"
     },
     {
-      "path": "app/(home)/components/section-heading.tsx",
-      "accessCount": 2,
-      "lastAccessed": 1780580521187,
-      "type": "file"
-    },
-    {
       "path": "app/(home)/components/install-command.tsx",
       "accessCount": 2,
       "lastAccessed": 1780580522150,
-      "type": "file"
-    },
-    {
-      "path": "app/(home)/components/sections/works-with.tsx",
-      "accessCount": 2,
-      "lastAccessed": 1780580523087,
       "type": "file"
     },
     {
@@ -391,6 +403,12 @@
       "type": "file"
     },
     {
+      "path": "lib/customizer-config.ts",
+      "accessCount": 2,
+      "lastAccessed": 1780584280054,
+      "type": "file"
+    },
+    {
       "path": "lib/utils.ts",
       "accessCount": 1,
       "lastAccessed": 1780578756259,
@@ -400,12 +418,6 @@
       "path": "lib/layout.shared.tsx",
       "accessCount": 1,
       "lastAccessed": 1780578758857,
-      "type": "file"
-    },
-    {
-      "path": "lib/customizer-config.ts",
-      "accessCount": 1,
-      "lastAccessed": 1780578868781,
       "type": "file"
     },
     {
@@ -472,12 +484,6 @@
       "path": "public/bg.jpg",
       "accessCount": 1,
       "lastAccessed": 1780582782422,
-      "type": "file"
-    },
-    {
-      "path": "registry/__index__.tsx",
-      "accessCount": 1,
-      "lastAccessed": 1780583532254,
       "type": "file"
     },
     {

@@ -14,7 +14,7 @@ export function Hero() {
       <div className={SECTION}>
         <div className="flex flex-col items-center text-center">
           <FadeUp delay={0.06}>
-            <p className="mb-3 font-mono text-xs font-medium tracking-[0.18em] text-muted-foreground uppercase">
+            <p className="mb-3 font-mono text-xs font-medium text-muted-foreground">
               Sponsors
             </p>
           </FadeUp>
