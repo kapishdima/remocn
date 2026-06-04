@@ -1,0 +1,11 @@
+{
+  "active": true,
+  "started_at": "2026-06-04T16:55:09.379Z",
+  "original_prompt": "/oh-my-claudecode:ralph давай сделаем в TypewriterCodeBlock приоритет на next-theme, если в пропсах передана theme - используем ее. И убери в featuredstrep theme добавь ее в InteractiveCode",
+  "session_id": "2096ec79-a746-48fe-a12d-180366827aaf",
+  "project_path": "/Users/dev_wandry/projects/opensource/remocn/app/(home)/components",
+  "reinforcement_count": 0,
+  "awaiting_confirmation": true,
+  "awaiting_confirmation_set_at": "2026-06-04T16:55:09.379Z",
+  "last_checked_at": "2026-06-04T16:55:09.379Z"
+}

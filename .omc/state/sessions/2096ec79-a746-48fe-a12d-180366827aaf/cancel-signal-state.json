@@ -1,7 +1,1 @@
-{
-  "active": true,
-  "requested_at": "2026-06-04T16:48:08.477Z",
-  "expires_at": "2026-06-04T16:48:38.477Z",
-  "mode": "ultrawork",
-  "source": "state_clear"
-}
+{"active":true,"requested_at":"2026-06-04T17:00:37Z","mode":"ralph","source":"manual_clear"}

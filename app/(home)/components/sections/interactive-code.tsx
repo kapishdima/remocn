@@ -313,6 +313,7 @@ export function InteractiveCode() {
           <div className="mt-12 grid items-stretch gap-6 sm:mt-16 lg:grid-cols-2">
             {/* Interactive code editor — the JSX values are the controls. */}
             <TypewriterCodeBlock
+              theme="dark"
               text={
                 <EditableString value={text} onChange={set(setText, "text")} />
               }

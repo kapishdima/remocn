@@ -199,15 +199,15 @@
   },
   "hotPaths": [
     {
-      "path": "app/(home)/components/sections/hero.tsx",
-      "accessCount": 25,
-      "lastAccessed": 1780588628123,
+      "path": "app/(home)/components/sections/get-started.tsx",
+      "accessCount": 27,
+      "lastAccessed": 1780592333682,
       "type": "file"
     },
     {
-      "path": "app/(home)/components/sections/get-started.tsx",
+      "path": "app/(home)/components/sections/hero.tsx",
       "accessCount": 25,
-      "lastAccessed": 1780591621287,
+      "lastAccessed": 1780588628123,
       "type": "file"
     },
     {
@@ -343,15 +343,15 @@
       "type": "file"
     },
     {
-      "path": "lib/convert-npm-command.ts",
-      "accessCount": 3,
-      "lastAccessed": 1780580514288,
+      "path": "app/(home)/components/theme-toggle.tsx",
+      "accessCount": 4,
+      "lastAccessed": 1780592261427,
       "type": "file"
     },
     {
-      "path": "app/(home)/components/theme-toggle.tsx",
+      "path": "lib/convert-npm-command.ts",
       "accessCount": 3,
-      "lastAccessed": 1780580702586,
+      "lastAccessed": 1780580514288,
       "type": "file"
     },
     {

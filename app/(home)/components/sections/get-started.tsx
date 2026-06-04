@@ -5,11 +5,7 @@ import { LAVENDER, MINT, PEACH, SECTION } from "@/config/landing";
 import { convertNpmCommand } from "@/lib/convert-npm-command";
 import { FadeUp } from "../fade-up";
 import { SectionHeading } from "../section-heading";
-import {
-  SYNTAX_LIGHT,
-  Token,
-  TypewriterCodeBlock,
-} from "../typewriter-code-block";
+import { Tok, TypewriterCodeBlock } from "../typewriter-code-block";
 
 type Step = {
   n: number;
@@ -125,13 +121,12 @@ function FeaturedStep({ step, delay }: { step: Step; delay: number }) {
         />
 
         <TypewriterCodeBlock
-          theme="light"
           header={false}
-          text={<Token color={SYNTAX_LIGHT.string}>"Hello, world"</Token>}
-          fontSize={<Token color={SYNTAX_LIGHT.number}>72</Token>}
-          color={<Token color={SYNTAX_LIGHT.string}>"#171717"</Token>}
-          fontWeight={<Token color={SYNTAX_LIGHT.number}>700</Token>}
-          cursor={<Token color={SYNTAX_LIGHT.boolean}>true</Token>}
+          text={<Tok kind="string">"Hello, world"</Tok>}
+          fontSize={<Tok kind="number">72</Tok>}
+          color={<Tok kind="string">"#171717"</Tok>}
+          fontWeight={<Tok kind="number">700</Tok>}
+          cursor={<Tok kind="boolean">true</Tok>}
         />
 
         <div className="flex flex-wrap items-center gap-2 pt-1">

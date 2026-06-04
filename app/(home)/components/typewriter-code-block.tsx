@@ -1,5 +1,14 @@
+"use client";
+
 import { ChevronDown } from "lucide-react";
-import type { ReactNode } from "react";
+import { useTheme } from "next-themes";
+import {
+  createContext,
+  type ReactNode,
+  useContext,
+  useEffect,
+  useState,
+} from "react";
 import { cn } from "@/lib/utils";
 
 export type CodeTheme = "light" | "dark";
@@ -47,8 +56,7 @@ export const SYNTAX: Record<CodeTheme, SyntaxPalette> = {
   light: SYNTAX_LIGHT,
 };
 
-// Chrome (surface, title bar, traffic lights, chip) per theme. Fixed colours —
-// driven only by the `theme` prop, never by the site's next-theme.
+// Chrome (surface, title bar, traffic lights, chip) per theme.
 const CHROME: Record<
   CodeTheme,
   { container: string; titleBar: string; dot: string; chip: string }
@@ -67,6 +75,8 @@ const CHROME: Record<
   },
 };
 
+const PaletteContext = createContext<SyntaxPalette>(SYNTAX_DARK);
+
 export function Token({
   color,
   children,
@@ -78,12 +88,30 @@ export function Token({
 }
 
 /**
- * The `Typewriter` editor card: title bar + syntax-highlighted source. The
- * `theme` prop ("light" | "dark") fully controls the surface and the syntax
- * palette and is independent of the site theme. The five JSX prop values are
- * slots, so callers decide whether each one is a static {@link Token} or an
- * interactive control; `palette` is exposed so callers can colour their slots
- * to match the active theme.
+ * Token coloured by the active {@link TypewriterCodeBlock} theme. Use this for
+ * slot values when the block follows the site theme (no explicit `theme` prop),
+ * so the colours track light/dark automatically.
+ */
+export function Tok({
+  kind,
+  children,
+}: {
+  kind: keyof SyntaxPalette;
+  children: ReactNode;
+}) {
+  const palette = useContext(PaletteContext);
+  return <span style={{ color: palette[kind] }}>{children}</span>;
+}
+
+/**
+ * The `Typewriter` editor card: title bar + syntax-highlighted source.
+ *
+ * Theme resolution: an explicit `theme` prop always wins; otherwise the block
+ * follows the site's next-theme (`resolvedTheme`), falling back to dark before
+ * mount to avoid hydration mismatch. The active palette is exposed to slots via
+ * context — colour them with {@link Tok} to track the theme, or {@link Token}
+ * for a fixed colour. The five JSX prop values are slots, so callers decide
+ * whether each is static or an interactive control.
  */
 export function TypewriterCodeBlock({
   text,
@@ -93,7 +121,7 @@ export function TypewriterCodeBlock({
   cursor,
   footer,
   label = "Typewriter",
-  theme = "dark",
+  theme,
   header = true,
   className,
 }: {
@@ -105,100 +133,111 @@ export function TypewriterCodeBlock({
   footer?: ReactNode;
   label?: string;
   theme?: CodeTheme;
-  className?: string;
   header?: boolean;
+  className?: string;
 }) {
-  const chrome = CHROME[theme];
-  const palette = SYNTAX[theme];
+  const { resolvedTheme } = useTheme();
+  const [mounted, setMounted] = useState(false);
+
+  // Theme is only known on the client; before mount fall back to dark so SSR
+  // and the first client render agree.
+  useEffect(() => setMounted(true), []);
+
+  const active: CodeTheme =
+    theme ?? (mounted && resolvedTheme === "light" ? "light" : "dark");
+  const chrome = CHROME[active];
+  const palette = SYNTAX[active];
 
   return (
-    <div
-      className={cn(
-        "relative overflow-hidden rounded-2xl ring-1 sm:rounded-3xl",
-        chrome.container,
-        className,
-      )}
-    >
-      {/* Title bar */}
-      {header && (
-        <div
-          className={cn(
-            "relative flex items-center justify-between border-b px-5 py-4",
-            chrome.titleBar,
-          )}
-        >
-          <div className="flex items-center gap-2">
-            <span className={cn("size-3 rounded-full", chrome.dot)} />
-            <span className={cn("size-3 rounded-full", chrome.dot)} />
-            <span className={cn("size-3 rounded-full", chrome.dot)} />
-          </div>
-          <span
+    <PaletteContext.Provider value={palette}>
+      <div
+        className={cn(
+          "relative overflow-hidden rounded-2xl ring-1 sm:rounded-3xl",
+          chrome.container,
+          className,
+        )}
+      >
+        {/* Title bar */}
+        {header && (
+          <div
             className={cn(
-              "inline-flex items-center gap-1.5 rounded-lg px-2.5 py-1 text-xs font-medium ring-1",
-              chrome.chip,
+              "relative flex items-center justify-between border-b px-5 py-4",
+              chrome.titleBar,
             )}
           >
-            {label}
-            <ChevronDown className="size-3.5" />
-          </span>
-        </div>
-      )}
+            <div className="flex items-center gap-2">
+              <span className={cn("size-3 rounded-full", chrome.dot)} />
+              <span className={cn("size-3 rounded-full", chrome.dot)} />
+              <span className={cn("size-3 rounded-full", chrome.dot)} />
+            </div>
+            <span
+              className={cn(
+                "inline-flex items-center gap-1.5 rounded-lg px-2.5 py-1 text-xs font-medium ring-1",
+                chrome.chip,
+              )}
+            >
+              {label}
+              <ChevronDown className="size-3.5" />
+            </span>
+          </div>
+        )}
 
-      {/* Code */}
-      <pre className="relative overflow-x-auto px-6 py-6 font-mono text-[13px] leading-[1.95] whitespace-pre [scrollbar-width:none] sm:text-sm [&::-webkit-scrollbar]:hidden">
-        <code>
-          <Token color={palette.keyword}>import</Token>
-          <Token color={palette.plain}>{" { "}</Token>
-          <Token color={palette.type}>Typewriter</Token>
-          <Token color={palette.plain}>{" } "}</Token>
-          <Token color={palette.keyword}>from</Token>{" "}
-          <Token color={palette.string}>"@/components/remocn/typewriter"</Token>
-          <Token color={palette.punctuation}>;</Token>
-          {"\n\n"}
-          <Token color={palette.keyword}>export function</Token>{" "}
-          <Token color={palette.fn}>Hero</Token>
-          <Token color={palette.punctuation}>{"() {"}</Token>
-          {"\n  "}
-          <Token color={palette.keyword}>return</Token>{" "}
-          <Token color={palette.punctuation}>(</Token>
-          {"\n    "}
-          <Token color={palette.punctuation}>{"<"}</Token>
-          <Token color={palette.type}>Typewriter</Token>
-          {"\n      "}
-          <Token color={palette.prop}>text</Token>
-          <Token color={palette.punctuation}>=</Token>
-          {text}
-          {"\n      "}
-          <Token color={palette.prop}>fontSize</Token>
-          <Token color={palette.punctuation}>={"{"}</Token>
-          {fontSize}
-          <Token color={palette.punctuation}>{"}"}</Token>
-          {"\n      "}
-          <Token color={palette.prop}>color</Token>
-          <Token color={palette.punctuation}>=</Token>
-          {color}
-          {"\n      "}
-          <Token color={palette.prop}>fontWeight</Token>
-          <Token color={palette.punctuation}>={"{"}</Token>
-          {fontWeight}
-          <Token color={palette.punctuation}>{"}"}</Token>
-          {"\n      "}
-          <Token color={palette.prop}>cursor</Token>
-          <Token color={palette.punctuation}>={"{"}</Token>
-          {cursor}
-          <Token color={palette.punctuation}>{"}"}</Token>
-          {"\n    "}
-          <Token color={palette.punctuation}>{"/>"}</Token>
-          {"\n  "}
-          <Token color={palette.punctuation}>)</Token>
-          {"\n"}
-          <Token color={palette.punctuation}>{"}"}</Token>
-        </code>
-      </pre>
+        {/* Code */}
+        <pre className="relative overflow-x-auto px-6 py-6 font-mono text-[13px] leading-[1.95] whitespace-pre [scrollbar-width:none] sm:text-sm [&::-webkit-scrollbar]:hidden">
+          <code>
+            <Token color={palette.keyword}>import</Token>
+            <Token color={palette.plain}>{" { "}</Token>
+            <Token color={palette.type}>Typewriter</Token>
+            <Token color={palette.plain}>{" } "}</Token>
+            <Token color={palette.keyword}>from</Token>{" "}
+            <Token color={palette.string}>"@/components/remocn/typewriter"</Token>
+            <Token color={palette.punctuation}>;</Token>
+            {"\n\n"}
+            <Token color={palette.keyword}>export function</Token>{" "}
+            <Token color={palette.fn}>Hero</Token>
+            <Token color={palette.punctuation}>{"() {"}</Token>
+            {"\n  "}
+            <Token color={palette.keyword}>return</Token>{" "}
+            <Token color={palette.punctuation}>(</Token>
+            {"\n    "}
+            <Token color={palette.punctuation}>{"<"}</Token>
+            <Token color={palette.type}>Typewriter</Token>
+            {"\n      "}
+            <Token color={palette.prop}>text</Token>
+            <Token color={palette.punctuation}>=</Token>
+            {text}
+            {"\n      "}
+            <Token color={palette.prop}>fontSize</Token>
+            <Token color={palette.punctuation}>={"{"}</Token>
+            {fontSize}
+            <Token color={palette.punctuation}>{"}"}</Token>
+            {"\n      "}
+            <Token color={palette.prop}>color</Token>
+            <Token color={palette.punctuation}>=</Token>
+            {color}
+            {"\n      "}
+            <Token color={palette.prop}>fontWeight</Token>
+            <Token color={palette.punctuation}>={"{"}</Token>
+            {fontWeight}
+            <Token color={palette.punctuation}>{"}"}</Token>
+            {"\n      "}
+            <Token color={palette.prop}>cursor</Token>
+            <Token color={palette.punctuation}>={"{"}</Token>
+            {cursor}
+            <Token color={palette.punctuation}>{"}"}</Token>
+            {"\n    "}
+            <Token color={palette.punctuation}>{"/>"}</Token>
+            {"\n  "}
+            <Token color={palette.punctuation}>)</Token>
+            {"\n"}
+            <Token color={palette.punctuation}>{"}"}</Token>
+          </code>
+        </pre>
 
-      {footer ? (
-        <div className="relative flex justify-end px-6 pb-5">{footer}</div>
-      ) : null}
-    </div>
+        {footer ? (
+          <div className="relative flex justify-end px-6 pb-5">{footer}</div>
+        ) : null}
+      </div>
+    </PaletteContext.Provider>
   );
 }
