@@ -5,9 +5,6 @@ description: Deterministic confetti burst from a focal point with optional headl
 
 <ComponentPreview name="success-confetti" />
 
-A workflow finale: a burst of SVG confetti particles fanning out from a configurable origin under gravity. Particle directions, colors, sizes, and rotations are derived from Remotion's seeded `random()`, so renders are perfectly deterministic.
-
-
 ## Installation
 
 <InstallBlock name="success-confetti" />
@@ -110,13 +107,3 @@ export const RemotionRoot = () => (
     },
   ]}
 />
-
-## Notes
-
-<Note title="Deterministic randomness">
-  Particle properties are derived from `random("seed:i:property")` so the same seed always yields the same burst — critical for chunked video renders.
-</Note>
-
-<Warning title="Avoid Math.random">
-  Never replace `random()` with `Math.random()` here. It would produce different results on every frame and tear the burst across rendered chunks.
-</Warning>

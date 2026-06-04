@@ -5,9 +5,6 @@ description: A CLI deploy completes and the live site grows out of the URL print
 
 <ComponentPreview name="terminal-to-browser-deploy" />
 
-A composition that pairs a build log with a celebratory reveal. The terminal types out a deploy sequence, and the moment the success line lands, the terminal scales down and blurs while a fully formed browser window springs out from exactly the URL that was just printed — making the deployed site feel like it physically emerged from the command that shipped it.
-
-
 ## Installation
 
 <InstallBlock name="terminal-to-browser-deploy" />
@@ -67,9 +64,3 @@ export const RemotionRoot = () => (
     },
   ]}
 />
-
-## Notes
-
-<Note title="The browser grows from the URL, not the screen center">
-  The browser window's `transform-origin` is computed from the pixel position of the URL line inside the terminal body. As `scale` springs from 0 to 1, the window literally unfurls out of the success line — sell the gag by keeping the terminal visible (just blurred and dimmed) behind it.
-</Note>

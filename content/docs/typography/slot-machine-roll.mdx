@@ -5,9 +5,6 @@ description: Vertical reel scrolls each character from an old value to a new val
 
 <ComponentPreview name="slot-machine-roll" />
 
-A typography primitive that animates changing values (prices, counters, statuses) as a vertical reel. Each character column rolls independently with a staggered spring, giving a slot-machine feel.
-
-
 ## Installation
 
 <InstallBlock name="slot-machine-roll" />
@@ -82,13 +79,3 @@ export const RemotionRoot = () => (
     },
   ]}
 />
-
-## Notes
-
-<Note title="Right-aligned by design">
-  `from` and `to` are left-padded with spaces to the same length so digits align on the right. This matches how prices and counters read.
-</Note>
-
-<Warning title="Monospaced digits recommended">
-  Each column is a fixed width (`0.7em`). If you use a proportional font, wide characters like `W` may get clipped. Use a mono font or characters of similar width.
-</Warning>

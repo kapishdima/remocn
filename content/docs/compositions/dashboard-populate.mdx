@@ -5,9 +5,6 @@ description: An empty dashboard fills itself with data in a cascaded spring sequ
 
 <ComponentPreview name="dashboard-populate" />
 
-A composition primitive that stages a full dashboard reveal in two acts. First the structure fades in — tiles, axes, gridlines, legends. Then, with a deliberate beat of silence, the data crashes in: KPIs spin up from zero, bars launch from the baseline on staggered springs, the line chart traces itself left to right, and the donut sweeps to its final value.
-
-
 ## Installation
 
 <InstallBlock name="dashboard-populate" />
@@ -64,9 +61,3 @@ export const RemotionRoot = () => (
     },
   ]}
 />
-
-## Notes
-
-<Note title="Structure first, then data">
-  The first 15 frames are reserved for the empty scaffolding — gridlines, axes, tile chrome — so the eye has something to anchor to before the springs hit. Without this beat the populate cascade reads as chaotic; with it, the dashboard feels like it's coming alive in a deliberate, choreographed way.
-</Note>

@@ -5,9 +5,6 @@ description: Slide one scene in while pushing the other out.
 
 <ComponentPreview name="directional-wipe" />
 
-A transition primitive that animates two scenes with `transform: translateX/Y`. The outgoing scene slides off in one direction while the incoming scene slides in from the opposite side. Uses `transform` (not `left`/`top`) so the browser doesn't trigger a layout reflow per frame.
-
-
 ## Installation
 
 <InstallBlock name="directional-wipe" />
@@ -75,13 +72,3 @@ export const RemotionRoot = () => (
     },
   ]}
 />
-
-## Notes
-
-<Note title="Pair with Sequence">
-  For multi-scene videos, wrap each scene in `<Sequence>` and overlap their durations so the wipe blends cleanly between them.
-</Note>
-
-<Warning title="Use transform, not left/top">
-  Animating positional CSS properties triggers layout reflow per frame. Stick to `transform: translateX/Y` for smooth 60fps renders.
-</Warning>

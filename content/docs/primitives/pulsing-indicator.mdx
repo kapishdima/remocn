@@ -5,9 +5,6 @@ description: Continuous pulsing dot for loading and "live" states.
 
 <ComponentPreview name="pulsing-indicator" />
 
-A tiny UI primitive for signalling activity. An inner dot breathes via `Math.sin(frame)` mapped to `scale` and `opacity`, while an outer ring "pings" outward on a separate phase.
-
-
 ## Installation
 
 <InstallBlock name="pulsing-indicator" />
@@ -70,9 +67,3 @@ export const RemotionRoot = () => (
     },
   ]}
 />
-
-## Notes
-
-<Note title="Deterministic pulse">
-  Animation is driven by `Math.sin(frame / speed)` — no `setInterval`, no randomness, fully frame-accurate on every render.
-</Note>

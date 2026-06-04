@@ -5,9 +5,6 @@ description: Elastic scale-in wrapper for any element.
 
 <ComponentPreview name="spring-pop-in" />
 
-A UI primitive that wraps its children in a spring-driven `transform: scale()`. Based directly on Remotion's `spring()` so timing and overshoot stay framerate-independent.
-
-
 ## Installation
 
 <InstallBlock name="spring-pop-in" />
@@ -80,9 +77,3 @@ export const RemotionRoot = () => (
     },
   ]}
 />
-
-## Notes
-
-<Note title="Transform origin">
-  The scale is applied with `transform-origin: center`. Override it via `className` if you need corner-anchored growth.
-</Note>

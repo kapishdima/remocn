@@ -5,9 +5,6 @@ description: Elegant scene transition through a sliding pane of frosted glass.
 
 <ComponentPreview name="frosted-glass-wipe" />
 
-A transition primitive that slides a pane of frosted glass across the screen between two scenes. The outgoing scene blurs beneath the glass; once the pane crosses the midpoint, the incoming scene is revealed in its place. Uses `backdrop-filter` for the glass and `transform: translateX` for movement so the browser stays on the compositor.
-
-
 ## Installation
 
 <InstallBlock name="frosted-glass-wipe" />
@@ -75,9 +72,3 @@ export const RemotionRoot = () => (
     },
   ]}
 />
-
-## Notes
-
-<Note title="Give the glass physical properties">
-  The pane uses thin 1px white borders on its left and right edges so light catches as it slides over darker scenes. Keep the blur radius high enough (16-32px) for the glass to feel substantial rather than like a flat tint.
-</Note>

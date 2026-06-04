@@ -78,8 +78,8 @@ function StepBadge({ n, accent }: { n: number; accent: string }) {
 
 function CompactStep({ step, delay }: { step: Step; delay: number }) {
   return (
-    <FadeUp delay={delay}>
-      <div className="surface-card flex flex-col gap-4 rounded-2xl p-5 sm:p-4">
+    <FadeUp delay={delay} className="min-w-0">
+      <div className="surface-card flex min-w-0 flex-col gap-4 rounded-2xl p-5 sm:p-4">
         <div className="flex items-center gap-3">
           <StepBadge n={step.n} accent={step.accent} />
           <h3 className="text-base font-semibold tracking-tight text-foreground">
@@ -101,8 +101,8 @@ function CompactStep({ step, delay }: { step: Step; delay: number }) {
 
 function FeaturedStep({ step, delay }: { step: Step; delay: number }) {
   return (
-    <FadeUp delay={delay}>
-      <div className="surface-card flex flex-col gap-5 rounded-2xl p-6 sm:rounded-3xl sm:p-6">
+    <FadeUp delay={delay} className="min-w-0">
+      <div className="surface-card flex min-w-0 flex-col gap-5 rounded-2xl p-6 sm:rounded-3xl sm:p-6">
         <div className="flex items-center gap-3">
           <StepBadge n={step.n} accent={step.accent} />
           <h3 className="text-lg font-semibold tracking-tight text-foreground">
@@ -161,7 +161,7 @@ export function GetStarted() {
         />
 
         <div className="mt-12 grid items-start gap-4 sm:mt-16 sm:gap-6 md:grid-cols-2">
-          <div className="flex flex-col gap-4 sm:gap-6.5">
+          <div className="flex min-w-0 flex-col gap-4 sm:gap-6.5">
             <CompactStep step={START} delay={0} />
             <CompactStep step={INIT} delay={0.08} />
             <CompactStep step={RENDER} delay={0.16} />

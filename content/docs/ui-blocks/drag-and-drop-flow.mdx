@@ -5,9 +5,6 @@ description: Simulates dragging a file into a drop zone, then a progress bar fil
 
 <ComponentPreview name="drag-and-drop-flow" />
 
-A micro-interaction composition: a file icon is dragged across the frame into a dashed dropzone. The dropzone border highlights via `interpolateColors`, the file fades, and a progress bar grows from 0 to 100%.
-
-
 ## Installation
 
 <InstallBlock name="drag-and-drop-flow" />
@@ -74,13 +71,3 @@ export const RemotionRoot = () => (
     },
   ]}
 />
-
-## Notes
-
-<Note title="Three timed phases">
-  The animation splits `durationInFrames` into a drag phase (~45%), a highlight handoff (~10%), and an upload phase (the remainder). All phases derive from `durationInFrames`, so resizing the composition stays in sync.
-</Note>
-
-<Warning title="Width is intentional here">
-  The progress bar grows by animating `width` instead of `transform: scaleX` so the rounded ends stay crisp at any progress value.
-</Warning>

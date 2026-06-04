@@ -5,8 +5,6 @@ description: A mobile-style swipe transition where the outgoing scene flicks off
 
 <ComponentPreview name="swipe-transition-wipe" />
 
-A swipe-style transition borrowed from native mobile UIs. Two scenes sit side-by-side inside a flex slider; one snappy spring drives the slider's `translateX` from `0%` to `-100%` (or the mirror), so the outgoing scene flicks off the edge while the incoming one slides in right behind it. A parallax background layer moves at a fraction of the foreground speed to fake depth, and the outgoing scene gets a subtle darkening overlay so it visibly recedes instead of just exiting.
-
 ## Installation
 
 <InstallBlock name="swipe-transition-wipe" />
@@ -132,13 +130,3 @@ export const RemotionRoot = () => (
     },
   ]}
 />
-
-## Notes
-
-<Note title="One spring, two layers">
-  The same spring value drives the foreground slider and the parallax background — they can never desync, which is what sells the depth illusion.
-</Note>
-
-<Warning title="Keep the flick snappy">
-  Swipes feel natural when they're fast. The default spring resolves in ~50 frames with a touch of overshoot; slowing it down past ~80 frames starts to feel like a slide carousel instead of a gesture.
-</Warning>

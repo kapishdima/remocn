@@ -5,9 +5,6 @@ description: Letter-spacing collapses and blur clears with a springy entrance.
 
 <ComponentPreview name="tracking-in" />
 
-A typography primitive that starts text with a wide `letter-spacing` and a heavy blur, then springs both back to normal. The result is a tight, premium-feeling title reveal.
-
-
 ## Installation
 
 <InstallBlock name="tracking-in" />
@@ -88,13 +85,3 @@ export const RemotionRoot = () => (
     },
   ]}
 />
-
-## Notes
-
-<Note title="Load fonts before render">
-  Make sure your font is loaded before the first frame renders. Use [`@remotion/google-fonts`](https://www.remotion.dev/docs/google-fonts) so the blur and tracking effects don't apply to a fallback system font.
-</Note>
-
-<Warning title="Overflow">
-  Wide initial tracking can push text outside the container. Either reduce `startTracking`, lower `fontSize`, or wrap the component in a parent with `overflow: hidden`.
-</Warning>

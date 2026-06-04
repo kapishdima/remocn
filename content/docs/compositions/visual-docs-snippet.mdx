@@ -5,10 +5,6 @@ description: Calm tutorial flow — virtual cursor arcs to a button, clicks, and
 
 <ComponentPreview name="visual-docs-snippet" />
 
-A medium-paced explainer for "docs that move." A virtual cursor traces a soft bezier arc to a CTA button inside a faux browser, clicks with a micro-bounce, then a peach bounding box draws itself around the changed element while a side tooltip stagger-fades in to explain the action. The cursor exits to the bottom-right after the click so it never blocks the new content.
-
-The background is a flat `#141318` — no particles, no gradients — to keep the focus on the action being taught.
-
 ## Installation
 
 <InstallBlock name="visual-docs-snippet" />
@@ -56,13 +52,3 @@ export const RemotionRoot = () => (
     { name: "className", type: "string", description: "Optional className for the outer container." },
   ]}
 />
-
-## Notes
-
-<Note title="Retiming">
-  All five timing anchors (`cursorEndFrame`, `clickFrame`, `boundingBoxFrame`, `tooltipFrame`, `settleFrame`) are derived from the single `clickFrame` prop. Bumping `clickFrame` shifts the whole flow without breaking sync.
-</Note>
-
-<Note title="Cursor coordinates are absolute">
-  `cursorStart` and `cursorTarget` are in the 1280×720 frame's coordinate space, not relative to the browser window. If you re-aim the cursor, also re-aim `cursorTarget` so it lands on the centered CTA — or fork the file and edit the `BUTTON` constants directly.
-</Note>

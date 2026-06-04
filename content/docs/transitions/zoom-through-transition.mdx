@@ -5,9 +5,6 @@ description: Aggressively scale into the center of an element to fly through it.
 
 <ComponentPreview name="zoom-through-transition" />
 
-A scene transition that interpolates `transform: scale()` with an exponential easing curve, creating the impression of flying *through* an element. Pair with the next scene rendered behind it for a continuous reveal.
-
-
 ## Installation
 
 <InstallBlock name="zoom-through-transition" />
@@ -69,13 +66,3 @@ export const RemotionRoot = () => (
     },
   ]}
 />
-
-## Notes
-
-<Note title="Aim the camera">
-  `transformOrigin` controls the focal point of the zoom. Set it to the exact pixel of the element you want to fly through (e.g. `"50% 30%"`).
-</Note>
-
-<Warning title="Match with the next scene">
-  This transition reads as a real fly-through only if the next scene is composited underneath. Use `<Sequence>` to overlap timings.
-</Warning>

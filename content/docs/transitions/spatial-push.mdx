@@ -5,9 +5,6 @@ description: A new scene physically presses the old one back into the frame.
 
 <ComponentPreview name="spatial-push" />
 
-A transition primitive with weight. Scene A shrinks, dims, and rounds its corners as if being pushed into the background, while Scene B drops in via a spring with overshoot, carrying a heavy directional drop shadow. The result feels kinetic — as if the incoming scene has real mass pressing against the outgoing one.
-
-
 ## Installation
 
 <InstallBlock name="spatial-push" />
@@ -75,9 +72,3 @@ export const RemotionRoot = () => (
     },
   ]}
 />
-
-## Notes
-
-<Note title="Spring overshoot creates mass">
-  The incoming scene uses a spring with `mass: 1.2` and moderate damping so it overshoots its final position by a hair before settling. That tiny bounce — combined with the directional drop shadow — is what sells the illusion of physical weight pressing into the frame.
-</Note>

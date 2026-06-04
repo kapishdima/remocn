@@ -15,8 +15,10 @@ export function ComponentCardGrid({ items }: { items: CardItem[] }) {
         const card = (
           <article
             className={cn(
-              "group/card relative flex h-full flex-col gap-2 rounded-xl bg-muted p-5 transition-colors",
-              item.status === "stable" ? "hover:bg-muted/70" : "opacity-60",
+              "surface-card group/card relative flex h-full flex-col gap-2 rounded-2xl p-5 transition-[transform,border-color]",
+              item.status === "stable"
+                ? "hover:-translate-y-0.5 hover:border-foreground/20"
+                : "opacity-60",
             )}
           >
             <div className="flex items-center justify-between gap-2">
@@ -40,7 +42,7 @@ export function ComponentCardGrid({ items }: { items: CardItem[] }) {
             <Link
               key={item.name}
               href={item.href}
-              className="block rounded-xl outline-none focus-visible:ring-2 focus-visible:ring-ring/40"
+              className="block rounded-2xl outline-none focus-visible:ring-2 focus-visible:ring-ring/40"
             >
               {card}
             </Link>

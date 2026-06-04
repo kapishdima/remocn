@@ -5,8 +5,6 @@ description: A horizontal pill of tool icons whips up from below the canvas, the
 
 <ComponentPreview name="tool-menu-slide-in" />
 
-A snappy editor-style toolbar reveal. The frosted-glass panel slides up from `translateY(120%)` to `0%` via a stiff, low-mass spring — no overshoot, no slow ramp — and as soon as it locks in place each icon pops from `scale: 0` to `1` with a small caskaded delay. Every icon is wrapped in its own `<Sequence>` so its internal `useCurrentFrame` resets cleanly to zero, which keeps the spring math local and predictable.
-
 ## Installation
 
 <InstallBlock name="tool-menu-slide-in" />
@@ -98,13 +96,3 @@ export const RemotionRoot = () => (
     },
   ]}
 />
-
-## Notes
-
-<Note title="Snappy, not bouncy">
-  The slide-in spring uses `stiffness: 320`, `damping: 20`, `mass: 0.6` — high stiffness with enough damping to land hard without overshoot. Tool menus that bounce read as toy-like; this one feels like macOS.
-</Note>
-
-<Warning title="Sequence resets the icon clock">
-  Each icon is rendered inside its own `<Sequence from={...}>` so that the spring inside `<ToolIcon>` always sees `frame: 0` at the moment it should start. Don't try to compute the offset manually — let `<Sequence>` reset the clock for you.
-</Warning>

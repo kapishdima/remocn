@@ -5,9 +5,6 @@ description: Highlight the recommended pricing tier by dimming and blurring its 
 
 <ComponentPreview name="pricing-tier-focus" />
 
-A composition that stages a classic three-tier pricing table and then dramatically focuses the camera on the recommended plan. The focused card scales up, lifts off the page with a heavy drop shadow, while the side cards retreat into a soft, brightness-dimmed blur. A subtle shimmer sweeps across the CTA button to seal the moment.
-
-
 ## Installation
 
 <InstallBlock name="pricing-tier-focus" />
@@ -64,9 +61,3 @@ export const RemotionRoot = () => (
     },
   ]}
 />
-
-## Notes
-
-<Note title="Shimmer is the closer">
-  The focus animation lands the visual hierarchy, but the shimmer sweep on the Pro CTA button is what makes the moment feel cinematic. It runs once around frame 90 — late enough that the eye has already settled on the focused card, so the highlight reads as confirmation rather than distraction.
-</Note>

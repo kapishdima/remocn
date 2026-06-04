@@ -7,6 +7,7 @@ export function InstallBlock({ name }: { name: string }) {
     <div className="my-6">
       <CodeBlockCommand
         component={name}
+        variant="outline"
         prompt={`Add the @remocn/${name} component to my project.`}
         {...convertNpmCommand(npmCommand)}
       />

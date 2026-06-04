@@ -5,9 +5,6 @@ description: A split-screen where code is typed on the left and the right-side U
 
 <ComponentPreview name="live-code-compilation" />
 
-A timeline-driven composition that pairs a glass code editor with a live preview pane. As each event fires, a new code fragment is appended to the editor and the preview button instantly applies the matching style — no CSS transitions, no easing — mimicking the feel of a real Vite HMR update.
-
-
 ## Installation
 
 <InstallBlock name="live-code-compilation" />
@@ -52,9 +49,3 @@ export const RemotionRoot = () => (
     },
   ]}
 />
-
-## Notes
-
-<Note title="No transitions on the preview">
-  The preview button intentionally sets `transition: none`. Each style change snaps in on a single frame so the right pane reads as a real hot module reload — instant, mechanical, and synchronized to the code being typed on the left.
-</Note>

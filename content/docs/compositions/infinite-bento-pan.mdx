@@ -5,9 +5,6 @@ description: A hypnotic diagonal camera glide over an oversized grid of bento ca
 
 <ComponentPreview name="infinite-bento-pan" />
 
-A composition that builds a super-sized bento grid (well beyond the canvas) and slowly drifts the camera across it on a diagonal trajectory. Each card renders a different miniature — line charts, counters, code fragments, gradients, logo marks — with subtle deterministic micro-animations driven by `Math.sin(frame)`. A radial vignette swallows the edges so cards seem to fade in and out of darkness as the camera moves.
-
-
 ## Installation
 
 <InstallBlock name="infinite-bento-pan" />
@@ -64,9 +61,3 @@ export const RemotionRoot = () => (
     },
   ]}
 />
-
-## Notes
-
-<Note title="Vignette is the trick">
-  The grid itself is an absurdly large absolutely-positioned super-container that you `translate(-X, -Y)` linearly. The illusion of "infinite" depth comes entirely from the radial vignette painted on top — without it, the edges of the card wall would be visible and the spell would break.
-</Note>

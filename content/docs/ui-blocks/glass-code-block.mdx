@@ -5,9 +5,6 @@ description: A premium frosted-glass code editor window with a regex tokenizer a
 
 <ComponentPreview name="glass-code-block" />
 
-A code window primitive that ditches the flat black rectangle look. The card uses `backdrop-filter: blur()` over a slow animated aura for real refraction; a 1px linear-gradient ring fakes a top-edge highlight; macOS-style traffic lights are dimmed to 60% so they don't shout. Lines fade in one after another with a tiny upward slide via `Sequence`. Syntax highlighting is a small built-in regex tokenizer — no `highlight.js` dependency.
-
-
 ## Installation
 
 <InstallBlock name="glass-code-block" />
@@ -108,13 +105,3 @@ export const RemotionRoot = () => (
     },
   ]}
 />
-
-## Notes
-
-<Note title="Tokenizer scope">
-  The built-in tokenizer covers JS/TS keywords, strings, numbers, and `//` comments. It is intentionally not a full parser — for richer highlighting, replace `tokenizeLine` with your own and keep the same `Token` shape.
-</Note>
-
-<Warning title="Backdrop filter requires content behind">
-  The frosted glass effect only shows refraction if there is something behind it. The component renders a slow built-in aura. If you wrap it inside another scene, make sure that scene has visual content.
-</Warning>
