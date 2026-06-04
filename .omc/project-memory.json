@@ -206,20 +206,26 @@
     },
     {
       "path": "config/landing.ts",
-      "accessCount": 16,
-      "lastAccessed": 1780586748360,
+      "accessCount": 17,
+      "lastAccessed": 1780586986299,
+      "type": "file"
+    },
+    {
+      "path": "app/(home)/components/sections/bento-registry.tsx",
+      "accessCount": 13,
+      "lastAccessed": 1780587374195,
+      "type": "file"
+    },
+    {
+      "path": "app/(home)/components/sections/works-with.tsx",
+      "accessCount": 12,
+      "lastAccessed": 1780586986695,
       "type": "file"
     },
     {
       "path": "app/globals.css",
       "accessCount": 11,
       "lastAccessed": 1780584350297,
-      "type": "file"
-    },
-    {
-      "path": "app/(home)/components/sections/works-with.tsx",
-      "accessCount": 11,
-      "lastAccessed": 1780586743036,
       "type": "file"
     },
     {
@@ -253,6 +259,12 @@
       "type": "file"
     },
     {
+      "path": "app/(home)/components/section-heading.tsx",
+      "accessCount": 7,
+      "lastAccessed": 1780586985769,
+      "type": "file"
+    },
+    {
       "path": "app/(home)/components/page-shell.tsx",
       "accessCount": 6,
       "lastAccessed": 1780581332349,
@@ -274,18 +286,6 @@
       "path": "app/(home)/sponsors/components/sections/wall-of-love.tsx",
       "accessCount": 6,
       "lastAccessed": 1780583874244,
-      "type": "file"
-    },
-    {
-      "path": "app/(home)/components/section-heading.tsx",
-      "accessCount": 6,
-      "lastAccessed": 1780584514033,
-      "type": "file"
-    },
-    {
-      "path": "app/(home)/components/sections/bento-registry.tsx",
-      "accessCount": 6,
-      "lastAccessed": 1780585299103,
       "type": "file"
     },
     {
@@ -349,6 +349,12 @@
       "type": "file"
     },
     {
+      "path": "app/(home)/components/install-command.tsx",
+      "accessCount": 3,
+      "lastAccessed": 1780587137999,
+      "type": "file"
+    },
+    {
       "path": "app/(home)/components/sections/use-cases.tsx",
       "accessCount": 2,
       "lastAccessed": 1780579600308,
@@ -385,12 +391,6 @@
       "type": "file"
     },
     {
-      "path": "app/(home)/components/install-command.tsx",
-      "accessCount": 2,
-      "lastAccessed": 1780580522150,
-      "type": "file"
-    },
-    {
       "path": "registry/remocn/glass-code-block/index.tsx",
       "accessCount": 2,
       "lastAccessed": 1780583531822,
@@ -406,6 +406,12 @@
       "path": "lib/customizer-config.ts",
       "accessCount": 2,
       "lastAccessed": 1780584280054,
+      "type": "file"
+    },
+    {
+      "path": "components/docs/copy-button.tsx",
+      "accessCount": 2,
+      "lastAccessed": 1780587138242,
       "type": "file"
     },
     {
@@ -454,12 +460,6 @@
       "path": "content/docs/getting-started/introduction.mdx",
       "accessCount": 1,
       "lastAccessed": 1780579663265,
-      "type": "file"
-    },
-    {
-      "path": "components/docs/copy-button.tsx",
-      "accessCount": 1,
-      "lastAccessed": 1780579727331,
       "type": "file"
     },
     {

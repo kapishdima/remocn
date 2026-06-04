@@ -1,16 +1,59 @@
 "use client";
 
-import { Player, type PlayerRef } from "@remotion/player";
-import { ArrowRight, Pause, Play } from "lucide-react";
+import { Player } from "@remotion/player";
+import { ArrowRight, Check, Copy } from "lucide-react";
 import { motion } from "motion/react";
 import Link from "next/link";
-import { type CSSProperties, useCallback, useRef, useState } from "react";
+import { type CSSProperties, useRef, useState } from "react";
 import { Button } from "@/components/ui/button";
 import { SECTION, SPRING_SOFT } from "@/config/landing";
 import { useTrackEvent } from "@/lib/analytics";
+import { cn } from "@/lib/utils";
 import registry from "@/registry/__index__";
 import { FadeUp } from "../fade-up";
 import { SectionHeading } from "../section-heading";
+
+/** Copyable `npx shadcn add` pill shown in each card footer. */
+function InstallPill({ name }: { name: string }) {
+  const command = `npx shadcn@latest add remocn/${name}`;
+  const [copied, setCopied] = useState(false);
+  const trackEvent = useTrackEvent();
+
+  const copy = () => {
+    navigator.clipboard.writeText(command);
+    setCopied(true);
+    trackEvent("install_command_copied", {
+      component: name,
+      surface: "bento",
+      package_manager: "npm",
+    });
+    setTimeout(() => setCopied(false), 1500);
+  };
+
+  return (
+    <button
+      type="button"
+      onClick={copy}
+      aria-label={`Copy install command for ${name}`}
+      className="mt-4 flex w-full items-center gap-2.5 rounded-xl border border-border bg-muted/40 px-3 py-2 font-mono text-xs text-muted-foreground transition-colors hover:border-foreground/20 hover:text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring/40"
+    >
+      <span aria-hidden className="select-none text-muted-foreground/50">
+        $
+      </span>
+      <span className="min-w-0 flex-1 truncate text-left text-foreground/90">
+        npx shadcn@latest add{" "}
+        <span className="text-foreground">remocn/{name}</span>
+      </span>
+      <span aria-hidden className="shrink-0 text-muted-foreground/70">
+        {copied ? (
+          <Check className="size-3.5 text-foreground" />
+        ) : (
+          <Copy className="size-3.5" />
+        )}
+      </span>
+    </button>
+  );
+}
 
 function BentoCard({
   name,
@@ -26,58 +69,20 @@ function BentoCard({
   inputProps?: Record<string, unknown>;
 }) {
   const entry = registry[name];
-  const playerRef = useRef<PlayerRef>(null);
-  const [playing, setPlaying] = useState(false);
-  const hoverTracked = useRef(false);
-  const trackEvent = useTrackEvent();
-
-  const handleEnter = () => {
-    playerRef.current?.play();
-    setPlaying(true);
-    if (!hoverTracked.current) {
-      hoverTracked.current = true;
-      trackEvent("preview_played", {
-        component: name,
-        surface: "bento",
-        trigger: "hover",
-      });
-    }
-  };
-  const handleLeave = () => {
-    playerRef.current?.pause();
-    setPlaying(false);
-  };
-  const togglePlay = useCallback(() => {
-    const p = playerRef.current;
-    if (!p) return;
-    if (p.isPlaying()) {
-      p.pause();
-      setPlaying(false);
-      trackEvent("preview_paused", { component: name, surface: "bento" });
-    } else {
-      p.play();
-      setPlaying(true);
-      trackEvent("preview_played", {
-        component: name,
-        surface: "bento",
-        trigger: "click",
-      });
-    }
-  }, [name, trackEvent]);
 
   return (
-    // biome-ignore lint/a11y/noStaticElementInteractions: hover-to-play is decorative video preview
     <motion.div
-      onMouseEnter={handleEnter}
-      onMouseLeave={handleLeave}
       whileHover={{ y: -4 }}
       transition={SPRING_SOFT}
-      className={`surface-card group relative flex flex-col overflow-hidden rounded-2xl shadow-xl shadow-black/5 sm:rounded-3xl dark:shadow-black/30 ${className}`}
+      className={cn(
+        "surface-card group relative flex flex-col overflow-hidden rounded-2xl shadow-xl shadow-black/5 sm:rounded-3xl dark:shadow-black/30",
+        className,
+      )}
     >
       {/* Spotlight overlay (driven by parent --mx/--my) — theme-aware. */}
       <div
         aria-hidden
-        className="pointer-events-none absolute inset-0 opacity-0 transition-opacity duration-300 group-hover:opacity-100"
+        className="pointer-events-none absolute inset-0 z-10 opacity-0 transition-opacity duration-300 group-hover:opacity-100"
         style={{
           background:
             "radial-gradient(500px circle at var(--mx) var(--my), color-mix(in oklab, var(--color-foreground) 8%, transparent), transparent 40%)",
@@ -87,7 +92,6 @@ function BentoCard({
       <div className="relative aspect-[16/9] w-full overflow-hidden bg-muted">
         {entry ? (
           <Player
-            ref={playerRef}
             component={entry.Component}
             inputProps={inputProps ?? {}}
             durationInFrames={entry.config.durationInFrames}
@@ -95,35 +99,22 @@ function BentoCard({
             compositionWidth={entry.config.compositionWidth}
             compositionHeight={entry.config.compositionHeight}
             style={{ width: "100%", height: "100%" }}
+            autoPlay
             loop
             acknowledgeRemotionLicense
           />
         ) : null}
-        <button
-          type="button"
-          onClick={togglePlay}
-          aria-label={playing ? "Pause preview" : "Play preview"}
-          className="absolute inset-0 flex items-center justify-center bg-transparent focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring/40 sm:hidden"
-        >
-          <span
-            aria-hidden
-            className="pointer-events-none flex size-12 items-center justify-center rounded-full bg-background/70 text-foreground backdrop-blur-md"
-          >
-            {playing ? (
-              <Pause className="size-4" />
-            ) : (
-              <Play className="size-4 translate-x-0.5" />
-            )}
-          </span>
-        </button>
       </div>
-      <div className="relative flex-1 border-t border-border p-5 sm:p-6">
+      <div className="relative flex flex-1 flex-col border-t border-border p-5 sm:p-6">
         <h3 className="text-base font-semibold tracking-tight text-foreground">
           {title}
         </h3>
         <p className="mt-1.5 text-sm leading-relaxed text-muted-foreground">
           {description}
         </p>
+        <div className="mt-auto">
+          <InstallPill name={name} />
+        </div>
       </div>
     </motion.div>
   );
@@ -150,7 +141,7 @@ export function BentoRegistry() {
         <SectionHeading
           eyebrow="The registry"
           title="A registry of motion"
-          lead="Transitions, primitives and text reveals — production-ready and hover to play."
+          lead="Transitions, primitives and text reveals — production-ready, autoplaying, and one command away."
           action={
             <Button
               variant="outline"
