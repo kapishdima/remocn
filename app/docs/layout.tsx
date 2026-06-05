@@ -29,6 +29,11 @@ export default async function Layout({ children }: { children: ReactNode }) {
         // `navEnabled && jsx(slots.header)` guard in layouts/docs/client.
         nav={{ enabled: false }}
         searchToggle={{ enabled: false }}
+        // Remove the sidebar hide/collapse button: fumadocs-ui 16.7 renders the
+        // collapse trigger only under `collapsible && <SidebarCollapseTrigger>`
+        // (slots/sidebar.js), so `collapsible: false` drops it (and the floating
+        // re-expand trigger, since the rail can no longer collapse).
+        sidebar={{ collapsible: false }}
       >
         {/* `relative isolate` scopes the decorative grid to the content column so
             it sits behind the page body but above the base background — the same

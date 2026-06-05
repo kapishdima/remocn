@@ -3,10 +3,8 @@
   "collapsible": false,
   "pages": [
     "index",
-    "---Backgrounds---",
     "mesh-gradient-bg",
     "dynamic-grid",
-    "---Lighting---",
     "spotlight-card"
   ]
 }

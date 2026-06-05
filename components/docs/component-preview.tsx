@@ -18,6 +18,7 @@ import {
   type ControlConfig,
   getDefaults,
 } from "@/lib/customizer-config";
+import { usePrefersReducedMotion } from "@/lib/use-prefers-reduced-motion";
 import { cn } from "@/lib/utils";
 import registry from "@/registry/__index__";
 import { ComponentCustomizer } from "./component-customizer";
@@ -209,19 +210,6 @@ function Preview({
       </div>
     </div>
   );
-}
-
-function usePrefersReducedMotion() {
-  const [reduced, setReduced] = useState(false);
-  useEffect(() => {
-    if (typeof window === "undefined" || !window.matchMedia) return;
-    const mql = window.matchMedia("(prefers-reduced-motion: reduce)");
-    setReduced(mql.matches);
-    const onChange = (e: MediaQueryListEvent) => setReduced(e.matches);
-    mql.addEventListener("change", onChange);
-    return () => mql.removeEventListener("change", onChange);
-  }, []);
-  return reduced;
 }
 
 /**
