@@ -25,12 +25,6 @@ export default async function Page(props: {
       tableOfContent={{ enabled: false }}
       tableOfContentPopover={{ enabled: false }}
       footer={{ enabled: true }}
-      editOnGithub={{
-        owner: "remocn",
-        repo: "remocn",
-        sha: "main",
-        path: `content/docs/${(params.slug ?? []).join("/") || "index"}.mdx`,
-      }}
     >
       <DocsTitle
         style={{ fontFamily: "var(--font-display)" }}
