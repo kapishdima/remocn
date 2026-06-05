@@ -197,6 +197,14 @@
 .prose figure.shiki [class*="bg-"] {
   background-color: transparent !important;
 }
+/* Larger, more readable code. Fumadocs sets `text-sm` (14px) on the
+   `figure.shiki` (components/codeblock.js), which the inner `pre`/`code`
+   inherit. Bumping font-size on the pre lifts the whole block; line-height
+   is loosened to keep the taller text comfortable. */
+.prose figure.shiki pre {
+  font-size: 0.9375rem;
+  line-height: 1.7;
+}
 /* Inline `code` inside prose — token-driven chip, not a default slab. */
 .prose :not(pre) > code {
   background-color: color-mix(in oklab, var(--muted) 70%, transparent);
