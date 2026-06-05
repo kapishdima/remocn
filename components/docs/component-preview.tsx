@@ -2,7 +2,7 @@
 
 import { Player } from "@remotion/player";
 import { DynamicCodeBlock } from "fumadocs-ui/components/dynamic-codeblock";
-import { CheckIcon, LinkIcon, RotateCcwIcon } from "lucide-react";
+import { CheckIcon, LinkIcon, PlayIcon, RotateCcwIcon } from "lucide-react";
 import {
   parseAsBoolean,
   parseAsFloat,
@@ -150,25 +150,16 @@ function Preview({
         </TabsList>
 
         <TabsContent value="preview" className="mt-0">
-          <div className="surface-card aspect-video w-full overflow-hidden rounded-2xl">
-            <Player
-              component={Component}
-              inputProps={values}
-              durationInFrames={config.durationInFrames}
-              fps={config.fps}
-              compositionWidth={config.compositionWidth}
-              compositionHeight={config.compositionHeight}
-              style={{ width: "100%", height: "100%" }}
-              controls
-              loop
-              autoPlay
-              acknowledgeRemotionLicense
-            />
-          </div>
+          <PreviewStage
+            name={name}
+            Component={Component}
+            inputProps={values}
+            config={config}
+          />
         </TabsContent>
 
         <TabsContent value="code" className="mt-0">
-          <div className="surface-card overflow-hiddenrounded-2xl [&_pre]:!rounded-none [&_pre]:!border-0 [&_pre]:!bg-transparent">
+          <div className="surface-card overflow-hidden rounded-2xl [&_pre]:!rounded-none [&_pre]:!border-0 [&_pre]:!bg-transparent">
             <DynamicCodeBlock lang="tsx" code={code} />
           </div>
         </TabsContent>
@@ -176,7 +167,7 @@ function Preview({
 
       <div className="overflow-hidden rounded-2xl">
         <div className="flex items-center justify-between pt-4 pb-2">
-          <h2>Customize</h2>
+          <span className="text-sm font-medium text-foreground">Customize</span>
           <div className="flex items-center gap-1">
             <button
               type="button"
@@ -216,6 +207,102 @@ function Preview({
           onChange={handleCustomizeChange}
         />
       </div>
+    </div>
+  );
+}
+
+function usePrefersReducedMotion() {
+  const [reduced, setReduced] = useState(false);
+  useEffect(() => {
+    if (typeof window === "undefined" || !window.matchMedia) return;
+    const mql = window.matchMedia("(prefers-reduced-motion: reduce)");
+    setReduced(mql.matches);
+    const onChange = (e: MediaQueryListEvent) => setReduced(e.matches);
+    mql.addEventListener("change", onChange);
+    return () => mql.removeEventListener("change", onChange);
+  }, []);
+  return reduced;
+}
+
+/**
+ * D2 — lazy-mount the Remotion player. Until the stage enters the viewport
+ * (IntersectionObserver) or the user clicks the poster, render a labeled
+ * poster button that exactly matches the Suspense fallback dimensions, so the
+ * live Player swaps in with zero layout shift.
+ */
+function PreviewStage({
+  name,
+  Component,
+  inputProps,
+  config,
+}: {
+  name: string;
+  Component: React.ComponentType<any>;
+  inputProps: Record<string, unknown>;
+  config: ComponentConfig;
+}) {
+  const [mounted, setMounted] = useState(false);
+  const frameRef = useRef<HTMLDivElement>(null);
+  const reducedMotion = usePrefersReducedMotion();
+
+  useEffect(() => {
+    if (mounted) return;
+    const el = frameRef.current;
+    if (!el || typeof IntersectionObserver === "undefined") return;
+    const observer = new IntersectionObserver(
+      (entries) => {
+        if (entries.some((entry) => entry.isIntersecting)) {
+          setMounted(true);
+          observer.disconnect();
+        }
+      },
+      { rootMargin: "200px 0px" },
+    );
+    observer.observe(el);
+    return () => observer.disconnect();
+  }, [mounted]);
+
+  return (
+    <div
+      ref={frameRef}
+      className="surface-card aspect-video w-full overflow-hidden rounded-2xl"
+    >
+      {mounted ? (
+        <div
+          className={cn(
+            "size-full",
+            !reducedMotion && "animate-in fade-in duration-300 ease-out",
+          )}
+        >
+          <Player
+            component={Component}
+            inputProps={inputProps}
+            durationInFrames={config.durationInFrames}
+            fps={config.fps}
+            compositionWidth={config.compositionWidth}
+            compositionHeight={config.compositionHeight}
+            style={{ width: "100%", height: "100%" }}
+            controls
+            loop
+            autoPlay
+            acknowledgeRemotionLicense
+          />
+        </div>
+      ) : (
+        <button
+          type="button"
+          onClick={() => setMounted(true)}
+          aria-label={`Play preview of ${name}`}
+          className={cn(
+            "group flex size-full items-center justify-center bg-muted/40 transition-colors",
+            "hover:bg-muted/60 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring/40",
+          )}
+        >
+          <span className="flex size-12 items-center justify-center rounded-full bg-background/80 text-foreground transition-colors group-hover:bg-background">
+            <PlayIcon className="size-5 translate-x-px fill-current" />
+          </span>
+        </button>
+      )}
     </div>
   );
 }
