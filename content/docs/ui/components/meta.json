@@ -1,0 +1,5 @@
+{
+  "title": "Components",
+  "collapsible": false,
+  "pages": ["button", "spinner"]
+}
