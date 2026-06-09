@@ -744,6 +744,60 @@
           "target": "components/remocn/github-stars.tsx"
         }
       ]
+    },
+    {
+      "name": "remocn-ui",
+      "type": "registry:lib",
+      "title": "remocn UI Core",
+      "description": "Shared timeline-fold hook, theme context, and color math for remocn UI primitives.",
+      "dependencies": ["remotion", "culori"],
+      "files": [
+        {
+          "path": "registry/remocn/ui-core/timeline.ts",
+          "type": "registry:lib",
+          "target": "lib/remocn-ui/timeline.ts"
+        },
+        {
+          "path": "registry/remocn/ui-core/theme.ts",
+          "type": "registry:lib",
+          "target": "lib/remocn-ui/theme.ts"
+        },
+        {
+          "path": "registry/remocn/ui-core/color.ts",
+          "type": "registry:lib",
+          "target": "lib/remocn-ui/color.ts"
+        },
+        {
+          "path": "registry/remocn/ui-core/motion.ts",
+          "type": "registry:lib",
+          "target": "lib/remocn-ui/motion.ts"
+        },
+        {
+          "path": "registry/remocn/ui-core/types.ts",
+          "type": "registry:lib",
+          "target": "lib/remocn-ui/types.ts"
+        },
+        {
+          "path": "registry/remocn/ui-core/index.ts",
+          "type": "registry:lib",
+          "target": "lib/remocn-ui/index.ts"
+        }
+      ]
+    },
+    {
+      "name": "ui-button",
+      "type": "registry:component",
+      "title": "UI Button",
+      "description": "A shadcn-style button whose hover/press/loading/success states are scripted on the Remotion timeline.",
+      "dependencies": ["remotion"],
+      "registryDependencies": ["remocn-ui"],
+      "files": [
+        {
+          "path": "registry/remocn/ui-button/index.tsx",
+          "type": "registry:component",
+          "target": "components/remocn/ui-button.tsx"
+        }
+      ]
     }
   ]
 }

@@ -1,0 +1,181 @@
+---
+title: UI
+description: shadcn-style primitives scripted on the Remotion timeline
+---
+
+The `ui` tier brings familiar shadcn components — Button, Input, Checkbox, Switch — into Remotion video. Instead of responding to mouse events, their interactions are **scripted on the timeline**: you declare what happens and when, and the component renders it as a deterministic pure function of `useCurrentFrame()`.
+
+No `useState`. No event handlers. No CSS transitions. Every pixel is a function of the current frame — which is exactly what Remotion's headless per-frame renderer requires.
+
+## What makes this different from regular shadcn
+
+In a browser, a button enters its loading state because the user clicked. In a video, it enters that state because you authored `{ at: 35, action: "loading" }`. The component looks identical; the wiring is completely different.
+
+This also means you get things that are impossible in a real UI: scrub backward through a form fill, play a button click at half speed, or loop a checkbox toggle indefinitely — all without any special setup.
+
+## Installation
+
+Each component installs via the standard shadcn CLI. The shared `remocn-ui` core installs automatically as a `registryDependencies` entry — you do not need to install it separately.
+
+```bash
+npx shadcn add @remocn/ui-button
+```
+
+This writes `components/remocn/ui-button.tsx` and `lib/remocn-ui/` to your project. Every `ui-*` component depends on the same `lib/remocn-ui/` core.
+
+## The `steps` timeline envelope
+
+Every `ui` primitive accepts a `steps` prop — an array of `Step` objects that describe what the component does and when.
+
+```ts
+interface Step<A extends string = string, V = unknown> {
+  /** Sequence-local frame at which this step begins. */
+  at: number;
+  /** Action name — component-specific (e.g. "hover" | "press" | "loading"). */
+  action: A;
+  /** Optional payload; meaning depends on the action. */
+  value?: V;
+  /** Frames to animate the transition. 0 = snap instantly. Omit = component default. */
+  duration?: number;
+}
+```
+
+A Button scripted through a full interaction looks like this:
+
+```tsx
+import { UIButton } from "@/components/remocn/ui-button";
+
+export const Scene = () => (
+  <UIButton
+    label="Continue"
+    steps={[
+      { at: 10, action: "hover" },
+      { at: 25, action: "press" },
+      { at: 35, action: "loading" },
+      { at: 70, action: "success" },
+    ]}
+  />
+);
+```
+
+The `at` value is always a **Sequence-local authored frame** — the frame number as you write it. If the component is inside a `<Sequence from={30}>`, Remotion shifts the frame counter automatically; `at: 10` still means "10 frames into this Sequence."
+
+## How the fold works
+
+Internally, every `ui` primitive calls `useTimelineState` from `lib/remocn-ui/timeline.ts`. This hook folds the `steps` array into two things:
+
+- **`state`** — the resolved logical state at the current frame (e.g. `{ phase: "loading" }`). This is the settled truth: what the component *is* right now.
+- **`progressOf(action)`** — a 0–1 progress value for the currently in-flight animation window of a given action. This is for driving the animation itself.
+
+```ts
+const { state, progressOf } = useTimelineState(steps, defaultState, reducer, durationDefaults);
+
+// state.phase tells you what the button IS (settled)
+// progressOf("hover") tells you how far into the hover animation you are (in-flight)
+```
+
+### The single fold invariant
+
+<Note>
+`progressOf(action)` is in-flight animation only. Once an animation window ends, `progressOf` returns 0 — it does not hold at 1. **Settled visual values must always be derived from `state`, not from `progressOf`.**
+</Note>
+
+This matters most for persistent visuals. A checkbox that has been checked should keep its checkmark drawn at frame 200, long after the 12-frame `check` animation finished. The correct pattern:
+
+```tsx
+// Good: settled truth from state, animation from progressOf
+const drawProgress = active.some(e => e.step.action === "check")
+  ? progressOf("check")
+  : active.some(e => e.step.action === "uncheck")
+    ? 1 - progressOf("uncheck")
+    : state.checked ? 1 : 0;  // <-- this line keeps the mark drawn after the window closes
+
+// Bad: reading progressOf alone — the mark flashes away once the animation ends
+const drawProgress = progressOf("check");
+```
+
+### Concurrent animation tracks
+
+`progressOf` returns a **per-action** progress value, so two animations can run at the same time. A Button can crossfade its spinner into a checkmark while the checkmark's background also animates. An Input can reveal characters while the focus ring is still settling.
+
+```tsx
+// Loading → success crossfade: both tracks are live simultaneously
+const spinnerOpacity = 1 - progressOf("success");
+const checkmarkOpacity = progressOf("success");
+const loadingRingProgress = progressOf("loading");
+```
+
+A single scalar `progress` value could not express this. The per-action tracks are why `useTimelineState` returns a function rather than a number.
+
+### `duration: 0` snaps
+
+A step with `duration: 0` (or whose action has a default duration of 0) updates the logical `state` at frame `at` with no animation window. `progressOf` will never return a non-zero value for it. Use this for instantaneous state changes that need no visual transition.
+
+### The `speed` prop
+
+Every `ui` primitive accepts a `speed` prop (default `1`). The fold scales the **playhead** by `speed`, not the authored step times. A step at `{ at: 30 }` with `speed: 2` fires at render frame 15 (`effectiveFrame = 15 * 2 = 30`). The component preview wires this to the shared speed slider automatically.
+
+## Theming
+
+The `ui` tier uses a JS theme object with stock shadcn token names. Values are concrete oklch strings — not CSS custom properties.
+
+```ts
+import type { RemocnTheme } from "@/lib/remocn-ui";
+
+// All tokens match shadcn's default neutral palette out of the box
+const myTheme: Partial<RemocnTheme> = {
+  primary: "oklch(0.55 0.2 250)",       // override just what you need
+  radius: 6,
+};
+```
+
+### `RemocnUIProvider`
+
+Wrap your composition (or a subtree) in `RemocnUIProvider` to set a theme and/or mode for all nested `ui` primitives:
+
+```tsx
+import { RemocnUIProvider } from "@/lib/remocn-ui";
+
+export const Scene = () => (
+  <RemocnUIProvider mode="dark" theme={{ primary: "oklch(0.6 0.22 260)" }}>
+    <UIButton label="Continue" steps={[{ at: 10, action: "hover" }]} />
+    <UICheckbox label="Remember me" steps={[{ at: 30, action: "check" }]} />
+  </RemocnUIProvider>
+);
+```
+
+Token resolution order (highest wins): per-component `theme` prop > `RemocnUIProvider` theme > `defaultLightTheme` / `defaultDarkTheme` per `mode`. The `mode` prop on a component wins over `RemocnUIProvider`'s `mode`.
+
+Available exports from `lib/remocn-ui`:
+
+| Export | Type | Description |
+|---|---|---|
+| `RemocnUIProvider` | Component | Context provider for theme and mode |
+| `useRemocnTheme` | Hook | Resolves the active theme inside a component |
+| `defaultLightTheme` | `RemocnTheme` | Stock shadcn neutral light palette |
+| `defaultDarkTheme` | `RemocnTheme` | Stock shadcn neutral dark palette |
+| `RemocnTheme` | Interface | Full token shape with `radius: number` |
+
+### Animated colors require concrete JS values
+
+<Warning>
+CSS custom properties (`var(--primary)`) work for **static** styling only. Remotion's headless per-frame renderer cannot resolve `var(...)` for JS interpolation. If you pass `var(--primary)` as an animated token, `parseColor` will warn in dev mode and fall back to the JS default theme value — not your CSS override.
+
+To override an animated color, pass a concrete oklch, hex, or rgb value via the `theme` prop or `RemocnUIProvider`. Static colors (borders, backgrounds that never animate) can safely use `var()` in `style` props.
+</Warning>
+
+A project whose `:root` overrides `--primary` will see static elements pick up the CSS variable correctly, but animated transitions (hover fades, press darkening) will use the JS theme default. The defaults match stock shadcn, so unless you have custom colors, you will not notice the difference — but if you do have custom colors, supply them through the JS theme.
+
+## Core library exports
+
+Installing any `@remocn/ui-*` component also installs `lib/remocn-ui/` with these modules:
+
+| Module | Key exports |
+|---|---|
+| `timeline.ts` | `useTimelineState`, `framesFor`, `revealCount` |
+| `theme.ts` | `RemocnUIProvider`, `useRemocnTheme`, `defaultLightTheme`, `defaultDarkTheme` |
+| `color.ts` | `mixOklch`, `parseColor`, `oklchToRgb`, `rgbToOklch`, `toCss` |
+| `motion.ts` | `easings`, `springs` |
+| `types.ts` | `Step`, `TimelineState` |
+
+You can import from `@/lib/remocn-ui` (the barrel) or from the individual module paths.
