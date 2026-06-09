@@ -16,7 +16,8 @@ import { NAV_LINKS } from "@/config/site";
  * block's right edge. The CSS vars are redeclared here because this header
  * renders above (outside) DocsLayout, so its variables aren't in scope. `-ml-4`
  * pulls the first nav item's label flush with the article text while its
- * ghost-button background bleeds back into the gutter.
+ * ghost-button background bleeds back into the gutter. The Components/Primitives
+ * switcher lives in the thin `DocsTabsBar` rendered directly below this header.
  *
  * The 1400px / 268px literals mirror fumadocs-ui 16.7 defaults — the docs grid
  * sets `[--fd-layout-width:1400px]` and `md:layout:[--fd-sidebar-width:268px]`
