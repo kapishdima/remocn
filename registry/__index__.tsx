@@ -163,6 +163,8 @@ import { ContextMenuPreview } from "@/registry/remocn-ui/context-menu/preview";
 import { contextMenuConfig } from "@/registry/remocn-ui/context-menu/config";
 import { ToggleGroup } from "@/registry/remocn-ui/toggle-group";
 import { toggleGroupConfig } from "@/registry/remocn-ui/toggle-group/config";
+import { StepperPreview } from "@/registry/remocn-ui/stepper/preview";
+import { stepperConfig } from "@/registry/remocn-ui/stepper/config";
 import { ZoomThroughTransition } from "@/registry/remocn/zoom-through-transition";
 import { zoomThroughTransitionConfig } from "@/registry/remocn/zoom-through-transition/config";
 
@@ -398,6 +400,9 @@ const registry: Record<string, RegistryEntry> = {
   // toggle-group registers RAW (no preview wrapper): like tabs it paints its own
   // opaque inset:0 centered stage, so the customizer mounts it directly.
   "toggle-group": { Component: ToggleGroup, config: toggleGroupConfig },
+  // stepper's customizer Component is the preview-only StepperPreview wrapper: a
+  // bare wide horizontal element would sit top-left, so the wrapper centers it.
+  "stepper": { Component: StepperPreview, config: stepperConfig },
   "spinner": { Component: Spinner, config: spinnerConfig },
 };
 

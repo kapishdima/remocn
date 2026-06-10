@@ -611,6 +611,26 @@
           "target": "components/remocn/use-toggle-group-transition.ts"
         }
       ]
+    },
+    {
+      "name": "stepper",
+      "type": "registry:component",
+      "title": "UI Stepper",
+      "description": "A horizontal onboarding stepper whose progress is a pure function of a continuous step index (value-channel deviation). Every circle (fill, number, stroke-dash check) and connector (primary fill fraction) derives purely from the float position; useStepperTransition reads the frame and eases position between step indices.",
+      "dependencies": ["remotion"],
+      "registryDependencies": ["remocn-ui"],
+      "files": [
+        {
+          "path": "stepper/index.tsx",
+          "type": "registry:component",
+          "target": "components/remocn/stepper.tsx"
+        },
+        {
+          "path": "stepper/use-stepper-transition.ts",
+          "type": "registry:component",
+          "target": "components/remocn/use-stepper-transition.ts"
+        }
+      ]
     }
   ]
 }

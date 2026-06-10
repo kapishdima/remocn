@@ -60,6 +60,10 @@ import {
   ToggleGroupExampleScene,
   toggleGroupExampleCode,
 } from "./toggle-group-example";
+import {
+  StepperExampleScene,
+  stepperExampleCode,
+} from "./stepper-example";
 
 export interface ExampleEntry {
   Component: ComponentType;
@@ -280,6 +284,15 @@ export const examples: Record<string, ExampleEntry> = {
     code: toggleGroupExampleCode,
     // Second toggle completes at 92 + dur 14 = 106; a short settle then loop.
     durationInFrames: 115,
+    fps: FPS,
+    width: W,
+    height: H,
+  },
+  "stepper-example": {
+    Component: StepperExampleScene,
+    code: stepperExampleCode,
+    // Final step (index 2) ease completes at 110 + 24 = 134; a short settle then loop.
+    durationInFrames: 150,
     fps: FPS,
     width: W,
     height: H,

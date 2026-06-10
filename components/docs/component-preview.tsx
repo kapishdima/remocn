@@ -167,7 +167,7 @@ function Preview({
         </TabsContent>
       </Tabs>
 
-      <div className="overflow-hidden rounded-2xl">
+      <div className="overflow-hidden ">
         <div className="flex items-center justify-between pt-4 pb-2">
           <span className="text-sm font-medium text-foreground">Customize</span>
           <div className="flex items-center gap-1">
