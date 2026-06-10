@@ -153,6 +153,8 @@ import { SkeletonBlockPreview } from "@/registry/remocn-ui/skeleton-block/previe
 import { skeletonBlockConfig } from "@/registry/remocn-ui/skeleton-block/config";
 import { SkeletonPreview } from "@/registry/remocn-ui/skeleton/preview";
 import { skeletonConfig } from "@/registry/remocn-ui/skeleton/config";
+import { SliderPreview } from "@/registry/remocn-ui/slider/preview";
+import { sliderConfig } from "@/registry/remocn-ui/slider/config";
 import { ZoomThroughTransition } from "@/registry/remocn/zoom-through-transition";
 import { zoomThroughTransitionConfig } from "@/registry/remocn/zoom-through-transition/config";
 
@@ -372,6 +374,9 @@ const registry: Record<string, RegistryEntry> = {
     config: skeletonBlockConfig,
   },
   "skeleton": { Component: SkeletonPreview, config: skeletonConfig },
+  // slider's customizer Component is the preview-only SliderPreview wrapper: a
+  // bare inline bar would sit top-left, so the wrapper centers it on a stage.
+  "slider": { Component: SliderPreview, config: sliderConfig },
   "spinner": { Component: Spinner, config: spinnerConfig },
 };
 

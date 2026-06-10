@@ -40,6 +40,10 @@ import {
   SkeletonExampleScene,
   skeletonExampleCode,
 } from "./skeleton-example";
+import {
+  SliderExampleScene,
+  sliderExampleCode,
+} from "./slider-example";
 
 export interface ExampleEntry {
   Component: ComponentType;
@@ -214,6 +218,15 @@ export const examples: Record<string, ExampleEntry> = {
     // ~3 shimmer cycles (180), crossfade completes at 180 + 16 = 196; a short
     // settle on the revealed content then loop.
     durationInFrames: 220,
+    fps: FPS,
+    width: W,
+    height: H,
+  },
+  "slider-example": {
+    Component: SliderExampleScene,
+    code: sliderExampleCode,
+    // Drag completes at 100; thumb releases at 108; a short settle then loop.
+    durationInFrames: 120,
     fps: FPS,
     width: W,
     height: H,

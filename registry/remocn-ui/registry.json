@@ -511,6 +511,26 @@
           "target": "components/remocn/use-skeleton-transition.ts"
         }
       ]
+    },
+    {
+      "name": "slider",
+      "type": "registry:component",
+      "title": "UI Slider",
+      "description": "A slider whose fill is a numeric value channel plus a thumb idle/hover/press channel (dual-channel value-channel deviation). The Slider renderer is pure (clamped 0–100 value, thumb scale, grab-ring opacity); useSliderTransition reads the frame and eases both channels — value as a numeric lerp, the thumb visual from its state presets. Muted track + primary range + bordered thumb with a derived grab ring.",
+      "dependencies": ["remotion"],
+      "registryDependencies": ["remocn-ui"],
+      "files": [
+        {
+          "path": "slider/index.tsx",
+          "type": "registry:component",
+          "target": "components/remocn/slider.tsx"
+        },
+        {
+          "path": "slider/use-slider-transition.ts",
+          "type": "registry:component",
+          "target": "components/remocn/use-slider-transition.ts"
+        }
+      ]
     }
   ]
 }
