@@ -1,0 +1,5 @@
+{
+  "title": "Blocks",
+  "collapsible": false,
+  "pages": ["index", "signup-flow", "ai-prompt-flow", "checkout-flow", "onboarding-stepper-flow", "settings-toggle-flow"]
+}

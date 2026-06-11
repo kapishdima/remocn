@@ -1,0 +1,64 @@
+---
+title: SettingsToggleFlow
+description: Settings panel with cursor-driven switch, select dropdown, and slider controls
+---
+
+<BlockPreview name="settings-toggle-flow" />
+
+A composition scene demonstrating a settings panel workflow: cursor navigates through a switch toggle, opens a select dropdown to choose a theme, and drags a slider to adjust volume. Concludes with a settings-saved confirmation toast. Shows cursor-driven interactions across multiple interactive primitives in sequence.
+
+## Installation
+
+<InstallBlock name="settings-toggle-flow" />
+
+<Note>
+Installing `settings-toggle-flow` automatically installs the shared `remocn-ui` core and all composed primitives via `registryDependencies`: switch, select, slider, cursor, and toast. Select automatically includes button and select-item via its own registryDependencies. You do not need to install them separately.
+</Note>
+
+## Composed primitives
+
+- **Switch** — toggle for notification settings
+- **Select** — dropdown control for theme selection (includes button + select-item)
+- **Slider** — dual-channel drag control (value + thumb state)
+- **Cursor** — animated pointer with click and press interactions
+- **Toast** — settings-saved confirmation message
+
+## Timeline narrative
+
+The cursor begins parked and moves to the first switch control at frame 24, clicking to toggle from off to on. At frame 55, the cursor arrives at the select dropdown trigger and clicks, opening the panel. At frame 80, the cursor moves to the theme option and clicks to select it, closing the dropdown at frame 90. The cursor then moves to the slider at frame 105 and begins dragging, maintaining pressed state while the slider value animates through its range from frame 105 to frame 150. At frame 155, the settings-saved toast appears, confirming the changes, and auto-dismisses at frame 215.
+
+## Props
+
+<PropsTable
+  rows={[
+    {
+      name: "rows",
+      type: "{label: string}[]",
+      default: "[{label:\"Notifications\"},{label:\"Theme\"},{label:\"Volume\"}]",
+      description: "Array of setting row labels with their associated controls.",
+    },
+    {
+      name: "selectItems",
+      type: "string[]",
+      default: "[\"System\",\"Light\",\"Dark\"]",
+      description: "Array of theme options for the select dropdown.",
+    },
+    {
+      name: "toastTitle",
+      type: "string",
+      default: "\"Settings saved\"",
+      description: "Confirmation message shown in the toast.",
+    },
+    {
+      name: "mode",
+      type: "\"light\" | \"dark\"",
+      default: "\"light\"",
+      description: "Color mode applied to all composed primitives.",
+    },
+    {
+      name: "theme",
+      type: "RemocnTheme",
+      description: "Optional theme override (concrete oklch/hex/rgb values).",
+    },
+  ]}
+/>

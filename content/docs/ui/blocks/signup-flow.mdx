@@ -1,0 +1,70 @@
+---
+title: SignupFlow
+description: Cursor-driven account creation with email input, agreement, and success feedback
+---
+
+<BlockPreview name="signup-flow" />
+
+A composition scene demonstrating cursor-driven account creation. The user enters an email, agrees to terms, clicks create, and receives a success confirmation via toast. Each step is driven by primitives orchestrated on a shared timeline.
+
+## Installation
+
+<InstallBlock name="signup-flow" />
+
+<Note>
+Installing `signup-flow` automatically installs the shared `remocn-ui` core and all composed primitives via `registryDependencies`: cursor, input, checkbox, button, and toast. You do not need to install them separately.
+</Note>
+
+## Composed primitives
+
+- **Cursor** — animated pointer with click ripples
+- **Input** — text reveal animation with active state
+- **Checkbox** — animated checkmark on agreement
+- **Button** — hover/press/loading/success state progression
+- **Toast** — success message auto-dismiss
+
+## Timeline narrative
+
+The scene opens with the cursor parked in the top-left corner. At frame 30, the cursor moves to the email input and clicks, triggering the input to become active and begin revealing the pre-filled email address letter-by-letter. At frame 80, the cursor arrives at the checkbox and clicks again, drawing the checkmark with a +2-frame offset. The cursor then moves to the create button at frame 95, triggering hover and press states in sequence. At frame 110, the button enters the loading state (showing a spinner), and by frame 150 it transitions to success (checkmark icon). Simultaneously at frame 150, the success toast appears and auto-dismisses at frame 210.
+
+## Props
+
+<PropsTable
+  rows={[
+    {
+      name: "email",
+      type: "string",
+      default: "\"jane@acme.com\"",
+      description: "Email address to be revealed during input animation.",
+    },
+    {
+      name: "agreeLabel",
+      type: "string",
+      default: "\"I agree to the terms\"",
+      description: "Text label for the checkbox.",
+    },
+    {
+      name: "buttonLabel",
+      type: "string",
+      default: "\"Create account\"",
+      description: "Text displayed on the create button.",
+    },
+    {
+      name: "toastTitle",
+      type: "string",
+      default: "\"Account created\"",
+      description: "Success message shown in the toast.",
+    },
+    {
+      name: "mode",
+      type: "\"light\" | \"dark\"",
+      default: "\"light\"",
+      description: "Color mode applied to all composed primitives.",
+    },
+    {
+      name: "theme",
+      type: "RemocnTheme",
+      description: "Optional theme override (concrete oklch/hex/rgb values).",
+    },
+  ]}
+/>

@@ -651,6 +651,81 @@
           "target": "components/remocn/use-resizable-transition.ts"
         }
       ]
+    },
+    {
+      "name": "signup-flow",
+      "type": "registry:component",
+      "title": "UI Signup Flow",
+      "description": "A cursor-driven signup composition: the pointer clicks the email field, the value types in, the agree box checks, the Create button runs idle → press → loading → success, and a success toast slides in. A pure orchestrator — every channel comes from a composed primitive's transition hook.",
+      "dependencies": ["remotion"],
+      "registryDependencies": ["remocn-ui", "cursor", "input", "checkbox", "button", "toast"],
+      "files": [
+        {
+          "path": "signup-flow/index.tsx",
+          "type": "registry:component",
+          "target": "components/remocn/signup-flow.tsx"
+        }
+      ]
+    },
+    {
+      "name": "ai-prompt-flow",
+      "type": "registry:component",
+      "title": "UI AI Prompt Flow",
+      "description": "An AI prompt composition: a prompt types into the field, the Generate button runs hover → press → loading, a skeleton shimmer reveals, then crossfades into the generated answer, and a ready toast slides in. A pure orchestrator — the shimmer is owned by the skeleton-block motion atom; every other channel comes from a composed primitive's hook.",
+      "dependencies": ["remotion"],
+      "registryDependencies": ["remocn-ui", "input", "button", "skeleton", "skeleton-block", "toast"],
+      "files": [
+        {
+          "path": "ai-prompt-flow/index.tsx",
+          "type": "registry:component",
+          "target": "components/remocn/ai-prompt-flow.tsx"
+        }
+      ]
+    },
+    {
+      "name": "checkout-flow",
+      "type": "registry:component",
+      "title": "UI Checkout Flow",
+      "description": "A cursor-driven checkout composition: a billing-cycle toggle, a card field, and a Pay button open into a confirmation dialog, ending in a success toast. A pure orchestrator — every channel comes from a composed primitive's transition hook.",
+      "dependencies": ["remotion"],
+      "registryDependencies": ["remocn-ui", "toggle-group", "dialog", "input", "button", "cursor", "toast"],
+      "files": [
+        {
+          "path": "checkout-flow/index.tsx",
+          "type": "registry:component",
+          "target": "components/remocn/checkout-flow.tsx"
+        }
+      ]
+    },
+    {
+      "name": "onboarding-stepper-flow",
+      "type": "registry:component",
+      "title": "UI Onboarding Stepper Flow",
+      "description": "A multi-step onboarding composition: a horizontal stepper advances through panels of input, radio, and switch fields, finishing on a Finish button that runs to success. Panel crossfade derives linearly from the stepper's exposed position channel; every other channel comes from a composed primitive's hook.",
+      "dependencies": ["remotion"],
+      "registryDependencies": ["remocn-ui", "stepper", "input", "radio", "switch", "button"],
+      "files": [
+        {
+          "path": "onboarding-stepper-flow/index.tsx",
+          "type": "registry:component",
+          "target": "components/remocn/onboarding-stepper-flow.tsx"
+        }
+      ]
+    },
+    {
+      "name": "settings-toggle-flow",
+      "type": "registry:component",
+      "title": "UI Settings Toggle Flow",
+      "description": "A cursor-driven settings composition: the pointer flips a switch, opens a select, and drags a slider, ending in a saved toast. A pure orchestrator — every channel comes from a composed primitive's transition hook.",
+      "dependencies": ["remotion"],
+      "registryDependencies": ["remocn-ui", "switch", "select", "slider", "cursor", "toast"],
+      "files": [
+        {
+          "path": "settings-toggle-flow/index.tsx",
+          "type": "registry:component",
+          "target": "components/remocn/settings-toggle-flow.tsx"
+        }
+      ]
     }
   ]
 }

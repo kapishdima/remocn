@@ -1,5 +1,5 @@
 {
   "title": "UI",
   "collapsible": false,
-  "pages": ["index", "concepts", "installation", "components"]
+  "pages": ["index", "concepts", "installation", "components", "blocks"]
 }

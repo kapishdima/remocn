@@ -1,0 +1,77 @@
+---
+title: CheckoutFlow
+description: Pricing toggle, cursor-driven checkout dialog with card input and payment confirmation
+---
+
+<BlockPreview name="checkout-flow" />
+
+A composition scene demonstrating a complete checkout flow: toggle between pricing plans, cursor-driven upgrade button, modal dialog with card entry, payment processing, and success confirmation. Shows dialog open/close animations and input reveal within a modal context.
+
+## Installation
+
+<InstallBlock name="checkout-flow" />
+
+<Note>
+Installing `checkout-flow` automatically installs the shared `remocn-ui` core and all composed primitives via `registryDependencies`: toggle-group, dialog, input, button, cursor, and toast. You do not need to install them separately.
+</Note>
+
+## Composed primitives
+
+- **Toggle-group** — segmented control for plan selection
+- **Dialog** — modal backdrop and zoom animation
+- **Input** — card number reveal animation
+- **Button** — primary action with hover/press/loading/success states
+- **Cursor** — animated pointer with click ripples
+- **Toast** — payment confirmation message
+
+## Timeline narrative
+
+The scene opens with the toggle-group showing monthly/yearly options. At frame 24, the cursor clicks the yearly segment, and the toggle animates to yearly (thumb slides to the new position). At frame 50, the cursor moves to the upgrade button and clicks, triggering hover then press states. The dialog opens at frame 56 with backdrop dim and zoom. The input inside the dialog begins revealing the card number from frame 70 to frame 120. At frame 124, the confirm button is pressed, transitioning to loading at frame 128. By frame 165, the button reaches success state (checkmark). The dialog closes at frame 175, and the success toast appears at frame 178, auto-dismissing at frame 235.
+
+## Props
+
+<PropsTable
+  rows={[
+    {
+      name: "plans",
+      type: "{value: string; label: string}[]",
+      default: "[{value:\"monthly\",label:\"Monthly\"},{value:\"yearly\",label:\"Yearly\"}]",
+      description: "Array of pricing plan options for the toggle-group.",
+    },
+    {
+      name: "upgradeLabel",
+      type: "string",
+      default: "\"Upgrade\"",
+      description: "Text displayed on the upgrade button.",
+    },
+    {
+      name: "cardPlaceholder",
+      type: "string",
+      default: "\"4242 4242 4242 4242\"",
+      description: "Card number placeholder shown in the input.",
+    },
+    {
+      name: "confirmLabel",
+      type: "string",
+      default: "\"Pay\"",
+      description: "Text displayed on the confirm button inside the dialog.",
+    },
+    {
+      name: "toastTitle",
+      type: "string",
+      default: "\"Payment successful\"",
+      description: "Success message shown in the toast.",
+    },
+    {
+      name: "mode",
+      type: "\"light\" | \"dark\"",
+      default: "\"light\"",
+      description: "Color mode applied to all composed primitives.",
+    },
+    {
+      name: "theme",
+      type: "RemocnTheme",
+      description: "Optional theme override (concrete oklch/hex/rgb values).",
+    },
+  ]}
+/>
