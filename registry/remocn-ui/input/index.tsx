@@ -2,7 +2,13 @@
 
 import { mixOklch, type RemocnTheme, useRemocnTheme } from "@/lib/remocn-ui";
 
-export type InputState = "idle" | "hover" | "active" | "typing" | "invalid";
+export type InputState =
+  | "idle"
+  | "hover"
+  | "active"
+  | "typing"
+  | "blur"
+  | "invalid";
 
 type InputSize = "sm" | "default" | "lg";
 
@@ -18,12 +24,6 @@ export interface InputProps {
   placeholder?: string;
   /** The "typed" value revealed in the typing/invalid states. */
   value?: string;
-  /**
-   * Natural width (px) of the value text at full reveal. Remotion's headless
-   * render can't measure text, so the resting width is authored, not measured —
-   * the value clips to `valueWidth * valueReveal` and the caret sits at its end.
-   */
-  valueWidth?: number;
   size?: InputSize;
   theme?: Partial<RemocnTheme>;
   /** Convenience override for the `primary` theme token — merged into `theme`. */
@@ -62,7 +62,7 @@ export interface InputStyle {
   background: string;
   /** Caret bar opacity 0→1. */
   caretOpacity: number;
-  /** Value reveal 0→1; multiplies `valueWidth` to clip the text + place the caret. */
+  /** Value reveal 0→1; the fraction of the value shown as a substring (typewriter). */
   valueReveal: number;
   /** Placeholder opacity 0→1 (fades out as the value reveals). */
   placeholderOpacity: number;
@@ -144,6 +144,19 @@ export function inputStyle(
         valueReveal: 1,
         placeholderOpacity: 0,
       };
+    case "blur":
+      // Filled but unfocused: the value stays fully shown (valueReveal 1, so a
+      // typing→blur transition never un-types), but the focus ring and caret are
+      // gone and the border relaxes to its resting tone.
+      return {
+        borderColor: ctx.idleBorder,
+        ringColor: ctx.ring,
+        ringWidth: 0,
+        background: ctx.background,
+        caretOpacity: 0,
+        valueReveal: 1,
+        placeholderOpacity: 0,
+      };
     case "invalid":
       return {
         borderColor: ctx.invalidBorder,
@@ -172,7 +185,6 @@ export function Input({
   style,
   placeholder = "you@example.com",
   value = "remotion@remocn.dev",
-  valueWidth = 168,
   size = "default",
   theme: themeOverride,
   primary,
@@ -187,6 +199,10 @@ export function Input({
   const sizeStyle = SIZE_STYLES[size];
   const ctx = inputStyleContext(theme);
   const v = style ?? inputStyle(state, ctx);
+  // Typewriter substring — reveal `valueReveal` of the value character-by-
+  // character. The value box is content-sized, so the caret sits a fixed 4px
+  // after the last visible glyph (no authored width, no floating caret).
+  const revealed = value.slice(0, Math.round(value.length * v.valueReveal));
 
   return (
     <div
@@ -235,24 +251,14 @@ export function Input({
         >
           {placeholder}
         </span>
-        {/* Value + caret. The value clips to `valueWidth * valueReveal` — an
-            authored width (headless render can't measure text) — so the caret
-            sits flush against the end of the revealed text, typewriter-style.
-            With no value revealed (the `active` focus state) the value box is
-            0-wide, so the caret rests flush at the field's start. The caret is
-            shown only by `caretOpacity` (on in `active`/`typing`, off
-            otherwise) — never floating away from where the value would be. */}
+        {/* Value + caret. The value is a content-sized substring (typewriter),
+            so the caret sits a fixed 4px after the last visible glyph — never
+            floating in authored whitespace. With no value revealed (the `active`
+            focus state) the caret rests at the field's start. The caret is shown
+            only by `caretOpacity` (on in `active`/`typing`, off otherwise). */}
         <div style={{ display: "flex", alignItems: "center", minWidth: 0 }}>
-          <span
-            style={{
-              display: "inline-block",
-              width: valueWidth * v.valueReveal,
-              overflow: "hidden",
-              whiteSpace: "nowrap",
-              color: ctx.foreground,
-            }}
-          >
-            {value}
+          <span style={{ whiteSpace: "nowrap", color: ctx.foreground }}>
+            {revealed}
           </span>
           <span
             style={{
@@ -262,6 +268,7 @@ export function Input({
               borderRadius: 1,
               background: ctx.foreground,
               opacity: v.caretOpacity,
+              marginLeft: revealed.length > 0 ? 4 : 0,
             }}
           />
         </div>

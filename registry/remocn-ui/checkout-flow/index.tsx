@@ -198,7 +198,6 @@ export function CheckoutFlow({
           style={cardStyle}
           placeholder={cardPlaceholder}
           value={cardPlaceholder}
-          valueWidth={208}
           mode={mode}
           theme={theme}
         />

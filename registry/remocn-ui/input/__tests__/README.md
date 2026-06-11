@@ -43,11 +43,11 @@ or framework dep is added to `package.json`.
 
 ## What is covered
 
-- **`InputState` union** — asserts the five states
-  `["idle","hover","active","typing","invalid"]` are the complete set (via the
-  real `controls.state.options` list from `config.ts`).
+- **`InputState` union** — asserts the six states
+  `["idle","hover","active","typing","blur","invalid"]` are the complete set (via
+  the real `controls.state.options` list from `config.ts`).
 - **`inputConfig.controls.state`** — the customizer control wiring. Asserts a
-  `select` control exists with exactly those five options, default `"typing"`
+  `select` control exists with exactly those six options, default `"typing"`
   (so the preview showcases the caret + revealed value), and that every option
   is a member of the `InputState` union.
 - **`inputConfig.snippet`** — REAL pure string builder (high value).
@@ -71,6 +71,7 @@ or framework dep is added to `package.json`.
   | hover   | 0         | 0            | 0           | 1                  |
   | active  | 3         | 1            | 0           | 1                  |
   | typing  | 3         | 1            | 1           | 0                  |
+  | blur    | 0         | 0            | 1           | 0                  |
   | invalid | 3         | 0            | 1           | 0                  |
 
 - **`tweenInputStyle`** — exported pure `(a, b, t) => InputStyle`. Asserts:

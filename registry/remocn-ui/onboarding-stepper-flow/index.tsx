@@ -138,7 +138,6 @@ export function OnboardingStepperFlow({
             style={nameStyle}
             placeholder={name}
             value={name}
-            valueWidth={150}
             mode={mode}
             theme={theme}
           />

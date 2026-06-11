@@ -50,6 +50,7 @@ const VALID_STATES: readonly InputState[] = [
   "hover",
   "active",
   "typing",
+  "blur",
   "invalid",
 ];
 
@@ -71,7 +72,7 @@ const snippet = (values: SnippetValues): string =>
 // ===========================================================================
 
 describe("InputState union", () => {
-  it("contains exactly the five documented states", () => {
+  it("contains exactly the six documented states", () => {
     // We can't enumerate a TS type at runtime, but we can assert the REAL
     // controls.state options match and that all known states are members.
     const control = inputConfig.controls.state;
@@ -81,16 +82,17 @@ describe("InputState union", () => {
       "hover",
       "active",
       "typing",
+      "blur",
       "invalid",
     ]);
   });
 
   it("every VALID_STATES entry is assignable (no typos in the fixture)", () => {
-    // Belt-and-suspenders: the fixture array must have exactly 5 entries and
+    // Belt-and-suspenders: the fixture array must have exactly 6 entries and
     // match the options list from the real config.
     const control = inputConfig.controls.state;
     if (control.type !== "select") throw new Error("state control must be a select");
-    expect(VALID_STATES).toHaveLength(5);
+    expect(VALID_STATES).toHaveLength(6);
     for (const s of VALID_STATES) {
       expect(control.options).toContain(s);
     }
@@ -106,7 +108,7 @@ describe("inputConfig.controls.state", () => {
     expect(inputConfig.controls.state.type).toBe("select");
   });
 
-  it("has exactly the five InputState options in order", () => {
+  it("has exactly the six InputState options in order", () => {
     const control = inputConfig.controls.state;
     if (control.type !== "select") throw new Error("state control must be a select");
     expect(control.options).toEqual([
@@ -114,6 +116,7 @@ describe("inputConfig.controls.state", () => {
       "hover",
       "active",
       "typing",
+      "blur",
       "invalid",
     ]);
   });
@@ -153,6 +156,10 @@ describe("inputConfig.snippet: state prop emission", () => {
 
   it("emits state=\"typing\" for the typing option", () => {
     expect(snippet({ state: "typing" })).toContain('state="typing"');
+  });
+
+  it("emits state=\"blur\" for the blur option", () => {
+    expect(snippet({ state: "blur" })).toContain('state="blur"');
   });
 
   it("emits state=\"invalid\" for the invalid option", () => {
@@ -394,6 +401,41 @@ describe("inputStyle: typing state", () => {
   });
 
   it("placeholderOpacity is 0 (placeholder hidden by value)", () => {
+    expect(s.placeholderOpacity).toBe(0);
+  });
+
+  it("borderColor is a non-empty string", () => {
+    expect(typeof s.borderColor).toBe("string");
+    expect(s.borderColor.length).toBeGreaterThan(0);
+  });
+
+  it("ringColor is a non-empty string", () => {
+    expect(typeof s.ringColor).toBe("string");
+    expect(s.ringColor.length).toBeGreaterThan(0);
+  });
+
+  it("background is a non-empty string", () => {
+    expect(typeof s.background).toBe("string");
+    expect(s.background.length).toBeGreaterThan(0);
+  });
+});
+
+describe("inputStyle: blur state", () => {
+  const s = inputStyle("blur", ctx);
+
+  it("ringWidth is 0 (no focus ring — field is unfocused)", () => {
+    expect(s.ringWidth).toBe(0);
+  });
+
+  it("caretOpacity is 0 (caret hidden when blurred)", () => {
+    expect(s.caretOpacity).toBe(0);
+  });
+
+  it("valueReveal is 1 (value stays fully shown — no un-typing)", () => {
+    expect(s.valueReveal).toBe(1);
+  });
+
+  it("placeholderOpacity is 0 (placeholder stays hidden — value is shown)", () => {
     expect(s.placeholderOpacity).toBe(0);
   });
 

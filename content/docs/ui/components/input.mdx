@@ -5,7 +5,7 @@ description: An input field whose visual state is a pure function of the timelin
 
 <UiComponentPreview name="input" />
 
-A state atom whose appearance (idle, hover, active, typing, invalid) is a pure function of the `state` prop. Pass a state directly or drive it from the Remotion timeline via `useCurrentState`. The component reads no frame — only the state value you give it.
+A state atom whose appearance (idle, hover, active, typing, blur, invalid) is a pure function of the `state` prop. Pass a state directly or drive it from the Remotion timeline via `useCurrentState`. The component reads no frame — only the state value you give it.
 
 ## Installation
 
@@ -25,10 +25,11 @@ type InputState =
   | "hover"    // border darkens slightly, subtle muted bg wash, no ring
   | "active"   // focused, focus ring appears, border = ring, caret visible, placeholder still shown
   | "typing"   // focused, value text reveals (typewriter), caret at end, placeholder faded out
+  | "blur"     // filled but unfocused: value fully shown + static, no ring, no caret, resting border
   | "invalid"  // destructive border + destructive ring, value shown, no caret
 ```
 
-`hover` subtly lifts the visual weight with a darkened border and a wash of the muted background. `active` shows the focus ring and caret but the field is still empty (placeholder visible). `typing` animates the value text reveal and fades out the placeholder. `invalid` uses the destructive color tokens for both border and ring.
+`hover` subtly lifts the visual weight with a darkened border and a wash of the muted background. `active` shows the focus ring and caret but the field is still empty (placeholder visible). `typing` animates the value text reveal and fades out the placeholder. `blur` is the filled-but-unfocused resting state — the value stays fully shown and static (a `typing → blur` transition never un-types the value), but the focus ring and caret are gone and the border relaxes to its idle tone. `invalid` uses the destructive color tokens for both border and ring.
 
 ## Snap usage (simple path)
 
@@ -92,7 +93,7 @@ The `duration` field on each step overrides the file's `DEFAULT_DURATION` for th
   rows={[
     {
       name: "state",
-      type: "\"idle\" | \"hover\" | \"active\" | \"typing\" | \"invalid\"",
+      type: "\"idle\" | \"hover\" | \"active\" | \"typing\" | \"blur\" | \"invalid\"",
       default: "\"idle\"",
       description: "Current visual state (snap path). State changes snap — no automatic cross-fade.",
     },
@@ -111,13 +112,7 @@ The `duration` field on each step overrides the file's `DEFAULT_DURATION` for th
       name: "value",
       type: "string",
       default: "\"remotion@remocn.dev\"",
-      description: "The typed value revealed in the typing/invalid states.",
-    },
-    {
-      name: "valueWidth",
-      type: "number",
-      default: "168",
-      description: "Authored natural width (px) of the value text; the value clips to valueWidth × valueReveal since Remotion's headless render can't measure text.",
+      description: "The typed value revealed in the typing/invalid states. Reveals character-by-character (typewriter); the caret sits a fixed 4px after the last visible glyph.",
     },
     {
       name: "size",

@@ -142,7 +142,6 @@ export function AiPromptFlow({
         <Input
           placeholder="Ask anything…"
           value={prompt}
-          valueWidth={186}
           style={inputStyle}
           mode={mode}
           theme={theme}

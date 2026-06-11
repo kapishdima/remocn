@@ -40,43 +40,29 @@ export interface SignupFlowProps {
   theme?: Partial<RemocnTheme>;
 }
 
-// ── Stage + card geometry (1280×720). The card surface is theme.background so
-// the Input/Button atoms (which paint their own inset:0 theme.background fill)
-// blend into it in BOTH light and dark; the stage sits on theme.muted so the
-// card lifts off the page via tone + border + shadow. Card content flows in a
-// padded column; the cursor targets each control's vertical center, derived
-// from the fixed field metrics below (label 18 + gap 6 + control 40, group
-// gap 16) so the click visually lands on the field. The focus itself is
-// frame-driven (each click `at` == the field's `active` `at`), not position-
-// driven, so the animation stays exact regardless of pixel rounding.
 const STAGE_W = 1280;
 const CARD_W = 376;
 const CARD_TOP = 48;
 const CARD_LEFT = (STAGE_W - CARD_W) / 2; // 452
 const CENTER_X = STAGE_W / 2; // 640 — the centered content column
 
-// Cursor tip targets — each control's vertical center (see metrics above).
-const NAME_Y = 196;
-const EMAIL_Y = 276;
-const PASS_Y = 378;
-const CONFIRM_Y = 480;
-const CREATE_Y = 544;
+// Cursor tip targets — each control's vertical center, derived from the flow:
+// card top 48 + pad 28 → content y 76. Header = title(28) + gap4 + desc(40, the
+// description wraps to 2 lines in the 320px column) = 72 → ends 148. gap24 →
+// FieldGroup at 172 (Field = label 18 + gap6 + control 40; group gap 16):
+//   Name   control 196–236 → center 216
+//   Email  control 276–316 → center 296   (+ desc 16)
+//   Pass   control 378–418 → center 398   (+ desc 16)
+//   Confirm control 480–520 → center 500
+// gap24 → action Field at 544: Create control 544–584 → center 564.
+// (The click only needs to land on the field; focus is frame-driven, so a few
+// px of font drift is harmless.)
+const NAME_Y = 216;
+const EMAIL_Y = 296;
+const PASS_Y = 398;
+const CONFIRM_Y = 500;
+const CREATE_Y = 564;
 
-/**
- * Cursor-driven signup card: the pointer fills each labeled field top-to-bottom
- * (Full Name → Email → Password → Confirm), then clicks "Create account"
- * (hover → press → loading → success) and a success toast slides in. A pure
- * orchestrator — every animated channel comes from a composed primitive's own
- * transition hook (`useCursorPath` / `use*Transition`); the block holds no
- * state, effects, or frame reads of its own. The card chrome and form layout
- * are composed from the static `Field` family (FieldGroup / Field / FieldLabel
- * / FieldControl / FieldDescription).
- *
- * Frame-sync: each cursor-click `at` equals the field's `active` `at`
- * (18, 52, 96, 134) and the button `hover` `at` (176); the button `success`
- * `at` equals the toast enter `at` (234). Type windows never overlap the next
- * field's click.
- */
 export function SignupFlow({
   title = "Create an account",
   description = "Enter your information below to create your account",
@@ -84,8 +70,6 @@ export function SignupFlow({
   email = "m@example.com",
   password = "••••••••",
   createLabel = "Create account",
-  googleLabel = "Sign up with Google",
-  signinText = "Already have an account?",
   toastTitle = "Account created",
   mode = "light",
   theme,
@@ -106,10 +90,15 @@ export function SignupFlow({
 
   // Each field focuses on its click, then reveals its typed value. Each field's
   // own hook holds the filled visual afterward.
+  // Each field focuses on its click, types its value, then BLURS (state `blur`)
+  // the moment the cursor clicks the next field/button — so only the focused
+  // field ever shows the ring + caret. `blur` keeps the value fully shown and
+  // static (no un-typing); the previously-typed fields stay filled.
   const nameStyle = useInputTransition(
     [
       { at: 18, state: "active", duration: 6 },
       { at: 20, state: "typing", duration: 20 },
+      { at: 52, state: "blur", duration: 8 },
     ],
     opts,
   );
@@ -117,6 +106,7 @@ export function SignupFlow({
     [
       { at: 52, state: "active", duration: 6 },
       { at: 54, state: "typing", duration: 28 },
+      { at: 96, state: "blur", duration: 8 },
     ],
     opts,
   );
@@ -124,6 +114,7 @@ export function SignupFlow({
     [
       { at: 96, state: "active", duration: 6 },
       { at: 98, state: "typing", duration: 22 },
+      { at: 134, state: "blur", duration: 8 },
     ],
     opts,
   );
@@ -131,6 +122,7 @@ export function SignupFlow({
     [
       { at: 134, state: "active", duration: 6 },
       { at: 136, state: "typing", duration: 22 },
+      { at: 176, state: "blur", duration: 8 },
     ],
     opts,
   );
@@ -175,7 +167,7 @@ export function SignupFlow({
           left: CARD_LEFT,
           top: CARD_TOP,
           width: CARD_W,
-          height: 620,
+          height: 580,
           boxSizing: "border-box",
           padding: 28,
           display: "flex",
@@ -222,7 +214,6 @@ export function SignupFlow({
               <Input
                 placeholder={fullName}
                 value={fullName}
-                valueWidth={72}
                 style={nameStyle}
                 mode={mode}
                 theme={theme}
@@ -238,7 +229,6 @@ export function SignupFlow({
               <Input
                 placeholder={email}
                 value={email}
-                valueWidth={108}
                 style={emailStyle}
                 mode={mode}
                 theme={theme}
@@ -257,7 +247,6 @@ export function SignupFlow({
               <Input
                 placeholder={password}
                 value={password}
-                valueWidth={70}
                 style={passStyle}
                 mode={mode}
                 theme={theme}
@@ -276,7 +265,6 @@ export function SignupFlow({
               <Input
                 placeholder={password}
                 value={password}
-                valueWidth={70}
                 style={confirmStyle}
                 mode={mode}
                 theme={theme}
@@ -295,28 +283,6 @@ export function SignupFlow({
               theme={theme}
             />
           </FieldControl>
-          <FieldControl>
-            <Button
-              label={googleLabel}
-              variant="outline"
-              state="idle"
-              mode={mode}
-              theme={theme}
-            />
-          </FieldControl>
-          <FieldDescription align="center" mode={mode} theme={theme}>
-            {signinText}{" "}
-            <span
-              style={{
-                color: resolved.foreground,
-                fontWeight: 500,
-                textDecoration: "underline",
-                textUnderlineOffset: 2,
-              }}
-            >
-              Sign in
-            </span>
-          </FieldDescription>
         </Field>
       </div>
 
