@@ -51,8 +51,9 @@ export const blockExamples: Record<string, BlockExampleEntry> = {
   "signup-flow": {
     Component: SignupFlowExampleScene,
     code: signupFlowExampleCode,
-    // Toast dismiss 300 + 14 + ~16 settle (signup card fill → submit → toast).
-    durationInFrames: 330,
+    // blur-in entrance (card → header → fields → button, ~0–64) → cursor demo
+    // (+DEMO 48) → toast dismiss 348 + 14 + ~18 settle.
+    durationInFrames: 380,
     fps: FPS,
     width: W,
     height: H,

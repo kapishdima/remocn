@@ -693,7 +693,7 @@
       "title": "UI Signup Flow",
       "description": "A signup card composition: a real shadcn-style card (header, labeled Full Name / Email / Password / Confirm fields, primary + Google-outline buttons, sign-in footer) whose cursor fills each field top-to-bottom, then clicks Create account (hover → press → loading → success) as a success toast slides in. A pure orchestrator — every channel comes from a composed primitive's transition hook.",
       "dependencies": ["remotion"],
-      "registryDependencies": ["remocn-ui", "cursor", "input", "button", "toast", "field"],
+      "registryDependencies": ["remocn-ui", "cursor", "input", "button", "toast", "field", "blur-in"],
       "files": [
         {
           "path": "signup-flow/index.tsx",
