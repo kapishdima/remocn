@@ -721,9 +721,9 @@
       "name": "checkout-flow",
       "type": "registry:component",
       "title": "UI Checkout Flow",
-      "description": "A cursor-driven checkout composition: a billing-cycle toggle, a card field, and a Pay button open into a confirmation dialog, ending in a success toast. A pure orchestrator — every channel comes from a composed primitive's transition hook.",
+      "description": "A cursor-driven checkout card: the card and its fields blur-in, then the pointer flips a billing-cycle toggle, types a card number, ticks the terms checkbox, and presses Pay through to success, ending in a toast. A pure orchestrator — every channel comes from a composed primitive's transition hook.",
       "dependencies": ["remotion"],
-      "registryDependencies": ["remocn-ui", "toggle-group", "dialog", "input", "button", "cursor", "toast"],
+      "registryDependencies": ["remocn-ui", "toggle-group", "input", "checkbox", "button", "field", "blur-in", "cursor", "toast"],
       "files": [
         {
           "path": "checkout-flow/index.tsx",
@@ -751,9 +751,9 @@
       "name": "settings-toggle-flow",
       "type": "registry:component",
       "title": "UI Settings Toggle Flow",
-      "description": "A cursor-driven settings composition: the pointer flips a switch, opens a select, and drags a slider, ending in a saved toast. A pure orchestrator — every channel comes from a composed primitive's transition hook.",
+      "description": "A two-column settings card: the card and its controls blur-in, then the cursor flips a switch, opens a select, drags a labeled slider, and clicks Save, ending in a saved toast. A pure orchestrator — every channel comes from a composed primitive's transition hook.",
       "dependencies": ["remotion"],
-      "registryDependencies": ["remocn-ui", "switch", "select", "slider", "cursor", "toast"],
+      "registryDependencies": ["remocn-ui", "switch", "select", "slider", "button", "blur-in", "cursor", "toast"],
       "files": [
         {
           "path": "settings-toggle-flow/index.tsx",

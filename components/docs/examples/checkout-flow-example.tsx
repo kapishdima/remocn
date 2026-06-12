@@ -3,16 +3,17 @@
 import { CheckoutFlow } from "@/registry/remocn-ui/checkout-flow";
 
 /**
- * Fixed lifecycle demo for the `checkout-flow` block: a cursor flips the billing
- * toggle monthly → yearly, clicks Upgrade, a payment Dialog opens, the card
- * number types in, the confirm button runs press → loading → success, the Dialog
- * closes and a success Toast slides in. The block is a pure orchestrator — every
- * channel comes from a composed primitive's hook.
+ * Fixed lifecycle demo for the `checkout-flow` block: the card and its fields
+ * blur-in (card → header → toggle → card number → terms → Pay), then a cursor
+ * flips the billing toggle monthly → yearly, types the card number, ticks the
+ * terms checkbox, and presses Pay → loading → success, ending in a success
+ * Toast. The block is a pure orchestrator — every channel comes from a composed
+ * primitive's hook.
  *
- * Timeline (US-B003 beat table): toggle click 24 ≡ toggle slide 24; Upgrade
- * click 50 ≡ button press 50; dialog open 56; card typing 70→120; confirm press
- * 124 → loading 128 → success 165; dialog close 175; toast enter 178 → dismiss
- * 235. durationInFrames 245 (235 + ~10 settle).
+ * Timeline: entrance 0→58; toggle click 64 ≡ toggle slide 64; card field click
+ * 96 → typing 100→140; terms click 150 ≡ checkbox checked 150; Pay click 180 →
+ * loading 186 → success 224; toast enter 224 → dismiss 286. durationInFrames
+ * 320 (286 + 14 dismiss + ~20 settle).
  */
 export const CheckoutFlowExampleScene = () => <CheckoutFlow />;
 

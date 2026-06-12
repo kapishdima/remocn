@@ -70,8 +70,9 @@ export const blockExamples: Record<string, BlockExampleEntry> = {
   "checkout-flow": {
     Component: CheckoutFlowExampleScene,
     code: checkoutFlowExampleCode,
-    // Final beat 235 + ~10 settle (US-B003).
-    durationInFrames: 245,
+    // blur-in entrance (card → header → toggle → fields → Pay, ~0–58) → cursor
+    // demo (toggle 64 → card 96 → terms 150 → Pay 180) → toast dismiss 286 + ~34.
+    durationInFrames: 320,
     fps: FPS,
     width: W,
     height: H,
@@ -88,8 +89,10 @@ export const blockExamples: Record<string, BlockExampleEntry> = {
   "settings-toggle-flow": {
     Component: SettingsToggleFlowExampleScene,
     code: settingsToggleFlowExampleCode,
-    // Final beat 215 + ~10 settle (US-B005).
-    durationInFrames: 225,
+    // blur-in entrance (card → header → controls, ~0–58) → cursor demo (+DEMO
+    // 44): switch 68 → select 99/124 → slider 149–202 → Save click 224 → toast
+    // 240–300 dismiss + ~20 settle.
+    durationInFrames: 320,
     fps: FPS,
     width: W,
     height: H,

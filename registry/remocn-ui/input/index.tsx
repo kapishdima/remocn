@@ -29,10 +29,16 @@ export interface InputProps {
   /** Convenience override for the `primary` theme token — merged into `theme`. */
   primary?: string;
   mode?: "light" | "dark";
+  /**
+   * Stretch the field to fill its slot instead of the intrinsic `FIELD_WIDTH`.
+   * Use inside a sized container (e.g. a card column) so the box is flush with
+   * the surrounding labels and controls.
+   */
+  fullWidth?: boolean;
   className?: string;
 }
 
-/** Field width (px) of the rendered input. */
+/** Intrinsic field width (px) when not stretched to fill its slot. */
 const FIELD_WIDTH = 320;
 
 const SIZE_STYLES: Record<
@@ -189,6 +195,7 @@ export function Input({
   theme: themeOverride,
   primary,
   mode,
+  fullWidth = false,
   className,
 }: InputProps) {
   const theme = useRemocnTheme(
@@ -223,7 +230,7 @@ export function Input({
           position: "relative",
           display: "flex",
           alignItems: "center",
-          width: FIELD_WIDTH,
+          width: fullWidth ? "100%" : FIELD_WIDTH,
           height: sizeStyle.height,
           padding: `0 ${sizeStyle.padding}px`,
           fontSize: sizeStyle.fontSize,

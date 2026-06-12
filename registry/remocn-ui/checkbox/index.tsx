@@ -21,7 +21,18 @@ export interface CheckboxProps {
   /** Convenience override for the `primary` theme token — merged into `theme`. */
   primary?: string;
   mode?: "light" | "dark";
+  /** Horizontal placement of the box+label within its slot. */
+  align?: "start" | "center" | "end";
   className?: string;
+}
+
+/** Map an `align` value to a flexbox `justifyContent`. */
+function justify(align: "start" | "center" | "end"): string {
+  return align === "start"
+    ? "flex-start"
+    : align === "end"
+      ? "flex-end"
+      : "center";
 }
 
 /** Checkmark stroke length (svg path units), drives the draw-on animation. */
@@ -116,6 +127,7 @@ export function Checkbox({
   theme: themeOverride,
   primary,
   mode,
+  align = "center",
   className,
 }: CheckboxProps) {
   const theme = useRemocnTheme(
@@ -135,7 +147,7 @@ export function Checkbox({
         inset: 0,
         display: "flex",
         alignItems: "center",
-        justifyContent: "center",
+        justifyContent: justify(align),
         background: theme.background,
         fontFamily:
           "var(--font-geist-sans), -apple-system, BlinkMacSystemFont, sans-serif",

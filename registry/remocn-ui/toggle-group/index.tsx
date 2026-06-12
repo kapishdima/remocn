@@ -29,7 +29,18 @@ export interface ToggleGroupProps {
   size?: ToggleGroupSize;
   theme?: Partial<RemocnTheme>;
   mode?: "light" | "dark";
+  /** Horizontal placement of the track within its (full-width) slot. */
+  align?: "start" | "center" | "end";
   className?: string;
+}
+
+/** Map an `align` value to a flexbox `justifyContent`. */
+function justify(align: "start" | "center" | "end"): string {
+  return align === "start"
+    ? "flex-start"
+    : align === "end"
+      ? "flex-end"
+      : "center";
 }
 
 /** Default segments. */
@@ -118,6 +129,7 @@ export function ToggleGroup({
   size = "default",
   theme: themeOverride,
   mode,
+  align = "center",
   className,
 }: ToggleGroupProps) {
   const theme = useRemocnTheme(themeOverride, mode);
@@ -139,7 +151,7 @@ export function ToggleGroup({
         inset: 0,
         display: "flex",
         alignItems: "center",
-        justifyContent: "center",
+        justifyContent: justify(align),
         // OPAQUE wrapper — a self-contained widget, not a modal layer (like Tabs).
         background: theme.background,
         fontFamily:

@@ -31,7 +31,18 @@ export interface ButtonProps {
   mode?: "light" | "dark";
   /** Playhead scale, forwarded to the loading Spinner. */
   speed?: number;
+  /** Horizontal placement of the button within its (full-width) slot. */
+  align?: "start" | "center" | "end";
   className?: string;
+}
+
+/** Map an `align` value to a flexbox `justifyContent`. */
+function justify(align: "start" | "center" | "end"): string {
+  return align === "start"
+    ? "flex-start"
+    : align === "end"
+      ? "flex-end"
+      : "center";
 }
 
 /** Checkmark stroke length (svg path units). */
@@ -208,6 +219,7 @@ export function Button({
   primary,
   mode,
   speed = 1,
+  align = "center",
   className,
 }: ButtonProps) {
   const theme = useRemocnTheme(
@@ -229,7 +241,7 @@ export function Button({
         inset: 0,
         display: "flex",
         alignItems: "center",
-        justifyContent: "center",
+        justifyContent: justify(align),
         background: theme.background,
         fontFamily:
           "var(--font-geist-sans), -apple-system, BlinkMacSystemFont, sans-serif",
