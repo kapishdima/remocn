@@ -95,6 +95,8 @@ import { TrackingIn } from "@/registry/remocn/tracking-in";
 import { trackingInConfig } from "@/registry/remocn/tracking-in/config";
 import { Typewriter } from "@/registry/remocn/typewriter";
 import { typewriterConfig } from "@/registry/remocn/typewriter/config";
+import { XFollowCard } from "@/registry/remocn/x-follow-card";
+import { xFollowCardConfig } from "@/registry/remocn/x-follow-card/config";
 import { Accordion } from "@/registry/remocn-ui/accordion";
 import { accordionConfig } from "@/registry/remocn-ui/accordion/config";
 import { AlertDialog } from "@/registry/remocn-ui/alert-dialog";
@@ -315,6 +317,7 @@ const registry: Record<string, RegistryEntry> = {
     config: imageExpandToFullscreenConfig,
   },
   "github-stars": { Component: GitHubStars, config: githubStarsConfig },
+  "x-follow-card": { Component: XFollowCard, config: xFollowCardConfig },
   "button": { Component: Button, config: buttonConfig },
   "accordion": { Component: Accordion, config: accordionConfig },
   "alert-dialog": { Component: AlertDialog, config: alertDialogConfig },
@@ -403,6 +406,18 @@ for (const { config } of Object.values(registry)) {
 const githubStars = registry["github-stars"];
 if (githubStars) {
   githubStars.config.controls.speed = {
+    type: "number",
+    default: 1,
+    min: 1,
+    max: 4,
+    step: 0.25,
+    label: "Speed",
+  };
+}
+
+const xFollowCard = registry["x-follow-card"];
+if (xFollowCard) {
+  xFollowCard.config.controls.speed = {
     type: "number",
     default: 1,
     min: 1,

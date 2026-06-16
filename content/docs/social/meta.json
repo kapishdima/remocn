@@ -1,5 +1,5 @@
 {
   "title": "Social",
   "collapsible": false,
-  "pages": ["index", "github-stars"]
+  "pages": ["index", "github-stars", "x-follow-card"]
 }

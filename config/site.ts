@@ -41,6 +41,7 @@ export const NAV_LINKS: NavLink[] = [
  */
 export const NEW_BADGE_PATHS = new Set<string>([
   "/docs/social/github-stars",
+  "/docs/social/x-follow-card",
 ]);
 
 export const FOOTER_NAV: NavLink[] = [
