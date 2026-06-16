@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { CodeBlockCommand } from "@/components/docs/code-block-command";
 import { convertNpmCommand } from "@/lib/convert-npm-command";
+import { cn } from "@/lib/utils";
 import {
   ADD,
   INIT,
@@ -27,9 +28,17 @@ function StepBadge({ n, accent }: { n: number; accent: string }) {
   );
 }
 
-function CompactStep({ step, delay }: { step: Step; delay: number }) {
+function CompactStep({
+  step,
+  delay,
+  className,
+}: {
+  step: Step;
+  delay: number;
+  className?: string;
+}) {
   return (
-    <FadeUp delay={delay} className="min-w-0">
+    <FadeUp delay={delay} className={cn("min-w-0", className)}>
       <div className="surface-card flex min-w-0 flex-col gap-4 rounded-2xl p-5 sm:p-4">
         <div className="flex items-center gap-3">
           <StepBadge n={step.n} accent={step.accent} />
@@ -50,9 +59,17 @@ function CompactStep({ step, delay }: { step: Step; delay: number }) {
   );
 }
 
-function FeaturedStep({ step, delay }: { step: Step; delay: number }) {
+function FeaturedStep({
+  step,
+  delay,
+  className,
+}: {
+  step: Step;
+  delay: number;
+  className?: string;
+}) {
   return (
-    <FadeUp delay={delay} className="min-w-0">
+    <FadeUp delay={delay} className={cn("min-w-0", className)}>
       <div className="surface-card flex min-w-0 flex-col gap-5 rounded-2xl p-6 sm:rounded-3xl sm:p-6">
         <div className="flex items-center gap-3">
           <StepBadge n={step.n} accent={step.accent} />
@@ -111,13 +128,27 @@ export function GetStarted() {
           lead="If you know shadcn/ui, you already know remocn. Three commands and you're rendering — the code lands in your repo, yours to tweak."
         />
 
-        <div className="mt-12 grid items-start gap-4 sm:mt-16 sm:gap-6 md:grid-cols-2">
-          <div className="flex min-w-0 flex-col gap-4 sm:gap-6.5">
-            <CompactStep step={START} delay={0} />
-            <CompactStep step={INIT} delay={0.08} />
-            <CompactStep step={RENDER} delay={0.16} />
-          </div>
-          <FeaturedStep step={ADD} delay={0.08} />
+        <div className="mt-12 grid items-start gap-4 sm:mt-16 sm:gap-6 md:grid-cols-2 md:gap-x-6 md:gap-y-6.5">
+          <CompactStep
+            step={START}
+            delay={0}
+            className="md:col-start-1 md:row-start-1"
+          />
+          <CompactStep
+            step={INIT}
+            delay={0.08}
+            className="md:col-start-1 md:row-start-2"
+          />
+          <FeaturedStep
+            step={ADD}
+            delay={0.16}
+            className="md:col-start-2 md:row-start-1 md:row-span-3"
+          />
+          <CompactStep
+            step={RENDER}
+            delay={0.24}
+            className="md:col-start-1 md:row-start-3"
+          />
         </div>
       </div>
     </section>
