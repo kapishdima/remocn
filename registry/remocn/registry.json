@@ -689,6 +689,35 @@
           "target": "components/remocn/x-follow-card.tsx"
         }
       ]
+    },
+    {
+      "name": "x-followers-overview",
+      "type": "registry:component",
+      "title": "X Followers Overview",
+      "description": "X follow notifications cycle through as 3D flipping text — '<name> followed you · 7h' — then the total follower count pops in with a confetti burst. Hardcoded sample list (X API ready). Light/dark, horizontal or vertical.",
+      "dependencies": ["remotion", "@remotion/google-fonts"],
+      "registryDependencies": ["@remocn/confetti"],
+      "files": [
+        {
+          "path": "x-followers-overview/index.tsx",
+          "type": "registry:component",
+          "target": "components/remocn/x-followers-overview.tsx"
+        }
+      ]
+    },
+    {
+      "name": "confetti",
+      "type": "registry:component",
+      "title": "Confetti",
+      "description": "Deterministic confetti burst for Remotion — seeded particles with gravity, spin, and flutter so every render is identical. Fire it on any frame as a celebratory overlay.",
+      "dependencies": ["remotion"],
+      "files": [
+        {
+          "path": "confetti/index.tsx",
+          "type": "registry:component",
+          "target": "components/remocn/confetti.tsx"
+        }
+      ]
     }
   ]
 }

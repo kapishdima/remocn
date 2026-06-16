@@ -97,6 +97,10 @@ import { Typewriter } from "@/registry/remocn/typewriter";
 import { typewriterConfig } from "@/registry/remocn/typewriter/config";
 import { XFollowCard } from "@/registry/remocn/x-follow-card";
 import { xFollowCardConfig } from "@/registry/remocn/x-follow-card/config";
+import { XFollowersOverview } from "@/registry/remocn/x-followers-overview";
+import { xFollowersOverviewConfig } from "@/registry/remocn/x-followers-overview/config";
+import { Confetti } from "@/registry/remocn/confetti";
+import { confettiConfig } from "@/registry/remocn/confetti/config";
 import { Accordion } from "@/registry/remocn-ui/accordion";
 import { accordionConfig } from "@/registry/remocn-ui/accordion/config";
 import { AlertDialog } from "@/registry/remocn-ui/alert-dialog";
@@ -318,6 +322,11 @@ const registry: Record<string, RegistryEntry> = {
   },
   "github-stars": { Component: GitHubStars, config: githubStarsConfig },
   "x-follow-card": { Component: XFollowCard, config: xFollowCardConfig },
+  "x-followers-overview": {
+    Component: XFollowersOverview,
+    config: xFollowersOverviewConfig,
+  },
+  "confetti": { Component: Confetti, config: confettiConfig },
   "button": { Component: Button, config: buttonConfig },
   "accordion": { Component: Accordion, config: accordionConfig },
   "alert-dialog": { Component: AlertDialog, config: alertDialogConfig },
@@ -418,6 +427,21 @@ if (githubStars) {
 const xFollowCard = registry["x-follow-card"];
 if (xFollowCard) {
   xFollowCard.config.controls.speed = {
+    type: "number",
+    default: 1,
+    min: 1,
+    max: 4,
+    step: 0.25,
+    label: "Speed",
+  };
+}
+
+// x-followers-overview cycles notifications then blur-reveals the total at a
+// fixed point in the timeline. A speed < 1 would stall the driver before the
+// reveal frame, so cap min:1 like github-stars.
+const xFollowersOverview = registry["x-followers-overview"];
+if (xFollowersOverview) {
+  xFollowersOverview.config.controls.speed = {
     type: "number",
     default: 1,
     min: 1,
