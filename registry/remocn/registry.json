@@ -737,6 +737,21 @@
       ]
     },
     {
+      "name": "v0",
+      "type": "registry:component",
+      "title": "v0",
+      "description": "Animated Vercel v0 composer — types a prompt into the dark textarea and the mic button morphs into a send button. Dark/light themes.",
+      "dependencies": ["remotion", "@remotion/google-fonts"],
+      "registryDependencies": ["@remocn/caret", "@remocn/remocn-ui"],
+      "files": [
+        {
+          "path": "v0/index.tsx",
+          "type": "registry:component",
+          "target": "components/remocn/v0.tsx"
+        }
+      ]
+    },
+    {
       "name": "confetti",
       "type": "registry:component",
       "title": "Confetti",
