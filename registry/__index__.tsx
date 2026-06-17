@@ -101,6 +101,8 @@ import { XFollowersOverview } from "@/registry/remocn/x-followers-overview";
 import { xFollowersOverviewConfig } from "@/registry/remocn/x-followers-overview/config";
 import { Confetti } from "@/registry/remocn/confetti";
 import { confettiConfig } from "@/registry/remocn/confetti/config";
+import { ChatGpt } from "@/registry/remocn/chat-gpt";
+import { chatGptConfig } from "@/registry/remocn/chat-gpt/config";
 import { ClaudeChat } from "@/registry/remocn/claude-chat";
 import { claudeChatConfig } from "@/registry/remocn/claude-chat/config";
 import { Accordion } from "@/registry/remocn-ui/accordion";
@@ -332,6 +334,7 @@ const registry: Record<string, RegistryEntry> = {
   },
   "confetti": { Component: Confetti, config: confettiConfig },
   "claude-chat": { Component: ClaudeChat, config: claudeChatConfig },
+  "chat-gpt": { Component: ChatGpt, config: chatGptConfig },
   "button": { Component: Button, config: buttonConfig },
   "accordion": { Component: Accordion, config: accordionConfig },
   "alert-dialog": { Component: AlertDialog, config: alertDialogConfig },
@@ -460,6 +463,18 @@ if (xFollowersOverview) {
 const claudeChat = registry["claude-chat"];
 if (claudeChat) {
   claudeChat.config.controls.speed = {
+    type: "number",
+    default: 1,
+    min: 1,
+    max: 4,
+    step: 0.25,
+    label: "Speed",
+  };
+}
+
+const chatGpt = registry["chat-gpt"];
+if (chatGpt) {
+  chatGpt.config.controls.speed = {
     type: "number",
     default: 1,
     min: 1,

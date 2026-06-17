@@ -722,6 +722,21 @@
       ]
     },
     {
+      "name": "chat-gpt",
+      "type": "registry:component",
+      "title": "ChatGPT",
+      "description": "Animated ChatGPT composer — types a prompt into the pill input, the blue voice button morphs into a send button, and the suggestion chips fade out. Light/dark themes.",
+      "dependencies": ["remotion", "@remotion/google-fonts"],
+      "registryDependencies": ["@remocn/caret", "@remocn/remocn-ui"],
+      "files": [
+        {
+          "path": "chat-gpt/index.tsx",
+          "type": "registry:component",
+          "target": "components/remocn/chat-gpt.tsx"
+        }
+      ]
+    },
+    {
       "name": "confetti",
       "type": "registry:component",
       "title": "Confetti",
