@@ -126,7 +126,6 @@ export function OnboardingStepperFlow({
           <Switch
             style={settingsStyle}
             label="Email notifications"
-            mode={mode}
             theme={theme}
           />
         </div>

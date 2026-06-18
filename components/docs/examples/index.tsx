@@ -1,5 +1,6 @@
 import type { ComponentType } from "react";
 import { FPS, H, W } from "@/lib/customizer-config";
+import type { BackdropFill } from "@/registry/remocn/backdrop";
 import {
   AccordionExampleScene,
   accordionExampleCode,
@@ -84,6 +85,7 @@ export interface ExampleEntry {
   fps: number;
   width: number;
   height: number;
+  previewBackdrop?: BackdropFill;
 }
 
 export const examples: Record<string, ExampleEntry> = {
@@ -163,6 +165,7 @@ export const examples: Record<string, ExampleEntry> = {
     fps: FPS,
     width: W,
     height: H,
+    previewBackdrop: { type: "color", value: "oklch(1 0 0)" },
   },
   "input-example": {
     Component: InputExampleScene,
@@ -234,6 +237,7 @@ export const examples: Record<string, ExampleEntry> = {
     fps: FPS,
     width: W,
     height: H,
+    previewBackdrop: { type: "color", value: "oklch(1 0 0)" },
   },
   "progress-example": {
     Component: ProgressExampleScene,
@@ -243,6 +247,7 @@ export const examples: Record<string, ExampleEntry> = {
     fps: FPS,
     width: W,
     height: H,
+    previewBackdrop: { type: "color", value: "oklch(1 0 0)" },
   },
   "skeleton-example": {
     Component: SkeletonExampleScene,

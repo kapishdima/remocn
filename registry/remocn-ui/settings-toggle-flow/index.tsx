@@ -289,7 +289,7 @@ export function SettingsToggleFlow({
           ...reveal(enterSwitch),
         }}
       >
-        <Switch style={switchStyle} mode={mode} theme={theme} />
+        <Switch style={switchStyle} theme={theme} />
       </div>
 
       {}
