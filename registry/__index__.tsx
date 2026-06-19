@@ -63,6 +63,8 @@ import { MatrixDecode } from "@/registry/remocn/matrix-decode";
 import { matrixDecodeConfig } from "@/registry/remocn/matrix-decode/config";
 import { MeshGradientBg } from "@/registry/remocn/mesh-gradient-bg";
 import { meshGradientBgConfig } from "@/registry/remocn/mesh-gradient-bg/config";
+import { NumberWheel } from "@/registry/remocn/number-wheel";
+import { numberWheelConfig } from "@/registry/remocn/number-wheel/config";
 import { PerspectiveMarquee } from "@/registry/remocn/perspective-marquee";
 import { perspectiveMarqueeConfig } from "@/registry/remocn/perspective-marquee/config";
 import { PricingTierFocus } from "@/registry/remocn/pricing-tier-focus";
@@ -335,6 +337,7 @@ const registry: Record<string, RegistryEntry> = {
     config: imageExpandToFullscreenConfig,
   },
   "github-stars": { Component: GitHubStars, config: githubStarsConfig },
+  "number-wheel": { Component: NumberWheel, config: numberWheelConfig },
   "x-follow-card": { Component: XFollowCard, config: xFollowCardConfig },
   "x-followers-overview": {
     Component: XFollowersOverview,
@@ -441,6 +444,18 @@ if (backdrop) {
 const githubStars = registry["github-stars"];
 if (githubStars) {
   githubStars.config.controls.speed = {
+    type: "number",
+    default: 1,
+    min: 1,
+    max: 4,
+    step: 0.25,
+    label: "Speed",
+  };
+}
+
+const numberWheel = registry["number-wheel"];
+if (numberWheel) {
+  numberWheel.config.controls.speed = {
     type: "number",
     default: 1,
     min: 1,

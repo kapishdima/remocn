@@ -16,7 +16,6 @@ import {
   computeCounterProgress,
   computeScrollProgress,
   computeSpacerRows,
-  computeWheel,
   downsampleStargazers,
   getStarCount,
   isScrollContained,
@@ -209,7 +208,7 @@ describe("computeScrollProgress", () => {
 });
 
 describe("maxScrollOvershoot / elastic peak", () => {
-  it("peaks at ≈1.0657 near t≈0.63 (frame≈189 at dur=300)", () => {
+  it("peaks at ≈1.0183 near t≈0.72 (frame≈217 at dur=300)", () => {
     const dur = 300;
     let max = -Infinity;
     let maxFrame = -1;
@@ -220,9 +219,9 @@ describe("maxScrollOvershoot / elastic peak", () => {
         maxFrame = f;
       }
     }
-    expect(max).toBeCloseTo(1.0657, 3);
-    expect(maxFrame).toBeGreaterThanOrEqual(185);
-    expect(maxFrame).toBeLessThanOrEqual(193);
+    expect(max).toBeCloseTo(1.0183, 3);
+    expect(maxFrame).toBeGreaterThanOrEqual(213);
+    expect(maxFrame).toBeLessThanOrEqual(221);
   });
 });
 
@@ -291,79 +290,6 @@ describe("getStarCount", () => {
     const total = 100;
     for (let i = 0; i <= 100; i++) {
       expect(getStarCount(i / 100, total)).toBeLessThanOrEqual(total);
-    }
-  });
-});
-
-// ---------------------------------------------------------------------------
-// computeWheel — odometer digit alignment
-// ---------------------------------------------------------------------------
-
-describe("computeWheel", () => {
-  it("lands every place on its exact integer digit at an integer current", () => {
-    // The regression: 24813 used to render fractional wheels (1.3, 8.13, …)
-    // for every place above the ones, leaving glyphs stuck between two values.
-    const current = 24813;
-    const digits = [3, 1, 8, 4, 2]; // ones → ten-thousands
-    digits.forEach((expected, place) => {
-      expect(computeWheel(current, place)).toBeCloseTo(expected, 10);
-    });
-  });
-
-  it("rolls the ones place continuously", () => {
-    expect(computeWheel(7, 0)).toBeCloseTo(7, 10);
-    expect(computeWheel(7.4, 0)).toBeCloseTo(7.4, 10);
-    expect(computeWheel(123.5, 0)).toBeCloseTo(3.5, 10);
-  });
-
-  it("parks a higher place on its integer digit outside the carry window", () => {
-    // tens digit of 24813 is 1; it must not move until the ones is about to
-    // carry (current within the final 10% of the tens cell).
-    expect(computeWheel(24813, 1)).toBeCloseTo(1, 10);
-    expect(computeWheel(24815, 1)).toBeCloseTo(1, 10);
-    expect(computeWheel(24818, 1)).toBeCloseTo(1, 10); // frac 0.8 < 0.9 → parked
-  });
-
-  it("rolls a higher place toward the next digit during the carry window", () => {
-    // current 24819.x → ones carrying 9→0, tens rolls 1→2 within [0.9,1.0).
-    const start = computeWheel(24819, 1); // frac 0.9 → roll just starting
-    const mid = computeWheel(24819.5, 1); // frac 0.95 → mid roll
-    expect(start).toBeCloseTo(1, 6);
-    expect(mid).toBeGreaterThan(1);
-    expect(mid).toBeLessThan(2);
-  });
-
-  it("reaches the next integer exactly as the carry completes", () => {
-    // Approaching the carry boundary the tens wheel tends to 2; at 24820 it has
-    // ticked over to the parked 2.
-    expect(computeWheel(24820, 1)).toBeCloseTo(2, 10);
-    expect(computeWheel(24819.999, 1)).toBeGreaterThan(1.99);
-  });
-
-  it("renders 9→0 carry within [9, 10) so the trailing wheel glyph is used", () => {
-    // tens digit 9 mid-carry must stay in [9,10), never wrap to a small value,
-    // so DigitColumn shows the 9→0 transition via its trailing 0 cell.
-    const w = computeWheel(999.5, 1); // tens is 9, frac 0.95 → rolling 9→10
-    expect(w).toBeGreaterThanOrEqual(9);
-    expect(w).toBeLessThan(10);
-  });
-
-  it("returns 0 for non-positive current at any place", () => {
-    expect(computeWheel(0, 0)).toBe(0);
-    expect(computeWheel(0, 3)).toBe(0);
-    expect(computeWheel(-5, 2)).toBe(0);
-  });
-
-  it("keeps every wheel within [0, 10) across a full ramp to totalStars", () => {
-    const total = 24813;
-    const places = [0, 1, 2, 3, 4];
-    for (let i = 0; i <= 1000; i++) {
-      const current = (i / 1000) * total;
-      for (const place of places) {
-        const w = computeWheel(current, place);
-        expect(w).toBeGreaterThanOrEqual(0);
-        expect(w).toBeLessThan(10);
-      }
     }
   });
 });

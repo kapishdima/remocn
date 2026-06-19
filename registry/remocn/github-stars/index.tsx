@@ -1,10 +1,9 @@
 "use client";
 
 import { format, parseISO } from "date-fns";
-import type React from "react";
-import { useState } from "react";
+import { memo, useMemo, useState } from "react";
 import { loadFont as loadSans } from "@remotion/google-fonts/Manrope";
-import { loadFont as loadMono } from "@remotion/google-fonts/JetBrainsMono";
+import { loadFont as loadMono } from "@remotion/google-fonts/GeistMono";
 import {
   AbsoluteFill,
   Easing,
@@ -13,6 +12,7 @@ import {
   useCurrentFrame,
   useVideoConfig,
 } from "remotion";
+import { Odometer } from "@/components/remocn/number-wheel";
 
 export interface Stargazer {
   login: string;
@@ -29,6 +29,7 @@ export interface GitHubStarsProps {
   accentColor?: string;
   speed?: number;
   theme?: "light" | "dark";
+  repoAvatarUrl?: string;
 }
 
 /**
@@ -638,6 +639,7 @@ export function downsampleStargazers(
 const MAX_ELASTIC_OVERSHOOT = 0.0658; // Easing.elastic(1) peak−1 (true ≈0.0657267), rounded UP for use as a safety bound
 const SCROLL_OVERSHOOT = 1 + MAX_ELASTIC_OVERSHOOT; // ≈1.0658
 const MASK_SOLID_FRACTION = 0.88; // bottom fade mask is solid until 88% of viewport height
+const COUNT_PORTION = 0.8;
 
 /** Monotonic counter ramp — mirrors the reference StarCount easing. Drives the
  *  odometer, which must stay monotonic or the digit wheels roll backward. */
@@ -650,11 +652,16 @@ export function computeCounterProgress({
   speed?: number;
   durationInFrames: number;
 }): number {
-  return interpolate(frame * speed, [0, durationInFrames], [0, 1], {
-    extrapolateLeft: "clamp",
-    extrapolateRight: "clamp",
-    easing: Easing.bezier(0.5, 1, 0.5, 1),
-  });
+  return interpolate(
+    frame * speed,
+    [0, durationInFrames * COUNT_PORTION],
+    [0, 1],
+    {
+      extrapolateLeft: "clamp",
+      extrapolateRight: "clamp",
+      easing: Easing.bezier(0.5, 1, 0.5, 1),
+    },
+  );
 }
 
 /** Elastic scroll ramp — mirrors the reference avatar slide. NON-monotonic:
@@ -672,7 +679,7 @@ export function computeScrollProgress({
   return interpolate(frame * speed, [0, durationInFrames], [0, 1], {
     extrapolateLeft: "clamp",
     extrapolateRight: "clamp",
-    easing: Easing.elastic(1),
+    easing: Easing.elastic(0.8),
   });
 }
 
@@ -724,22 +731,6 @@ export function getStarCount(
   totalStars: number,
 ): number {
   return Math.round(scrollProgress * totalStars);
-}
-
-const WHEEL_ROLL_START = 0.9;
-
-export function computeWheel(current: number, place: number): number {
-  if (current <= 0) return 0;
-  if (place === 0) return current % 10;
-
-  const v = current / 10 ** place;
-  const digit = Math.floor(v) % 10;
-  const frac = v - Math.floor(v);
-  if (frac <= WHEEL_ROLL_START) return digit;
-
-  const raw = (frac - WHEEL_ROLL_START) / (1 - WHEEL_ROLL_START);
-  const eased = raw * raw * (3 - 2 * raw); // smoothstep: 0→0, 1→1
-  return digit + eased;
 }
 
 // --- Sub-components --------------------------------------------------------
@@ -813,117 +804,13 @@ function Avatar({
   );
 }
 
-function DigitColumn({
-  value,
-  fontSize,
-}: {
-  /** continuous wheel value in [0, 10) */
-  value: number;
-  fontSize: number;
-}) {
-  const cellHeight = fontSize * 1.1;
-  return (
-    <span
-      style={{
-        display: "inline-block",
-        overflow: "hidden",
-        height: cellHeight,
-        width: "0.62em",
-        verticalAlign: "top",
-        textAlign: "center",
-      }}
-    >
-      <span
-        style={{
-          display: "flex",
-          flexDirection: "column",
-          transform: `translateY(${-value * cellHeight}px)`,
-        }}
-      >
-        {[0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 0].map((d, i) => (
-          <span
-            key={i}
-            style={{ height: cellHeight, lineHeight: `${cellHeight}px` }}
-          >
-            {d}
-          </span>
-        ))}
-      </span>
-    </span>
-  );
-}
-
-function Odometer({
-  current,
-  fontSize,
-  color,
-  mutedColor,
-}: {
-  /** continuous running total (float) */
-  current: number;
-  fontSize: number;
-  color: string;
-  mutedColor: string;
-}) {
-  const intVal = Math.max(0, Math.round(current));
-  const formatted = intVal.toLocaleString("en-US");
-
-  // Walk right→left so each digit knows its decimal place; drive each wheel
-  // continuously from `current` (higher places roll slower → mechanical feel).
-  const cells: React.ReactNode[] = [];
-  let place = 0;
-  for (let i = formatted.length - 1; i >= 0; i--) {
-    const ch = formatted[i];
-    if (ch === ",") {
-      cells.unshift(
-        <span
-          key={`c${i}`}
-          style={{
-            display: "inline-block",
-            width: "0.32em",
-            color: "currentColor",
-            fontSize: "0.85em",
-            textAlign: "center",
-          }}
-        >
-          ,
-        </span>,
-      );
-    } else {
-      const wheel = computeWheel(current, place);
-      cells.unshift(
-        <DigitColumn key={`d${i}`} value={wheel} fontSize={fontSize} />,
-      );
-      place++;
-    }
-  }
-
-  return (
-    <div
-      style={{
-        display: "flex",
-        alignItems: "baseline",
-        fontSize,
-        fontWeight: 800,
-        color,
-        fontFamily: MONO_FAMILY,
-        fontVariantNumeric: "tabular-nums",
-        letterSpacing: "-0.03em",
-        lineHeight: 1,
-      }}
-    >
-      {cells}
-    </div>
-  );
-}
-
 interface RowProps {
   stargazer: Stargazer;
   index: number;
   rowH: number;
   avatarSize: number;
   loginSize: number;
-  dateFormat: string;
+  dateLabel: string;
   accent: string;
   theme: Theme;
   isActive: boolean;
@@ -932,13 +819,13 @@ interface RowProps {
   opacity: number;
 }
 
-function Row({
+const Row = memo(function Row({
   stargazer,
   index,
   rowH,
   avatarSize,
   loginSize,
-  dateFormat,
+  dateLabel,
   accent,
   theme,
   isActive,
@@ -946,13 +833,6 @@ function Row({
   showSeparator,
   opacity,
 }: RowProps) {
-  let dateLabel = stargazer.starredAt;
-  try {
-    dateLabel = format(parseISO(stargazer.starredAt), dateFormat);
-  } catch {
-    // leave the raw string if it isn't a valid ISO date
-  }
-
   return (
     <div
       style={{
@@ -1051,7 +931,7 @@ function Row({
       </div>
     </div>
   );
-}
+});
 
 // --- Main composition ------------------------------------------------------
 
@@ -1063,6 +943,7 @@ export function GitHubStars({
   accentColor = "#ffbb00",
   speed = 1,
   theme = "light",
+  repoAvatarUrl,
 }: GitHubStarsProps) {
   const frame = useCurrentFrame();
   const { durationInFrames, width, height } = useVideoConfig();
@@ -1076,7 +957,7 @@ export function GitHubStars({
   const refH = isVertical ? 1280 : 720;
   const stageScale = Math.min(width / refW, height / refH);
 
-  const rows = downsampleStargazers(stargazers);
+  const rows = useMemo(() => downsampleStargazers(stargazers), [stargazers]);
   const N = rows.length;
 
   // Progress drivers: monotonic counter ramp + non-monotonic elastic scroll.
@@ -1095,6 +976,17 @@ export function GitHubStars({
   const avatarSize = isVertical ? 60 : 56;
   const loginSize = isVertical ? 30 : 28;
   const dateFormat = isVertical ? "MMM yyyy" : "MMM d, yyyy";
+  const formattedRows = useMemo(
+    () =>
+      rows.map((sg) => {
+        try {
+          return { sg, dateLabel: format(parseISO(sg.starredAt), dateFormat) };
+        } catch {
+          return { sg, dateLabel: sg.starredAt };
+        }
+      }),
+    [rows, dateFormat],
+  );
 
   const viewport = isVertical
     ? { x: 48, y: 320, w: 624, h: 888, radius: 28 }
@@ -1123,8 +1015,7 @@ export function GitHubStars({
   const underlineMax = isVertical ? 200 : 240;
   const underlineWidth = counterProgress * underlineMax;
 
-  const fadeMask =
-    "linear-gradient(to bottom, transparent 0, black 12%, black 88%, transparent 100%)";
+  const fadeH = Math.round(viewport.h * 0.12);
 
   const listViewport = (
     <div
@@ -1138,8 +1029,6 @@ export function GitHubStars({
         borderRadius: viewport.radius,
         border: `1px solid ${t.border}`,
         background: t.bg,
-        WebkitMaskImage: fadeMask,
-        maskImage: fadeMask,
       }}
     >
       <div
@@ -1148,7 +1037,7 @@ export function GitHubStars({
           willChange: "transform",
         }}
       >
-        {rows.map((sg, i) => (
+        {formattedRows.map(({ sg, dateLabel }, i) => (
           <Row
             key={`${sg.login}-${i}`}
             stargazer={sg}
@@ -1156,11 +1045,11 @@ export function GitHubStars({
             rowH={rowH}
             avatarSize={avatarSize}
             loginSize={loginSize}
-            dateFormat={dateFormat}
+            dateLabel={dateLabel}
             accent={accentColor}
             theme={t}
             isActive={i === N - 1}
-            settle={settle}
+            settle={i === N - 1 ? settle : 0}
             showSeparator={i < N - 1}
             opacity={1}
           />
@@ -1169,6 +1058,28 @@ export function GitHubStars({
           <div style={{ height: spacerPx }} aria-hidden="true" />
         )}
       </div>
+      <div
+        style={{
+          position: "absolute",
+          top: 0,
+          left: 0,
+          right: 0,
+          height: fadeH,
+          background: `linear-gradient(to bottom, ${t.bg}, transparent)`,
+          pointerEvents: "none",
+        }}
+      />
+      <div
+        style={{
+          position: "absolute",
+          bottom: 0,
+          left: 0,
+          right: 0,
+          height: fadeH,
+          background: `linear-gradient(to top, ${t.bg}, transparent)`,
+          pointerEvents: "none",
+        }}
+      />
     </div>
   );
 
@@ -1183,20 +1094,39 @@ export function GitHubStars({
     />
   );
 
+  const repoOwner = repo.split("/")[0] || repo;
+  const repoAvatarSize = isVertical ? 28 : 32;
+  const repoAvatarSrc =
+    repoAvatarUrl ?? `https://unavatar.io/github/${repoOwner}`;
+
   const repoSlug = (
     <div
       style={{
-        fontSize: isVertical ? 20 : 24,
-        fontWeight: 500,
-        color: t.fgMuted,
-        fontFamily: FONT_FAMILY,
+        display: "flex",
+        alignItems: "center",
+        gap: 12,
         maxWidth: isVertical ? 600 : 392,
-        overflow: "hidden",
-        textOverflow: "ellipsis",
-        whiteSpace: "nowrap",
       }}
     >
-      {repo}
+      <Avatar
+        login={repoOwner}
+        avatarUrl={repoAvatarSrc}
+        size={repoAvatarSize}
+        theme={t}
+      />
+      <div
+        style={{
+          fontSize: isVertical ? 20 : 24,
+          fontWeight: 500,
+          color: t.fgMuted,
+          fontFamily: FONT_FAMILY,
+          overflow: "hidden",
+          textOverflow: "ellipsis",
+          whiteSpace: "nowrap",
+        }}
+      >
+        {repo}
+      </div>
     </div>
   );
 
@@ -1217,25 +1147,10 @@ export function GitHubStars({
     >
       <div style={{ display: "flex", alignItems: "center", gap: 20 }}>
         <StarGlyph size={starSize} fill={accentColor} />
-        <Odometer
-          current={current}
-          fontSize={counterSize}
-          color={t.fg}
-          mutedColor={t.fgMuted}
-        />
+        <Odometer current={current} fontSize={counterSize} color={t.fg} />
       </div>
       {underline}
-      <div
-        style={{
-          display: "flex",
-          fontSize: 20,
-          fontWeight: 500,
-          color: t.fgMuted,
-          fontFamily: FONT_FAMILY,
-        }}
-      >
-        <span>{repo}</span>
-      </div>
+      {repoSlug}
     </div>
   ) : (
     <div
@@ -1253,12 +1168,7 @@ export function GitHubStars({
     >
       <StarGlyph size={starSize} fill={accentColor} />
       <div style={{ height: 20 }} />
-      <Odometer
-        current={current}
-        fontSize={counterSize}
-        color={t.fg}
-        mutedColor={t.fgMuted}
-      />
+      <Odometer current={current} fontSize={counterSize} color={t.fg} />
       <div style={{ height: 16 }} />
       {underline}
       <div style={{ height: 20 }} />
