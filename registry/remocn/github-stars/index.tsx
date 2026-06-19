@@ -1,7 +1,6 @@
 "use client";
 
 import { format, parseISO } from "date-fns";
-import type React from "react";
 import { useState } from "react";
 import { loadFont as loadSans } from "@remotion/google-fonts/Manrope";
 import { loadFont as loadMono } from "@remotion/google-fonts/JetBrainsMono";
@@ -13,6 +12,7 @@ import {
   useCurrentFrame,
   useVideoConfig,
 } from "remotion";
+import { Odometer } from "@/components/remocn/number-wheel";
 
 export interface Stargazer {
   login: string;
@@ -726,22 +726,6 @@ export function getStarCount(
   return Math.round(scrollProgress * totalStars);
 }
 
-const WHEEL_ROLL_START = 0.9;
-
-export function computeWheel(current: number, place: number): number {
-  if (current <= 0) return 0;
-  if (place === 0) return current % 10;
-
-  const v = current / 10 ** place;
-  const digit = Math.floor(v) % 10;
-  const frac = v - Math.floor(v);
-  if (frac <= WHEEL_ROLL_START) return digit;
-
-  const raw = (frac - WHEEL_ROLL_START) / (1 - WHEEL_ROLL_START);
-  const eased = raw * raw * (3 - 2 * raw); // smoothstep: 0→0, 1→1
-  return digit + eased;
-}
-
 // --- Sub-components --------------------------------------------------------
 
 function StarGlyph({ size, fill }: { size: number; fill: string }) {
@@ -810,110 +794,6 @@ function Avatar({
       onError={() => setErrored(true)}
       style={{ ...ringStyle, objectFit: "cover" }}
     />
-  );
-}
-
-function DigitColumn({
-  value,
-  fontSize,
-}: {
-  /** continuous wheel value in [0, 10) */
-  value: number;
-  fontSize: number;
-}) {
-  const cellHeight = fontSize * 1.1;
-  return (
-    <span
-      style={{
-        display: "inline-block",
-        overflow: "hidden",
-        height: cellHeight,
-        width: "0.62em",
-        verticalAlign: "top",
-        textAlign: "center",
-      }}
-    >
-      <span
-        style={{
-          display: "flex",
-          flexDirection: "column",
-          transform: `translateY(${-value * cellHeight}px)`,
-        }}
-      >
-        {[0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 0].map((d, i) => (
-          <span
-            key={i}
-            style={{ height: cellHeight, lineHeight: `${cellHeight}px` }}
-          >
-            {d}
-          </span>
-        ))}
-      </span>
-    </span>
-  );
-}
-
-function Odometer({
-  current,
-  fontSize,
-  color,
-  mutedColor,
-}: {
-  /** continuous running total (float) */
-  current: number;
-  fontSize: number;
-  color: string;
-  mutedColor: string;
-}) {
-  const intVal = Math.max(0, Math.round(current));
-  const formatted = intVal.toLocaleString("en-US");
-
-  // Walk right→left so each digit knows its decimal place; drive each wheel
-  // continuously from `current` (higher places roll slower → mechanical feel).
-  const cells: React.ReactNode[] = [];
-  let place = 0;
-  for (let i = formatted.length - 1; i >= 0; i--) {
-    const ch = formatted[i];
-    if (ch === ",") {
-      cells.unshift(
-        <span
-          key={`c${i}`}
-          style={{
-            display: "inline-block",
-            width: "0.32em",
-            color: "currentColor",
-            fontSize: "0.85em",
-            textAlign: "center",
-          }}
-        >
-          ,
-        </span>,
-      );
-    } else {
-      const wheel = computeWheel(current, place);
-      cells.unshift(
-        <DigitColumn key={`d${i}`} value={wheel} fontSize={fontSize} />,
-      );
-      place++;
-    }
-  }
-
-  return (
-    <div
-      style={{
-        display: "flex",
-        alignItems: "baseline",
-        fontSize,
-        fontWeight: 800,
-        color,
-        fontFamily: MONO_FAMILY,
-        fontVariantNumeric: "tabular-nums",
-        letterSpacing: "-0.03em",
-        lineHeight: 1,
-      }}
-    >
-      {cells}
-    </div>
   );
 }
 
@@ -1217,12 +1097,7 @@ export function GitHubStars({
     >
       <div style={{ display: "flex", alignItems: "center", gap: 20 }}>
         <StarGlyph size={starSize} fill={accentColor} />
-        <Odometer
-          current={current}
-          fontSize={counterSize}
-          color={t.fg}
-          mutedColor={t.fgMuted}
-        />
+        <Odometer current={current} fontSize={counterSize} color={t.fg} />
       </div>
       {underline}
       <div
@@ -1253,12 +1128,7 @@ export function GitHubStars({
     >
       <StarGlyph size={starSize} fill={accentColor} />
       <div style={{ height: 20 }} />
-      <Odometer
-        current={current}
-        fontSize={counterSize}
-        color={t.fg}
-        mutedColor={t.fgMuted}
-      />
+      <Odometer current={current} fontSize={counterSize} color={t.fg} />
       <div style={{ height: 16 }} />
       {underline}
       <div style={{ height: 20 }} />

@@ -769,11 +769,31 @@
         "date-fns",
         "@remotion/google-fonts"
       ],
+      "registryDependencies": [
+        "@remocn/number-wheel"
+      ],
       "files": [
         {
           "path": "github-stars/index.tsx",
           "type": "registry:component",
           "target": "components/remocn/github-stars.tsx"
+        }
+      ]
+    },
+    {
+      "name": "number-wheel",
+      "type": "registry:component",
+      "title": "Number Wheel",
+      "description": "Mechanical odometer that rolls an integer up or down to its target, direction inferred from the values.",
+      "dependencies": [
+        "remotion",
+        "@remotion/google-fonts"
+      ],
+      "files": [
+        {
+          "path": "number-wheel/index.tsx",
+          "type": "registry:component",
+          "target": "components/remocn/number-wheel.tsx"
         }
       ]
     },
