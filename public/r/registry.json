@@ -768,11 +768,31 @@
         "date-fns",
         "@remotion/google-fonts"
       ],
+      "registryDependencies": [
+        "@remocn/number-wheel"
+      ],
       "files": [
         {
           "path": "registry/remocn/github-stars/index.tsx",
           "type": "registry:component",
           "target": "components/remocn/github-stars.tsx"
+        }
+      ],
+      "type": "registry:component"
+    },
+    {
+      "name": "number-wheel",
+      "title": "Number Wheel",
+      "description": "Mechanical odometer that rolls an integer up or down to its target, direction inferred from the values.",
+      "dependencies": [
+        "remotion",
+        "@remotion/google-fonts"
+      ],
+      "files": [
+        {
+          "path": "registry/remocn/number-wheel/index.tsx",
+          "type": "registry:component",
+          "target": "components/remocn/number-wheel.tsx"
         }
       ],
       "type": "registry:component"
@@ -934,6 +954,22 @@
           "path": "registry/remocn/confetti/index.tsx",
           "type": "registry:component",
           "target": "components/remocn/confetti.tsx"
+        }
+      ],
+      "type": "registry:component"
+    },
+    {
+      "name": "backdrop",
+      "title": "Backdrop",
+      "description": "Configurable full-frame background (color / gradient / image / live component) with Screen Studio-style padding and a rounded, shadowed content frame.",
+      "dependencies": [
+        "remotion"
+      ],
+      "files": [
+        {
+          "path": "registry/remocn/backdrop/index.tsx",
+          "type": "registry:component",
+          "target": "components/remocn/backdrop.tsx"
         }
       ],
       "type": "registry:component"
