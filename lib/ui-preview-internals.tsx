@@ -38,7 +38,7 @@ export function buildParsers(name: string, controls: ControlConfig) {
     urlKeys[key] = `${prefix}_${key}`;
     if (ctrl.type === "text") {
       parsers[key] = parseAsString.withDefault(ctrl.default);
-    } else if (ctrl.type === "number") {
+    } else if (ctrl.type === "number" || ctrl.type === "number-input") {
       parsers[key] = parseAsFloat.withDefault(ctrl.default);
     } else if (ctrl.type === "color") {
       parsers[key] = parseAsString.withDefault(ctrl.default);

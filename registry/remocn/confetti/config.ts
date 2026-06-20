@@ -37,7 +37,7 @@ export const confettiConfig: ComponentConfig = {
       label: "Size",
     },
     seed: {
-      type: "number",
+      type: "number-input",
       default: 1,
       min: 1,
       max: 9999,

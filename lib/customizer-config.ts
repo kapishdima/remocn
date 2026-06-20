@@ -10,6 +10,14 @@ export type ControlType =
       step: number;
       label: string;
     }
+  | {
+      type: "number-input";
+      default: number;
+      min: number;
+      max: number;
+      step: number;
+      label: string;
+    }
   | { type: "color"; default: string; label: string }
   | { type: "select"; default: string; options: string[]; label: string }
   | { type: "boolean"; default: boolean; label: string };

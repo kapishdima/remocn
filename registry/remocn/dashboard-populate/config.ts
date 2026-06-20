@@ -10,7 +10,7 @@ export const dashboardPopulateConfig: ComponentConfig = {
       label: "Accent color",
     },
     kpiTarget: {
-      type: "number",
+      type: "number-input",
       default: 128400,
       min: 1000,
       max: 1000000,

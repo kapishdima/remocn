@@ -5,7 +5,7 @@ export const rollingNumberConfig: ComponentConfig = {
   importPath: "@/components/remocn/rolling-number",
   controls: {
     from: {
-      type: "number",
+      type: "number-input",
       default: 0,
       min: 0,
       max: 1000000,
@@ -13,7 +13,7 @@ export const rollingNumberConfig: ComponentConfig = {
       label: "From",
     },
     to: {
-      type: "number",
+      type: "number-input",
       default: 24813,
       min: 0,
       max: 1000000,

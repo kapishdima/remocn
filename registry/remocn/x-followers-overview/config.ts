@@ -5,7 +5,7 @@ export const xFollowersOverviewConfig: ComponentConfig = {
   importPath: "@/components/remocn/x-followers-overview",
   controls: {
     totalFollowers: {
-      type: "number",
+      type: "number-input",
       default: 1709,
       min: 0,
       max: 10000000,

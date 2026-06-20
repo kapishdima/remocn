@@ -15,7 +15,7 @@ export const githubStarsConfig: ComponentConfig = {
       label: "Repository",
     },
     totalStars: {
-      type: "number",
+      type: "number-input",
       default: 24813,
       min: 0,
       max: 500000,
