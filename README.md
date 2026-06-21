@@ -1,8 +1,11 @@
+# remocn
+
+![GitHub Health](https://shieldcn.dev/group/github/stars/kapishdima/remocn+github/forks/kapishdima/remocn+badge/%E2%9D%A4%EF%B8%8F%20Sponsor-this%20project-FF69B4.svg?variant=secondary)
+
 <p align="center">
   <img src="./public/hero.png" alt="remocn — shadcn registry for Remotion" />
 </p>
 
-# remocn
 
 > A shadcn registry of production-ready animations, transitions, backgrounds, and scenes for [Remotion](https://www.remotion.dev/).
 
