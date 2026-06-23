@@ -164,6 +164,22 @@
       ]
     },
     {
+      "name": "per-word-crossfade",
+      "type": "registry:component",
+      "title": "Per-Word Crossfade",
+      "description": "Words gently fade into place one after another, with a short vertical drift for a calm keynote rhythm.",
+      "dependencies": [
+        "remotion"
+      ],
+      "files": [
+        {
+          "path": "per-word-crossfade/index.tsx",
+          "type": "registry:component",
+          "target": "components/remocn/per-word-crossfade.tsx"
+        }
+      ]
+    },
+    {
       "name": "typewriter",
       "type": "registry:component",
       "title": "Typewriter",
