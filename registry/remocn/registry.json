@@ -84,6 +84,22 @@
       ]
     },
     {
+      "name": "micro-scale-fade",
+      "type": "registry:component",
+      "title": "Micro Scale Fade",
+      "description": "A calm, tiny scale pop used as subtle premium polish for labels and headings.",
+      "dependencies": [
+        "remotion"
+      ],
+      "files": [
+        {
+          "path": "micro-scale-fade/index.tsx",
+          "type": "registry:component",
+          "target": "components/remocn/micro-scale-fade.tsx"
+        }
+      ]
+    },
+    {
       "name": "typewriter",
       "type": "registry:component",
       "title": "Typewriter",

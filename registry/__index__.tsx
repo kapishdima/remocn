@@ -17,6 +17,8 @@ import { TopDownLetters } from "@/registry/remocn/top-down-letters";
 import { topDownLettersConfig } from "@/registry/remocn/top-down-letters/config";
 import { SpringScaleIn } from "@/registry/remocn/spring-scale-in";
 import { springScaleInConfig } from "@/registry/remocn/spring-scale-in/config";
+import { MicroScaleFade } from "@/registry/remocn/micro-scale-fade";
+import { microScaleFadeConfig } from "@/registry/remocn/micro-scale-fade/config";
 import { BrowserFlow } from "@/registry/remocn/browser-flow";
 import { browserFlowConfig } from "@/registry/remocn/browser-flow/config";
 import { ChatToPreviewLayout } from "@/registry/remocn/chat-to-preview-layout";
@@ -205,6 +207,7 @@ const registry: Record<string, RegistryEntry> = {
   "bottom-up-letters": { Component: BottomUpLetters, config: bottomUpLettersConfig },
   "top-down-letters": { Component: TopDownLetters, config: topDownLettersConfig },
   "spring-scale-in": { Component: SpringScaleIn, config: springScaleInConfig },
+  "micro-scale-fade": { Component: MicroScaleFade, config: microScaleFadeConfig },
   typewriter: { Component: Typewriter, config: typewriterConfig },
   "inline-highlight": {
     Component: InlineHighlight,
