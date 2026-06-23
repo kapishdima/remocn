@@ -39,6 +39,8 @@ import { ShortSlideRight } from "@/registry/remocn/short-slide-right";
 import { shortSlideRightConfig } from "@/registry/remocn/short-slide-right/config";
 import { KineticCenterBuild } from "@/registry/remocn/kinetic-center-build";
 import { kineticCenterBuildConfig } from "@/registry/remocn/kinetic-center-build/config";
+import { ShortSlideDown } from "@/registry/remocn/short-slide-down";
+import { shortSlideDownConfig } from "@/registry/remocn/short-slide-down/config";
 import { BrowserFlow } from "@/registry/remocn/browser-flow";
 import { browserFlowConfig } from "@/registry/remocn/browser-flow/config";
 import { ChatToPreviewLayout } from "@/registry/remocn/chat-to-preview-layout";
@@ -238,6 +240,7 @@ const registry: Record<string, RegistryEntry> = {
   "shared-axis-z": { Component: SharedAxisZ, config: sharedAxisZConfig },
   "short-slide-right": { Component: ShortSlideRight, config: shortSlideRightConfig },
   "kinetic-center-build": { Component: KineticCenterBuild, config: kineticCenterBuildConfig },
+  "short-slide-down": { Component: ShortSlideDown, config: shortSlideDownConfig },
   typewriter: { Component: Typewriter, config: typewriterConfig },
   "inline-highlight": {
     Component: InlineHighlight,
