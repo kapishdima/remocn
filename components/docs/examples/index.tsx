@@ -70,6 +70,22 @@ import {
   resizableExampleCode,
 } from "./resizable-example";
 import { BlurInExampleScene, blurInExampleCode } from "./blur-in-example";
+import {
+  FadeThroughExampleScene,
+  fadeThroughExampleCode,
+} from "./fade-through-example";
+import {
+  SharedAxisYExampleScene,
+  sharedAxisYExampleCode,
+} from "./shared-axis-y-example";
+import {
+  SharedAxisZExampleScene,
+  sharedAxisZExampleCode,
+} from "./shared-axis-z-example";
+import {
+  PerWordCrossfadeExampleScene,
+  perWordCrossfadeExampleCode,
+} from "./per-word-crossfade-example";
 
 export interface ExampleEntry {
   Component: ComponentType;
@@ -354,5 +370,45 @@ export const examples: Record<string, ExampleEntry> = {
     fps: FPS,
     width: W,
     height: H,
+  },
+  "fade-through-example": {
+    Component: FadeThroughExampleScene,
+    code: fadeThroughExampleCode,
+    // Two chained A→B transitions, 40 frames each — tight delay for a dynamic feel.
+    durationInFrames: 80,
+    fps: FPS,
+    width: W,
+    height: H,
+    previewBackdrop: { type: "color", value: "#ffffff" },
+  },
+  "shared-axis-y-example": {
+    Component: SharedAxisYExampleScene,
+    code: sharedAxisYExampleCode,
+    // Two chained A→B transitions, 40 frames each — tight delay for a dynamic feel.
+    durationInFrames: 80,
+    fps: FPS,
+    width: W,
+    height: H,
+    previewBackdrop: { type: "color", value: "#ffffff" },
+  },
+  "shared-axis-z-example": {
+    Component: SharedAxisZExampleScene,
+    code: sharedAxisZExampleCode,
+    // Two chained A→B transitions, 40 frames each — tight delay for a dynamic feel.
+    durationInFrames: 80,
+    fps: FPS,
+    width: W,
+    height: H,
+    previewBackdrop: { type: "color", value: "#ffffff" },
+  },
+  "per-word-crossfade-example": {
+    Component: PerWordCrossfadeExampleScene,
+    code: perWordCrossfadeExampleCode,
+    // Two chained A→B transitions, 50 frames each — slower enter needs a touch more room.
+    durationInFrames: 100,
+    fps: FPS,
+    width: W,
+    height: H,
+    previewBackdrop: { type: "color", value: "#ffffff" },
   },
 };

@@ -4,18 +4,274 @@
   "homepage": "https://remocn.dev",
   "items": [
     {
-      "name": "blur-reveal",
+      "name": "soft-blur-in",
       "type": "registry:component",
-      "title": "Blur Reveal",
-      "description": "Text fades in from a heavy blur into sharp focus.",
+      "title": "Soft Blur In",
+      "description": "Per-character fade-in with a gentle blur and upward motion. Apple's signature hero-title reveal.",
       "dependencies": [
         "remotion"
       ],
       "files": [
         {
-          "path": "blur-reveal/index.tsx",
+          "path": "soft-blur-in/index.tsx",
           "type": "registry:component",
-          "target": "components/remocn/blur-reveal.tsx"
+          "target": "components/remocn/soft-blur-in.tsx"
+        }
+      ]
+    },
+    {
+      "name": "per-character-rise",
+      "type": "registry:component",
+      "title": "Per Character Rise",
+      "description": "Letters slide up from below with no blur — crisp, deliberate, kinetic.",
+      "dependencies": [
+        "remotion"
+      ],
+      "files": [
+        {
+          "path": "per-character-rise/index.tsx",
+          "type": "registry:component",
+          "target": "components/remocn/per-character-rise.tsx"
+        }
+      ]
+    },
+    {
+      "name": "bottom-up-letters",
+      "type": "registry:component",
+      "title": "Bottom-Up Letters",
+      "description": "Letters rise from below in a pronounced staircase, one symbol at a time, with zero blur.",
+      "dependencies": [
+        "remotion"
+      ],
+      "files": [
+        {
+          "path": "bottom-up-letters/index.tsx",
+          "type": "registry:component",
+          "target": "components/remocn/bottom-up-letters.tsx"
+        }
+      ]
+    },
+    {
+      "name": "top-down-letters",
+      "type": "registry:component",
+      "title": "Top-Down Letters",
+      "description": "Letters descend from above in a pronounced staircase, one symbol at a time, with zero blur.",
+      "dependencies": [
+        "remotion"
+      ],
+      "files": [
+        {
+          "path": "top-down-letters/index.tsx",
+          "type": "registry:component",
+          "target": "components/remocn/top-down-letters.tsx"
+        }
+      ]
+    },
+    {
+      "name": "spring-scale-in",
+      "type": "registry:component",
+      "title": "Spring Scale In",
+      "description": "Words pop in with a soft overshoot scale, like a physical spring settling into place.",
+      "dependencies": [
+        "remotion"
+      ],
+      "files": [
+        {
+          "path": "spring-scale-in/index.tsx",
+          "type": "registry:component",
+          "target": "components/remocn/spring-scale-in.tsx"
+        }
+      ]
+    },
+    {
+      "name": "micro-scale-fade",
+      "type": "registry:component",
+      "title": "Micro Scale Fade",
+      "description": "A calm, tiny scale pop used as subtle premium polish for labels and headings.",
+      "dependencies": [
+        "remotion"
+      ],
+      "files": [
+        {
+          "path": "micro-scale-fade/index.tsx",
+          "type": "registry:component",
+          "target": "components/remocn/micro-scale-fade.tsx"
+        }
+      ]
+    },
+    {
+      "name": "scale-down-fade",
+      "type": "registry:component",
+      "title": "Scale Down Fade",
+      "description": "Subtle premium settle-in with a restrained scale-down fade on exit.",
+      "dependencies": [
+        "remotion"
+      ],
+      "files": [
+        {
+          "path": "scale-down-fade/index.tsx",
+          "type": "registry:component",
+          "target": "components/remocn/scale-down-fade.tsx"
+        }
+      ]
+    },
+    {
+      "name": "blur-out-up",
+      "type": "registry:component",
+      "title": "Blur Out Up",
+      "description": "Words arrive clean and depart upward with increasing blur for airy exits.",
+      "dependencies": [
+        "remotion"
+      ],
+      "files": [
+        {
+          "path": "blur-out-up/index.tsx",
+          "type": "registry:component",
+          "target": "components/remocn/blur-out-up.tsx"
+        }
+      ]
+    },
+    {
+      "name": "focus-blur-resolve",
+      "type": "registry:component",
+      "title": "Focus Blur Resolve",
+      "description": "A premium focus pull from heavy blur to crisp text, then a soft blur-out exit.",
+      "dependencies": [
+        "remotion"
+      ],
+      "files": [
+        {
+          "path": "focus-blur-resolve/index.tsx",
+          "type": "registry:component",
+          "target": "components/remocn/focus-blur-resolve.tsx"
+        }
+      ]
+    },
+    {
+      "name": "line-by-line-slide",
+      "type": "registry:component",
+      "title": "Line-by-Line Slide",
+      "description": "Each line enters from the left with a staggered slide and exits to the right for a flowing paragraph reveal.",
+      "dependencies": [
+        "remotion"
+      ],
+      "files": [
+        {
+          "path": "line-by-line-slide/index.tsx",
+          "type": "registry:component",
+          "target": "components/remocn/line-by-line-slide.tsx"
+        }
+      ]
+    },
+    {
+      "name": "per-word-crossfade",
+      "type": "registry:component",
+      "title": "Per-Word Crossfade",
+      "description": "Words gently fade into place one after another, with a short vertical drift for a calm keynote rhythm.",
+      "dependencies": [
+        "remotion"
+      ],
+      "files": [
+        {
+          "path": "per-word-crossfade/index.tsx",
+          "type": "registry:component",
+          "target": "components/remocn/per-word-crossfade.tsx"
+        }
+      ]
+    },
+    {
+      "name": "fade-through",
+      "type": "registry:component",
+      "title": "Fade Through",
+      "description": "A Material-style content transition: old fades out, new fades in with a soft delay.",
+      "dependencies": [
+        "remotion"
+      ],
+      "files": [
+        {
+          "path": "fade-through/index.tsx",
+          "type": "registry:component",
+          "target": "components/remocn/fade-through.tsx"
+        }
+      ]
+    },
+    {
+      "name": "shared-axis-y",
+      "type": "registry:component",
+      "title": "Shared Axis Y",
+      "description": "Per-word hard-cut transition with staircase timing for sharp editorial swaps.",
+      "dependencies": [
+        "remotion"
+      ],
+      "files": [
+        {
+          "path": "shared-axis-y/index.tsx",
+          "type": "registry:component",
+          "target": "components/remocn/shared-axis-y.tsx"
+        }
+      ]
+    },
+    {
+      "name": "shared-axis-z",
+      "type": "registry:component",
+      "title": "Shared Axis Z",
+      "description": "Scale-based shared-axis transition for focus shifts and context depth.",
+      "dependencies": [
+        "remotion"
+      ],
+      "files": [
+        {
+          "path": "shared-axis-z/index.tsx",
+          "type": "registry:component",
+          "target": "components/remocn/shared-axis-z.tsx"
+        }
+      ]
+    },
+    {
+      "name": "short-slide-right",
+      "type": "registry:component",
+      "title": "Short Slide Right",
+      "description": "The whole phrase glides in from the left as one compact move while words reveal in sequence through opacity.",
+      "dependencies": [
+        "remotion"
+      ],
+      "files": [
+        {
+          "path": "short-slide-right/index.tsx",
+          "type": "registry:component",
+          "target": "components/remocn/short-slide-right.tsx"
+        }
+      ]
+    },
+    {
+      "name": "kinetic-center-build",
+      "type": "registry:component",
+      "title": "Kinetic Center Build",
+      "description": "A word appears in the center; each new word enters from the right and pushes the line until the full phrase locks centered.",
+      "dependencies": [
+        "remotion"
+      ],
+      "files": [
+        {
+          "path": "kinetic-center-build/index.tsx",
+          "type": "registry:component",
+          "target": "components/remocn/kinetic-center-build.tsx"
+        }
+      ]
+    },
+    {
+      "name": "short-slide-down",
+      "type": "registry:component",
+      "title": "Short Slide Down",
+      "description": "Each new word drops in from above into its own line and pushes the stack downward until a centered three-line composition locks in place.",
+      "dependencies": [
+        "remotion"
+      ],
+      "files": [
+        {
+          "path": "short-slide-down/index.tsx",
+          "type": "registry:component",
+          "target": "components/remocn/short-slide-down.tsx"
         }
       ]
     },
@@ -88,18 +344,18 @@
       ]
     },
     {
-      "name": "masked-slide-reveal",
+      "name": "mask-reveal-up",
       "type": "registry:component",
-      "title": "Masked Slide Reveal",
-      "description": "Words slide up out of an invisible horizontal mask, one after another.",
+      "title": "Mask Reveal Up",
+      "description": "Lines reveal upward with a soft masked feel and compact stagger.",
       "dependencies": [
         "remotion"
       ],
       "files": [
         {
-          "path": "masked-slide-reveal/index.tsx",
+          "path": "mask-reveal-up/index.tsx",
           "type": "registry:component",
-          "target": "components/remocn/masked-slide-reveal.tsx"
+          "target": "components/remocn/mask-reveal-up.tsx"
         }
       ]
     },

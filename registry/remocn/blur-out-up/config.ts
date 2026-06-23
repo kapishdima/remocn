@@ -6,18 +6,18 @@ import {
   W,
 } from "@/lib/customizer-config";
 
-export const blurRevealConfig: ComponentConfig = {
-  componentName: "BlurReveal",
-  importPath: "@/components/remocn/blur-reveal",
+export const blurOutUpConfig: ComponentConfig = {
+  componentName: "BlurOutUp",
+  importPath: "@/components/remocn/blur-out-up",
   controls: {
-    text: { type: "text", default: "BlurReveal", label: "Text" },
-    blur: {
+    text: { type: "text", default: "Clear in, airy out.", label: "Text" },
+    staggerDelay: {
       type: "number",
-      default: 10,
-      min: 1,
-      max: 30,
+      default: 1,
+      min: 0,
+      max: 8,
       step: 1,
-      label: "Blur",
+      label: "Stagger",
     },
     fontSize: {
       type: "number",

@@ -1,10 +1,11 @@
 "use client";
 
-import { spring, useCurrentFrame, useVideoConfig } from "remotion";
+import { Easing, interpolate, useCurrentFrame } from "remotion";
 
-export interface MaskedSlideRevealProps {
+export interface SpringScaleInProps {
   text: string;
   staggerDelay?: number;
+  scaleFrom?: number;
   fontSize?: number;
   color?: string;
   fontWeight?: number;
@@ -12,19 +13,21 @@ export interface MaskedSlideRevealProps {
   className?: string;
 }
 
-export function MaskedSlideReveal({
+export function SpringScaleIn({
   text,
   staggerDelay = 3,
+  scaleFrom = 0.7,
   fontSize = 72,
   color = "#171717",
-  fontWeight = 700,
+  fontWeight = 600,
   speed = 1,
   className,
-}: MaskedSlideRevealProps) {
+}: SpringScaleInProps) {
   const frame = useCurrentFrame() * speed;
-  const { fps } = useVideoConfig();
 
   const words = text.split(" ");
+  const wordDurationFrames = 11;
+  const easing = Easing.bezier(0.34, 1.56, 0.64, 1);
 
   return (
     <div
@@ -34,7 +37,7 @@ export function MaskedSlideReveal({
         display: "flex",
         alignItems: "center",
         justifyContent: "center",
-        background: "white",
+        background: "transparent",
       }}
     >
       <span
@@ -49,30 +52,29 @@ export function MaskedSlideReveal({
         }}
       >
         {words.map((word, i) => {
-          const t = spring({
-            frame: frame - i * staggerDelay,
-            fps,
-            config: { damping: 14 },
+          const local = frame - i * staggerDelay;
+          const opacity = interpolate(local, [0, wordDurationFrames], [0, 1], {
+            extrapolateLeft: "clamp",
+            extrapolateRight: "clamp",
+            easing,
+          });
+          const scale = interpolate(local, [0, wordDurationFrames], [scaleFrom, 1], {
+            extrapolateLeft: "clamp",
+            extrapolateRight: "clamp",
+            easing,
           });
           return (
             <span
               key={i}
               style={{
                 display: "inline-block",
-                overflow: "hidden",
-                verticalAlign: "bottom",
-                lineHeight: 1,
                 marginRight: "0.25em",
+                transformOrigin: "50% 50%",
+                opacity,
+                transform: `scale(${scale})`,
               }}
             >
-              <span
-                style={{
-                  display: "inline-block",
-                  transform: `translateY(${(1 - t) * 100}%)`,
-                }}
-              >
-                {word}
-              </span>
+              {word}
             </span>
           );
         })}

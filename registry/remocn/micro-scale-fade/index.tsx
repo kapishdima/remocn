@@ -1,39 +1,40 @@
 "use client";
 
-import { interpolate, useCurrentFrame, useVideoConfig } from "remotion";
+import { Easing, interpolate, useCurrentFrame } from "remotion";
 
-export interface BlurRevealProps {
+export interface MicroScaleFadeProps {
   text: string;
-  className?: string;
-  blur?: number;
+  scaleFrom?: number;
   fontSize?: number;
   color?: string;
   fontWeight?: number;
   speed?: number;
+  className?: string;
 }
 
-export function BlurReveal({
+export function MicroScaleFade({
   text,
-  className,
-  blur = 10,
-  fontSize = 48,
+  scaleFrom = 0.96,
+  fontSize = 72,
   color = "#171717",
   fontWeight = 600,
   speed = 1,
-}: BlurRevealProps) {
+  className,
+}: MicroScaleFadeProps) {
   const frame = useCurrentFrame() * speed;
-  const { durationInFrames } = useVideoConfig();
+  const easing = Easing.bezier(0.32, 0.72, 0, 1);
 
-  const opacity = interpolate(frame, [0, durationInFrames * 0.6], [0, 1], {
+  const opacity = interpolate(frame, [0, 18], [0, 1], {
+    extrapolateLeft: "clamp",
     extrapolateRight: "clamp",
+    easing,
   });
 
-  const blurAmount = interpolate(
-    frame,
-    [0, durationInFrames * 0.6],
-    [blur, 0],
-    { extrapolateRight: "clamp" },
-  );
+  const scale = interpolate(frame, [0, 18], [scaleFrom, 1], {
+    extrapolateLeft: "clamp",
+    extrapolateRight: "clamp",
+    easing,
+  });
 
   return (
     <div
@@ -49,14 +50,16 @@ export function BlurReveal({
       <span
         className={className}
         style={{
-          opacity,
-          filter: `blur(${blurAmount}px)`,
           fontSize,
           fontWeight,
           color,
-          letterSpacing: "-0.05em",
+          letterSpacing: "-0.03em",
           fontFamily:
             "var(--font-geist-sans), -apple-system, BlinkMacSystemFont, sans-serif",
+          display: "inline-block",
+          transformOrigin: "50% 50%",
+          opacity,
+          transform: `scale(${scale})`,
         }}
       >
         {text}

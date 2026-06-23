@@ -32,7 +32,7 @@ export interface ComponentConfig {
   compositionHeight: number;
   /**
    * Import statement shown in the generated code snippet.
-   * Example: `import { BlurReveal } from "@/components/remocn/blur-reveal";`
+   * Example: `import { SoftBlurIn } from "@/components/remocn/soft-blur-in";`
    */
   importPath: string;
   /**

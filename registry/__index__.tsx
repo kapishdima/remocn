@@ -7,8 +7,40 @@ import { AnimatedBarChart } from "@/registry/remocn/animated-bar-chart";
 import { animatedBarChartConfig } from "@/registry/remocn/animated-bar-chart/config";
 import { AnimatedLineChart } from "@/registry/remocn/animated-line-chart";
 import { animatedLineChartConfig } from "@/registry/remocn/animated-line-chart/config";
-import { BlurReveal } from "@/registry/remocn/blur-reveal";
-import { blurRevealConfig } from "@/registry/remocn/blur-reveal/config";
+import { SoftBlurIn } from "@/registry/remocn/soft-blur-in";
+import { softBlurInConfig } from "@/registry/remocn/soft-blur-in/config";
+import { PerCharacterRise } from "@/registry/remocn/per-character-rise";
+import { perCharacterRiseConfig } from "@/registry/remocn/per-character-rise/config";
+import { BottomUpLetters } from "@/registry/remocn/bottom-up-letters";
+import { bottomUpLettersConfig } from "@/registry/remocn/bottom-up-letters/config";
+import { TopDownLetters } from "@/registry/remocn/top-down-letters";
+import { topDownLettersConfig } from "@/registry/remocn/top-down-letters/config";
+import { SpringScaleIn } from "@/registry/remocn/spring-scale-in";
+import { springScaleInConfig } from "@/registry/remocn/spring-scale-in/config";
+import { MicroScaleFade } from "@/registry/remocn/micro-scale-fade";
+import { microScaleFadeConfig } from "@/registry/remocn/micro-scale-fade/config";
+import { ScaleDownFade } from "@/registry/remocn/scale-down-fade";
+import { scaleDownFadeConfig } from "@/registry/remocn/scale-down-fade/config";
+import { BlurOutUp } from "@/registry/remocn/blur-out-up";
+import { blurOutUpConfig } from "@/registry/remocn/blur-out-up/config";
+import { FocusBlurResolve } from "@/registry/remocn/focus-blur-resolve";
+import { focusBlurResolveConfig } from "@/registry/remocn/focus-blur-resolve/config";
+import { LineByLineSlide } from "@/registry/remocn/line-by-line-slide";
+import { lineByLineSlideConfig } from "@/registry/remocn/line-by-line-slide/config";
+import { PerWordCrossfade } from "@/registry/remocn/per-word-crossfade";
+import { perWordCrossfadeConfig } from "@/registry/remocn/per-word-crossfade/config";
+import { FadeThrough } from "@/registry/remocn/fade-through";
+import { fadeThroughConfig } from "@/registry/remocn/fade-through/config";
+import { SharedAxisY } from "@/registry/remocn/shared-axis-y";
+import { sharedAxisYConfig } from "@/registry/remocn/shared-axis-y/config";
+import { SharedAxisZ } from "@/registry/remocn/shared-axis-z";
+import { sharedAxisZConfig } from "@/registry/remocn/shared-axis-z/config";
+import { ShortSlideRight } from "@/registry/remocn/short-slide-right";
+import { shortSlideRightConfig } from "@/registry/remocn/short-slide-right/config";
+import { KineticCenterBuild } from "@/registry/remocn/kinetic-center-build";
+import { kineticCenterBuildConfig } from "@/registry/remocn/kinetic-center-build/config";
+import { ShortSlideDown } from "@/registry/remocn/short-slide-down";
+import { shortSlideDownConfig } from "@/registry/remocn/short-slide-down/config";
 import { BrowserFlow } from "@/registry/remocn/browser-flow";
 import { browserFlowConfig } from "@/registry/remocn/browser-flow/config";
 import { ChatToPreviewLayout } from "@/registry/remocn/chat-to-preview-layout";
@@ -57,8 +89,8 @@ import { LiveCodeCompilation } from "@/registry/remocn/live-code-compilation";
 import { liveCodeCompilationConfig } from "@/registry/remocn/live-code-compilation/config";
 import { MarkerHighlight } from "@/registry/remocn/marker-highlight";
 import { markerHighlightConfig } from "@/registry/remocn/marker-highlight/config";
-import { MaskedSlideReveal } from "@/registry/remocn/masked-slide-reveal";
-import { maskedSlideRevealConfig } from "@/registry/remocn/masked-slide-reveal/config";
+import { MaskRevealUp } from "@/registry/remocn/mask-reveal-up";
+import { maskRevealUpConfig } from "@/registry/remocn/mask-reveal-up/config";
 import { MatrixDecode } from "@/registry/remocn/matrix-decode";
 import { matrixDecodeConfig } from "@/registry/remocn/matrix-decode/config";
 import { MeshGradientBg } from "@/registry/remocn/mesh-gradient-bg";
@@ -192,7 +224,23 @@ export interface RegistryEntry {
 }
 
 const registry: Record<string, RegistryEntry> = {
-  "blur-reveal": { Component: BlurReveal, config: blurRevealConfig },
+  "soft-blur-in": { Component: SoftBlurIn, config: softBlurInConfig },
+  "per-character-rise": { Component: PerCharacterRise, config: perCharacterRiseConfig },
+  "bottom-up-letters": { Component: BottomUpLetters, config: bottomUpLettersConfig },
+  "top-down-letters": { Component: TopDownLetters, config: topDownLettersConfig },
+  "spring-scale-in": { Component: SpringScaleIn, config: springScaleInConfig },
+  "micro-scale-fade": { Component: MicroScaleFade, config: microScaleFadeConfig },
+  "scale-down-fade": { Component: ScaleDownFade, config: scaleDownFadeConfig },
+  "blur-out-up": { Component: BlurOutUp, config: blurOutUpConfig },
+  "focus-blur-resolve": { Component: FocusBlurResolve, config: focusBlurResolveConfig },
+  "line-by-line-slide": { Component: LineByLineSlide, config: lineByLineSlideConfig },
+  "per-word-crossfade": { Component: PerWordCrossfade, config: perWordCrossfadeConfig },
+  "fade-through": { Component: FadeThrough, config: fadeThroughConfig },
+  "shared-axis-y": { Component: SharedAxisY, config: sharedAxisYConfig },
+  "shared-axis-z": { Component: SharedAxisZ, config: sharedAxisZConfig },
+  "short-slide-right": { Component: ShortSlideRight, config: shortSlideRightConfig },
+  "kinetic-center-build": { Component: KineticCenterBuild, config: kineticCenterBuildConfig },
+  "short-slide-down": { Component: ShortSlideDown, config: shortSlideDownConfig },
   typewriter: { Component: Typewriter, config: typewriterConfig },
   "inline-highlight": {
     Component: InlineHighlight,
@@ -206,9 +254,9 @@ const registry: Record<string, RegistryEntry> = {
     Component: StaggeredFadeUp,
     config: staggeredFadeUpConfig,
   },
-  "masked-slide-reveal": {
-    Component: MaskedSlideReveal,
-    config: maskedSlideRevealConfig,
+  "mask-reveal-up": {
+    Component: MaskRevealUp,
+    config: maskRevealUpConfig,
   },
   "tracking-in": { Component: TrackingIn, config: trackingInConfig },
   "shimmer-sweep": { Component: ShimmerSweep, config: shimmerSweepConfig },

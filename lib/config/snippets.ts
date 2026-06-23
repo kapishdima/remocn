@@ -5,16 +5,16 @@ import { LAVENDER, MINT, PEACH } from "@/config/site";
 // ---------------------------------------------------------------------------
 
 /** Shown inside the hero's glass-code-block player — the real remocn flow. */
-export const HERO_CODE = `// npx shadcn@latest add remocn/blur-reveal remocn/mesh-gradient-bg
+export const HERO_CODE = `// npx shadcn@latest add remocn/soft-blur-in remocn/mesh-gradient-bg
 import { AbsoluteFill } from "remotion";
-import { BlurReveal } from "@/components/remocn/blur-reveal";
+import { SoftBlurIn } from "@/components/remocn/soft-blur-in";
 import { MeshGradientBg } from "@/components/remocn/mesh-gradient-bg";
 
 export function LaunchScene() {
   return (
     <AbsoluteFill>
       <MeshGradientBg />
-      <BlurReveal text="Ship your launch video" />
+      <SoftBlurIn text="Ship your launch video" />
     </AbsoluteFill>
   );
 }`;
@@ -56,8 +56,8 @@ export const ADD: Step = {
   title: "Add a component",
   description:
     "Pull any primitive or composition straight into your project with the shadcn CLI — the code lands in your repo, yours to tweak.",
-  command: "npx shadcn@latest add remocn/blur-reveal",
-  component: "blur-reveal",
+  command: "npx shadcn@latest add remocn/soft-blur-in",
+  component: "soft-blur-in",
   accent: LAVENDER,
 };
 
@@ -72,7 +72,7 @@ export const RENDER: Step = {
 
 /** A taste of what `remocn/<name>` pulls in — fills the featured card. */
 export const SAMPLE_COMPONENTS = [
-  "blur-reveal",
+  "soft-blur-in",
   "shimmer-sweep",
   "frosted-glass-wipe",
   "grid-pixelate-wipe",
