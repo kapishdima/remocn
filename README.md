@@ -16,9 +16,6 @@ Remotion is a prerequisite — set up a Remotion project first if you don't have
 npx shadcn@latest add @remocn/blur-reveal
 ```
 
-The component lands in `components/remocn/blur-reveal.tsx` and is yours to edit.
-
-
 ## Why remocn
 
 - **Remotion has no batteries-included component library** You either build every animation from scratch or copy snippets from blog posts. remocn gives you a curated registry of primitives and full scenes that just work.
@@ -39,17 +36,4 @@ The component lands in `components/remocn/blur-reveal.tsx` and is yours to edit.
 - **Compositions** — Hero Device Assemble, Ecosystem Constellation, Infinite Bento Pan, Browser Flow, AI Generation Canvas, Live Code Compilation, Terminal to Browser Deploy, Dashboard Populate, Pricing Tier Focus
 - **UI primitives** (`remocn-ui`) — timeline-driven, shadcn-style atoms: Button, Accordion, Dialog, Drawer, Sheet, Select, Dropdown Menu, Command Menu, Tabs, Tooltip, Toast, Popover, Slider, Stepper, Resizable, and full flows (Signup, Checkout, Settings Toggle)
 
-Browse the full catalog with interactive previews at [remocn.dev](https://remocn.dev).
-
-## remocn/ui
-
-`remocn/ui` is a separate registry of **timeline-driven UI primitives** — the components you'd reach for in shadcn (Button, Dialog, Dropdown Menu, Tabs, Command Menu, Toast…), but rebuilt for video. Every state change is keyframe-driven instead of event-driven: a primitive plays through its open/close, focus, hover, and selection states on the Remotion timeline, so you can animate a real UI walkthrough — a signup form filling in, a dropdown opening, a checkout completing — frame by frame.
-
-All atoms share one core lib (`remocn-ui`) and follow the same steps API, so they compose into full flows: **Signup**, **Checkout**, and **Settings Toggle** ship ready to drop into a scene.
-
-https://github.com/user-attachments/assets/948a440e-5307-475d-95be-922a28f92d94
-
-
-```bash
-npx shadcn@latest add @remocn/ui-dropdown-menu
-```
+Browse the full catalog with interactive previews at [remocn.dev](https://remocn.dev)
