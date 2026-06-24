@@ -80,11 +80,11 @@ export function Hero() {
               className="mb-5 h-7 gap-1.5 rounded-full px-3 text-xs"
               render={
                 <Link
-                  href="/docs/ui"
+                  href="/docs/typography"
                   onClick={() =>
                     trackEvent("cta_clicked", {
                       cta: "hero_ui_badge",
-                      destination: "/docs/ui",
+                      destination: "/docs/typography",
                     })
                   }
                 />
@@ -95,7 +95,7 @@ export function Hero() {
                 ·
               </span>
               <span className="text-muted-foreground">
-                Introducing <span className="text-foreground">remocn/ui</span>
+                Introducing <span className="text-foreground">Typography</span>
               </span>
               <ArrowRight className="size-3" aria-hidden="true" />
             </Badge>
