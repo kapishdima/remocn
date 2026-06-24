@@ -8,6 +8,17 @@
 
 remocn is a copy-paste component library for building videos in Remotion. Instead of writing every fade, wipe, and kinetic title from scratch, you `npx shadcn add` a polished primitive into your project and own the code. Built for solo builders and small teams who need a product demo video shipped today, not next week.
 
+## Installation
+
+Remotion is a prerequisite — set up a Remotion project first if you don't have one (`npx create-video@latest`). Then add any component from the registry:
+
+```bash
+npx shadcn@latest add @remocn/blur-reveal
+```
+
+The component lands in `components/remocn/blur-reveal.tsx` and is yours to edit.
+
+
 ## Why remocn
 
 - **Remotion has no batteries-included component library** You either build every animation from scratch or copy snippets from blog posts. remocn gives you a curated registry of primitives and full scenes that just work.
@@ -42,15 +53,3 @@ https://github.com/user-attachments/assets/948a440e-5307-475d-95be-922a28f92d94
 ```bash
 npx shadcn@latest add @remocn/ui-dropdown-menu
 ```
-
-The atom lands in `components/remocn/ui-dropdown-menu.tsx`, pulls in the `remocn-ui` core lib, and is yours to edit.
-
-## Installation
-
-Remotion is a prerequisite — set up a Remotion project first if you don't have one (`npx create-video@latest`). Then add any component from the registry:
-
-```bash
-npx shadcn@latest add @remocn/blur-reveal
-```
-
-The component lands in `components/remocn/blur-reveal.tsx` and is yours to edit.
