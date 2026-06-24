@@ -36,7 +36,8 @@ Browse the full catalog with interactive previews at [remocn.dev](https://remocn
 
 All atoms share one core lib (`remocn-ui`) and follow the same steps API, so they compose into full flows: **Signup**, **Checkout**, and **Settings Toggle** ship ready to drop into a scene.
 
-<!-- TODO: загрузить mp4 через GitHub UI (перетащить файл в редактор README) и вставить голую ссылку на github.com/user-attachments/assets/... сюда -->
+https://github.com/user-attachments/assets/948a440e-5307-475d-95be-922a28f92d94
+
 
 ```bash
 npx shadcn@latest add @remocn/ui-dropdown-menu
