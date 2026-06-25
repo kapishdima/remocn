@@ -119,7 +119,6 @@ export function TerminalSimulator({
         display: "flex",
         alignItems: "center",
         justifyContent: "center",
-        background: "#050505",
       }}
     >
       <div

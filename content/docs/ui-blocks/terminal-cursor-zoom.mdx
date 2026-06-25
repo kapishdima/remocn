@@ -1,0 +1,95 @@
+---
+title: Terminal Cursor Zoom
+description: Camera locked to the typing cursor, dollying across a terminal as a command types at high zoom
+---
+
+<ComponentPreview name="terminal-cursor-zoom" />
+
+## Installation
+
+<InstallBlock name="terminal-cursor-zoom" />
+
+## Usage
+
+```tsx
+// src/Root.tsx
+import { Composition } from "remotion";
+import { TerminalCursorZoom } from "@/components/remocn/terminal-cursor-zoom";
+
+const TerminalCursorZoomScene = () => (
+  <TerminalCursorZoom command="npx shadcn add @remocn/terminal-simulator" />
+);
+
+export const RemotionRoot = () => (
+  <Composition
+    id="TerminalCursorZoom"
+    component={TerminalCursorZoomScene}
+    durationInFrames={90}
+    fps={30}
+    width={1280}
+    height={720}
+  />
+);
+```
+
+The camera reads `terminal-simulator`'s fixed layout to keep the cursor pinned, so it pairs with that component — `npx shadcn add @remocn/terminal-cursor-zoom` pulls it in automatically.
+
+## Props
+
+<PropsTable
+  rows={[
+    {
+      name: "command",
+      type: "string",
+      default: "\"npx shadcn add @remocn/terminal-cursor-zoom\"",
+      description: "The single command line typed out and tracked by the camera",
+    },
+    {
+      name: "zoom",
+      type: "number",
+      default: "2.8",
+      description: "Camera scale while the cursor is pinned to screen center",
+    },
+    {
+      name: "fontSize",
+      type: "number",
+      default: "20",
+      description: "Monospace font size in pixels; the cursor geometry is derived from it",
+    },
+    {
+      name: "prompt",
+      type: "string",
+      default: "\"$\"",
+      description: "Prompt prefix shown before the command",
+    },
+    {
+      name: "title",
+      type: "string",
+      default: "\"~/code/remocn-demo\"",
+      description: "Title shown in the terminal window chrome",
+    },
+    {
+      name: "charsPerFrame",
+      type: "number",
+      default: "1",
+      description: "Typing speed passed through to the terminal; the camera mirrors it exactly",
+    },
+    {
+      name: "chunkSize",
+      type: "number",
+      default: "1",
+      description: "Characters revealed per step; the camera snaps to the same chunking",
+    },
+    {
+      name: "speed",
+      type: "number",
+      default: "1",
+      description: "Playback multiplier applied to both the typing and the camera",
+    },
+    {
+      name: "className",
+      type: "string",
+      description: "Optional className passed to the outer container",
+    },
+  ]}
+/>

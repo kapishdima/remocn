@@ -38,6 +38,7 @@
       "@/components/remocn/use-blur-in-transition": ["./registry/remocn-ui/blur-in/use-blur-in-transition.ts"],
       "@/components/remocn/confetti": ["./registry/remocn/confetti/index.tsx"],
       "@/components/remocn/number-wheel": ["./registry/remocn/number-wheel/index.tsx"],
+      "@/components/remocn/terminal-simulator": ["./registry/remocn/terminal-simulator/index.tsx"],
       "@/components/remocn/*": ["./registry/remocn-ui/*/index.tsx"],
       "@/*": ["./*"]
     }

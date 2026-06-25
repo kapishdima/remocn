@@ -632,6 +632,25 @@
       ]
     },
     {
+      "name": "terminal-cursor-zoom",
+      "type": "registry:component",
+      "title": "Terminal Cursor Zoom",
+      "description": "Camera locked to the typing cursor, dollying across a terminal as a command types at high zoom.",
+      "dependencies": [
+        "remotion"
+      ],
+      "registryDependencies": [
+        "@remocn/terminal-simulator"
+      ],
+      "files": [
+        {
+          "path": "terminal-cursor-zoom/index.tsx",
+          "type": "registry:component",
+          "target": "components/remocn/terminal-cursor-zoom.tsx"
+        }
+      ]
+    },
+    {
       "name": "code-diff-wipe",
       "type": "registry:component",
       "title": "Code Diff Wipe",
