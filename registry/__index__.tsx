@@ -123,6 +123,8 @@ import { StaggeredFadeUp } from "@/registry/remocn/staggered-fade-up";
 import { staggeredFadeUpConfig } from "@/registry/remocn/staggered-fade-up/config";
 import { StrikethroughReplace } from "@/registry/remocn/strikethrough-replace";
 import { strikethroughReplaceConfig } from "@/registry/remocn/strikethrough-replace/config";
+import { TerminalCursorZoom } from "@/registry/remocn/terminal-cursor-zoom";
+import { terminalCursorZoomConfig } from "@/registry/remocn/terminal-cursor-zoom/config";
 import { TerminalSimulator } from "@/registry/remocn/terminal-simulator";
 import { terminalSimulatorConfig } from "@/registry/remocn/terminal-simulator/config";
 import { TerminalToBrowserDeploy } from "@/registry/remocn/terminal-to-browser-deploy";
@@ -323,6 +325,10 @@ const registry: Record<string, RegistryEntry> = {
   "terminal-simulator": {
     Component: TerminalSimulator,
     config: terminalSimulatorConfig,
+  },
+  "terminal-cursor-zoom": {
+    Component: TerminalCursorZoom,
+    config: terminalCursorZoomConfig,
   },
   "code-diff-wipe": { Component: CodeDiffWipe, config: codeDiffWipeConfig },
   "drag-and-drop-flow": {
