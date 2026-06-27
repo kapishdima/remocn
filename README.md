@@ -27,10 +27,10 @@ npx shadcn@latest add @remocn/blur-reveal
 
 110+ components, split between scene-ready animations and timeline-driven UI primitives:
 
-- **Typography** — Soft Blur In, Per Character Rise, Tracking In, Typewriter, Shimmer Sweep, Marker Highlight, Slot Machine Roll, Matrix Decode, RGB Glitch Text, Number Wheel, Rolling Number, Infinite & Perspective Marquee, and 30+ more text effects
-- **Transitions & wipes** — Zoom Through, Device Mockup Zoom, Image Expand to Fullscreen, Directional Wipe, Spatial Push, Frosted Glass Wipe, Grid Pixelate Wipe, Chromatic Aberration Wipe
-- **Environment & effects** — Mesh Gradient Background, Dynamic Grid, Spotlight Card, Confetti, Backdrop
-- **UI blocks** — Glass Code Block, Terminal Simulator, Code Accordion, Code Diff Wipe, Tool Menu Slide In, Animated Line & Bar Charts, Drag and Drop Flow
+- **Typography** - Soft Blur In, Per Character Rise, Tracking In, Typewriter, Shimmer Sweep, Marker Highlight, Slot Machine Roll, Matrix Decode, RGB Glitch Text, Number Wheel, Rolling Number, Infinite & Perspective Marquee, and 30+ more text effects
+- **Transitions & wipes** - Zoom Through, Device Mockup Zoom, Image Expand to Fullscreen, Directional Wipe, Spatial Push, Frosted Glass Wipe, Grid Pixelate Wipe, Chromatic Aberration Wipe
+- **Environment & effects** - Mesh Gradient Background, Dynamic Grid, Spotlight Card, Confetti, Backdrop
+- **UI blocks** - Glass Code Block, Terminal Simulator, Code Accordion, Code Diff Wipe, Tool Menu Slide In, Animated Line & Bar Charts, Drag and Drop Flow
 - **AI scenes** — Claude Chat, ChatGPT, v0, Claude Code, OpenCode
 - **Social** — GitHub Stars, X Follow Card, X Followers Overview
 - **Compositions** — Hero Device Assemble, Ecosystem Constellation, Infinite Bento Pan, Browser Flow, AI Generation Canvas, Live Code Compilation, Terminal to Browser Deploy, Dashboard Populate, Pricing Tier Focus
