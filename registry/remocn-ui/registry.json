@@ -776,6 +776,86 @@
           "target": "components/remocn/settings-toggle-flow.tsx"
         }
       ]
+    },
+    {
+      "name": "message-bubble",
+      "type": "registry:component",
+      "title": "UI Message Bubble",
+      "description": "A chat message bubble whose hidden/visible state is a pure function of the timeline. The renderer is a pure function of a MessageBubbleStyle (opacity, translateY, scale); useMessageBubbleTransition eases the rise-in enter. The incoming/outgoing variant resolves bubble color and alignment from the theme, and an optional reaction badge pops in on its own channel.",
+      "dependencies": ["remotion"],
+      "registryDependencies": ["@remocn/remocn-ui"],
+      "files": [
+        {
+          "path": "message-bubble/index.tsx",
+          "type": "registry:component",
+          "target": "components/remocn/message-bubble.tsx"
+        },
+        {
+          "path": "message-bubble/use-message-bubble-transition.ts",
+          "type": "registry:component",
+          "target": "components/remocn/use-message-bubble-transition.ts"
+        }
+      ]
+    },
+    {
+      "name": "typing-indicator",
+      "type": "registry:component",
+      "title": "UI Typing Indicator",
+      "description": "A continuous typing animation: N dots bounce with a staggered sine wave. A motion atom — it reads the frame and takes color, size, gap, and speed props, defaulting to currentColor so it inherits the bubble it sits in.",
+      "dependencies": ["remotion"],
+      "registryDependencies": ["@remocn/remocn-ui"],
+      "files": [
+        {
+          "path": "typing-indicator/index.tsx",
+          "type": "registry:component",
+          "target": "components/remocn/typing-indicator.tsx"
+        }
+      ]
+    },
+    {
+      "name": "chat-flow",
+      "type": "registry:component",
+      "title": "UI Chat Flow",
+      "description": "A messaging composition: an outgoing message types into the composer, the send button presses, and the bubble rises in; the other side shows a typing indicator that swaps into the reply, and reactions pop in. A pure orchestrator — every channel comes from a composed primitive's hook (Input, MessageBubble, TypingIndicator).",
+      "dependencies": ["remotion"],
+      "registryDependencies": ["@remocn/remocn-ui", "@remocn/caret", "@remocn/message-bubble", "@remocn/typing-indicator"],
+      "files": [
+        {
+          "path": "chat-flow/index.tsx",
+          "type": "registry:component",
+          "target": "components/remocn/chat-flow.tsx"
+        }
+      ]
+    },
+    {
+      "name": "telegram-chat-flow",
+      "type": "registry:component",
+      "title": "UI Telegram Chat Flow",
+      "description": "A Telegram-styled messaging composition: tailed bubbles (white incoming, blue outgoing) with in-bubble timestamps and delivery checks, a header that flips to 'typing…' while the other side replies, reaction chips, and a Telegram composer that types the outgoing message before sending. Self-contained — it owns its timeline and only composes the caret primitive.",
+      "dependencies": ["remotion"],
+      "registryDependencies": ["@remocn/remocn-ui", "@remocn/caret"],
+      "files": [
+        {
+          "path": "telegram-chat-flow/index.tsx",
+          "type": "registry:component",
+          "target": "components/remocn/telegram-chat-flow.tsx"
+        }
+      ]
+    },
+    {
+      "name": "imessage-chat-flow",
+      "type": "registry:component",
+      "title": "UI iMessage Chat Flow",
+      "description": "An iMessage-styled messaging composition: gray incoming and blue outgoing bubbles with tails, an in-thread typing bubble with dots, a Delivered label, and tapback-style reaction badges. The composer types the outgoing message before sending. Chrome icons come from lucide-react; self-contained otherwise, composing the caret and typing-indicator primitives.",
+      "dependencies": ["remotion", "lucide-react"],
+      "registryDependencies": ["@remocn/remocn-ui", "@remocn/caret", "@remocn/typing-indicator"],
+      "files": [
+        {
+          "path": "imessage-chat-flow/index.tsx",
+          "type": "registry:component",
+          "target": "components/remocn/imessage-chat-flow.tsx"
+        }
+      ]
     }
   ]
 }
