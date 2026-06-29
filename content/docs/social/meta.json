@@ -4,6 +4,7 @@
   "pages": [
     "index",
     "github-stars",
+    "github-sponsors",
     "x-follow-card",
     "x-followers-overview",
     "logo-enter"

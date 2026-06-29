@@ -67,6 +67,8 @@ import { EcosystemConstellation } from "@/registry/remocn/ecosystem-constellatio
 import { ecosystemConstellationConfig } from "@/registry/remocn/ecosystem-constellation/config";
 import { FrostedGlassWipe } from "@/registry/remocn/frosted-glass-wipe";
 import { frostedGlassWipeConfig } from "@/registry/remocn/frosted-glass-wipe/config";
+import { GitHubSponsors } from "@/registry/remocn/github-sponsors";
+import { githubSponsorsConfig } from "@/registry/remocn/github-sponsors/config";
 import { GitHubStars } from "@/registry/remocn/github-stars";
 import { githubStarsConfig } from "@/registry/remocn/github-stars/config";
 import { LogoEnter } from "@/registry/remocn/logo-enter";
@@ -404,6 +406,10 @@ const registry: Record<string, RegistryEntry> = {
     Component: ImageExpandToFullscreen,
     config: imageExpandToFullscreenConfig,
   },
+  "github-sponsors": {
+    Component: GitHubSponsors,
+    config: githubSponsorsConfig,
+  },
   "github-stars": { Component: GitHubStars, config: githubStarsConfig },
   "logo-enter": { Component: LogoEnter, config: logoEnterConfig },
   "number-wheel": { Component: NumberWheel, config: numberWheelConfig },
@@ -522,6 +528,21 @@ if (backdrop) {
 const githubStars = registry["github-stars"];
 if (githubStars) {
   githubStars.config.controls.speed = {
+    type: "number",
+    default: 1,
+    min: 1,
+    max: 4,
+    step: 0.25,
+    label: "Speed",
+  };
+}
+
+// github-sponsors plays its heart draw, avatar blur-stagger, and headline/CTA
+// off the shared progress timeline; a speed < 1 would stall the driver before
+// the lockup completes, so cap min:1 like github-stars.
+const githubSponsors = registry["github-sponsors"];
+if (githubSponsors) {
+  githubSponsors.config.controls.speed = {
     type: "number",
     default: 1,
     min: 1,

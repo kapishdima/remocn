@@ -1,0 +1,133 @@
+---
+title: GitHub Sponsors
+description: Animated GitHub Sponsors lockup — a self-drawing heart that docks to a header, every sponsor avatar blur-staggering into a grid, then a thank-you headline and a CTA
+---
+
+<ComponentPreview name="github-sponsors" />
+
+## Installation
+
+<InstallBlock name="github-sponsors" />
+
+## Usage
+
+Standalone in a Remotion `<Composition>` — renders immediately from built-in sample sponsors so the video works right after install.
+
+```tsx
+// src/Root.tsx
+import { Composition } from "remotion";
+import { GitHubSponsors } from "@/components/remocn/github-sponsors";
+
+const GitHubSponsorsScene = () => (
+  <GitHubSponsors
+    account="remotion-dev"
+    accentColor="#db61a2"
+    speed={1}
+    theme="light"
+  />
+);
+
+export const RemotionRoot = () => (
+  <Composition
+    id="GitHubSponsors"
+    component={GitHubSponsorsScene}
+    durationInFrames={270}
+    fps={30}
+    width={1280}
+    height={720}
+  />
+);
+```
+
+### With live data
+
+Pass a `sponsors` array of `{ login, avatarUrl }` to replace the built-in sample. Every sponsor in the array is shown — the grid sizes itself to the count, and the "Powered by N sponsors" line uses the array length.
+
+```tsx
+// src/Root.tsx
+import { Composition } from "remotion";
+import { GitHubSponsors } from "@/components/remocn/github-sponsors";
+
+const sponsors = [
+  {
+    login: "octocat",
+    avatarUrl: "https://avatars.githubusercontent.com/u/583231",
+  },
+  // …
+];
+
+const GitHubSponsorsScene = () => (
+  <GitHubSponsors
+    account="remotion-dev"
+    sponsors={sponsors}
+    accentColor="#db61a2"
+    speed={1}
+    theme="light"
+  />
+);
+
+export const RemotionRoot = () => (
+  <Composition
+    id="GitHubSponsors"
+    component={GitHubSponsorsScene}
+    durationInFrames={270}
+    fps={30}
+    width={1280}
+    height={720}
+  />
+);
+```
+
+## Props
+
+<PropsTable
+  rows={[
+    {
+      name: "account",
+      type: "string",
+      default: "\"remotion-dev\"",
+      description: "GitHub account shown in the lockup (github.com/sponsors/account)",
+    },
+    {
+      name: "sponsors",
+      type: "Sponsor[]",
+      default: "SAMPLE_SPONSORS",
+      description: "Every entry is shown — avatars blur-stagger into a grid that sizes to the array. Falls back to built-in sample data when omitted.",
+    },
+    {
+      name: "accentColor",
+      type: "string",
+      default: "\"#db61a2\"",
+      description: "Accent for the heart and the CTA pill (GitHub Sponsors pink)",
+    },
+    {
+      name: "speed",
+      type: "number",
+      default: "1",
+      description: "Animation speed multiplier (minimum 1; the headline and CTA must land before the final frame)",
+    },
+    {
+      name: "theme",
+      type: "\"light\" | \"dark\"",
+      default: "\"light\"",
+      description: "Color theme for background and text",
+    },
+  ]}
+/>
+
+### Sponsor shape
+
+<PropsTable
+  rows={[
+    {
+      name: "login",
+      type: "string",
+      description: "GitHub username (used for the avatar fallback initial)",
+    },
+    {
+      name: "avatarUrl",
+      type: "string",
+      description: "Full URL to the avatar image (must be CORS-accessible for MP4 export)",
+    },
+  ]}
+/>
