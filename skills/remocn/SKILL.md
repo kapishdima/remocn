@@ -51,8 +51,11 @@ remocn has two kinds of components — they have **different APIs**:
 
 ## Component categories
 
-Pick by what you're building. The **full catalog with props, defaults, and dependencies** is
-`references/components.md` — read it before installing.
+Pick by what you're building. The catalog is split one file per component under
+`references/components/`. **Start at `references/components/index.md`** — a router table grouped by
+these categories with a `Use for` / `Avoid for` signal per component. Scan it, pick candidates, then
+open only the `references/components/<name>.md` files you need (full props, example, all use / don't-use
+notes). Don't read every file.
 
 | Category | Tier | Use for |
 |---|---|---|
@@ -61,7 +64,6 @@ Pick by what you're building. The **full catalog with props, defaults, and depen
 | **Transitions & Wipes** | `remocn` | Swap between two scenes (`directional-wipe`, `frosted-glass-wipe`, `spatial-push`, `zoom-through-transition`…) |
 | **UI Blocks** | `remocn` | Interface sims for product demos (`terminal-simulator`, `glass-code-block`, `animated-bar-chart`, `progress-steps`…) |
 | **AI & Social Cards** | `remocn` | Brand/product card scenes (`chat-gpt`, `claude-code`, `v0`, `github-stars`, `x-follow-card`…) |
-| **Compositions** | `remocn` | Ready multi-scene sequences (`dashboard-populate`, `terminal-to-browser-deploy`, `hero-device-assemble`…) |
 | **UI Primitives** | `remocn-ui` | shadcn-style primitives for video (`button`, `dialog`, `select`, `command-menu`, `tooltip`…) |
 
 ## Component patterns
@@ -115,8 +117,9 @@ import { Sequence, Series } from "remotion";
 ### Canvas & timing
 
 - **Canvas standard:** `1280×720 @ 30fps`. Components are laid out for it.
-- **Budget each Sequence around the component's natural length** — `components.md` lists it as
-  `*Nf @ 30fps*` per component. Under-budgeting clips the animation; over-budgeting leaves dead air.
+- **Budget each Sequence around the component's natural length** — the `Length` column in
+  `components/index.md` (and each file's `Natural length`). Under-budgeting clips the animation;
+  over-budgeting leaves dead air.
 - **Tone matching:** each catalog entry carries a `vibe` tag (`tech`/`premium`/`data`/`clean`/
   `playful`/`social`) — pick components whose vibe fits the brand.
 - **Palette & fonts:** stay within the library's tokens (`references/design.md` → tokens) so your
@@ -160,14 +163,14 @@ Typical product demo:
 2. **Title reveal**: `blur-out-up`, `staggered-fade-up`, or `tracking-in`.
 3. **Show the product**: `browser-flow`, `terminal-simulator`, or `glass-code-block`.
 4. **Transition between scenes**: `frosted-glass-wipe`, `spatial-push`, or `directional-wipe`.
-5. **End with impact**: `confetti`, `pricing-tier-focus`, or a full composition.
+5. **End with impact**: `confetti`, a social card, or a CTA beat.
 
-Or drop in a full composition (`dashboard-populate`, `terminal-to-browser-deploy`,
-`hero-device-assemble`) and customize its props.
+Pick each beat's component from `references/components/index.md` — match the `vibe` tag to the brand
+and budget each `<Sequence durationInFrames>` around the component's natural length.
 
 ## Reference
 
-- `references/components.md` — full catalog: props, defaults, dependencies, duration & vibe per component.
+- `references/components/index.md` — router table (all components, grouped by category, with `Use for` / `Avoid for`). Open `references/components/<name>.md` for one component's full props, example, and use / don't-use notes.
 - `references/design.md` — anti-slop design defaults (do/avoid) + design tokens (palette, fonts, canvas).
 - `references/motion-principles.md` — motion-design principles adapted to remocn + Remotion.
 - `references/anti-patterns.md` — common generation mistakes and their fixes.
