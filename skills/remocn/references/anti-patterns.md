@@ -4,8 +4,8 @@ Common mistakes when generating remocn videos. Each is something the model tends
 
 ## 1. Clipping a component by under-budgeting its Sequence
 
-Every component has a natural length (the `*Nf @ 30fps*` line in `components.md`). Budget the
-`Sequence` around it.
+Every component has a natural length (the `Length` column in `components/index.md`, and the
+`Natural length` meta line in each `components/<name>.md`). Budget the `Sequence` around it.
 
 ```tsx
 // ❌ blur-out-up needs ~90f, gets cut at 30
