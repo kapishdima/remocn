@@ -5,6 +5,8 @@ export type SponsorTier = "partner" | "builder" | "supporter";
 export type Sponsor = {
   id: string;
   name: string;
+  /** Optional visible label rendered under the logo. Skipped when absent. */
+  displayName?: string;
   logoUrl: string;
   website: string;
   tier: SponsorTier;
@@ -56,6 +58,16 @@ export const sponsors: Sponsor[] = [
     logoScale: 1.2,
     customStyles: "grayscale invert opacity-90 h-8",
     isPaste: true,
+  },
+  {
+    id: "ln",
+    name: "ln",
+    displayName: "LN",
+    logoUrl: "https://unavatar.io/x/ln_dev7",
+    website: "https://pro.lndevui.com/?utm_source=remocn&utm_medium=sponsor&utm_campaign=remocn_sponsors_page",
+    tier: "builder",
+    customStyles: "rounded-full",
+    isPaste: false,
   },
 ].filter(sponsor => !sponsor.isPaste);
 

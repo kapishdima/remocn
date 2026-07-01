@@ -1,8 +1,6 @@
 import type React from "react";
 import { type ComponentConfig, SHARED_CONTROLS } from "@/lib/customizer-config";
 
-import { AIGenerationCanvas } from "@/registry/remocn/ai-generation-canvas";
-import { aiGenerationCanvasConfig } from "@/registry/remocn/ai-generation-canvas/config";
 import { AnimatedBarChart } from "@/registry/remocn/animated-bar-chart";
 import { animatedBarChartConfig } from "@/registry/remocn/animated-bar-chart/config";
 import { AnimatedLineChart } from "@/registry/remocn/animated-line-chart";
@@ -41,26 +39,14 @@ import { KineticCenterBuild } from "@/registry/remocn/kinetic-center-build";
 import { kineticCenterBuildConfig } from "@/registry/remocn/kinetic-center-build/config";
 import { ShortSlideDown } from "@/registry/remocn/short-slide-down";
 import { shortSlideDownConfig } from "@/registry/remocn/short-slide-down/config";
-import { BrowserFlow } from "@/registry/remocn/browser-flow";
-import { browserFlowConfig } from "@/registry/remocn/browser-flow/config";
 import { ChatToPreviewLayout } from "@/registry/remocn/chat-to-preview-layout";
 import { chatToPreviewLayoutConfig } from "@/registry/remocn/chat-to-preview-layout/config";
 import { ChromaticAberrationWipe } from "@/registry/remocn/chromatic-aberration-wipe";
 import { chromaticAberrationWipeConfig } from "@/registry/remocn/chromatic-aberration-wipe/config";
-import { CodeAccordion } from "@/registry/remocn/code-accordion";
-import { codeAccordionConfig } from "@/registry/remocn/code-accordion/config";
-import { CodeDiffWipe } from "@/registry/remocn/code-diff-wipe";
-import { codeDiffWipeConfig } from "@/registry/remocn/code-diff-wipe/config";
-import { DashboardPopulate } from "@/registry/remocn/dashboard-populate";
-import { dashboardPopulateConfig } from "@/registry/remocn/dashboard-populate/config";
 import { DataFlowPipes } from "@/registry/remocn/data-flow-pipes";
 import { dataFlowPipesConfig } from "@/registry/remocn/data-flow-pipes/config";
-import { DeviceMockupZoom } from "@/registry/remocn/device-mockup-zoom";
-import { deviceMockupZoomConfig } from "@/registry/remocn/device-mockup-zoom/config";
 import { DirectionalWipe } from "@/registry/remocn/directional-wipe";
 import { directionalWipeConfig } from "@/registry/remocn/directional-wipe/config";
-import { DragAndDropFlow } from "@/registry/remocn/drag-and-drop-flow";
-import { dragAndDropFlowConfig } from "@/registry/remocn/drag-and-drop-flow/config";
 import { DynamicGrid } from "@/registry/remocn/dynamic-grid";
 import { dynamicGridConfig } from "@/registry/remocn/dynamic-grid/config";
 import { EcosystemConstellation } from "@/registry/remocn/ecosystem-constellation";
@@ -79,18 +65,12 @@ import { GlassCodeWalk } from "@/registry/remocn/glass-code-walk";
 import { glassCodeWalkConfig } from "@/registry/remocn/glass-code-walk/config";
 import { GridPixelateWipe } from "@/registry/remocn/grid-pixelate-wipe";
 import { gridPixelateWipeConfig } from "@/registry/remocn/grid-pixelate-wipe/config";
-import { HeroDeviceAssemble } from "@/registry/remocn/hero-device-assemble";
-import { heroDeviceAssembleConfig } from "@/registry/remocn/hero-device-assemble/config";
-import { ImageExpandToFullscreen } from "@/registry/remocn/image-expand-to-fullscreen";
-import { imageExpandToFullscreenConfig } from "@/registry/remocn/image-expand-to-fullscreen/config";
 import { InfiniteBentoPan } from "@/registry/remocn/infinite-bento-pan";
 import { infiniteBentoPanConfig } from "@/registry/remocn/infinite-bento-pan/config";
 import { InfiniteMarquee } from "@/registry/remocn/infinite-marquee";
 import { infiniteMarqueeConfig } from "@/registry/remocn/infinite-marquee/config";
 import { InlineHighlight } from "@/registry/remocn/inline-highlight";
 import { inlineHighlightConfig } from "@/registry/remocn/inline-highlight/config";
-import { LandingCodeShowcase } from "@/registry/remocn/landing-code-showcase";
-import { landingCodeShowcaseConfig } from "@/registry/remocn/landing-code-showcase/config";
 import { LiveCodeCompilation } from "@/registry/remocn/live-code-compilation";
 import { liveCodeCompilationConfig } from "@/registry/remocn/live-code-compilation/config";
 import { MarkerHighlight } from "@/registry/remocn/marker-highlight";
@@ -105,8 +85,6 @@ import { NumberWheel } from "@/registry/remocn/number-wheel";
 import { numberWheelConfig } from "@/registry/remocn/number-wheel/config";
 import { PerspectiveMarquee } from "@/registry/remocn/perspective-marquee";
 import { perspectiveMarqueeConfig } from "@/registry/remocn/perspective-marquee/config";
-import { PricingTierFocus } from "@/registry/remocn/pricing-tier-focus";
-import { pricingTierFocusConfig } from "@/registry/remocn/pricing-tier-focus/config";
 import { ProgressSteps } from "@/registry/remocn/progress-steps";
 import { progressStepsConfig } from "@/registry/remocn/progress-steps/config";
 import { RGBGlitchText } from "@/registry/remocn/rgb-glitch-text";
@@ -131,10 +109,6 @@ import { TerminalCursorZoom } from "@/registry/remocn/terminal-cursor-zoom";
 import { terminalCursorZoomConfig } from "@/registry/remocn/terminal-cursor-zoom/config";
 import { TerminalSimulator } from "@/registry/remocn/terminal-simulator";
 import { terminalSimulatorConfig } from "@/registry/remocn/terminal-simulator/config";
-import { TerminalToBrowserDeploy } from "@/registry/remocn/terminal-to-browser-deploy";
-import { terminalToBrowserDeployConfig } from "@/registry/remocn/terminal-to-browser-deploy/config";
-import { ToolMenuSlideIn } from "@/registry/remocn/tool-menu-slide-in";
-import { toolMenuSlideInConfig } from "@/registry/remocn/tool-menu-slide-in/config";
 import { TrackingIn } from "@/registry/remocn/tracking-in";
 import { trackingInConfig } from "@/registry/remocn/tracking-in/config";
 import { Typewriter } from "@/registry/remocn/typewriter";
@@ -329,7 +303,6 @@ const registry: Record<string, RegistryEntry> = {
     Component: GlassCodeWalk,
     config: glassCodeWalkConfig,
   },
-  "code-accordion": { Component: CodeAccordion, config: codeAccordionConfig },
   "data-flow-pipes": { Component: DataFlowPipes, config: dataFlowPipesConfig },
   "mesh-gradient-bg": {
     Component: MeshGradientBg,
@@ -343,10 +316,6 @@ const registry: Record<string, RegistryEntry> = {
   "directional-wipe": {
     Component: DirectionalWipe,
     config: directionalWipeConfig,
-  },
-  "device-mockup-zoom": {
-    Component: DeviceMockupZoom,
-    config: deviceMockupZoomConfig,
   },
   "zoom-through-transition": {
     Component: ZoomThroughTransition,
@@ -372,11 +341,6 @@ const registry: Record<string, RegistryEntry> = {
     Component: TerminalCursorZoom,
     config: terminalCursorZoomConfig,
   },
-  "code-diff-wipe": { Component: CodeDiffWipe, config: codeDiffWipeConfig },
-  "drag-and-drop-flow": {
-    Component: DragAndDropFlow,
-    config: dragAndDropFlowConfig,
-  },
   "progress-steps": { Component: ProgressSteps, config: progressStepsConfig },
   "frosted-glass-wipe": {
     Component: FrostedGlassWipe,
@@ -391,50 +355,17 @@ const registry: Record<string, RegistryEntry> = {
     Component: ChromaticAberrationWipe,
     config: chromaticAberrationWipeConfig,
   },
-  "hero-device-assemble": {
-    Component: HeroDeviceAssemble,
-    config: heroDeviceAssembleConfig,
-  },
   "ecosystem-constellation": {
     Component: EcosystemConstellation,
     config: ecosystemConstellationConfig,
-  },
-  "ai-generation-canvas": {
-    Component: AIGenerationCanvas,
-    config: aiGenerationCanvasConfig,
   },
   "live-code-compilation": {
     Component: LiveCodeCompilation,
     config: liveCodeCompilationConfig,
   },
-  "landing-code-showcase": {
-    Component: LandingCodeShowcase,
-    config: landingCodeShowcaseConfig,
-  },
-  "dashboard-populate": {
-    Component: DashboardPopulate,
-    config: dashboardPopulateConfig,
-  },
-  "terminal-to-browser-deploy": {
-    Component: TerminalToBrowserDeploy,
-    config: terminalToBrowserDeployConfig,
-  },
-  "browser-flow": { Component: BrowserFlow, config: browserFlowConfig },
-  "pricing-tier-focus": {
-    Component: PricingTierFocus,
-    config: pricingTierFocusConfig,
-  },
   "infinite-bento-pan": {
     Component: InfiniteBentoPan,
     config: infiniteBentoPanConfig,
-  },
-  "tool-menu-slide-in": {
-    Component: ToolMenuSlideIn,
-    config: toolMenuSlideInConfig,
-  },
-  "image-expand-to-fullscreen": {
-    Component: ImageExpandToFullscreen,
-    config: imageExpandToFullscreenConfig,
   },
   "github-sponsors": {
     Component: GitHubSponsors,

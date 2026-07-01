@@ -66,11 +66,9 @@ Tier `remocn`. Swap between two scenes — wrap `from` / `to` as ReactNode plus 
 | Component | Use for | Avoid for | Length | Vibe | Deps |
 |---|---|---|---|---|---|
 | [`chromatic-aberration-wipe`](chromatic-aberration-wipe.md) | Cuts between scenes need to feel fast, kinetic, and slightly chaotic — tech product… | The video tone is calm, professional, or corporate — the RGB glitch reads as… | 90f | premium | — |
-| [`device-mockup-zoom`](device-mockup-zoom.md) | An app demo video needs the classic "zoom out to reveal the product in a device" moment | You are transitioning between two unrelated scenes — this is a reveal effect for a… | 120f | premium | — |
 | [`directional-wipe`](directional-wipe.md) | Scenes are spatially related and should feel like pages sliding — feature steps,… | You want a dramatic, high-energy cut — the slide is clean but understated; use… | 90f | premium | — |
 | [`frosted-glass-wipe`](frosted-glass-wipe.md) | The video tone is refined and editorial — the frosted pane reads as premium Apple-style… | The transition needs to be fast or punchy — `transitionDuration` of 30 frames is a… | 90f | premium | — |
 | [`grid-pixelate-wipe`](grid-pixelate-wipe.md) | The transition should feel designed and deliberate — the grid dissolve reads as an… | The scenes are spatially related and the transition should feel like physical movement… | 90f | premium | — |
-| [`image-expand-to-fullscreen`](image-expand-to-fullscreen.md) | You are demoing an image editing, content creation, or media app and want to show the… | You need a generic scene-to-scene swap — this component encodes a specific feed→editor… | 180f | premium | — |
 | [`spatial-push`](spatial-push.md) | The narrative moves deeper into a topic — "zooming in" on a feature, entering a… | You need a fast, energy-forward cut — the scale-based push reads as deliberate and… | 90f | premium | — |
 | [`zoom-through-transition`](zoom-through-transition.md) | The outgoing scene needs a dramatic, high-velocity exit that commands attention before… | You need a two-sided transition (swap `from` and `to` scenes in one component) —… | 60f | premium | — |
 
@@ -82,14 +80,10 @@ Tier `remocn`. Interface simulations for product demos.
 |---|---|---|---|---|---|
 | [`animated-bar-chart`](animated-bar-chart.md) | Showing comparative categorical metrics in a product demo — feature usage, plan… | The data represents change over time — continuous trends belong in… | 90f | data | — |
 | [`animated-line-chart`](animated-line-chart.md) | Showing growth or trend over time — revenue curve, DAU climb, error-rate drop | The data is categorical (not time-ordered) — use `animated-bar-chart` to compare… | 90f | data | — |
-| [`code-accordion`](code-accordion.md) | Demoing a refactor or AI edit where boilerplate collapses to focus on the changed lines | You want to show a before/after diff between two versions of a file — use… | 150f | tech | — |
-| [`code-diff-wipe`](code-diff-wipe.md) | Showing an AI-assisted code transformation — old implementation wipes away to reveal… | You want to collapse/fold part of a file to focus attention — use `code-accordion`… | 120f | tech | — |
 | [`data-flow-pipes`](data-flow-pipes.md) | Visualizing a microservices or event-driven architecture where data moves between… | The workflow is sequential with discrete pass/fail steps — use `progress-steps`… | 180f | tech | — |
-| [`drag-and-drop-flow`](drag-and-drop-flow.md) | Demoing a file upload or import feature in a product walkthrough scene | The interaction you're demoing involves multiple tools or a palette — use… | 150f | tech | — |
 | [`glass-code-block`](glass-code-block.md) | A landing or hero scene needs an animated code backdrop that reads as "premium dev… | You need to animate a collapse of specific lines to focus attention — use… | 180f | tech | — |
 | [`progress-steps`](progress-steps.md) | Showing a CI/CD pipeline, onboarding checklist, or multi-phase workflow completing step… | The data is quantitative and you need to show magnitudes — use `animated-bar-chart` or… | 150f | data | — |
 | [`terminal-simulator`](terminal-simulator.md) | Demoing a CLI tool install sequence (`npm install`, `npx shadcn add`, build output) | You only need to type a single short string — use `typewriter` instead, which is… | 240f | tech | — |
-| [`tool-menu-slide-in`](tool-menu-slide-in.md) | Demoing an AI-powered editor or design tool where a contextual action bar appears after… | The interaction is a file being dropped into a zone — use `drag-and-drop-flow` instead | 180f | tech | — |
 
 ## AI & Social Cards
 

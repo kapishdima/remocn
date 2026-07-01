@@ -41,5 +41,5 @@ Lands at `components/remocn/data-flow-pipes.tsx`.
 ## Don't use when
 
 - The workflow is sequential with discrete pass/fail steps — use `progress-steps` instead, which shows status clearly.
-- You only have two nodes; a single pipe with a pulse looks sparse — use `drag-and-drop-flow` or an animated arrow instead.
+- You only have two nodes; a single pipe with a pulse looks sparse — use an animated arrow instead.
 - The audience needs to read specific data values — pipes convey motion/topology, not data content; use `animated-line-chart` or `animated-bar-chart` for values.

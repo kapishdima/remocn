@@ -3,14 +3,8 @@
   "collapsible": false,
   "pages": [
     "index",
-    "hero-device-assemble",
     "ecosystem-constellation",
     "infinite-bento-pan",
-    "browser-flow",
-    "ai-generation-canvas",
-    "live-code-compilation",
-    "terminal-to-browser-deploy",
-    "dashboard-populate",
-    "pricing-tier-focus"
+    "live-code-compilation"
   ]
 }

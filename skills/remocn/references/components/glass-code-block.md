@@ -40,6 +40,4 @@ Lands at `components/remocn/glass-code-block.tsx`.
 
 ## Don't use when
 
-- You need to animate a collapse of specific lines to focus attention — use `code-accordion` instead.
-- You're showing a before/after transformation — use `code-diff-wipe` instead.
 - The scene requires the code to be visibly typed out character by character — use `terminal-simulator` or `typewriter` instead.

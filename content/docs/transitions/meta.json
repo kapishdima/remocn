@@ -4,8 +4,6 @@
   "pages": [
     "index",
     "zoom-through-transition",
-    "device-mockup-zoom",
-    "image-expand-to-fullscreen",
     "directional-wipe",
     "spatial-push",
     "frosted-glass-wipe",

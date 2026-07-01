@@ -7,11 +7,7 @@
     "glass-code-walk",
     "terminal-simulator",
     "terminal-cursor-zoom",
-    "code-accordion",
-    "code-diff-wipe",
-    "tool-menu-slide-in",
     "animated-line-chart",
-    "animated-bar-chart",
-    "drag-and-drop-flow"
+    "animated-bar-chart"
   ]
 }

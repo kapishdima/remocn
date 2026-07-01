@@ -32,8 +32,7 @@ A short wind-up before the action makes it feel intentional: a drawer dips befor
 
 - **Mechanic:** `spring()` with light overshoot, or a brief reverse `interpolate` (e.g. `−4px`)
   for 1–3 frames before the main move.
-- **remocn:** `spring-scale-in`, `tool-menu-slide-in` (palette crouches before it flies up),
-  `code-accordion`.
+- **remocn:** `spring-scale-in`.
 - **Do/Avoid:** keep the wind-up to 1–3 frames, ≤110% scale. ❌ No bouncy cartoon recoil.
 
 ## 3. Staging — `core`
@@ -42,7 +41,7 @@ Direct the eye: one clear idea per scene. Clear the stage before introducing the
 
 - **Mechanic:** `<Sequence>` / `<Series>` to isolate beats; stagger entrances so only one focal
   element moves at a time; dim/scale-down what's leaving.
-- **remocn:** `pricing-tier-focus` (focused tier rises, siblings dim), most Compositions.
+- **remocn:** most Compositions.
 - **Do/Avoid:** one focal action per beat. ❌ Don't enter five elements on the same frame.
 
 ## 4. Straight-Ahead vs Pose-to-Pose — `rarely-needed`
@@ -59,8 +58,7 @@ Pose-to-pose = define key frames, interpolate between. That's exactly how remocn
 Nothing stops at once; elements arrive staggered. Lighter things lead, heavier lag.
 
 - **Mechanic:** per-element delay offsets (`frame - index * stagger`) on the same animation.
-- **remocn:** `staggered-fade-up`, `tool-menu-slide-in` (icons pop after the panel),
-  `short-slide-right`.
+- **remocn:** `staggered-fade-up`, `short-slide-right`.
 - **Do/Avoid:** stagger 3–6 frames between siblings. ❌ Don't land a whole group on one frame
   (reads robotic) and don't over-stagger (feels sluggish).
 
@@ -117,7 +115,7 @@ Form, weight, and consistent perspective. For block composition this is mostly f
 components; it matters only if you build 3D-ish scenes.
 
 - **Mechanic:** consistent `perspective` / `transform-origin` across layered elements.
-- **remocn:** `spatial-push`, `perspective-marquee`, `device-mockup-zoom`.
+- **remocn:** `spatial-push`, `perspective-marquee`.
 - **Do/Avoid:** keep one perspective per scene when stacking 3D layers. ❌ Don't mix inconsistent
   vanishing points.
 

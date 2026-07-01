@@ -41,5 +41,4 @@ Lands at `components/remocn/terminal-simulator.tsx`.
 ## Don't use when
 
 - You only need to type a single short string — use `typewriter` instead, which is lighter and pairs with any layout.
-- The code should be displayed as a formatted, highlighted editor window — use `glass-code-block` or `code-accordion` instead.
-- The scene calls for a before/after code transformation — use `code-diff-wipe` instead.
+- The code should be displayed as a formatted, highlighted editor window — use `glass-code-block` instead.
