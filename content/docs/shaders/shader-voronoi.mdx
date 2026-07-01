@@ -1,0 +1,37 @@
+---
+title: Shader Voronoi
+description: Animated Voronoi cells shifting and re-tessellating
+---
+
+<ComponentPreview name="shader-voronoi" />
+
+## Installation
+
+<InstallBlock name="shader-voronoi" />
+
+## Usage
+
+```tsx
+// src/Root.tsx
+import { Composition } from "remotion";
+import { ShaderVoronoi } from "@/components/remocn/shader-voronoi";
+
+const ShaderVoronoiScene = () => (
+  <ShaderVoronoi speed={1} distortion={0.4} gap={0.04} />
+);
+
+export const RemotionRoot = () => (
+  <Composition
+    id="ShaderVoronoi"
+    component={ShaderVoronoiScene}
+    durationInFrames={150}
+    fps={30}
+    width={1280}
+    height={720}
+  />
+);
+```
+
+## Credits
+
+Shader by [paper-design/shaders](https://github.com/paper-design/shaders) (Apache-2.0).

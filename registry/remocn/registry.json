@@ -664,6 +664,22 @@
       ]
     },
     {
+      "name": "shader-voronoi",
+      "type": "registry:component",
+      "title": "Shader Voronoi",
+      "description": "Animated Voronoi cells shifting and re-tessellating.",
+      "dependencies": [
+        "@paper-design/shaders-react"
+      ],
+      "files": [
+        {
+          "path": "shader-voronoi/index.tsx",
+          "type": "registry:component",
+          "target": "components/remocn/shader-voronoi.tsx"
+        }
+      ]
+    },
+    {
       "name": "dynamic-grid",
       "type": "registry:component",
       "title": "Dynamic Grid",

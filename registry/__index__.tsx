@@ -95,6 +95,8 @@ import { ShaderPerlinNoise } from "@/registry/remocn/shader-perlin-noise";
 import { shaderPerlinNoiseConfig } from "@/registry/remocn/shader-perlin-noise/config";
 import { ShaderSimplexNoise } from "@/registry/remocn/shader-simplex-noise";
 import { shaderSimplexNoiseConfig } from "@/registry/remocn/shader-simplex-noise/config";
+import { ShaderVoronoi } from "@/registry/remocn/shader-voronoi";
+import { shaderVoronoiConfig } from "@/registry/remocn/shader-voronoi/config";
 import { ShaderSpiral } from "@/registry/remocn/shader-spiral";
 import { shaderSpiralConfig } from "@/registry/remocn/shader-spiral/config";
 import { ShaderSwirl } from "@/registry/remocn/shader-swirl";
@@ -373,6 +375,10 @@ const registry: Record<string, RegistryEntry> = {
   "shader-simplex-noise": {
     Component: ShaderSimplexNoise,
     config: shaderSimplexNoiseConfig,
+  },
+  "shader-voronoi": {
+    Component: ShaderVoronoi,
+    config: shaderVoronoiConfig,
   },
   "dynamic-grid": { Component: DynamicGrid, config: dynamicGridConfig },
   "simulated-cursor": {
