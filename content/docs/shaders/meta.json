@@ -8,6 +8,7 @@
     "shader-warp",
     "shader-swirl",
     "shader-water",
-    "shader-spiral"
+    "shader-spiral",
+    "shader-liquid-metal"
   ]
 }

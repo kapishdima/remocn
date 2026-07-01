@@ -22,7 +22,7 @@ export function ShaderWater({
   ...rest
 }: ShaderWaterProps) {
   const frame = useCurrentFrame();
-  const { fps } = useVideoConfig();
+  const { fps, width, height } = useVideoConfig();
 
   const [handle] = useState(() => delayRender("shader-water"));
   const gate = useCallback(
@@ -49,7 +49,9 @@ export function ShaderWater({
         highlights={highlights}
         waves={waves}
         caustic={caustic}
-        style={{ width: "100%", height: "100%" }}
+        fit="cover"
+        width={width}
+        height={height}
         {...rest}
       />
     </div>

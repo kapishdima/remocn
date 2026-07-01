@@ -26,7 +26,7 @@ export function ShaderMeshGradient({
   ...rest
 }: ShaderMeshGradientProps) {
   const frame = useCurrentFrame();
-  const { fps } = useVideoConfig();
+  const { fps, width, height } = useVideoConfig();
 
   const [handle] = useState(() => delayRender("shader-mesh-gradient"));
   const gate = useCallback(
@@ -51,7 +51,9 @@ export function ShaderMeshGradient({
         colors={colors}
         distortion={distortion}
         swirl={swirl}
-        style={{ width: "100%", height: "100%" }}
+        fit="cover"
+        width={width}
+        height={height}
         {...rest}
       />
     </div>

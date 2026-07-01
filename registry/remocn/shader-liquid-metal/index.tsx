@@ -1,6 +1,9 @@
 "use client";
 
-import { Swirl, type SwirlProps } from "@paper-design/shaders-react";
+import {
+  LiquidMetal,
+  type LiquidMetalProps,
+} from "@paper-design/shaders-react";
 import { useCallback, useState } from "react";
 import {
   continueRender,
@@ -9,24 +12,25 @@ import {
   useVideoConfig,
 } from "remotion";
 
-const NEUTRAL_COLORS = ["#52527a", "#3a3a5c", "#232338"];
+export interface ShaderLiquidMetalProps
+  extends Omit<LiquidMetalProps, "frame" | "ref"> {}
 
-export interface ShaderSwirlProps extends Omit<SwirlProps, "frame" | "ref"> {}
-
-export function ShaderSwirl({
+export function ShaderLiquidMetal({
   speed = 1,
-  colors = NEUTRAL_COLORS,
-  colorBack = "#12121a",
-  bandCount = 4,
-  twist = 0.1,
-  softness = 0.2,
+  colorBack = "#2a2a30",
+  colorTint = "#8a8a95",
+  distortion = 0.1,
+  repetition = 1.5,
+  contour = 0.4,
+  softness = 0.05,
+  shape = "none",
   className,
   ...rest
-}: ShaderSwirlProps) {
+}: ShaderLiquidMetalProps) {
   const frame = useCurrentFrame();
   const { fps, width, height } = useVideoConfig();
 
-  const [handle] = useState(() => delayRender("shader-swirl"));
+  const [handle] = useState(() => delayRender("shader-liquid-metal"));
   const gate = useCallback(
     (element: HTMLDivElement | null) => {
       if (!element) return;
@@ -43,14 +47,16 @@ export function ShaderSwirl({
       className={className}
       style={{ position: "absolute", inset: 0 }}
     >
-      <Swirl
+      <LiquidMetal
         speed={0}
         frame={(frame / fps) * speed * 1000}
-        colors={colors}
         colorBack={colorBack}
-        bandCount={bandCount}
-        twist={twist}
+        colorTint={colorTint}
+        distortion={distortion}
+        repetition={repetition}
+        contour={contour}
         softness={softness}
+        shape={shape}
         fit="cover"
         width={width}
         height={height}

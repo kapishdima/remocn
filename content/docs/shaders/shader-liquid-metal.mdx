@@ -1,0 +1,37 @@
+---
+title: Shader Liquid Metal
+description: Molten metallic surface with flowing specular highlights
+---
+
+<ComponentPreview name="shader-liquid-metal" />
+
+## Installation
+
+<InstallBlock name="shader-liquid-metal" />
+
+## Usage
+
+```tsx
+// src/Root.tsx
+import { Composition } from "remotion";
+import { ShaderLiquidMetal } from "@/components/remocn/shader-liquid-metal";
+
+const ShaderLiquidMetalScene = () => (
+  <ShaderLiquidMetal speed={1} distortion={0.07} repetition={2} />
+);
+
+export const RemotionRoot = () => (
+  <Composition
+    id="ShaderLiquidMetal"
+    component={ShaderLiquidMetalScene}
+    durationInFrames={150}
+    fps={30}
+    width={1280}
+    height={720}
+  />
+);
+```
+
+## Credits
+
+Shader by [paper-design/shaders](https://github.com/paper-design/shaders) (Apache-2.0).

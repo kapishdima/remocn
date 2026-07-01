@@ -22,7 +22,7 @@ export function ShaderSpiral({
   ...rest
 }: ShaderSpiralProps) {
   const frame = useCurrentFrame();
-  const { fps } = useVideoConfig();
+  const { fps, width, height } = useVideoConfig();
 
   const [handle] = useState(() => delayRender("shader-spiral"));
   const gate = useCallback(
@@ -49,7 +49,9 @@ export function ShaderSpiral({
         density={density}
         strokeWidth={strokeWidth}
         softness={softness}
-        style={{ width: "100%", height: "100%" }}
+        fit="cover"
+        width={width}
+        height={height}
         {...rest}
       />
     </div>

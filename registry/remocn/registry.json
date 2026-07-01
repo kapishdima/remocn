@@ -584,6 +584,22 @@
       ]
     },
     {
+      "name": "shader-liquid-metal",
+      "type": "registry:component",
+      "title": "Shader Liquid Metal",
+      "description": "Molten metallic surface with flowing specular highlights.",
+      "dependencies": [
+        "@paper-design/shaders-react"
+      ],
+      "files": [
+        {
+          "path": "shader-liquid-metal/index.tsx",
+          "type": "registry:component",
+          "target": "components/remocn/shader-liquid-metal.tsx"
+        }
+      ]
+    },
+    {
       "name": "dynamic-grid",
       "type": "registry:component",
       "title": "Dynamic Grid",

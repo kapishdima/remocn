@@ -83,6 +83,8 @@ import { MeshGradientBg } from "@/registry/remocn/mesh-gradient-bg";
 import { meshGradientBgConfig } from "@/registry/remocn/mesh-gradient-bg/config";
 import { ShaderGrainGradient } from "@/registry/remocn/shader-grain-gradient";
 import { shaderGrainGradientConfig } from "@/registry/remocn/shader-grain-gradient/config";
+import { ShaderLiquidMetal } from "@/registry/remocn/shader-liquid-metal";
+import { shaderLiquidMetalConfig } from "@/registry/remocn/shader-liquid-metal/config";
 import { ShaderMeshGradient } from "@/registry/remocn/shader-mesh-gradient";
 import { shaderMeshGradientConfig } from "@/registry/remocn/shader-mesh-gradient/config";
 import { ShaderSpiral } from "@/registry/remocn/shader-spiral";
@@ -343,6 +345,10 @@ const registry: Record<string, RegistryEntry> = {
   "shader-spiral": {
     Component: ShaderSpiral,
     config: shaderSpiralConfig,
+  },
+  "shader-liquid-metal": {
+    Component: ShaderLiquidMetal,
+    config: shaderLiquidMetalConfig,
   },
   "dynamic-grid": { Component: DynamicGrid, config: dynamicGridConfig },
   "simulated-cursor": {

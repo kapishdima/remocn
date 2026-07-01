@@ -24,7 +24,7 @@ export function ShaderWarp({
   ...rest
 }: ShaderWarpProps) {
   const frame = useCurrentFrame();
-  const { fps } = useVideoConfig();
+  const { fps, width, height } = useVideoConfig();
 
   const [handle] = useState(() => delayRender("shader-warp"));
   const gate = useCallback(
@@ -51,7 +51,9 @@ export function ShaderWarp({
         softness={softness}
         distortion={distortion}
         swirl={swirl}
-        style={{ width: "100%", height: "100%" }}
+        fit="cover"
+        width={width}
+        height={height}
         {...rest}
       />
     </div>

@@ -28,7 +28,7 @@ export function ShaderGrainGradient({
   ...rest
 }: ShaderGrainGradientProps) {
   const frame = useCurrentFrame();
-  const { fps } = useVideoConfig();
+  const { fps, width, height } = useVideoConfig();
 
   const [handle] = useState(() => delayRender("shader-grain-gradient"));
   const gate = useCallback(
@@ -55,7 +55,9 @@ export function ShaderGrainGradient({
         softness={softness}
         intensity={intensity}
         noise={noise}
-        style={{ width: "100%", height: "100%" }}
+        fit="cover"
+        width={width}
+        height={height}
         {...rest}
       />
     </div>
