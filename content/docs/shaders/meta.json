@@ -11,6 +11,7 @@
     "shader-spiral",
     "shader-liquid-metal",
     "shader-color-panels",
-    "shader-neuro-noise"
+    "shader-neuro-noise",
+    "shader-perlin-noise"
   ]
 }

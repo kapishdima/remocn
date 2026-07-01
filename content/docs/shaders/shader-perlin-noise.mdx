@@ -1,0 +1,37 @@
+---
+title: Shader Perlin Noise
+description: Classic Perlin noise clouds drifting across the frame
+---
+
+<ComponentPreview name="shader-perlin-noise" />
+
+## Installation
+
+<InstallBlock name="shader-perlin-noise" />
+
+## Usage
+
+```tsx
+// src/Root.tsx
+import { Composition } from "remotion";
+import { ShaderPerlinNoise } from "@/components/remocn/shader-perlin-noise";
+
+const ShaderPerlinNoiseScene = () => (
+  <ShaderPerlinNoise speed={1} proportion={0.35} softness={0.1} />
+);
+
+export const RemotionRoot = () => (
+  <Composition
+    id="ShaderPerlinNoise"
+    component={ShaderPerlinNoiseScene}
+    durationInFrames={150}
+    fps={30}
+    width={1280}
+    height={720}
+  />
+);
+```
+
+## Credits
+
+Shader by [paper-design/shaders](https://github.com/paper-design/shaders) (Apache-2.0).
