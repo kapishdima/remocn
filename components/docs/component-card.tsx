@@ -9,6 +9,7 @@ import { cn } from "@/lib/utils";
 import registry from "@/registry/__index__";
 import type { CardItem } from "./component-card-grid";
 import { useTheme } from "next-themes";
+import { useAutoplay } from "@/app/(home)/components/use-autoplay";
 
 function slugFromHref(href?: string) {
   if (!href) return undefined;
@@ -47,29 +48,8 @@ function CardPreview({ item }: { item: CardItem }) {
 
   const slug = slugFromHref(item.href);
   const entry = slug ? registry[slug] : undefined;
-  const showPlayer =
-    item.status === "stable" && !!entry && inView && !reducedMotion;
 
-  // Same reliable-autoplay shim as PreviewStage: `<Player autoPlay>` mounts a
-  // tick before its imperative handle is ready and silently fails to start, so
-  // we drive play() via the ref once the player is shown, retrying once.
-  useEffect(() => {
-    if (!showPlayer) return;
-    let raf1 = 0;
-    let raf2 = 0;
-    raf1 = requestAnimationFrame(() => {
-      playerRef.current?.play();
-      raf2 = requestAnimationFrame(() => {
-        if (playerRef.current && !playerRef.current.isPlaying()) {
-          playerRef.current.play();
-        }
-      });
-    });
-    return () => {
-      if (raf1) cancelAnimationFrame(raf1);
-      if (raf2) cancelAnimationFrame(raf2);
-    };
-  }, [showPlayer]);
+  useAutoplay(playerRef);
 
   let content: ReactNode;
   if (item.status !== "stable" || !entry || !inView) {
