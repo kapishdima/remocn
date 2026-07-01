@@ -447,7 +447,7 @@ export function ElasticSlider({
       ref={wrapperRef}
       data-slot="elastic-slider"
       className={cn(
-        "[--elastic-slider-height:--spacing(9)] [--elastic-slider-radius:var(--radius-lg)]",
+        "[--elastic-slider-height:--spacing(9)] [--elastic-slider-radius:var(--radius-xl)]",
         "[--elastic-slider-bg:var(--muted)]",
         "[--elastic-slider-fill:var(--muted-foreground)]/10",
         "[--elastic-slider-fill-active:var(--muted-foreground)]/20",
@@ -473,8 +473,8 @@ export function ElasticSlider({
         aria-valuenow={value}
         aria-valuetext={displayValue}
         className={cn(
-          "group/elastic-slider absolute inset-0 cursor-pointer touch-none overflow-hidden rounded-(--elastic-slider-radius) bg-(--elastic-slider-bg) outline-none select-none",
-          "data-[focus-visible=true]:ring-2 data-[focus-visible=true]:ring-ring/50 data-[focus-visible=true]:ring-offset-1 data-[focus-visible=true]:ring-offset-background",
+          "group/elastic-slider absolute inset-0 cursor-pointer touch-none overflow-hidden rounded-xl bg-(--elastic-slider-bg) outline-none select-none",
+          "data-[focus-visible=true]:ring-2 data-[focus-visible=true]:ring-ring/50 data-[focus-visible=true]:ring-offset-1 data-[focus-visible=true]:ring-offset-background bg-control",
         )}
         style={{ width: rubberWidth, x: rubberX }}
         onPointerDown={handlePointerDown}
