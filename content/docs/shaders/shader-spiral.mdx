@@ -1,0 +1,37 @@
+---
+title: Shader Spiral
+description: Rotating spiral arms radiating from the center
+---
+
+<ComponentPreview name="shader-spiral" />
+
+## Installation
+
+<InstallBlock name="shader-spiral" />
+
+## Usage
+
+```tsx
+// src/Root.tsx
+import { Composition } from "remotion";
+import { ShaderSpiral } from "@/components/remocn/shader-spiral";
+
+const ShaderSpiralScene = () => (
+  <ShaderSpiral speed={1} density={1} strokeWidth={0.5} />
+);
+
+export const RemotionRoot = () => (
+  <Composition
+    id="ShaderSpiral"
+    component={ShaderSpiralScene}
+    durationInFrames={150}
+    fps={30}
+    width={1280}
+    height={720}
+  />
+);
+```
+
+## Credits
+
+Shader by [paper-design/shaders](https://github.com/paper-design/shaders) (Apache-2.0).

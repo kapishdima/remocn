@@ -7,6 +7,7 @@
     "shader-grain-gradient",
     "shader-warp",
     "shader-swirl",
-    "shader-water"
+    "shader-water",
+    "shader-spiral"
   ]
 }

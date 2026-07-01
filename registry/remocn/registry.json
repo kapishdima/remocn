@@ -568,6 +568,22 @@
       ]
     },
     {
+      "name": "shader-spiral",
+      "type": "registry:component",
+      "title": "Shader Spiral",
+      "description": "Rotating spiral arms radiating from the center.",
+      "dependencies": [
+        "@paper-design/shaders-react"
+      ],
+      "files": [
+        {
+          "path": "shader-spiral/index.tsx",
+          "type": "registry:component",
+          "target": "components/remocn/shader-spiral.tsx"
+        }
+      ]
+    },
+    {
       "name": "dynamic-grid",
       "type": "registry:component",
       "title": "Dynamic Grid",
