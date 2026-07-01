@@ -11,7 +11,7 @@ export default async function Layout({ children }: { children: ReactNode }) {
   // `withNewBadges`), then split it into the Components / Primitives tab trees
   // (see `splitDocsTree`). Both run on the server; `DocsShell` picks the tree
   // matching the active tab by pathname so each tab owns its own sidebar.
-  const { components, primitives } = splitDocsTree(
+  const { components, primitives, shaders } = splitDocsTree(
     withNewBadges(source.pageTree),
   );
 
@@ -23,7 +23,11 @@ export default async function Layout({ children }: { children: ReactNode }) {
           over the sidebar, tabs starting at the article column's left edge. */}
       <DocsHeader />
       <DocsTabsBar />
-      <DocsShell componentsTree={components} primitivesTree={primitives}>
+      <DocsShell
+        componentsTree={components}
+        primitivesTree={primitives}
+        shadersTree={shaders}
+      >
         {children}
       </DocsShell>
     </>

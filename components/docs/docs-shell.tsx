@@ -34,17 +34,22 @@ import { baseOptions } from "@/lib/layout.shared";
 export function DocsShell({
   componentsTree,
   primitivesTree,
+  shadersTree,
   children,
 }: {
   componentsTree: Root;
   primitivesTree: Root;
+  shadersTree: Root;
   children: ReactNode;
 }) {
   const pathname = usePathname();
+  const activeTab = getActiveDocsTab(pathname);
   const tree =
-    getActiveDocsTab(pathname) === "primitives"
+    activeTab === "primitives"
       ? primitivesTree
-      : componentsTree;
+      : activeTab === "shaders"
+        ? shadersTree
+        : componentsTree;
 
   return (
     <DocsLayout

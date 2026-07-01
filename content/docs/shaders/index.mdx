@@ -1,0 +1,21 @@
+---
+title: Shaders
+description: WebGL shader backdrops for Remotion, frozen to the current frame for deterministic renders
+---
+
+GPU shader backgrounds wrapped for Remotion. Each one is driven per-frame, so renders stay deterministic across every pass. Colors and motion are tunable, and every raw shader parameter stays available for full control.
+
+Powered by [paper-design/shaders](https://github.com/paper-design/shaders) (Apache-2.0).
+
+## Gradients
+
+<ComponentCardGrid
+  items={[
+    {
+      name: "ShaderMeshGradient",
+      description: "WebGL mesh gradient backdrop with drifting color blobs, driven per-frame",
+      status: "stable",
+      href: "/docs/shaders/shader-mesh-gradient",
+    },
+  ]}
+/>
