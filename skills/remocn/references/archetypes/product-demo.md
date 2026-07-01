@@ -114,8 +114,3 @@ surface, add a `TerminalSimulator` / chat sim / new `ui-frame` sequence before t
 Before delivering, run the good/slop checklist in `../anatomy.md` §3: one accent, sentence-case kinetic
 type, real content (no `Scene A` lorem), no glow halos, no feature-list enumeration, no `mesh-gradient-bg`,
 legible text, story not catalog. Budget frames so nothing clips and there's no dead air.
-
-## Installable worked example
-
-`a1-product-demo` in this registry is a full standard-length (~45s, 1356f) product demo built on this
-skeleton — install and read it as the long worked reference: `shadcn add @remocn/a1-product-demo`.

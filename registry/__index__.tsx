@@ -71,8 +71,6 @@ import { GitHubSponsors } from "@/registry/remocn/github-sponsors";
 import { githubSponsorsConfig } from "@/registry/remocn/github-sponsors/config";
 import { GitHubStars } from "@/registry/remocn/github-stars";
 import { githubStarsConfig } from "@/registry/remocn/github-stars/config";
-import { A1ProductDemo } from "@/registry/remocn/a1-product-demo";
-import { a1ProductDemoConfig } from "@/registry/remocn/a1-product-demo/config";
 import { LogoEnter } from "@/registry/remocn/logo-enter";
 import { logoEnterConfig } from "@/registry/remocn/logo-enter/config";
 import { GlassCodeBlock } from "@/registry/remocn/glass-code-block";
@@ -239,22 +237,52 @@ export interface RegistryEntry {
 
 const registry: Record<string, RegistryEntry> = {
   "soft-blur-in": { Component: SoftBlurIn, config: softBlurInConfig },
-  "per-character-rise": { Component: PerCharacterRise, config: perCharacterRiseConfig },
-  "bottom-up-letters": { Component: BottomUpLetters, config: bottomUpLettersConfig },
-  "top-down-letters": { Component: TopDownLetters, config: topDownLettersConfig },
+  "per-character-rise": {
+    Component: PerCharacterRise,
+    config: perCharacterRiseConfig,
+  },
+  "bottom-up-letters": {
+    Component: BottomUpLetters,
+    config: bottomUpLettersConfig,
+  },
+  "top-down-letters": {
+    Component: TopDownLetters,
+    config: topDownLettersConfig,
+  },
   "spring-scale-in": { Component: SpringScaleIn, config: springScaleInConfig },
-  "micro-scale-fade": { Component: MicroScaleFade, config: microScaleFadeConfig },
+  "micro-scale-fade": {
+    Component: MicroScaleFade,
+    config: microScaleFadeConfig,
+  },
   "scale-down-fade": { Component: ScaleDownFade, config: scaleDownFadeConfig },
   "blur-out-up": { Component: BlurOutUp, config: blurOutUpConfig },
-  "focus-blur-resolve": { Component: FocusBlurResolve, config: focusBlurResolveConfig },
-  "line-by-line-slide": { Component: LineByLineSlide, config: lineByLineSlideConfig },
-  "per-word-crossfade": { Component: PerWordCrossfade, config: perWordCrossfadeConfig },
+  "focus-blur-resolve": {
+    Component: FocusBlurResolve,
+    config: focusBlurResolveConfig,
+  },
+  "line-by-line-slide": {
+    Component: LineByLineSlide,
+    config: lineByLineSlideConfig,
+  },
+  "per-word-crossfade": {
+    Component: PerWordCrossfade,
+    config: perWordCrossfadeConfig,
+  },
   "fade-through": { Component: FadeThrough, config: fadeThroughConfig },
   "shared-axis-y": { Component: SharedAxisY, config: sharedAxisYConfig },
   "shared-axis-z": { Component: SharedAxisZ, config: sharedAxisZConfig },
-  "short-slide-right": { Component: ShortSlideRight, config: shortSlideRightConfig },
-  "kinetic-center-build": { Component: KineticCenterBuild, config: kineticCenterBuildConfig },
-  "short-slide-down": { Component: ShortSlideDown, config: shortSlideDownConfig },
+  "short-slide-right": {
+    Component: ShortSlideRight,
+    config: shortSlideRightConfig,
+  },
+  "kinetic-center-build": {
+    Component: KineticCenterBuild,
+    config: kineticCenterBuildConfig,
+  },
+  "short-slide-down": {
+    Component: ShortSlideDown,
+    config: shortSlideDownConfig,
+  },
   typewriter: { Component: Typewriter, config: typewriterConfig },
   "inline-highlight": {
     Component: InlineHighlight,
@@ -413,7 +441,6 @@ const registry: Record<string, RegistryEntry> = {
     config: githubSponsorsConfig,
   },
   "github-stars": { Component: GitHubStars, config: githubStarsConfig },
-  "a1-product-demo": { Component: A1ProductDemo, config: a1ProductDemoConfig },
   "logo-enter": { Component: LogoEnter, config: logoEnterConfig },
   "number-wheel": { Component: NumberWheel, config: numberWheelConfig },
   "rolling-number": { Component: RollingNumber, config: rollingNumberConfig },
@@ -422,42 +449,42 @@ const registry: Record<string, RegistryEntry> = {
     Component: XFollowersOverview,
     config: xFollowersOverviewConfig,
   },
-  "confetti": { Component: Confetti, config: confettiConfig },
-  "backdrop": { Component: BackdropDemo, config: backdropConfig },
+  confetti: { Component: Confetti, config: confettiConfig },
+  backdrop: { Component: BackdropDemo, config: backdropConfig },
   "claude-chat": { Component: ClaudeChat, config: claudeChatConfig },
   "chat-gpt": { Component: ChatGpt, config: chatGptConfig },
-  "v0": { Component: V0, config: v0Config },
+  v0: { Component: V0, config: v0Config },
   "claude-code": { Component: ClaudeCode, config: claudeCodeConfig },
-  "opencode": { Component: OpenCode, config: opencodeConfig },
-  "button": { Component: Button, config: buttonConfig },
-  "accordion": { Component: Accordion, config: accordionConfig },
+  opencode: { Component: OpenCode, config: opencodeConfig },
+  button: { Component: Button, config: buttonConfig },
+  accordion: { Component: Accordion, config: accordionConfig },
   "alert-dialog": { Component: AlertDialog, config: alertDialogConfig },
-  "dialog": { Component: Dialog, config: dialogConfig },
-  "sheet": { Component: Sheet, config: sheetConfig },
-  "drawer": { Component: Drawer, config: drawerConfig },
-  "checkbox": { Component: Checkbox, config: checkboxConfig },
-  "input": { Component: Input, config: inputConfig },
+  dialog: { Component: Dialog, config: dialogConfig },
+  sheet: { Component: Sheet, config: sheetConfig },
+  drawer: { Component: Drawer, config: drawerConfig },
+  checkbox: { Component: Checkbox, config: checkboxConfig },
+  input: { Component: Input, config: inputConfig },
   // blur-in WRAPS a single child, so the customizer Component is the
   // preview-only BlurInPreview wrapper (it supplies a fixed sample card and
   // centers it on a stage); the shipped BlurIn is a pure child-wrapper.
   "blur-in": { Component: BlurInPreview, config: blurInConfig },
-  "radio": { Component: Radio, config: radioConfig },
-  "switch": { Component: Switch, config: switchConfig },
-  "select": { Component: Select, config: selectConfig },
+  radio: { Component: Radio, config: radioConfig },
+  switch: { Component: Switch, config: switchConfig },
+  select: { Component: Select, config: selectConfig },
   "select-item": { Component: SelectItem, config: selectItemConfig },
   "dropdown-menu": { Component: DropdownMenu, config: dropdownMenuConfig },
   "dropdown-menu-item": {
     Component: DropdownMenuItem,
     config: dropdownMenuItemConfig,
   },
-  "tabs": { Component: Tabs, config: tabsConfig },
+  tabs: { Component: Tabs, config: tabsConfig },
   // cursor's customizer Component is the preview-only CursorPreview wrapper (it
   // runs a fixed demo path through useCursorPath); the shipped Cursor is pure.
-  "cursor": { Component: CursorPreview, config: cursorConfig },
+  cursor: { Component: CursorPreview, config: cursorConfig },
   // toast's customizer Component is the preview-only ToastPreview wrapper (it
   // centers the toast on a theme-background stage); the shipped Toast is a
   // placement-agnostic card the caller positions.
-  "toast": { Component: ToastPreview, config: toastConfig },
+  toast: { Component: ToastPreview, config: toastConfig },
   "message-bubble": {
     Component: MessageBubblePreview,
     config: messageBubbleConfig,
@@ -475,10 +502,10 @@ const registry: Record<string, RegistryEntry> = {
   "command-menu": { Component: CommandMenu, config: commandMenuConfig },
   // tooltip's customizer Component is the preview-only TooltipPreview wrapper: a
   // bare bubble has no backdrop and would not center as the composition root.
-  "tooltip": { Component: TooltipPreview, config: tooltipConfig },
+  tooltip: { Component: TooltipPreview, config: tooltipConfig },
   // progress's customizer Component is the preview-only ProgressPreview wrapper:
   // a bare inline bar would sit top-left, so the wrapper centers it on a stage.
-  "progress": { Component: ProgressPreview, config: progressConfig },
+  progress: { Component: ProgressPreview, config: progressConfig },
   // skeleton-block is the shimmer motion atom; its preview centers the bare block
   // on a stage. skeleton is the state atom whose preview supplies demo content +
   // placeholder for the loading↔loaded crossfade.
@@ -486,16 +513,16 @@ const registry: Record<string, RegistryEntry> = {
     Component: SkeletonBlockPreview,
     config: skeletonBlockConfig,
   },
-  "skeleton": { Component: SkeletonPreview, config: skeletonConfig },
+  skeleton: { Component: SkeletonPreview, config: skeletonConfig },
   // slider's customizer Component is the preview-only SliderPreview wrapper: a
   // bare inline bar would sit top-left, so the wrapper centers it on a stage.
-  "slider": { Component: SliderPreview, config: sliderConfig },
+  slider: { Component: SliderPreview, config: sliderConfig },
   // combobox registers RAW (no preview wrapper): like select it paints its own
   // opaque inset:0 wrapper, so the customizer mounts it directly and it centers.
-  "combobox": { Component: Combobox, config: comboboxConfig },
+  combobox: { Component: Combobox, config: comboboxConfig },
   // popover's customizer Component is the preview-only PopoverPreview wrapper: a
   // bare card has no backdrop and would not center as the composition root.
-  "popover": { Component: PopoverPreview, config: popoverConfig },
+  popover: { Component: PopoverPreview, config: popoverConfig },
   // context-menu's customizer Component is the preview-only ContextMenuPreview
   // wrapper: a bare panel (transparent, caller-positioned) would sit top-left,
   // so the wrapper centers it on a stage.
@@ -505,12 +532,12 @@ const registry: Record<string, RegistryEntry> = {
   "toggle-group": { Component: ToggleGroup, config: toggleGroupConfig },
   // stepper's customizer Component is the preview-only StepperPreview wrapper: a
   // bare wide horizontal element would sit top-left, so the wrapper centers it.
-  "stepper": { Component: StepperPreview, config: stepperConfig },
+  stepper: { Component: StepperPreview, config: stepperConfig },
   // resizable registers RAW (no preview wrapper): its index.tsx already paints
   // an opaque inset:0 stage that centers the fixed-size bordered box, like tabs.
-  "resizable": { Component: Resizable, config: resizableConfig },
-  "spinner": { Component: Spinner, config: spinnerConfig },
-  "caret": { Component: CaretPreview, config: caretConfig },
+  resizable: { Component: Resizable, config: resizableConfig },
+  spinner: { Component: Spinner, config: spinnerConfig },
+  caret: { Component: CaretPreview, config: caretConfig },
 };
 
 // Append the shared controls (e.g. `speed`) to every component config so
@@ -657,18 +684,6 @@ if (claudeCode) {
 const opencode = registry["opencode"];
 if (opencode) {
   opencode.config.controls.speed = {
-    type: "number",
-    default: 1,
-    min: 1,
-    max: 4,
-    step: 0.25,
-    label: "Speed",
-  };
-}
-
-const a1ProductDemo = registry["a1-product-demo"];
-if (a1ProductDemo) {
-  a1ProductDemo.config.controls.speed = {
     type: "number",
     default: 1,
     min: 1,
