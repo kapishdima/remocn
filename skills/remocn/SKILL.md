@@ -61,6 +61,7 @@ notes). Don't read every file.
 |---|---|---|
 | **Text Animations** | `remocn` | Reveal/replace/emphasize text (`typewriter`, `blur-out-up`, `tracking-in`, `rolling-number`, `shimmer-sweep`…) |
 | **Backgrounds & Effects** | `remocn` | Animated foundations, cursors, one-shot effects (`mesh-gradient-bg`, `dynamic-grid`, `spotlight-card`, `confetti`, `backdrop`) |
+| **Shaders** | `remocn` | WebGL shader backdrops, frame-driven for deterministic renders (`shader-mesh-gradient`, `shader-warp`, `shader-voronoi`, `shader-god-rays`, `shader-metaballs`…) |
 | **Transitions & Wipes** | `remocn` | Swap between two scenes (`directional-wipe`, `frosted-glass-wipe`, `spatial-push`, `zoom-through-transition`…) |
 | **UI Blocks** | `remocn` | Interface sims for product demos (`terminal-simulator`, `glass-code-block`, `animated-bar-chart`, `progress-steps`…) |
 | **AI & Social Cards** | `remocn` | Brand/product card scenes (`chat-gpt`, `claude-code`, `v0`, `github-stars`, `x-follow-card`…) |

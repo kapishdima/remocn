@@ -37,6 +37,6 @@ Lands at `components/remocn/mesh-gradient-bg.tsx`.
 
 ## Don't use when
 
-- You want a quality, production-grade background — `mesh-gradient-bg` is considered low-quality in this library and should be avoided; use `dynamic-grid` for a structured dark background, `spotlight-card` for a dramatic lit-card feel, or a solid theme color via a `backdrop` fill.
+- You want a quality, production-grade gradient — `mesh-gradient-bg` is considered low-quality in this library and should be avoided; use `shader-mesh-gradient` (WebGL, frame-driven) as the direct replacement, `dynamic-grid` for a structured dark background, `spotlight-card` for a dramatic lit-card feel, or a solid theme color via a `backdrop` fill.
 - The design aesthetic is clean or minimal — blurred color blobs read as generic AI-generated output and undermine premium positioning.
 - Text legibility matters — drifting saturated blobs create unpredictable contrast behind foreground content; use a solid or grid background that keeps the text readable at every frame.

@@ -59,6 +59,31 @@ Tier `remocn`. Animated foundations, cursors, one-shot effects.
 | [`simulated-cursor`](simulated-cursor.md) | You are recording a screen demo and need a synthetic cursor that moves predictably over… | You need a real screen recording — `simulated-cursor` draws a synthetic cursor overlay,… | 150f | clean | — |
 | [`spotlight-card`](spotlight-card.md) | A hero or feature card needs a premium, editorial feel — the moving spotlight creates a… | The scene has a light or colorful background — `spotlight-card` defaults are… | 240f | premium | — |
 
+## Shaders
+
+Tier `remocn`. WebGL shader backdrops from `@paper-design/shaders`, wrapped for Remotion. Frozen to the current frame (`speed={0}` + `frame` from `useCurrentFrame()`) so renders stay deterministic; full-bleed; muted defaults; every raw paper prop forwarded via `...rest`. Deps: `@paper-design/shaders-react`.
+
+| Component | Use for | Avoid for | Length | Vibe | Deps |
+|---|---|---|---|---|---|
+| [`shader-mesh-gradient`](shader-mesh-gradient.md) | A quality, production-grade gradient backdrop with slow living color motion — the intended replacement for `mesh-gradient-bg` | You want structured, geometric background — use `dynamic-grid` | 150f | premium | `@paper-design/shaders-react` |
+| [`shader-grain-gradient`](shader-grain-gradient.md) | A gradient backdrop that needs analog film/print grain texture over the blend | You need crisp, clean color with no texture — use `shader-mesh-gradient` | 150f | premium | `@paper-design/shaders-react` |
+| [`shader-warp`](shader-warp.md) | A hero scene wants organic, liquid folds that feel alive but stay out of the way | You want tight, repeating structure — use `shader-swirl` or `shader-spiral` | 150f | premium | `@paper-design/shaders-react` |
+| [`shader-swirl`](shader-swirl.md) | A hypnotic radial background with clear concentric banded structure around a center | You want free-flowing liquid folds — use `shader-warp` | 150f | premium | `@paper-design/shaders-react` |
+| [`shader-water`](shader-water.md) | A calm, aquatic atmosphere with gentle refracted caustic highlights | The palette must be warm/vibrant — water reads cool by design | 150f | premium | `@paper-design/shaders-react` |
+| [`shader-spiral`](shader-spiral.md) | A hypnotic rotating radial background with visible arm structure pulling toward center | You want closed concentric rings — use `shader-swirl` | 150f | premium | `@paper-design/shaders-react` |
+| [`shader-liquid-metal`](shader-liquid-metal.md) | A premium/industrial/luxury scene wants a molten, reflective metal surface | You want color rather than tonal metal — use `shader-warp` or `shader-mesh-gradient` | 150f | premium | `@paper-design/shaders-react` |
+| [`shader-color-panels`](shader-color-panels.md) | An architectural, glassy backdrop of translucent panes sliding past each other | You want organic flowing motion — use `shader-warp` or `shader-metaballs` | 150f | premium | `@paper-design/shaders-react` |
+| [`shader-neuro-noise`](shader-neuro-noise.md) | An AI/ML/tech scene wants an organic neural-web texture that reads as intelligence | You want smooth cloud noise — use `shader-perlin-noise` or `shader-simplex-noise` | 150f | tech | `@paper-design/shaders-react` |
+| [`shader-perlin-noise`](shader-perlin-noise.md) | A soft, cloudy, organic backdrop that drifts slowly and stays calm | You want a smoother flowing field — use `shader-simplex-noise` | 150f | clean | `@paper-design/shaders-react` |
+| [`shader-simplex-noise`](shader-simplex-noise.md) | The smoothest noise backdrop — fewer directional artifacts than Perlin | You want cloudier, softer fog — use `shader-perlin-noise` | 150f | clean | `@paper-design/shaders-react` |
+| [`shader-voronoi`](shader-voronoi.md) | A cellular, crystalline backdrop that shifts and re-tessellates | You want soft, structureless fog — use `shader-perlin-noise` or `shader-simplex-noise` | 150f | tech | `@paper-design/shaders-react` |
+| [`shader-dot-orbit`](shader-dot-orbit.md) | A structured dot-grid backdrop with gentle orbital motion (network/system vibe) | You want a static dot grid — use a CSS grid or `dynamic-grid` | 150f | tech | `@paper-design/shaders-react` |
+| [`shader-dithering`](shader-dithering.md) | A retro/print 1-bit ordered-dither texture over a moving gradient | You want smooth, non-textured color — use `shader-mesh-gradient` | 150f | tech | `@paper-design/shaders-react` |
+| [`shader-god-rays`](shader-god-rays.md) | A hero/reveal scene wants cinematic volumetric light rays from a corner source | You want structured or cellular motion — use `dynamic-grid` or `shader-voronoi` | 150f | premium | `@paper-design/shaders-react` |
+| [`shader-smoke-ring`](shader-smoke-ring.md) | A single soft, centered smoke ring as a focal atmospheric element | You need a full-bleed edge-to-edge texture — use a noise or gradient shader | 150f | premium | `@paper-design/shaders-react` |
+| [`shader-metaballs`](shader-metaballs.md) | A playful/organic scene wants lava-lamp blobs merging and splitting | The brand is strictly serious/corporate — metaballs read playful | 150f | playful | `@paper-design/shaders-react` |
+| [`shader-pulsing-border`](shader-pulsing-border.md) | A pulsing lit frame around the scene edges that leaves the center clear for text | You want a full-field texture — the interior stays mostly `colorBack` | 150f | premium | `@paper-design/shaders-react` |
+
 ## Transitions & Wipes
 
 Tier `remocn`. Swap between two scenes — wrap `from` / `to` as ReactNode plus `transitionDuration`.
