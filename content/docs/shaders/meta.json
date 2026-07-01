@@ -16,6 +16,7 @@
     "shader-simplex-noise",
     "shader-voronoi",
     "shader-dot-orbit",
-    "shader-dithering"
+    "shader-dithering",
+    "shader-god-rays"
   ]
 }

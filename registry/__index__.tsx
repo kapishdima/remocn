@@ -89,6 +89,8 @@ import { ShaderDithering } from "@/registry/remocn/shader-dithering";
 import { shaderDitheringConfig } from "@/registry/remocn/shader-dithering/config";
 import { ShaderDotOrbit } from "@/registry/remocn/shader-dot-orbit";
 import { shaderDotOrbitConfig } from "@/registry/remocn/shader-dot-orbit/config";
+import { ShaderGodRays } from "@/registry/remocn/shader-god-rays";
+import { shaderGodRaysConfig } from "@/registry/remocn/shader-god-rays/config";
 import { ShaderLiquidMetal } from "@/registry/remocn/shader-liquid-metal";
 import { shaderLiquidMetalConfig } from "@/registry/remocn/shader-liquid-metal/config";
 import { ShaderMeshGradient } from "@/registry/remocn/shader-mesh-gradient";
@@ -391,6 +393,10 @@ const registry: Record<string, RegistryEntry> = {
   "shader-dithering": {
     Component: ShaderDithering,
     config: shaderDitheringConfig,
+  },
+  "shader-god-rays": {
+    Component: ShaderGodRays,
+    config: shaderGodRaysConfig,
   },
   "dynamic-grid": { Component: DynamicGrid, config: dynamicGridConfig },
   "simulated-cursor": {

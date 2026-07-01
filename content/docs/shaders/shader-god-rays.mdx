@@ -1,0 +1,37 @@
+---
+title: Shader God Rays
+description: Volumetric light rays radiating from an off-screen source
+---
+
+<ComponentPreview name="shader-god-rays" />
+
+## Installation
+
+<InstallBlock name="shader-god-rays" />
+
+## Usage
+
+```tsx
+// src/Root.tsx
+import { Composition } from "remotion";
+import { ShaderGodRays } from "@/components/remocn/shader-god-rays";
+
+const ShaderGodRaysScene = () => (
+  <ShaderGodRays speed={1} intensity={0.8} density={0.3} />
+);
+
+export const RemotionRoot = () => (
+  <Composition
+    id="ShaderGodRays"
+    component={ShaderGodRaysScene}
+    durationInFrames={150}
+    fps={30}
+    width={1280}
+    height={720}
+  />
+);
+```
+
+## Credits
+
+Shader by [paper-design/shaders](https://github.com/paper-design/shaders) (Apache-2.0).
