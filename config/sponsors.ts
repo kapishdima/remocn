@@ -66,7 +66,7 @@ export const sponsors: Sponsor[] = [
     logoUrl: "https://unavatar.io/x/ln_dev7",
     website: "https://pro.lndevui.com/?utm_source=remocn&utm_medium=sponsor&utm_campaign=remocn_sponsors_page",
     tier: "builder",
-    customStyles: "rounded-full",
+    customStyles: "rounded-full opacity-100 grayscale-0 dark:[filter:none]",
     isPaste: false,
   },
 ].filter(sponsor => !sponsor.isPaste);
