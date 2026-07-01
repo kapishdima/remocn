@@ -12,7 +12,7 @@ import { cn } from "@/lib/utils";
 
 /** Shared pill surface so every non-slider control matches the elastic slider. */
 const PILL =
-  "flex h-11 items-center gap-3 rounded-xl bg-muted px-3 text-sm transition-colors";
+  "flex h-11 items-center gap-3 rounded-xl bg-control px-3 text-sm transition-colors";
 
 /** Strip trailing zeros so the value reads like the reference (1, 0.8, 0.1). */
 function formatNumber(v: number) {
@@ -148,7 +148,7 @@ function Control({
           max={ctrl.max}
           step={ctrl.step}
           formatValue={formatNumber}
-          className="[--elastic-slider-height:--spacing(11)] [--elastic-slider-radius:0.75rem]"
+          className="[--elastic-slider-height:--spacing(11)] [--elastic-slider-radius:0.75rem] "
         />
       );
 
@@ -164,16 +164,18 @@ function Control({
 
     case "select":
       return (
-        <SelectPill id={id} ctrl={ctrl} value={value as string} onChange={onChange} />
+        <SelectPill
+          id={id}
+          ctrl={ctrl}
+          value={value as string}
+          onChange={onChange}
+        />
       );
 
     case "boolean":
       return (
         <div className={cn(PILL, "justify-between")}>
-          <Label
-            htmlFor={id}
-            className="font-medium text-muted-foreground"
-          >
+          <Label htmlFor={id} className="font-medium text-muted-foreground">
             {ctrl.label}
           </Label>
           <Switch
@@ -196,7 +198,7 @@ function Control({
             <span className="font-mono text-sm font-medium uppercase text-foreground">
               {value as string}
             </span>
-            <span className="relative inline-flex size-5 shrink-0 overflow-hidden rounded-md border border-border/60">
+            <span className="relative inline-flex size-5 shrink-0 overflow-hidden rounded-lg border border-border/60">
               <input
                 id={id}
                 type="color"
