@@ -89,6 +89,8 @@ import { ShaderLiquidMetal } from "@/registry/remocn/shader-liquid-metal";
 import { shaderLiquidMetalConfig } from "@/registry/remocn/shader-liquid-metal/config";
 import { ShaderMeshGradient } from "@/registry/remocn/shader-mesh-gradient";
 import { shaderMeshGradientConfig } from "@/registry/remocn/shader-mesh-gradient/config";
+import { ShaderNeuroNoise } from "@/registry/remocn/shader-neuro-noise";
+import { shaderNeuroNoiseConfig } from "@/registry/remocn/shader-neuro-noise/config";
 import { ShaderSpiral } from "@/registry/remocn/shader-spiral";
 import { shaderSpiralConfig } from "@/registry/remocn/shader-spiral/config";
 import { ShaderSwirl } from "@/registry/remocn/shader-swirl";
@@ -355,6 +357,10 @@ const registry: Record<string, RegistryEntry> = {
   "shader-color-panels": {
     Component: ShaderColorPanels,
     config: shaderColorPanelsConfig,
+  },
+  "shader-neuro-noise": {
+    Component: ShaderNeuroNoise,
+    config: shaderNeuroNoiseConfig,
   },
   "dynamic-grid": { Component: DynamicGrid, config: dynamicGridConfig },
   "simulated-cursor": {

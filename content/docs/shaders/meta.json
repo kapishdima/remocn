@@ -10,6 +10,7 @@
     "shader-water",
     "shader-spiral",
     "shader-liquid-metal",
-    "shader-color-panels"
+    "shader-color-panels",
+    "shader-neuro-noise"
   ]
 }
